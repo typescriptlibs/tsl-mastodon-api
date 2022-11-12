@@ -1,0 +1,42 @@
+{
+    "private": true,
+    "author": "TypeScriptLibs and Contributers",
+    "description": "TypeScript Library for the Mastodon API",
+    "license": "MIT",
+    "name": "tsl-mastodon-api",
+    "type": "module",
+    "version": "0.0.1",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "bugs": "https://github.com/typescriptlibs/tsl-mastodon-api/issues",
+    "homepage": "https://github.com/typescriptlibs/tsl-mastodon-api#readme",
+    "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
+    "dependencies": {
+        "@types/oauth": "~0.9.1",
+        "node-fetch": "^3.2.10",
+        "oauth": "~0.10.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.18.3",
+        "typescript": "~4.8.4"
+    },
+    "engines": {
+        "node": ">=16.8.0"
+    },
+    "files": [
+        "lib/",
+        "AUTHORS.md",
+        "LICENSE.txt",
+        "README.md"
+    ],
+    "keywords": [
+        "Mastodon",
+        "TypeScript"
+    ],
+    "scripts": {
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -rf lib",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "npm run build -- --watch"
+    }
+}
