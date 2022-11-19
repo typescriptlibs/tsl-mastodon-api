@@ -4,7 +4,7 @@
  *
  * */
 
-import { FormData } from 'node-fetch';
+import { Blob, FormData } from 'node-fetch';
 import { URL } from 'url';
 
 /* *
