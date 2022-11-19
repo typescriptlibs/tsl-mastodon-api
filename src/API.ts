@@ -228,7 +228,7 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
-            JSON.isStatus(result.json)
+            !JSON.isStatus(result.json)
         ) {
             return Promise.reject(result);
         }
