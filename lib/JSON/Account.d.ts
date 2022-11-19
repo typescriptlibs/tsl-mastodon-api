@@ -4,9 +4,13 @@ export interface Account {
     avatar_static?: string;
     bot?: boolean;
     created_at: string;
+    discoverable?: boolean;
     display_name: string;
     followers_count: number;
     following_count: number;
+    group?: boolean;
+    header?: string;
+    header_static?: string;
     id: string;
     last_status_at: string;
     locked?: boolean;
