@@ -5,4 +5,5 @@ export interface Emoji {
     url: string;
     visible_in_picker: boolean;
 }
+export declare function isEmoji(json: Partial<Emoji>): json is Emoji;
 export default Emoji;

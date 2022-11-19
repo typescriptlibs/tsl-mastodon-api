@@ -17,6 +17,7 @@ export declare class API {
     protected extractRateLimit(headers: Headers): (number | undefined);
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<JSON.Status>>;
+    search(search: JSON.Search): Promise<API.Success<JSON.SearchResults>>;
 }
 export declare namespace API {
     type Config = REST.Config;

@@ -1,1 +1,1 @@
-{"version":3,"file":"Emoji.js","sourceRoot":"","sources":["../../src/JSON/Emoji.ts"],"names":[],"mappings":"AAAA;;;;KAIK"}
+{"version":3,"file":"Emoji.js","sourceRoot":"","sources":["../../src/JSON/Emoji.ts"],"names":[],"mappings":"AAAA;;;;KAIK;AAUL;;;;KAIK;AAEL,MAAM,UAAU,OAAO,CACnB,IAAoB;IAEpB,OAAO,CACH,OAAO,IAAI,KAAK,QAAQ;QACxB,OAAO,IAAI,CAAC,SAAS,KAAK,QAAQ;QAClC,OAAO,IAAI,CAAC,UAAU,KAAK,QAAQ;QACnC,OAAO,IAAI,CAAC,GAAG,KAAK,QAAQ;QAC5B,OAAO,IAAI,CAAC,iBAAiB,KAAK,SAAS,CAC9C,CAAC;AACN,CAAC"}

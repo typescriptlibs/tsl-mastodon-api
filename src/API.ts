@@ -150,11 +150,11 @@ export class API {
      *
      * */
 
-    public async delay(): Promise<void> {
+    public async delay (): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, this.nextDelay));
     }
 
-    public async getAccount(): Promise<JSON.Account> {
+    public async getAccount (): Promise<JSON.Account> {
         const result = await this.fetch('GET', 'accounts/verify_credentials');
         const json = result.json;
 
@@ -169,7 +169,7 @@ export class API {
         return json as JSON.Account;
     }
 
-    public async getStatuses(
+    public async getStatuses (
         limit?: number
     ): Promise<API.Success<Array<JSON.Status>>> {
         const result = await this.fetch('GET', 'statuses', { limit });
@@ -186,7 +186,7 @@ export class API {
         return result as API.Success<Array<JSON.Status>>;
     }
 
-    protected extractRateLimit(
+    protected extractRateLimit (
         headers: Headers
     ): (number|undefined) {
         let value = headers.get('X-RateLimit-Limit');
@@ -234,6 +234,23 @@ export class API {
         }
 
         return result as API.Success<JSON.Status>;
+    }
+
+    public async search (
+        search: JSON.Search
+    ): Promise<API.Success<JSON.SearchResults>> {
+        const result = await this.fetch('GET', 'search', search);
+        const json = result?.json;
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isSearchResults(json)
+        ) {
+            return Promise.reject(result);
+        }
+
+        return result as API.Success<JSON.SearchResults>;
     }
 
 }

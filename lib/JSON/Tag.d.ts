@@ -8,4 +8,6 @@ export interface TagStatistic {
     day: number;
     uses: number;
 }
+export declare function isTag(json: Partial<Tag>): json is Tag;
+export declare function isTagStatistic(json: Partial<TagStatistic>): json is TagStatistic;
 export default Tag;

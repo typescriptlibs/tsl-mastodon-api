@@ -36,4 +36,6 @@ export interface UnknownAttachment {
 export interface UnknownAttachmentMeta {
     focus: MediaAttachmentMetaFocus;
 }
+export declare function isImageAttachment(json: Partial<ImageAttachment>): json is ImageAttachment;
+export declare function isImageAttachmentMeta(json: Partial<MediaAttachmentMeta>): json is MediaAttachmentMeta;
 export default MediaAttachment;
