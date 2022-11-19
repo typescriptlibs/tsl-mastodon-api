@@ -4,7 +4,7 @@ interface BaseCard {
     type: string;
     url: string;
 }
-export declare type Card = (LinkCard | PhotoCard | VideoCard);
+export type Card = (LinkCard | PhotoCard | VideoCard);
 export interface LinkCard extends BaseCard {
     type: 'link';
 }

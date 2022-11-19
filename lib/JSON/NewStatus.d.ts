@@ -1,6 +1,6 @@
 import type NewPoll from './NewPoll.js';
 import type Visibility from './Visibility.js';
-export declare type NewStatus = (NewMediaStatus | NewTextStatus);
+export type NewStatus = (NewMediaStatus | NewTextStatus);
 export interface NewMediaStatus {
     in_reply_to_id?: string;
     media_ids: Array<string>;

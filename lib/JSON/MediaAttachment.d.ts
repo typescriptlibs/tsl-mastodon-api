@@ -8,7 +8,7 @@ export interface ImageAttachment {
     type: 'image';
     url: string;
 }
-export declare type MediaAttachment = (ImageAttachment | UnknownAttachment);
+export type MediaAttachment = (ImageAttachment | UnknownAttachment);
 export interface MediaAttachmentMeta {
     focus: MediaAttachmentMetaFocus;
     original: MediaAttachmentMetaSize;
