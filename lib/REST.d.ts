@@ -1,4 +1,4 @@
-import type { Response } from 'node-fetch';
+import { Response } from 'node-fetch';
 export declare class REST {
     constructor(config: REST.Config);
     readonly apiURL: string;
