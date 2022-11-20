@@ -4,12 +4,8 @@
  *
  * */
 
-import type {
-    HeadersInit,
-    Response
-} from 'node-fetch';
-
 import fetch from 'node-fetch';
+import { Response } from 'node-fetch';
 import { Utilities } from './Utilities.js';
 
 /* *
@@ -85,34 +81,50 @@ export class REST {
         const timeout = new AbortController();
         const timer = setTimeout(() => timeout.abort(), config.timeout_ms);
 
-        const response = await fetch(
-            url.toString(),
-            {
-                ...(config.no_follow ? {
-                    follow: 9,
-                    redirect: 'follow',
-                } : {}),
-                compress: true,
-                headers: Utilities.buildHeaders({
-                    Accept: '*/*',
-                    Authorization: `Bearer ${config.access_token}`,
-                    'User-Agent': config.user_agent
-                }),
-                method,
-                signal: timeout.signal,
-                body: supportsBody && Utilities.buildFormData(params)
+        let response = new Response();
+
+        try {
+            response = await fetch(
+                url.toString(),
+                {
+                    ...(config.no_follow ? {
+                        follow: 9,
+                        redirect: 'follow',
+                    } : {}),
+                    compress: true,
+                    headers: Utilities.buildHeaders({
+                        Accept: '*/*',
+                        Authorization: `Bearer ${config.access_token}`,
+                        'User-Agent': config.user_agent
+                    }),
+                    method,
+                    signal: timeout.signal,
+                    body: supportsBody && Utilities.buildFormData(params)
+                }
+            );
+
+            clearTimeout(timer);
+
+            return {
+                failed: !response.ok,
+                json: await response.json(),
+                path,
+                response,
+                status: response.status
+            };
+        }
+        catch (error) {
+
+            clearTimeout(timer);
+
+            return {
+                failed: true,
+                json: {},
+                path,
+                response,
+                status: 422 // Unprocessable Entity
             }
-        );
-
-        clearTimeout(timer);
-
-        return {
-            failed: !response.ok,
-            json: await response.json(),
-            path,
-            response,
-            status: response.status
-        };    
+        }
     }
 
     public get (
