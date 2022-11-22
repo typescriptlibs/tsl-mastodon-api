@@ -18,7 +18,6 @@
     },
     "devDependencies": {
         "@types/node": "^16.18.3",
-        "http-server": "^14.1.1",
         "typescript": "~4.9.3"
     },
     "engines": {
@@ -38,7 +37,7 @@
         "build": "npm run clean && tsc -b src",
         "clean": "rm -rf lib test-run",
         "test": "rm -rf test-run && tsc -b test && node test-run/test/index",
-        "test-server-start": "http-server test-data/ -s -p 8000 &",
+        "test-server-start": "cd test-data && python3 -m http.server 8000 &> ../test.log &",
         "test-server-stop": "kill $(lsof -t -i:8000)",
         "watch": "npm run build -- --watch"
     }

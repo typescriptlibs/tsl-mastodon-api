@@ -107,4 +107,5 @@ dist
 .DS_Store
 
 # Test
-/test-run/
+test-run/
+test.log
