@@ -163,6 +163,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isAccount(json)
         ) {
+            result.failed = true;
             return Promise.reject(result);
         }
 
@@ -180,6 +181,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatuses(json)
         ) {
+            result.failed = true;
             return Promise.reject(result);
         }
 
@@ -230,6 +232,7 @@ export class API {
             ) ||
             !JSON.isStatus(result.json)
         ) {
+            result.failed = true;
             return Promise.reject(result);
         }
 
@@ -247,6 +250,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isSearchResults(json)
         ) {
+            result.failed = true;
             return Promise.reject(result);
         }
 
