@@ -18,6 +18,8 @@
     },
     "devDependencies": {
         "@types/node": "^16.18.3",
+        "@typescriptlibs/tst": "^0.0.2",
+        "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.3"
     },
     "engines": {
@@ -35,10 +37,10 @@
     ],
     "scripts": {
         "build": "npm run clean && tsc -b src",
-        "clean": "rm -rf lib test-run",
-        "test": "rm -rf test-run && tsc -b test && node test-run/test/index",
-        "test-server-start": "cd test-data && python3 -m http.server 8000 &> ../test.log &",
-        "test-server-stop": "kill $(lsof -t -i:8000)",
+        "clean": "rm -rf lib tst-run",
+        "server:start": "cd tst-data && python3 -m http.server 8000 &> ../test.log &",
+        "server:stop": "kill $(lsof -t -i:8000)",
+        "test": "npm run server:start ; tst --verbose tst/ ; npm run server:stop",
         "watch": "npm run build -- --watch"
     }
 }
