@@ -18,6 +18,8 @@ The following versions of tsl-mastodon-api are currently being supported with se
 Reporting a Vulnerability
 -------------------------
 
+**Please do not report security vulnerabilities through public GitHub issues.**
+
 Send a detailed description of the security issue to typescriptlibs.org under the `security` handle.
 Please understand that only security issues regarding the library can be addressed.
 
