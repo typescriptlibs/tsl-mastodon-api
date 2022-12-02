@@ -19,7 +19,7 @@ function buildFormData (
 ): FormData {
     let value: unknown;
 
-    for (const key in params) {
+    for ( const key in params ) {
         value = params[key];
 
         if (
@@ -29,12 +29,12 @@ function buildFormData (
             continue;
         }
 
-        if (value instanceof Blob) {
-            target.append(key, value);
-        } else if (typeof value === 'object') {
-            target.append(key, JSON.stringify(value));
+        if ( value instanceof Blob ) {
+            target.append( key, value );
+        } else if ( typeof value === 'object' ) {
+            target.append( key, JSON.stringify( value ) );
         } else {
-            target.append(key, `${value}`);
+            target.append( key, `${value}` );
         }
     }
 
@@ -47,7 +47,7 @@ function buildHeaders (
 ): Record<string, string> {
     let value: unknown;
 
-    for (const key in params) {
+    for ( const key in params ) {
         value = params[key];
 
         if (
@@ -57,8 +57,8 @@ function buildHeaders (
             continue;
         }
 
-        if (typeof value === 'object') {
-            target[key] = JSON.stringify(value);
+        if ( typeof value === 'object' ) {
+            target[key] = JSON.stringify( value );
         } else {
             target[key] = `${value}`;
         }
@@ -72,10 +72,10 @@ function buildURL (
     path: string = '.',
     params?: Record<string, unknown>
 ): URL {
-    const url = new URL(path, base);
+    const url = new URL( path, base );
 
-    if (params) {
-        buildURLSearchParams(params, url.searchParams);
+    if ( params ) {
+        buildURLSearchParams( params, url.searchParams );
     }
 
     return url;
@@ -87,7 +87,7 @@ function buildURLSearchParams (
 ): URLSearchParams {
     let value: unknown;
 
-    for (const key in params) {
+    for ( const key in params ) {
         value = params[key];
 
         if (
@@ -97,10 +97,10 @@ function buildURLSearchParams (
             continue;
         }
 
-        if (typeof value === 'object') {
-            target.append(key, JSON.stringify(value));
+        if ( typeof value === 'object' ) {
+            target.append( key, JSON.stringify( value ) );
         } else {
-            target.append(key, `${value}`);
+            target.append( key, `${value}` );
         }
     }
 

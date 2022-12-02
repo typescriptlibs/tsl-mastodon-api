@@ -43,14 +43,14 @@ export class API {
         redirectUri = 'urn:ietf:wg:oauth:2.0:oob',
         website?: string
     ): Promise<unknown> {
-        const body: (FormData|undefined) = new FormData();
+        const body: ( FormData | undefined ) = new FormData();
 
-        body.append('client_name', clientName);
-        body.append('redirect_uris', redirectUri);
-        body.append('scopes', scopes);
+        body.append( 'client_name', clientName );
+        body.append( 'redirect_uris', redirectUri );
+        body.append( 'scopes', scopes );
 
-        if (website) {
-            body.append('website', website);
+        if ( website ) {
+            body.append( 'website', website );
         }
 
         const response = await fetch(
@@ -71,7 +71,7 @@ export class API {
         baseUrl = API.defaultBase,
         redirectUri = API.defaultRedirect
     ): Promise<string> {
-        return new Promise((resolve, reject) => {
+        return new Promise( ( resolve, reject ) => {
             const oauth = new OAuth2(
                 clientId,
                 clientSecret,
@@ -85,15 +85,15 @@ export class API {
                     grant_type: 'authorization_code',
                     redirect_uri: redirectUri
                 },
-                (err, accessToken) => {
-                    if (err) {
-                        reject(err)
+                ( err, accessToken ) => {
+                    if ( err ) {
+                        reject( err )
                         return
                     }
-                    resolve(accessToken)
+                    resolve( accessToken )
                 }
             );
-        });
+        } );
     }
 
     public static getAuthorizationUrl (
@@ -103,7 +103,7 @@ export class API {
         scope = 'read write follow',
         redirectUri = API.defaultRedirect
     ): Promise<string> {
-        return new Promise((resolve) => {
+        return new Promise( ( resolve ) => {
             const oauth = new OAuth2(
                 clientId,
                 clientSecret,
@@ -111,14 +111,14 @@ export class API {
                 undefined,
                 '/oauth/token'
             );
-            const url = oauth.getAuthorizeUrl({
+            const url = oauth.getAuthorizeUrl( {
                 redirect_uri: redirectUri,
                 response_type: 'code',
                 client_id: clientId,
                 scope
-            });
-            resolve(url);
-        });
+            } );
+            resolve( url );
+        } );
     }
 
     /* *
@@ -131,7 +131,7 @@ export class API {
         config: API.Config
     ) {
         this.nextDelay = 1;
-        this.rest = new REST(config);
+        this.rest = new REST( config );
     }
 
     /* *
@@ -151,20 +151,20 @@ export class API {
      * */
 
     public async delay (): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, this.nextDelay));
+        return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
     }
 
     public async getAccount (): Promise<JSON.Account> {
-        const result = await this.fetch('GET', 'accounts/verify_credentials');
+        const result = await this.fetch( 'GET', 'accounts/verify_credentials' );
         const json = result.json;
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isAccount(json)
+            !JSON.isAccount( json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return json as JSON.Account;
@@ -173,7 +173,7 @@ export class API {
     public async getMediaAttachment (
         id: string
     ): Promise<JSON.MediaAttachment> {
-        const result = await this.fetch('GET', `media/${id}`);
+        const result = await this.fetch( 'GET', `media/${id}` );
         const json = result.json;
 
         if (
@@ -182,10 +182,10 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
-            !JSON.isMediaAttachment(json)
+            !JSON.isMediaAttachment( json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return json as JSON.MediaAttachment;
@@ -194,16 +194,16 @@ export class API {
     public async getStatuses (
         limit?: number
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch('GET', 'statuses', { limit });
+        const result = await this.fetch( 'GET', 'statuses', { limit } );
         const json = result?.json;
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses(json)
+            !JSON.isStatuses( json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return result as API.Success<Array<JSON.Status>>;
@@ -211,39 +211,39 @@ export class API {
 
     protected extractRateLimit (
         headers: Headers
-    ): (number|undefined) {
-        let value = headers.get('X-RateLimit-Limit');
+    ): ( number | undefined ) {
+        let value = headers.get( 'X-RateLimit-Limit' );
 
-        if (typeof value === 'string') {
-            return parseInt(value);
+        if ( typeof value === 'string' ) {
+            return parseInt( value );
         }
 
-        value = headers.get('X-RateLimit-Remaining');
+        value = headers.get( 'X-RateLimit-Remaining' );
 
-        if (typeof value === 'string') {
-            return parseInt(value);
+        if ( typeof value === 'string' ) {
+            return parseInt( value );
         }
     };
 
     protected async fetch (
-        method: ('DELETE'|'GET'|'PATCH'|'POST'|'PUT'),
+        method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,
         params?: unknown
     ): Promise<API.Result> {
         const rest: REST = this.rest;
-        const result: API.Result = await rest.fetch(method, path, params as REST.Params);
-        const rateLimit = this.extractRateLimit(result.response.headers);
+        const result: API.Result = await rest.fetch( method, path, params as REST.Params );
+        const rateLimit = this.extractRateLimit( result.response.headers );
 
         result.rateLimit = rateLimit;
-        this.nextDelay = 300000 / (rateLimit || 300);
+        this.nextDelay = 300000 / ( rateLimit || 300 );
 
         return result;
     }
 
-    public async postNewMediaAttachment(
+    public async postNewMediaAttachment (
         newMediaAttachment: JSON.NewMediaAttachment
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.fetch('POST', 'media', newMediaAttachment);
+        const result = await this.fetch( 'POST', 'media', newMediaAttachment );
 
         if (
             result.failed ||
@@ -251,10 +251,10 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 202
             ) ||
-            !JSON.isMediaAttachment(result.json)
+            !JSON.isMediaAttachment( result.json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return result as API.Success<JSON.MediaAttachment>;
@@ -264,15 +264,15 @@ export class API {
         pollId: string,
         newPollVote: JSON.NewPollVote
     ): Promise<API.Success<JSON.Poll>> {
-        const result = await this.fetch('POST', `polls/${pollId}/votes`, newPollVote);
+        const result = await this.fetch( 'POST', `polls/${pollId}/votes`, newPollVote );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isPoll(result.json)
+            !JSON.isPoll( result.json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return result as API.Success<JSON.Poll>;
@@ -281,7 +281,7 @@ export class API {
     public async postNewStatus (
         newStatus: JSON.NewStatus
     ): Promise<API.Success<JSON.Status>> {
-        const result = await this.fetch('POST', 'statuses', newStatus);
+        const result = await this.fetch( 'POST', 'statuses', newStatus );
 
         if (
             result.failed ||
@@ -289,10 +289,10 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
-            !JSON.isStatus(result.json)
+            !JSON.isStatus( result.json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return result as API.Success<JSON.Status>;
@@ -301,16 +301,16 @@ export class API {
     public async search (
         search: JSON.Search
     ): Promise<API.Success<JSON.SearchResults>> {
-        const result = await this.fetch('GET', 'search', search);
+        const result = await this.fetch( 'GET', 'search', search );
         const json = result?.json;
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isSearchResults(json)
+            !JSON.isSearchResults( json )
         ) {
             result.failed = true;
-            return Promise.reject(result);
+            return Promise.reject( result );
         }
 
         return result as API.Success<JSON.SearchResults>;
@@ -341,7 +341,7 @@ export namespace API {
     export interface Success<T = unknown> extends Result {
         failed: false;
         json: T;
-        status: (200|206);
+        status: ( 200 | 206 );
     }
 
 }

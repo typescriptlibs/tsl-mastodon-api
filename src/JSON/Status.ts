@@ -84,7 +84,7 @@ export function isStatus (
         typeof json.tags === 'object' &&
         typeof json.uri === 'string' &&
         typeof json.visibility === 'string' &&
-        isAccount(json.account)
+        isAccount( json.account )
     );
 }
 
@@ -95,7 +95,7 @@ export function isStatuses (
         json instanceof Array &&
         (
             !json.length ||
-            isStatus(json[0] || {})
+            isStatus( json[0] || {} )
         )
     );
 }

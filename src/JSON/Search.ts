@@ -62,15 +62,15 @@ export function isSearchResults (
         json.statuses instanceof Array &&
         (
             !json.accounts.length ||
-            isAccount(json.accounts[0])
+            isAccount( json.accounts[0] )
         ) &&
         (
             !json.hashtags.length ||
-            isTag(json.hashtags[0])
+            isTag( json.hashtags[0] )
         ) &&
         (
             !json.statuses.length ||
-            isStatus(json.statuses[0])
+            isStatus( json.statuses[0] )
         )
     );
 }

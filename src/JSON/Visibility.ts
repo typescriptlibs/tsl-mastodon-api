@@ -5,7 +5,7 @@
  * */
 
 export type Visibility = (
-    'direct'
+    | 'direct'
     | 'private'
     | 'public'
     | 'unlisted'

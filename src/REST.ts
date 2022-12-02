@@ -29,7 +29,7 @@ export class REST {
 
         config.timeout_ms = (
             typeof config.timeout_ms === 'number' &&
-            config.timeout_ms > 0 ?
+                config.timeout_ms > 0 ?
                 config.timeout_ms :
                 60000
         );
@@ -57,11 +57,11 @@ export class REST {
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
-        return this.fetch('DELETE', path, params);
+        return this.fetch( 'DELETE', path, params );
     }
 
     public async fetch (
-        method: ('DELETE'|'GET'|'PATCH'|'POST'|'PUT'),
+        method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
@@ -74,12 +74,12 @@ export class REST {
         );
         const url = (
             supportsBody ?
-                Utilities.buildURL(apiURL, path) :
-                Utilities.buildURL(apiURL, path, params)
+                Utilities.buildURL( apiURL, path ) :
+                Utilities.buildURL( apiURL, path, params )
         );
 
         const timeout = new AbortController();
-        const timer = setTimeout(() => timeout.abort(), config.timeout_ms);
+        const timer = setTimeout( () => timeout.abort(), config.timeout_ms );
 
         let response = new Response();
 
@@ -87,23 +87,23 @@ export class REST {
             response = await fetch(
                 url.toString(),
                 {
-                    ...(config.no_follow ? {
+                    ...( config.no_follow ? {
                         follow: 9,
                         redirect: 'follow',
-                    } : {}),
+                    } : {} ),
                     compress: true,
-                    headers: Utilities.buildHeaders({
+                    headers: Utilities.buildHeaders( {
                         Accept: '*/*',
                         Authorization: `Bearer ${config.access_token}`,
                         'User-Agent': config.user_agent
-                    }),
+                    } ),
                     method,
                     signal: timeout.signal,
-                    body: supportsBody && Utilities.buildFormData(params)
+                    body: supportsBody && Utilities.buildFormData( params )
                 }
             );
 
-            clearTimeout(timer);
+            clearTimeout( timer );
 
             return {
                 failed: !response.ok,
@@ -113,9 +113,9 @@ export class REST {
                 status: response.status
             };
         }
-        catch (error) {
+        catch ( error ) {
 
-            clearTimeout(timer);
+            clearTimeout( timer );
 
             return {
                 failed: true,
@@ -131,28 +131,28 @@ export class REST {
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
-        return this.fetch('GET', path, params);
+        return this.fetch( 'GET', path, params );
     }
 
     public patch (
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
-        return this.fetch('PATCH', path, params);
+        return this.fetch( 'PATCH', path, params );
     }
 
     public post (
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
-        return this.fetch('POST', path, params);
+        return this.fetch( 'POST', path, params );
     }
 
     public put (
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
-        return this.fetch('PUT', path, params);
+        return this.fetch( 'PUT', path, params );
     }
 
 }

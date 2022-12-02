@@ -5,12 +5,12 @@
  * */
 
 export interface AudioAttachment {
-    blurhash?: (string|null);
-    description?: (string|null);
+    blurhash?: ( string | null );
+    description?: ( string | null );
     id: string;
     meta: AudioAttachmentMeta;
     preview_url: string;
-    remote_url?: (string|null);
+    remote_url?: ( string | null );
     /** @deprecated */
     text_url?: string;
     type: 'audio';
@@ -33,11 +33,11 @@ export interface AudioAttachmentMetaOriginal {
 
 export interface GIFVAttachment {
     blurhash: string;
-    description?: (string|null);
+    description?: ( string | null );
     id: string;
     meta: GIFVAttachmentMeta;
     preview_url: string;
-    remote_url?: (string|null);
+    remote_url?: ( string | null );
     /** @deprecated */
     text_url?: string;
     type: 'gifv';
@@ -73,11 +73,11 @@ export interface GIFVAttachmentMetaSmall {
 
 export interface ImageAttachment {
     blurhash: string;
-    description?: (string|null);
+    description?: ( string | null );
     id: string;
     meta: ImageAttachmentMeta;
     preview_url: string;
-    remote_url?: (string|null);
+    remote_url?: ( string | null );
     /** @deprecated */
     text_url?: string;
     type: 'image';
@@ -118,11 +118,11 @@ export type MediaAttachment = (
 );
 
 export interface UnknownAttachment {
-    description?: (string|null);
+    description?: ( string | null );
     id: string;
-    meta: Record<string, Record<string, (number|string)>>;
+    meta: Record<string, Record<string, ( number | string )>>;
     preview_url: string;
-    remote_url?: (string|null);
+    remote_url?: ( string | null );
     /** @deprecated */
     text_url?: string;
     type: 'unknown';
@@ -131,11 +131,11 @@ export interface UnknownAttachment {
 
 export interface VideoAttachment {
     blurhash: string;
-    description?: (string|null);
+    description?: ( string | null );
     id: string;
     meta: VideoAttachmentMeta;
     preview_url: string;
-    remote_url?: (string|null);
+    remote_url?: ( string | null );
     /** @deprecated */
     text_url?: string;
     type: 'video';
@@ -188,7 +188,7 @@ export function isAudioAttachment (
         typeof json.preview_url === 'string' &&
         typeof json.url === 'string' &&
         json.type === 'audio' &&
-        isAudioAttachmentMeta(json.meta)
+        isAudioAttachmentMeta( json.meta )
     );
 }
 
@@ -219,7 +219,7 @@ export function isGIFVAttachment (
         typeof json.preview_url === 'string' &&
         typeof json.url === 'string' &&
         json.type === 'gifv' &&
-        isGIFVAttachmentMeta(json.meta)
+        isGIFVAttachmentMeta( json.meta )
     );
 }
 
@@ -260,7 +260,7 @@ export function isImageAttachment (
         typeof json.preview_url === 'string' &&
         typeof json.url === 'string' &&
         json.type === 'image' &&
-        isImageAttachmentMeta(json.meta)
+        isImageAttachmentMeta( json.meta )
     );
 }
 
@@ -288,13 +288,13 @@ export function isImageAttachmentMeta (
 export function isMediaAttachment (
     json: Partial<MediaAttachment>
 ): json is MediaAttachment {
-   return (
-        isAudioAttachment(json as AudioAttachment) ||
-        isGIFVAttachment(json as GIFVAttachment) ||
-        isImageAttachment(json as ImageAttachment) ||
-        isUnknownAttachment(json as UnknownAttachment) ||
-        isVideoAttachment(json as VideoAttachment)
-   );
+    return (
+        isAudioAttachment( json as AudioAttachment ) ||
+        isGIFVAttachment( json as GIFVAttachment ) ||
+        isImageAttachment( json as ImageAttachment ) ||
+        isUnknownAttachment( json as UnknownAttachment ) ||
+        isVideoAttachment( json as VideoAttachment )
+    );
 }
 
 export function isUnknownAttachment (
@@ -321,7 +321,7 @@ export function isVideoAttachment (
         typeof json.preview_url === 'string' &&
         typeof json.url === 'string' &&
         json.type === 'video' &&
-        isVideoAttachmentMeta(json.meta)
+        isVideoAttachmentMeta( json.meta )
     );
 }
 

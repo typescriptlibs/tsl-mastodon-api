@@ -22,7 +22,7 @@ export interface TagStatistic {
  *
  * */
 
-export function isTag(
+export function isTag (
     json: Partial<Tag>
 ): json is Tag {
     return (
@@ -32,12 +32,12 @@ export function isTag(
         json.history instanceof Array &&
         (
             !json.history.length ||
-            isTagStatistic(json.history[0])
+            isTagStatistic( json.history[0] )
         )
     );
 }
 
-export function isTagStatistic(
+export function isTagStatistic (
     json: Partial<TagStatistic>
 ): json is TagStatistic {
     return (
