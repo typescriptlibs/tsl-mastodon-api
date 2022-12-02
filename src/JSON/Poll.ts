@@ -11,9 +11,9 @@ export interface Poll {
     id: string;
     multiple?: boolean;
     options: Array<PollOption>;
-    own_votes: Array<unknown>;
+    own_votes: Array<number>;
     voted: boolean;
-    voters_count: number;
+    voters_count?: (number|null);
     votes_count: number;
 }
 
@@ -40,7 +40,6 @@ export function isPoll (
         typeof json.options === 'object' &&
         typeof json.own_votes === 'object' &&
         typeof json.voted === 'boolean' &&
-        typeof json.voters_count === 'number' &&
         typeof json.votes_count === 'number' &&
         isPollOptions(json.options)
     );

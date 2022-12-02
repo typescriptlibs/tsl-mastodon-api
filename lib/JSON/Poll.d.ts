@@ -5,9 +5,9 @@ export interface Poll {
     id: string;
     multiple?: boolean;
     options: Array<PollOption>;
-    own_votes: Array<unknown>;
+    own_votes: Array<number>;
     voted: boolean;
-    voters_count: number;
+    voters_count?: (number | null);
     votes_count: number;
 }
 export interface PollOption {
