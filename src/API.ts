@@ -170,6 +170,27 @@ export class API {
         return json as JSON.Account;
     }
 
+    public async getMediaAttachment (
+        id: string
+    ): Promise<JSON.MediaAttachment> {
+        const result = await this.fetch('GET', `media/${id}`);
+        const json = result.json;
+
+        if (
+            result.failed ||
+            (
+                result.status !== 200 &&
+                result.status !== 206
+            ) ||
+            !JSON.isMediaAttachment(json)
+        ) {
+            result.failed = true;
+            return Promise.reject(result);
+        }
+
+        return json as JSON.MediaAttachment;
+    }
+
     public async getStatuses (
         limit?: number
     ): Promise<API.Success<Array<JSON.Status>>> {
@@ -217,6 +238,44 @@ export class API {
         this.nextDelay = 300000 / (rateLimit || 300);
 
         return result;
+    }
+
+    public async postNewMediaAttachment(
+        newMediaAttachment: JSON.NewMediaAttachment
+    ): Promise<API.Success<JSON.MediaAttachment>> {
+        const result = await this.fetch('POST', 'media', newMediaAttachment);
+
+        if (
+            result.failed ||
+            (
+                result.status !== 200 &&
+                result.status !== 202
+            ) ||
+            !JSON.isMediaAttachment(result.json)
+        ) {
+            result.failed = true;
+            return Promise.reject(result);
+        }
+
+        return result as API.Success<JSON.MediaAttachment>;
+    }
+
+    public async postNewPollVote (
+        pollId: string,
+        newPollVote: JSON.NewPollVote
+    ): Promise<API.Success<JSON.Poll>> {
+        const result = await this.fetch('POST', `polls/${pollId}/votes`, newPollVote);
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isPoll(result.json)
+        ) {
+            result.failed = true;
+            return Promise.reject(result);
+        }
+
+        return result as API.Success<JSON.Poll>;
     }
 
     public async postNewStatus (

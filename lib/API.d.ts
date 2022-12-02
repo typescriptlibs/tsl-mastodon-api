@@ -13,9 +13,12 @@ export declare class API {
     readonly rest: REST;
     delay(): Promise<void>;
     getAccount(): Promise<JSON.Account>;
+    getMediaAttachment(id: string): Promise<JSON.MediaAttachment>;
     getStatuses(limit?: number): Promise<API.Success<Array<JSON.Status>>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
+    postNewMediaAttachment(newMediaAttachment: JSON.NewMediaAttachment): Promise<API.Success<JSON.MediaAttachment>>;
+    postNewPollVote(pollId: string, newPollVote: JSON.NewPollVote): Promise<API.Success<JSON.Poll>>;
     postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<JSON.Status>>;
     search(search: JSON.Search): Promise<API.Success<JSON.SearchResults>>;
 }
