@@ -1,29 +1,25 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: "Node.js"
 
 on:
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ "main", main* ]
   push:
-    branches: [ $default-branch ]
-  workflow_dispatch:
-    # allow manual run
+    branches: [ "main" ]
 
 permissions:
   contents: read
 
 jobs:
-  build:
-
+  test:
+    name: Test
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - name: Checkout The Branch
       uses: actions/checkout@v3
