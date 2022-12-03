@@ -3,7 +3,7 @@ import test from '@typescriptlibs/tst';
 
 const API = new Mastodon.API( {
     access_token: '0', // test server does not validate
-    api_url: 'http://127.0.0.1:8000/v1/'
+    api_url: 'http://127.0.0.1:8000/v1-get/'
 } );
 
 test( 'Test API.getAccount', async ( assert: test.Assert ) => {
