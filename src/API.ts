@@ -18,111 +18,6 @@ export class API {
 
     /* *
      *
-     *  Static Properties
-     *
-     * */
-
-    public static readonly defaultBase = 'https://mastodon.social';
-
-    public static readonly defaultPath = '/api/v1/';
-
-    public static readonly defaultRedirect = 'urn:ietf:wg:oauth:2.0:oob';
-
-    public static readonly defaultRoot = this.defaultBase + this.defaultPath;
-
-    /* *
-     *
-     *  Static Functions
-     *
-     * */
-
-    public static async createOAuthApp (
-        url = `${API.defaultRoot}apps`,
-        clientName = 'mastodon-node',
-        scopes = 'read write follow',
-        redirectUri = 'urn:ietf:wg:oauth:2.0:oob',
-        website?: string
-    ): Promise<unknown> {
-        const body: ( FormData | undefined ) = new FormData();
-
-        body.append( 'client_name', clientName );
-        body.append( 'redirect_uris', redirectUri );
-        body.append( 'scopes', scopes );
-
-        if ( website ) {
-            body.append( 'website', website );
-        }
-
-        const response = await fetch(
-            url,
-            {
-                body,
-                method: 'POST'
-            }
-        );
-
-        return await response.json();
-    }
-
-    public static getAccessToken (
-        clientId: string,
-        clientSecret: string,
-        authorizationCode: string,
-        baseUrl = API.defaultBase,
-        redirectUri = API.defaultRedirect
-    ): Promise<string> {
-        return new Promise( ( resolve, reject ) => {
-            const oauth = new OAuth2(
-                clientId,
-                clientSecret,
-                baseUrl,
-                undefined,
-                '/oauth/token'
-            );
-            oauth.getOAuthAccessToken(
-                authorizationCode,
-                {
-                    grant_type: 'authorization_code',
-                    redirect_uri: redirectUri
-                },
-                ( err, accessToken ) => {
-                    if ( err ) {
-                        reject( err )
-                        return
-                    }
-                    resolve( accessToken )
-                }
-            );
-        } );
-    }
-
-    public static getAuthorizationUrl (
-        clientId: string,
-        clientSecret: string,
-        baseUrl = API.defaultBase,
-        scope = 'read write follow',
-        redirectUri = API.defaultRedirect
-    ): Promise<string> {
-        return new Promise( ( resolve ) => {
-            const oauth = new OAuth2(
-                clientId,
-                clientSecret,
-                baseUrl,
-                undefined,
-                '/oauth/token'
-            );
-            const url = oauth.getAuthorizeUrl( {
-                redirect_uri: redirectUri,
-                response_type: 'code',
-                client_id: clientId,
-                scope
-            } );
-            resolve( url );
-        } );
-    }
-
-    /* *
-     *
      *  Constructor
      *
      * */
@@ -342,6 +237,97 @@ export namespace API {
         failed: false;
         json: T;
         status: ( 200 | 206 );
+    }
+
+    /* *
+     *
+     *  Functions
+     *
+     * */
+
+    export async function createOAuthApp (
+        apiURL: string,
+        clientName = 'mastodon-node',
+        redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
+        scopes = 'read write follow',
+        website?: string
+    ): Promise<unknown> {
+        const body: ( FormData | undefined ) = new FormData();
+
+        body.append( 'client_name', clientName );
+        body.append( 'redirect_uris', redirectURI );
+        body.append( 'scopes', scopes );
+
+        if ( website ) {
+            body.append( 'website', website );
+        }
+
+        const response = await fetch(
+            `${apiURL}apps`,
+            {
+                body,
+                method: 'POST'
+            }
+        );
+
+        return await response.json();
+    }
+
+    export async function getAccessToken (
+        baseURL: string,
+        clientId: string,
+        clientSecret: string,
+        authorizationCode: string,
+        redirectUri = 'urn:ietf:wg:oauth:2.0:oob'
+    ): Promise<string> {
+        return new Promise( ( resolve, reject ) => {
+            const oauth = new OAuth2(
+                clientId,
+                clientSecret,
+                baseURL,
+                undefined,
+                '/oauth/token'
+            );
+            oauth.getOAuthAccessToken(
+                authorizationCode,
+                {
+                    grant_type: 'authorization_code',
+                    redirect_uri: redirectUri
+                },
+                ( err, accessToken ) => {
+                    if ( err ) {
+                        reject( err )
+                        return
+                    }
+                    resolve( accessToken )
+                }
+            );
+        } );
+    }
+
+    export async function getAuthorizationUrl (
+        baseURL: string,
+        clientId: string,
+        clientSecret: string,
+        redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
+        scope = 'read write follow'
+    ): Promise<string> {
+        return new Promise( ( resolve ) => {
+            const oauth = new OAuth2(
+                clientId,
+                clientSecret,
+                baseURL,
+                undefined,
+                '/oauth/token'
+            );
+            const url = oauth.getAuthorizeUrl( {
+                redirect_uri: redirectURI,
+                response_type: 'code',
+                client_id: clientId,
+                scope
+            } );
+            resolve( url );
+        } );
     }
 
 }
