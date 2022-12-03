@@ -63,13 +63,13 @@ API Overview
 
 The following declaration snippet shows excerpt of v0.0.6 of the API.
 
-```js
+```ts
 API.createOAuthApp(url?, clientName?, scopes?, redirectUri?, website?)
 API.getAccessToken(clientId, clientSecret, authorizationCode, baseUrl?, redirectUri?)
 API.getAuthorizationUrl(clientId, clientSecret, baseUrl?, scope?, redirectUri?)
 ```
 
-```js
+```ts
 API(config)
 API.rest.delete(path, params?)
 API.rest.fetch(method, path, params?)
@@ -87,7 +87,7 @@ API.postNewStatus(newStatus)
 API.search(search)
 ```
 
-```js
+```ts
 JSON.isAccount(json)
 JSON.isMediaAttachment(json)
 JSON.isPoll(json)
