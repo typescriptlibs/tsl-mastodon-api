@@ -1,3 +1,5 @@
+# GitHub Pages config
+
 title: Mastodon TypeScript Library
 description: Version 0.0.6
 author: © TypeScriptLibs
@@ -20,3 +22,8 @@ theme: minima
 minima:
   date_format: "%Y-%m-%d"
   skin: auto
+
+titles_from_headings:
+  enabled:     true
+  strip_title: true
+  collections: true
