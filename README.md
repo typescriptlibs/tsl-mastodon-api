@@ -36,10 +36,11 @@ Examples
 import * as Mastodon from 'tsl-mastodon-api';
 async function postHelloWorld(): Promise<void> {
     // create the API instance
-    const mastodon = new Mastodon.API(
-        access_token: 'ABC';
-        api_url: 'https://mastodon.example/api/v1/';
-    );
+    const mastodon = new Mastodon.API({
+        access_token: 'ABC',
+        api_url: 'https://mastodon.example/api/v1/',
+        auto_delay: true
+    });
     // expect client / server errors
     try {
         const post = await mastodon.postNewStatus({
