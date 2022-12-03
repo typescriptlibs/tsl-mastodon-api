@@ -1,4 +1,5 @@
 MIT License
+===========
 
 Copyright (c) 2022 TypeScriptLibs and Contributors
 
