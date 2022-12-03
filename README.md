@@ -33,33 +33,26 @@ Examples
 --------
 
 ```ts
-// import the library
 import * as Mastodon from 'tsl-mastodon-api';
-// the example
 async function postHelloWorld(): Promise<void> {
     // create the API instance
     const mastodon = new Mastodon.API(
         access_token: 'ABC';
         api_url: 'https://mastodon.example/api/v1/';
     );
-    // expect server errors
+    // expect client / server errors
     try {
-        // post a new status
         const post = await mastodon.postNewStatus({
             sensitive: true,
             spoiler_text: 'Hello',
             status: 'World'
         });
-        // show post information
         console.log(JSON.stringify(post));
     }
-    // handle server errors
     catch (error) {
-        // raise awareness
         console.error(error);
     }
 }
-// run the example
 postHelloWorld();
 ```
 
@@ -96,14 +89,10 @@ API.search(search)
 
 ```js
 JSON.isAccount(json)
-JSON.isEmoji(json)
-JSON.isList(json)
 JSON.isMediaAttachment(json)
 JSON.isPoll(json)
-JSON.isSearch(json)
 JSON.isSearchResults(json)
 JSON.isStatus(json)
-JSON.isTag(json)
 ```
 
 
