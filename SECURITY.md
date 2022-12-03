@@ -24,7 +24,7 @@ Send a detailed description of the security issue to typescriptlibs.org under th
 Please understand that only security issues regarding the library can be addressed.
 
 If you found a security issue in Mastodon, please contact them instead.
-How to report security issues to Mastodon is described at https://github.com/mastodon/mastodon/security/policy.
+How to report security issues to Mastodon is described at [github.com/mastodon](https://github.com/mastodon/mastodon/security/policy).
 
 When typescriptlibs.org receives a secruity report, the review process will take about four weeks.
 We might ask for more details or assistence in understanding the security impact.
