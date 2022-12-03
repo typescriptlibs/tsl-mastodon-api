@@ -61,7 +61,7 @@ postHelloWorld();
 API Overview
 ------------
 
-The following declaration snippet shows excerpt of v0.0.6 of the API.
+The following snippets show an excerpt of the v0.0.6 API.
 
 ```ts
 API.createOAuthApp(url?, clientName?, scopes?, redirectUri?, website?)
