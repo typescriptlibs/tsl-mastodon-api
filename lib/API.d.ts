@@ -1,13 +1,6 @@
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 export declare class API {
-    static readonly defaultBase = "https://mastodon.social";
-    static readonly defaultPath = "/api/v1/";
-    static readonly defaultRedirect = "urn:ietf:wg:oauth:2.0:oob";
-    static readonly defaultRoot: string;
-    static createOAuthApp(url?: string, clientName?: string, scopes?: string, redirectUri?: string, website?: string): Promise<unknown>;
-    static getAccessToken(clientId: string, clientSecret: string, authorizationCode: string, baseUrl?: string, redirectUri?: string): Promise<string>;
-    static getAuthorizationUrl(clientId: string, clientSecret: string, baseUrl?: string, scope?: string, redirectUri?: string): Promise<string>;
     constructor(config: API.Config);
     nextDelay: number;
     readonly rest: REST;
@@ -32,5 +25,8 @@ export declare namespace API {
         json: T;
         status: (200 | 206);
     }
+    function createOAuthApp(apiURL: string, clientName?: string, redirectURI?: string, scopes?: string, website?: string): Promise<unknown>;
+    function getAccessToken(baseURL: string, clientId: string, clientSecret: string, authorizationCode: string, redirectUri?: string): Promise<string>;
+    function getAuthorizationUrl(baseURL: string, clientId: string, clientSecret: string, redirectURI?: string, scope?: string): Promise<string>;
 }
 export default API;
