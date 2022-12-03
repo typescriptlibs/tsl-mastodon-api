@@ -40,7 +40,8 @@
         "clean": "rm -rf lib tst-run",
         "server:start": "cd tst-data && python3 -m http.server 8000 &",
         "server:stop": "kill $(lsof -t -i:8000)",
-        "test": "npm run server:start && tst --verbose tst/ && npm run server:stop",
+        "test": "npm run server:start ; tst --verbose tst/ ; npm run server:stop",
+        "test:ci": "tst --verbose tst/",
         "watch": "npm run build -- --watch"
     }
 }
