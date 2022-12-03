@@ -1,0 +1,23 @@
+title: Mastodon API TypeScript Library
+description: TypeScript library for the Mastodon API
+author: © TypeScriptLibs
+email: bug@typescriptlibs.org
+github_username:  typescriptlibs
+rss: rss
+
+show_excerpts: false
+
+github:
+    private: true
+
+header_pages:
+ - README.md
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
+
+theme: minima
+
+minima:
+  date_format: "%Y-%m-%d"
