@@ -14,6 +14,11 @@ github:
 
 header_pages:
   - SECURITY.md
+  - LICENSE.md
+  - _config.md
+
+include:
+  - LICENSE.md
   - _config.md
 
 plugins:
