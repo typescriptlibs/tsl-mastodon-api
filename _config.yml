@@ -1,4 +1,4 @@
-title: Mastodon API TypeScript Library
+title: Mastodon TypeScript Library
 description: Version 0.0.6
 author: © TypeScriptLibs
 email: bug@typescriptlibs.org
@@ -8,10 +8,7 @@ rss: rss
 show_excerpts: false
 
 github:
-    private: true
-
-header_pages:
- - README.md
+  private: true
 
 plugins:
  - jekyll-feed
@@ -21,3 +18,4 @@ theme: minima
 
 minima:
   date_format: "%Y-%m-%d"
+  skin: auto
