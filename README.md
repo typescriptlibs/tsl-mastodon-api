@@ -1,5 +1,5 @@
 TypeScript Library for the Mastodon API
----------------------------------------
+=======================================
 
 This is a TypeScript-optimized library to access a Mastodon server.
 
