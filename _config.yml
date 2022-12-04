@@ -30,7 +30,7 @@ theme: minima
 
 minima:
   date_format: "%Y-%m-%d"
-  skin: auto
+  skin: classic
 
 titles_from_headings:
   enabled: true
