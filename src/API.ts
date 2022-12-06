@@ -4,6 +4,7 @@
  *
  * */
 
+import * as Fetch from 'node-fetch';
 import * as JSON from './JSON/index.js';
 import { OAuth2 } from 'oauth';
 import REST from './REST.js';
@@ -49,7 +50,14 @@ export class API {
         return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
     }
 
-    public async getAccount (): Promise<JSON.Account> {
+    public async fileFrom (
+        path: string,
+        mimeType?: string
+    ): Promise<File> {
+        return await Fetch.fileFrom( path, mimeType );
+    }
+
+    public async getAccount (): Promise<API.Success<JSON.Account>> {
         const result = await this.fetch( 'GET', 'accounts/verify_credentials' );
         const json = result.json;
 
@@ -62,12 +70,12 @@ export class API {
             return Promise.reject( result );
         }
 
-        return json as JSON.Account;
+        return result as API.Success<JSON.Account>;
     }
 
     public async getMediaAttachment (
         id: string
-    ): Promise<JSON.MediaAttachment> {
+    ): Promise<API.Success<JSON.MediaAttachment>> {
         const result = await this.fetch( 'GET', `media/${id}` );
         const json = result.json;
 
@@ -83,19 +91,18 @@ export class API {
             return Promise.reject( result );
         }
 
-        return json as JSON.MediaAttachment;
+        return result as API.Success<JSON.MediaAttachment>;
     }
 
     public async getStatuses (
         limit?: number
     ): Promise<API.Success<Array<JSON.Status>>> {
         const result = await this.fetch( 'GET', 'statuses', { limit } );
-        const json = result?.json;
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( json )
+            !JSON.isStatuses( result?.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -197,12 +204,11 @@ export class API {
         search: JSON.Search
     ): Promise<API.Success<JSON.SearchResults>> {
         const result = await this.fetch( 'GET', 'search', search );
-        const json = result?.json;
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isSearchResults( json )
+            !JSON.isSearchResults( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -236,7 +242,7 @@ export namespace API {
     export interface Success<T = unknown> extends Result {
         failed: false;
         json: T;
-        status: ( 200 | 206 );
+        status: ( 200 | 202 | 206 );
     }
 
     /* *

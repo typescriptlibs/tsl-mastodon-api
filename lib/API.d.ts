@@ -5,8 +5,9 @@ export declare class API {
     nextDelay: number;
     readonly rest: REST;
     delay(): Promise<void>;
-    getAccount(): Promise<JSON.Account>;
-    getMediaAttachment(id: string): Promise<JSON.MediaAttachment>;
+    fileFrom(path: string, mimeType?: string): Promise<File>;
+    getAccount(): Promise<API.Success<JSON.Account>>;
+    getMediaAttachment(id: string): Promise<API.Success<JSON.MediaAttachment>>;
     getStatuses(limit?: number): Promise<API.Success<Array<JSON.Status>>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
@@ -23,7 +24,7 @@ export declare namespace API {
     interface Success<T = unknown> extends Result {
         failed: false;
         json: T;
-        status: (200 | 206);
+        status: (200 | 202 | 206);
     }
     function createOAuthApp(apiURL: string, clientName?: string, redirectURI?: string, scopes?: string, website?: string): Promise<unknown>;
     function getAccessToken(baseURL: string, clientId: string, clientSecret: string, authorizationCode: string, redirectUri?: string): Promise<string>;

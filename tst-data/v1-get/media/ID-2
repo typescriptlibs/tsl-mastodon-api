@@ -1,27 +1,27 @@
 {
-  "id": "ID-2",
-  "type": "image",
-  "url": "http://localhost:8000/files/1x1.png",
-  "preview_url": "http://localhost:8000/files/1x1.png",
-  "remote_url": null,
-  "meta": {
-    "focus": {
-      "x": 0.5,
-      "y": 0.5
+    "id": "ID-2",
+    "type": "image",
+    "url": "http://127.0.0.1:8000/files/1x1.png",
+    "preview_url": "http://127.0.0.1:8000/files/1x1.png",
+    "remote_url": null,
+    "meta": {
+        "focus": {
+            "x": 0.5,
+            "y": 0.5
+        },
+        "original": {
+            "width": 1,
+            "height": 1,
+            "size": "1x1",
+            "aspect": 1
+        },
+        "small": {
+            "width": 1,
+            "height": 1,
+            "size": "1x1",
+            "aspect": 1
+        }
     },
-    "original": {
-      "width": 1,
-      "height": 1,
-      "size": "1x1",
-      "aspect": 1
-    },
-    "small": {
-      "width": 1,
-      "height": 1,
-      "size": "1x1",
-      "aspect": 1
-    }
-  },
-  "description": "1x1.png",
-  "blurhash": "UFBWY:8_0Jxv4mx]t8t64.%M-:IUWGWAt6M}"
+    "description": "1x1.png",
+    "blurhash": "UFBWY:8_0Jxv4mx]t8t64.%M-:IUWGWAt6M}"
 }
