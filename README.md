@@ -43,12 +43,12 @@ async function postHelloWorld(): Promise<void> {
     });
     // expect client / server errors
     try {
-        const { json: post } = await mastodon.postNewStatus({
+        const result = await mastodon.postNewStatus({
             sensitive: true,
             spoiler_text: 'Hello',
             status: 'World'
         });
-        console.log(JSON.stringify(post));
+        console.log(JSON.stringify(result));
     }
     catch (error) {
         console.error(error);
