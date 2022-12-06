@@ -4,7 +4,7 @@
  *
  * */
 
-import fetch from 'node-fetch';
+import fetch, * as Fetch from 'node-fetch';
 import { Response } from 'node-fetch';
 import { Utilities } from './Utilities.js';
 
@@ -52,6 +52,13 @@ export class REST {
      *  Functions
      *
      * */
+
+    public async blobFrom (
+        path: string,
+        mimeType?: string
+    ): Promise<Blob> {
+        return await Fetch.blobFrom( path, mimeType );
+    }
 
     public delete (
         path: string,

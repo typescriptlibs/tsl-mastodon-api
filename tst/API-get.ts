@@ -8,7 +8,7 @@ const API = new Mastodon.API( {
 
 test( 'Test API.getAccount', async ( assert: test.Assert ) => {
     try {
-        const account = await API.getAccount();
+        const { json: account } = await API.getAccount();
         assert.strictEqual(
             account.id,
             'ID-1',
@@ -16,6 +16,7 @@ test( 'Test API.getAccount', async ( assert: test.Assert ) => {
         );
     }
     catch ( result: any ) {
+        console.debug( result );
         assert.ok(
             false,
             'Request should not fail.'
@@ -25,7 +26,7 @@ test( 'Test API.getAccount', async ( assert: test.Assert ) => {
 
 test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
     try {
-        const mediaAttachment = await API.getMediaAttachment( 'ID-2' );
+        const { json: mediaAttachment } = await API.getMediaAttachment( 'ID-2' );
         assert.strictEqual(
             mediaAttachment.id,
             'ID-2',
@@ -33,6 +34,7 @@ test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
         );
     }
     catch ( result: any ) {
+        console.debug( result );
         assert.ok(
             false,
             'Request should not fail.'
