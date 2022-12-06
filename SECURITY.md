@@ -8,10 +8,10 @@ Supported Versions
 
 The following versions of tsl-mastodon-api are currently being supported with security updates.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.0.6   | yes                |
-| < 0.0.6 | no                 |
+| Version | Supported |
+| ------- | --------- |
+| 0.0.6   | yes       |
+| < 0.0.6 | no        |
 
 
 
