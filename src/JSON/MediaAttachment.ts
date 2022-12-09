@@ -186,7 +186,7 @@ export function isAudioAttachment (
         typeof json.id === 'string' &&
         typeof json.meta === 'object' &&
         typeof json.preview_url === 'string' &&
-        typeof json.url === 'string' &&
+        ( typeof json.url === 'string' || json.url === null ) &&
         json.type === 'audio' &&
         isAudioAttachmentMeta( json.meta )
     );
@@ -217,7 +217,7 @@ export function isGIFVAttachment (
         typeof json.id === 'string' &&
         typeof json.meta === 'object' &&
         typeof json.preview_url === 'string' &&
-        typeof json.url === 'string' &&
+        ( typeof json.url === 'string' || json.url === null ) &&
         json.type === 'gifv' &&
         isGIFVAttachmentMeta( json.meta )
     );
@@ -258,7 +258,7 @@ export function isImageAttachment (
         typeof json.id === 'string' &&
         typeof json.meta === 'object' &&
         typeof json.preview_url === 'string' &&
-        typeof json.url === 'string' &&
+        ( typeof json.url === 'string' || json.url === null ) &&
         json.type === 'image' &&
         isImageAttachmentMeta( json.meta )
     );
@@ -305,7 +305,7 @@ export function isUnknownAttachment (
         typeof json.id === 'string' &&
         typeof json.meta === 'object' &&
         typeof json.preview_url === 'string' &&
-        typeof json.url === 'string' &&
+        ( typeof json.url === 'string' || json.url === null ) &&
         json.type === 'unknown'
     );
 }
@@ -319,7 +319,7 @@ export function isVideoAttachment (
         typeof json.id === 'string' &&
         typeof json.meta === 'object' &&
         typeof json.preview_url === 'string' &&
-        typeof json.url === 'string' &&
+        ( typeof json.url === 'string' || json.url === null ) &&
         json.type === 'video' &&
         isVideoAttachmentMeta( json.meta )
     );
