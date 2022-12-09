@@ -15,11 +15,11 @@ github:
 header_pages:
   - SECURITY.md
   - LICENSE.md
-  - _config.md
+  - .github/pages/all-libraries.md
 
 include:
   - LICENSE.md
-  - _config.md
+  - .github/pages/all-libraries.md
 
 plugins:
   - jekyll-feed
