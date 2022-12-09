@@ -107,6 +107,18 @@ export function isStatuses (
     );
 }
 
+export function isStatusMention (
+    json: Partial<StatusMention>
+): json is StatusMention {
+    return (
+        typeof json === 'object' &&
+        typeof json.id === 'string' &&
+        typeof json.acct === 'string' &&
+        typeof json.url === 'string' &&
+        typeof json.username === 'string'
+    );
+}
+
 export function isStatusSchedule (
     json: Partial<StatusSchedule>
 ): json is StatusSchedule {

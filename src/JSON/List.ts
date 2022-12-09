@@ -26,6 +26,18 @@ export function isList (
     );
 }
 
+export function isLists (
+    json: Partial<Array<Partial<List>>>
+): json is Array<List> {
+    return (
+        json instanceof Array &&
+        (
+            !json.length ||
+            isList( json[0] || {} )
+        )
+    );
+}
+
 /* *
  *
  *  Default Export

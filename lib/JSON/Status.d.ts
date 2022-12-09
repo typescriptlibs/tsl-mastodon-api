@@ -52,5 +52,6 @@ export interface StatusSchedule {
 }
 export declare function isStatus(json: Partial<Status>): json is Status;
 export declare function isStatuses(json: Partial<Array<Partial<Status>>>): json is Array<Status>;
+export declare function isStatusMention(json: Partial<StatusMention>): json is StatusMention;
 export declare function isStatusSchedule(json: Partial<StatusSchedule>): json is StatusSchedule;
 export default Status;
