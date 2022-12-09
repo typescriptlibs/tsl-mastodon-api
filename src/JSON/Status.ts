@@ -23,33 +23,34 @@ import { isAccount } from './Account.js';
 
 export interface Status {
     account: Account;
-    application: Application;
+    application?: Application;
     bookmarked?: boolean;
-    card?: Card;
+    card?: ( Card | null );
     created_at: string;
     content: string;
+    edited_at?: string;
     emojis: Array<Emoji>;
     favourited?: boolean;
     favourites_count: number;
     id: string;
-    in_reply_to_account_id?: string;
-    in_reply_to_id?: string;
-    language?: string;
+    in_reply_to_account_id?: ( string | null );
+    in_reply_to_id?: ( string | null );
+    language?: ( string | null );
     media_attachments: Array<MediaAttachment>;
     mentions: Array<StatusMention>;
     muted?: boolean;
     pinned?: boolean;
-    poll?: Poll;
-    reblog?: Status;
+    poll?: ( Poll | null );
+    reblog?: ( Status | null );
     reblogged?: boolean;
     reblogs_count: number;
     replies_count: number;
     sensitive: boolean;
     spoiler_text: string;
     tags: Array<Tag>;
-    text?: string;
+    text?: ( string | null );
     uri: string;
-    url?: string;
+    url?: ( string | null );
     visibility: Visibility;
 }
 
@@ -58,6 +59,13 @@ export interface StatusMention {
     id: string;
     username: string;
     url: string;
+}
+
+export interface StatusSchedule {
+    id: string;
+    media_attachments: Array<MediaAttachment>;
+    params: Partial<Status>;
+    scheduled_at: string;
 }
 
 /* *
@@ -72,7 +80,6 @@ export function isStatus (
     return (
         typeof json === 'object' &&
         typeof json.account === 'object' &&
-        typeof json.application === 'object' &&
         typeof json.created_at === 'string' &&
         typeof json.content === 'string' &&
         typeof json.emojis === 'object' &&
@@ -97,6 +104,18 @@ export function isStatuses (
             !json.length ||
             isStatus( json[0] || {} )
         )
+    );
+}
+
+export function isStatusSchedule (
+    json: Partial<StatusSchedule>
+): json is StatusSchedule {
+    return (
+        typeof json === 'object' &&
+        typeof json.id === 'string' &&
+        typeof json.media_attachments === 'object' &&
+        typeof json.params === 'object' &&
+        typeof json.scheduled_at === 'string'
     );
 }
 

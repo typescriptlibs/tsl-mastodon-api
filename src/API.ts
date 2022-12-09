@@ -182,7 +182,7 @@ export class API {
 
     public async postNewStatus (
         newStatus: JSON.NewStatus
-    ): Promise<API.Success<JSON.Status>> {
+    ): Promise<API.Success<( JSON.Status | JSON.StatusSchedule )>> {
         const result = await this.fetch( 'POST', 'statuses', newStatus );
 
         if (
@@ -191,13 +191,16 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
-            !JSON.isStatus( result.json )
+            (
+                !JSON.isStatus( result.json ) &&
+                !JSON.isStatusSchedule( result.json )
+            )
         ) {
             result.failed = true;
             return Promise.reject( result );
         }
 
-        return result as API.Success<JSON.Status>;
+        return result as API.Success<( JSON.Status | JSON.StatusSchedule )>;
     }
 
     public async search (

@@ -13,7 +13,7 @@ export declare class API {
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     postNewMediaAttachment(newMediaAttachment: JSON.NewMediaAttachment): Promise<API.Success<JSON.MediaAttachment>>;
     postNewPollVote(pollId: string, newPollVote: JSON.NewPollVote): Promise<API.Success<JSON.Poll>>;
-    postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<JSON.Status>>;
+    postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
     search(search: JSON.Search): Promise<API.Success<JSON.SearchResults>>;
 }
 export declare namespace API {

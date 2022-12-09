@@ -1,0 +1,17 @@
+{
+    "id": "ID-4",
+    "scheduled_at": "2037-12-31T20:37:12.000Z",
+    "params": {
+        "text": "test content",
+        "media_ids": null,
+        "sensitive": null,
+        "spoiler_text": null,
+        "visibility": null,
+        "scheduled_at": null,
+        "poll": null,
+        "idempotency": null,
+        "in_reply_to_id": null,
+        "application_id": 1
+    },
+    "media_attachments": []
+}
