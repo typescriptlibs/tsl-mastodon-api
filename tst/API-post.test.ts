@@ -28,3 +28,24 @@ test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
         );
     }
 } );
+
+test( 'Test API.postNewStatus', async ( assert: test.Assert ) => {
+    try {
+        const mediaAttachment = await API.postNewStatus( {
+            scheduled_at: new Date( 2037, 11, 31, 20, 37, 12 ),
+            status: 'test content'
+        } );
+        assert.strictEqual(
+            mediaAttachment.json.id,
+            'ID-4',
+            'Status ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
