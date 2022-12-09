@@ -1,5 +1,5 @@
 import * as Mastodon from 'tsl-mastodon-api';
-import * as Utilities from './Utilities.js';
+import Utilities from './Utilities.js';
 import test from '@typescriptlibs/tst';
 
 const API = new Mastodon.API( {
