@@ -3,28 +3,33 @@
 title: Mastodon TypeScript Library
 description: TypeScript Library for the Mastodon API
 author: © TypeScriptLibs and Contributors
+
 email: bug@typescriptlibs.org
 github_username:  typescriptlibs
 rss: rss
-
-show_excerpts: false
 
 github:
   private: true
 
 header_pages:
+  - www/downloads.md
   - SECURITY.md
   - LICENSE.md
   - www/all-libraries.md
 
 include:
   - LICENSE.md
+  - README.md
+  - SECURITY.md
   - www/all-libraries.md
+  - www/downloads.md
 
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-titles-from-headings
+
+show_excerpts: false
 
 theme: minima
 
