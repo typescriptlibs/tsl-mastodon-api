@@ -18,7 +18,7 @@
     },
     "devDependencies": {
         "@types/node": "^16.8.0",
-        "@typescriptlibs/tst": "^0.0.4",
+        "@typescriptlibs/tst": "^0.0.5",
         "husky": "^8.0.2",
         "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.4"

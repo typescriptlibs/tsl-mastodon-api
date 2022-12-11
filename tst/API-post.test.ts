@@ -29,14 +29,35 @@ test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     }
 } );
 
+
+test( 'Test API.postNewPollVote', async ( assert: test.Assert ) => {
+    try {
+        const pollVote = await API.postNewPollVote( 'ID-5', {
+            choices: [0, 2, 4, 9, 6]
+        } );
+        assert.strictEqual(
+            pollVote.json.id,
+            'ID-6',
+            'PollVote ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
 test( 'Test API.postNewStatus', async ( assert: test.Assert ) => {
     try {
-        const mediaAttachment = await API.postNewStatus( {
+        const status = await API.postNewStatus( {
             scheduled_at: new Date( 2037, 11, 31, 20, 37, 12 ),
             status: 'test content'
         } );
         assert.strictEqual(
-            mediaAttachment.json.id,
+            status.json.id,
             'ID-4',
             'Status ID should contain mockup value.'
         );
