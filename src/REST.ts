@@ -5,6 +5,7 @@
  * */
 
 import fetch, * as Fetch from 'node-fetch';
+import HTON from './HTON.js';
 import { Response } from 'node-fetch';
 import { Utilities } from './Utilities.js';
 
@@ -88,7 +89,8 @@ export class REST {
         const timeout = new AbortController();
         const timer = setTimeout( () => timeout.abort(), config.timeout_ms );
 
-        let response = new Response();
+        let response = new Response(),
+            text: string = '';
 
         try {
             response = await fetch(
@@ -112,13 +114,26 @@ export class REST {
 
             clearTimeout( timer );
 
-            return {
-                failed: !response.ok,
-                json: await response.json(),
-                path,
-                response,
-                status: response.status
-            };
+            text = await response.text();
+
+            try {
+                return {
+                    failed: !response.ok,
+                    json: JSON.parse( text ),
+                    path,
+                    response,
+                    status: response.status,
+                };
+            }
+            catch ( error ) {
+                return {
+                    failed: !response.ok,
+                    json: HTON.parseText( text ),
+                    path,
+                    response,
+                    status: response.status,
+                };
+            }
         }
         catch ( error ) {
 
@@ -126,10 +141,10 @@ export class REST {
 
             return {
                 failed: true,
-                json: {},
+                json: { text },
                 path,
                 response,
-                status: 422 // Unprocessable Entity
+                status: 422, // Unprocessable Entity
             }
         }
     }
