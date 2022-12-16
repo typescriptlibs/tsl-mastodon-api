@@ -5,12 +5,13 @@ export declare class API {
     nextDelay: number;
     readonly rest: REST;
     delay(): Promise<void>;
+    protected extractRateLimit(headers: Headers): (number | undefined);
+    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     fileFrom(path: string, mimeType?: string): Promise<File>;
     getAccount(): Promise<API.Success<JSON.Account>>;
     getMediaAttachment(id: string): Promise<API.Success<JSON.MediaAttachment>>;
+    getStatus(id: string): Promise<API.Success<JSON.Status>>;
     getStatuses(limit?: number): Promise<API.Success<Array<JSON.Status>>>;
-    protected extractRateLimit(headers: Headers): (number | undefined);
-    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     postNewMediaAttachment(newMediaAttachment: JSON.NewMediaAttachment): Promise<API.Success<JSON.MediaAttachment>>;
     postNewPollVote(pollId: string, newPollVote: JSON.NewPollVote): Promise<API.Success<JSON.Poll>>;
     postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
