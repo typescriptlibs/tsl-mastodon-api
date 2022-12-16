@@ -15,6 +15,8 @@ export declare class API {
     getMediaAttachment(id: string): Promise<API.Success<JSON.MediaAttachment>>;
     getStatus(id: string): Promise<API.Success<JSON.Status>>;
     getStatuses(limit?: number): Promise<API.Success<Array<JSON.Status>>>;
+    postNewList(newList: JSON.NewList): Promise<API.Success<JSON.List>>;
+    postNewListAccounts(id: string, accountIds: Array<string>): Promise<API.Success<void>>;
     postNewMediaAttachment(newMediaAttachment: JSON.NewMediaAttachment): Promise<API.Success<JSON.MediaAttachment>>;
     postNewPollVote(pollId: string, newPollVote: JSON.NewPollVote): Promise<API.Success<JSON.Poll>>;
     postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
