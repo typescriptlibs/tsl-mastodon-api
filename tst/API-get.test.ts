@@ -24,6 +24,42 @@ test( 'Test API.getAccount', async ( assert: test.Assert ) => {
     }
 } );
 
+test( 'Test API.getList', async ( assert: test.Assert ) => {
+    try {
+        const { json: list } = await API.getList( 'ID-8' );
+        assert.strictEqual(
+            list.id,
+            'ID-8',
+            'List ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
+test( 'Test API.getListAccounts', async ( assert: test.Assert ) => {
+    try {
+        const { json: listAccounts } = await API.getListAccounts( 'ID-9' );
+        assert.strictEqual(
+            listAccounts.length,
+            1,
+            'List Accounts should contain mockup object.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
 test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
     try {
         const { json: mediaAttachment } = await API.getMediaAttachment( 'ID-2' );

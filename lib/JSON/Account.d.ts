@@ -20,4 +20,5 @@ export interface Account {
     username: string;
 }
 export declare function isAccount(json: Partial<Account>): json is Account;
+export declare function isAccounts(json: Partial<Array<Partial<Account>>>): json is Array<Account>;
 export default Account;

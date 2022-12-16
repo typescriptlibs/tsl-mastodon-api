@@ -50,6 +50,18 @@ export function isAccount (
     );
 }
 
+export function isAccounts (
+    json: Partial<Array<Partial<Account>>>
+): json is Array<Account> {
+    return (
+        json instanceof Array &&
+        (
+            !json.length ||
+            isAccount( json[0] || {} )
+        )
+    );
+}
+
 /* *
  *
  *  Default Export
