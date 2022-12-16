@@ -211,6 +211,41 @@ export class API {
         return result as API.Success<Array<JSON.Status>>;
     }
 
+    public async postNewList (
+        newList: JSON.NewList
+    ): Promise<API.Success<JSON.List>> {
+        const result = await this.fetch( 'POST', 'lists', newList );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isList( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.List>;
+    }
+
+    public async postNewListAccounts (
+        id: string,
+        accountIds: Array<string>
+    ): Promise<API.Success<void>> {
+        const result = await this.fetch( 'POST', `lists/${id}/accounts`, { account_ids: accountIds } );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            typeof result.json !== 'object'
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<void>;
+    }
+
     public async postNewMediaAttachment (
         newMediaAttachment: JSON.NewMediaAttachment
     ): Promise<API.Success<JSON.MediaAttachment>> {

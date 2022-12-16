@@ -9,13 +9,33 @@ const API = new Mastodon.API( {
 
 Utilities.forceGetFetch( API );
 
+test( 'Test API.postNewList', async ( assert: test.Assert ) => {
+    try {
+        const { json: list } = await API.postNewList( {
+            "title": "test",
+        } );
+        assert.strictEqual(
+            list.id,
+            'ID-8',
+            'List ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
 test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     try {
-        const mediaAttachment = await API.postNewMediaAttachment( {
+        const { json: mediaAttachment } = await API.postNewMediaAttachment( {
             file: await API.fileFrom( './tst-data/files/1x1.png' )
         } );
         assert.strictEqual(
-            mediaAttachment.json.id,
+            mediaAttachment.id,
             'ID-3',
             'Media Attachment ID should contain mockup value.'
         );
@@ -29,14 +49,13 @@ test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     }
 } );
 
-
 test( 'Test API.postNewPollVote', async ( assert: test.Assert ) => {
     try {
-        const pollVote = await API.postNewPollVote( 'ID-5', {
+        const { json: pollVote } = await API.postNewPollVote( 'ID-5', {
             choices: [0, 2, 4, 9, 6]
         } );
         assert.strictEqual(
-            pollVote.json.id,
+            pollVote.id,
             'ID-6',
             'PollVote ID should contain mockup value.'
         );
@@ -52,12 +71,12 @@ test( 'Test API.postNewPollVote', async ( assert: test.Assert ) => {
 
 test( 'Test API.postNewStatus', async ( assert: test.Assert ) => {
     try {
-        const status = await API.postNewStatus( {
+        const { json: status } = await API.postNewStatus( {
             scheduled_at: new Date( 2037, 11, 31, 20, 37, 12 ),
             status: 'test content'
         } );
         assert.strictEqual(
-            status.json.id,
+            status.id,
             'ID-4',
             'Status ID should contain mockup value.'
         );
