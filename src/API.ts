@@ -50,6 +50,42 @@ export class API {
         return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
     }
 
+    public async deleteList (
+        id: string
+    ): Promise<API.Success<JSON.List>> {
+        const result = await this.fetch( 'DELETE', `lists/${id}` );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isList( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.List>;
+
+    }
+
+    public async deleteStatus (
+        id: string
+    ): Promise<API.Success<JSON.Status>> {
+        const result = await this.fetch( 'DELETE', `statuses/${id}` );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatus( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.Status>;
+
+    }
+
     protected extractRateLimit (
         headers: Headers
     ): ( number | undefined ) {
