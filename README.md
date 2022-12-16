@@ -66,28 +66,49 @@ The following snippets show an excerpt of the v0.0.6 API.
 
 ```ts
 API(config)
-API.rest.delete(path, params?)
-API.rest.fetch(method, path, params?)
-API.rest.get(path, params?)
-API.rest.patch(path, params?)
-API.rest.post(path, params?)
-API.rest.put(path, params?)
 API.delay()
-API.getAccount()
-API.getMediaAttachment(id)
-API.getStatuses(limit?)
+API.search(search)
+
+API.postNewList(newList)
+API.postNewListAccounts(id, accountIds)
 API.postNewMediaAttachment(newMediaAttachment)
 API.postNewPollVote(pollId, newPollVote)
 API.postNewStatus(newStatus)
-API.search(search)
+
+API.getAccount()
+API.getList(id)
+API.getListAccounts(id, limit?)
+API.getLists()
+API.getMediaAttachment(id)
+API.getStatus(id)
+API.getStatuses(limit?)
+
+API.deleteList(id)
+API.deleteStatus(id)
+```
+
+```ts
+HTON.create(tagName, attributes?, children?)
+HTON.isHTML(text)
+HTON.parseText(text)
 ```
 
 ```ts
 JSON.isAccount(json)
+JSON.isList(json)
 JSON.isMediaAttachment(json)
 JSON.isPoll(json)
 JSON.isSearchResults(json)
 JSON.isStatus(json)
+```
+
+```ts
+REST.delete(path, params?)
+REST.fetch(method, path, params?)
+REST.get(path, params?)
+REST.patch(path, params?)
+REST.post(path, params?)
+REST.put(path, params?)
 ```
 
 
