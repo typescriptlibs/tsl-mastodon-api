@@ -5,6 +5,8 @@ export declare class API {
     nextDelay: number;
     readonly rest: REST;
     delay(): Promise<void>;
+    deleteList(id: string): Promise<API.Success<JSON.List>>;
+    deleteStatus(id: string): Promise<API.Success<JSON.Status>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     fileFrom(path: string, mimeType?: string): Promise<File>;
