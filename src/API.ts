@@ -50,6 +50,37 @@ export class API {
         return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
     }
 
+    protected extractRateLimit (
+        headers: Headers
+    ): ( number | undefined ) {
+        let value = headers.get( 'X-RateLimit-Limit' );
+
+        if ( typeof value === 'string' ) {
+            return parseInt( value );
+        }
+
+        value = headers.get( 'X-RateLimit-Remaining' );
+
+        if ( typeof value === 'string' ) {
+            return parseInt( value );
+        }
+    };
+
+    protected async fetch (
+        method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
+        path: string,
+        params?: unknown
+    ): Promise<API.Result> {
+        const rest: REST = this.rest;
+        const result: API.Result = await rest.fetch( method, path, params as REST.Params );
+        const rateLimit = this.extractRateLimit( result.response.headers );
+
+        result.rateLimit = rateLimit;
+        this.nextDelay = 300000 / ( rateLimit || 300 );
+
+        return result;
+    }
+
     public async fileFrom (
         path: string,
         mimeType?: string
@@ -94,6 +125,23 @@ export class API {
         return result as API.Success<JSON.MediaAttachment>;
     }
 
+    public async getStatus (
+        id: string
+    ): Promise<API.Success<JSON.Status>> {
+        const result = await this.fetch( 'GET', `statuses/${id}` );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatus( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.Status>;
+    }
+
     public async getStatuses (
         limit?: number
     ): Promise<API.Success<Array<JSON.Status>>> {
@@ -109,37 +157,6 @@ export class API {
         }
 
         return result as API.Success<Array<JSON.Status>>;
-    }
-
-    protected extractRateLimit (
-        headers: Headers
-    ): ( number | undefined ) {
-        let value = headers.get( 'X-RateLimit-Limit' );
-
-        if ( typeof value === 'string' ) {
-            return parseInt( value );
-        }
-
-        value = headers.get( 'X-RateLimit-Remaining' );
-
-        if ( typeof value === 'string' ) {
-            return parseInt( value );
-        }
-    };
-
-    protected async fetch (
-        method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
-        path: string,
-        params?: unknown
-    ): Promise<API.Result> {
-        const rest: REST = this.rest;
-        const result: API.Result = await rest.fetch( method, path, params as REST.Params );
-        const rateLimit = this.extractRateLimit( result.response.headers );
-
-        result.rateLimit = rateLimit;
-        this.nextDelay = 300000 / ( rateLimit || 300 );
-
-        return result;
     }
 
     public async postNewMediaAttachment (

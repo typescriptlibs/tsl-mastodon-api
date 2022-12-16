@@ -41,3 +41,21 @@ test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
         );
     }
 } );
+
+test( 'Test API.getStatus', async ( assert: test.Assert ) => {
+    try {
+        const { json: status } = await API.getStatus( 'ID-7' );
+        assert.strictEqual(
+            status.id,
+            'ID-7',
+            'Status ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
