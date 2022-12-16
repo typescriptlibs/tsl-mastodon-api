@@ -9,6 +9,9 @@ export declare class API {
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     fileFrom(path: string, mimeType?: string): Promise<File>;
     getAccount(): Promise<API.Success<JSON.Account>>;
+    getList(id: string): Promise<API.Success<JSON.List>>;
+    getListAccounts(id: string, limit?: number): Promise<API.Success<Array<JSON.Account>>>;
+    getLists(limit?: number): Promise<API.Success<Array<JSON.List>>>;
     getMediaAttachment(id: string): Promise<API.Success<JSON.MediaAttachment>>;
     getStatus(id: string): Promise<API.Success<JSON.Status>>;
     getStatuses(limit?: number): Promise<API.Success<Array<JSON.Status>>>;

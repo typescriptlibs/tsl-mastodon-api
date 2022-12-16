@@ -104,6 +104,58 @@ export class API {
         return result as API.Success<JSON.Account>;
     }
 
+    public async getList (
+        id: string
+    ): Promise<API.Success<JSON.List>> {
+        const result = await this.fetch( 'GET', `lists/${id}` );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isList( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.List>;
+    }
+
+    public async getListAccounts (
+        id: string,
+        limit?: number
+    ): Promise<API.Success<Array<JSON.Account>>> {
+        const result = await this.fetch( 'GET', `lists/${id}/accounts`, { limit } );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isAccounts( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Account>>;
+    }
+
+    public async getLists (
+        limit?: number
+    ): Promise<API.Success<Array<JSON.List>>> {
+        const result = await this.fetch( 'GET', `lists`, { limit } );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isLists( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.List>>;
+    }
+
     public async getMediaAttachment (
         id: string
     ): Promise<API.Success<JSON.MediaAttachment>> {
