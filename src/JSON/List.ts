@@ -21,6 +21,13 @@ export interface List {
 export type ListAccounts = Array<Account>;
 
 /**
+ * Interface to delete accounts from a list.
+ */
+export interface ListAccountsDelete {
+    account_ids: Array<string>;
+}
+
+/**
  * Interface to add accounts to a list.
  */
 export interface ListAccountsPost {
