@@ -1,11 +1,37 @@
 /* *
  *
+ *  Imports
+ *
+ * */
+
+import Account from './Account.js';
+
+/* *
+ *
  *  Declarations
  *
  * */
 
 export interface List {
     id: string;
+    replies_policy?: string;
+    title: string;
+}
+
+export type ListAccounts = Array<Account>;
+
+/**
+ * Interface to add accounts to a list.
+ */
+export interface ListAccountsPost {
+    account_ids: Array<string>;
+}
+
+/**
+ * Interface to post a new list, or update an existing list.
+ */
+export interface ListPost {
+    id?: string;
     replies_policy?: string;
     title: string;
 }

@@ -21,6 +21,18 @@ import { isAccount } from './Account.js';
  *
  * */
 
+export interface MediaStatusPost {
+    id?: string;
+    in_reply_to_id?: string;
+    media_ids: Array<string>;
+    poll?: undefined;
+    scheduled_at?: Date;
+    sensitive?: boolean;
+    spoiler_text?: string;
+    status?: string;
+    visibility?: Visibility;
+}
+
 export interface Status {
     account: Account;
     application?: Application;
@@ -61,11 +73,35 @@ export interface StatusMention {
     url: string;
 }
 
+export type StatusPost = (
+    | MediaStatusPost
+    | TextStatusPost
+);
+
 export interface StatusSchedule {
     id: string;
     media_attachments: Array<MediaAttachment>;
     params: Partial<Status>;
     scheduled_at: string;
+}
+
+export interface TextStatusPost {
+    id?: string;
+    in_reply_to_id?: string;
+    media_ids?: undefined;
+    poll?: TextStatusPostPoll;
+    scheduled_at?: Date;
+    sensitive?: boolean;
+    spoiler_text?: string;
+    status: string;
+    visibility?: Visibility;
+}
+
+export interface TextStatusPostPoll {
+    expires_in: number;
+    hide_totals?: boolean;
+    multiple?: boolean;
+    options: Array<string>;
 }
 
 /* *

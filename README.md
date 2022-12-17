@@ -43,7 +43,7 @@ async function postHelloWorld(): Promise<void> {
     });
     // expect client / server errors
     try {
-        const result = await mastodon.postNewStatus({
+        const result = await mastodon.postStatus({
             sensitive: true,
             spoiler_text: 'Hello',
             status: 'World'
@@ -69,19 +69,19 @@ API(config)
 API.delay()
 API.search(search)
 
-API.postNewList(newList)
-API.postNewListAccounts(id, accountIds)
-API.postNewMediaAttachment(newMediaAttachment)
-API.postNewPollVote(pollId, newPollVote)
-API.postNewStatus(newStatus)
-
 API.getAccount()
 API.getList(id)
 API.getListAccounts(id, limit?)
-API.getLists()
+API.getLists(limit?)
 API.getMediaAttachment(id)
 API.getStatus(id)
 API.getStatuses(limit?)
+
+API.postList(list)
+API.postListAccounts(id, listAccounts)
+API.postMediaAttachment(mediaAttachment)
+API.postPollVote(pollId, pollVote)
+API.postStatus(status)
 
 API.deleteList(id)
 API.deleteStatus(id)

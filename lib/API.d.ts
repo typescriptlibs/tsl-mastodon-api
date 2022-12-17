@@ -6,22 +6,23 @@ export declare class API {
     readonly rest: REST;
     delay(): Promise<void>;
     deleteList(id: string): Promise<API.Success<JSON.List>>;
+    deleteMediaAttachment(id: string): Promise<API.Success<JSON.MediaAttachment>>;
     deleteStatus(id: string): Promise<API.Success<JSON.Status>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     fileFrom(path: string, mimeType?: string): Promise<File>;
     getAccount(): Promise<API.Success<JSON.Account>>;
     getList(id: string): Promise<API.Success<JSON.List>>;
-    getListAccounts(id: string, limit?: number): Promise<API.Success<Array<JSON.Account>>>;
+    getListAccounts(id: string, limit?: number): Promise<API.Success<JSON.ListAccounts>>;
     getLists(limit?: number): Promise<API.Success<Array<JSON.List>>>;
     getMediaAttachment(id: string): Promise<API.Success<JSON.MediaAttachment>>;
     getStatus(id: string): Promise<API.Success<JSON.Status>>;
     getStatuses(limit?: number): Promise<API.Success<Array<JSON.Status>>>;
-    postNewList(newList: JSON.NewList): Promise<API.Success<JSON.List>>;
-    postNewListAccounts(id: string, accountIds: Array<string>): Promise<API.Success<void>>;
-    postNewMediaAttachment(newMediaAttachment: JSON.NewMediaAttachment): Promise<API.Success<JSON.MediaAttachment>>;
-    postNewPollVote(pollId: string, newPollVote: JSON.NewPollVote): Promise<API.Success<JSON.Poll>>;
-    postNewStatus(newStatus: JSON.NewStatus): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
+    postList(list: JSON.ListPost): Promise<API.Success<JSON.List>>;
+    postListAccounts(id: string, listAccounts: JSON.ListAccountsPost): Promise<API.Success<void>>;
+    postMediaAttachment(mediaAttachment: JSON.MediaAttachmentPost): Promise<API.Success<JSON.MediaAttachment>>;
+    postPollVote(pollId: string, pollVote: JSON.PollVotePost): Promise<API.Success<JSON.Poll>>;
+    postStatus(status: JSON.StatusPost): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
     search(search: JSON.Search): Promise<API.Success<JSON.SearchResults>>;
 }
 export declare namespace API {
