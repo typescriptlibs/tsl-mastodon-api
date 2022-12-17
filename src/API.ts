@@ -68,6 +68,24 @@ export class API {
 
     }
 
+    public async deleteMediaAttachment (
+        id: string
+    ): Promise<API.Success<JSON.MediaAttachment>> {
+        const result = await this.fetch( 'DELETE', `media/${id}` );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isMediaAttachment( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.MediaAttachment>;
+
+    }
+
     public async deleteStatus (
         id: string
     ): Promise<API.Success<JSON.Status>> {
@@ -160,7 +178,7 @@ export class API {
     public async getListAccounts (
         id: string,
         limit?: number
-    ): Promise<API.Success<Array<JSON.Account>>> {
+    ): Promise<API.Success<JSON.ListAccounts>> {
         const result = await this.fetch( 'GET', `lists/${id}/accounts`, { limit } );
 
         if (
@@ -172,7 +190,7 @@ export class API {
             return Promise.reject( result );
         }
 
-        return result as API.Success<Array<JSON.Account>>;
+        return result as API.Success<JSON.ListAccounts>;
     }
 
     public async getLists (
@@ -247,10 +265,10 @@ export class API {
         return result as API.Success<Array<JSON.Status>>;
     }
 
-    public async postNewList (
-        newList: JSON.NewList
+    public async postList (
+        list: JSON.ListPost,
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'POST', 'lists', newList );
+        const result = await this.fetch( 'POST', 'lists', list );
 
         if (
             result.failed ||
@@ -264,11 +282,11 @@ export class API {
         return result as API.Success<JSON.List>;
     }
 
-    public async postNewListAccounts (
+    public async postListAccounts (
         id: string,
-        accountIds: Array<string>
+        listAccounts: JSON.ListAccountsPost
     ): Promise<API.Success<void>> {
-        const result = await this.fetch( 'POST', `lists/${id}/accounts`, { account_ids: accountIds } );
+        const result = await this.fetch( 'POST', `lists/${id}/accounts`, listAccounts );
 
         if (
             result.failed ||
@@ -282,10 +300,10 @@ export class API {
         return result as API.Success<void>;
     }
 
-    public async postNewMediaAttachment (
-        newMediaAttachment: JSON.NewMediaAttachment
+    public async postMediaAttachment (
+        mediaAttachment: JSON.MediaAttachmentPost
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.fetch( 'POST', 'media', newMediaAttachment );
+        const result = await this.fetch( 'POST', 'media', mediaAttachment );
 
         if (
             result.failed ||
@@ -302,11 +320,11 @@ export class API {
         return result as API.Success<JSON.MediaAttachment>;
     }
 
-    public async postNewPollVote (
+    public async postPollVote (
         pollId: string,
-        newPollVote: JSON.NewPollVote
+        pollVote: JSON.PollVotePost
     ): Promise<API.Success<JSON.Poll>> {
-        const result = await this.fetch( 'POST', `polls/${pollId}/votes`, newPollVote );
+        const result = await this.fetch( 'POST', `polls/${pollId}/votes`, pollVote );
 
         if (
             result.failed ||
@@ -320,10 +338,10 @@ export class API {
         return result as API.Success<JSON.Poll>;
     }
 
-    public async postNewStatus (
-        newStatus: JSON.NewStatus
+    public async postStatus (
+        status: JSON.StatusPost
     ): Promise<API.Success<( JSON.Status | JSON.StatusSchedule )>> {
-        const result = await this.fetch( 'POST', 'statuses', newStatus );
+        const result = await this.fetch( 'POST', 'statuses', status );
 
         if (
             result.failed ||

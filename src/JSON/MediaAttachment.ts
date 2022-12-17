@@ -117,6 +117,16 @@ export type MediaAttachment = (
     | VideoAttachment
 );
 
+/**
+ * Interface to post a new media attachment.
+ */
+export interface MediaAttachmentPost {
+    file: ( Blob | File );
+    thumbnail?: Blob;
+    description?: string;
+    focus?: string;
+}
+
 export interface UnknownAttachment {
     description?: ( string | null );
     id: string;

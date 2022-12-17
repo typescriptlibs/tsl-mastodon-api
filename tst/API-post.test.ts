@@ -11,7 +11,7 @@ Utilities.forceGetFetch( API );
 
 test( 'Test API.postNewList', async ( assert: test.Assert ) => {
     try {
-        const { json: list } = await API.postNewList( {
+        const { json: list } = await API.postList( {
             "title": "test",
         } );
         assert.strictEqual(
@@ -31,7 +31,7 @@ test( 'Test API.postNewList', async ( assert: test.Assert ) => {
 
 test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     try {
-        const { json: mediaAttachment } = await API.postNewMediaAttachment( {
+        const { json: mediaAttachment } = await API.postMediaAttachment( {
             file: await API.fileFrom( './tst-data/files/1x1.png' )
         } );
         assert.strictEqual(
@@ -51,7 +51,7 @@ test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
 
 test( 'Test API.postNewPollVote', async ( assert: test.Assert ) => {
     try {
-        const { json: pollVote } = await API.postNewPollVote( 'ID-5', {
+        const { json: pollVote } = await API.postPollVote( 'ID-5', {
             choices: [0, 2, 4, 9, 6]
         } );
         assert.strictEqual(
@@ -71,7 +71,7 @@ test( 'Test API.postNewPollVote', async ( assert: test.Assert ) => {
 
 test( 'Test API.postNewStatus', async ( assert: test.Assert ) => {
     try {
-        const { json: status } = await API.postNewStatus( {
+        const { json: status } = await API.postStatus( {
             scheduled_at: new Date( 2037, 11, 31, 20, 37, 12 ),
             status: 'test content'
         } );

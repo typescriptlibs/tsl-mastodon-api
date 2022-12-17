@@ -22,6 +22,13 @@ export interface PollOption {
     votes_count: number;
 }
 
+/**
+ * Interface to post poll votes.
+ */
+export interface PollVotePost {
+    choices: Array<number>;
+}
+
 /* *
  *
  *  Functions
