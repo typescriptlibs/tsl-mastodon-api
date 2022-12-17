@@ -19,7 +19,7 @@
         "oauth": "~0.10.0"
     },
     "devDependencies": {
-        "@types/node": "^16.8.0",
+        "@types/node": "~16.7.13",
         "@typescriptlibs/tst": "^0.0.5",
         "husky": "^8.0.2",
         "tsl-mastodon-api": "file:./",
