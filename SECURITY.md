@@ -10,8 +10,8 @@ The following versions of tsl-mastodon-api are currently being supported with se
 
 | Version | Supported |
 | ------- | --------- |
-| 0.0.6   | yes       |
-| < 0.0.6 | no        |
+| 0.1.0   | yes       |
+| < 0.1.0 | no        |
 
 
 
