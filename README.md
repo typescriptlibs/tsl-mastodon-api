@@ -64,36 +64,37 @@ API Overview
 
 The following snippets show an excerpt of the v0.0.6 API.
 
-```ts
+```TypeScript
 API(config)
 API.delay()
 API.search(search)
 
 API.getAccount()
-API.getList(id)
-API.getListAccounts(id, limit?)
-API.getLists(limit?)
-API.getMediaAttachment(id)
-API.getStatus(id)
-API.getStatuses(limit?)
+API.getList(listID)
+API.getListAccounts(listID, queryParameters?)
+API.getLists(queryParameters?)
+API.getMediaAttachment(mediaAttachmentID)
+API.getStatus(statusID)
+API.getStatuses(queryParameters?)
 
 API.postList(list)
-API.postListAccounts(id, listAccounts)
+API.postListAccounts(listID, listAccounts)
 API.postMediaAttachment(mediaAttachment)
 API.postPollVote(pollId, pollVote)
 API.postStatus(status)
 
-API.deleteList(id)
-API.deleteStatus(id)
+API.deleteList(listID)
+API.deleteListAccounts(listID, listAccounts)
+API.deleteStatus(statusID)
 ```
 
-```ts
+```TypeScript
 HTON.create(tagName, attributes?, children?)
 HTON.isHTML(text)
 HTON.parseText(text)
 ```
 
-```ts
+```TypeScript
 JSON.isAccount(json)
 JSON.isList(json)
 JSON.isMediaAttachment(json)
@@ -102,7 +103,7 @@ JSON.isSearchResults(json)
 JSON.isStatus(json)
 ```
 
-```ts
+```TypeScript
 REST.delete(path, params?)
 REST.fetch(method, path, params?)
 REST.get(path, params?)
