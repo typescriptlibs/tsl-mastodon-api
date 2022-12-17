@@ -1,0 +1,37 @@
+{
+    "opts": {
+        "destination": "./www/api/",
+        "encoding": "utf8",
+        "mainpagetitle": "tsl-mastodon-api",
+        "pedantic": true,
+        "private": true,
+        "readme": "./.jsdoc/api-home.md",
+        "recurse": true,
+        "template": "./node_modules/minami",
+        "tutorials": "./.jsdoc/tutorials/"
+    },
+    "plugins": [
+        "plugins/underscore",
+        "plugins/escapeHTML",
+        "plugins/markdown"
+    ],
+    "source": {
+        "includePattern": ".+\\.jsx?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": [
+            "jsdoc"
+        ]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": true,
+        "showInheritedInNav": true,
+        "useLongnameInNav": false,
+        "default": {
+            "outputSourceFiles": false
+        }
+    }
+}

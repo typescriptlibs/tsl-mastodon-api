@@ -22,6 +22,9 @@
         "@types/node": "~16.7.13",
         "@typescriptlibs/tst": "^0.0.5",
         "husky": "^8.0.2",
+        "jsdoc": "^4.0.0",
+        "minami": "^1.2.3",
+        "taffydb": "^2.7.3",
         "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.4"
     },
@@ -39,11 +42,16 @@
         "TypeScript"
     ],
     "scripts": {
-        "build": "npm run clean && tsc -b src",
-        "clean": "rm -rf lib tst-run",
+        "build": "npm run build:lib && npm run build:api",
+        "build:api": "npm run clean:api && npx jsdoc -c .jsdoc/api-conf.json lib/",
+        "build:lib": "npm run clean:lib && tsc -b src/",
+        "clean": "npm run clean:lib && npm run clean:api",
+        "clean:api": "rm -rf www/api",
+        "clean:lib": "rm -rf lib tst-run",
         "server:start": "cd tst-data && python3 -m http.server 8000 &",
         "server:stop": "kill $(lsof -t -i:8000)",
         "test": "npm run server:start ; npm run build && tst --reset --verbose tst/ && npm run server:stop",
+        "test:api": "npm run build && open www/api/index.html",
         "test:ci": "tst --reset --verbose tst/",
         "watch": "npm run build -- --watch"
     }
