@@ -6,46 +6,29 @@ const REST = new Mastodon.REST( {
     api_url: 'http://127.0.0.1:8000/'
 } );
 
-test( 'Test REST.get HTON fallback', async ( assert: test.Assert ) => {
+test( 'Test REST.get fallback', async ( assert: test.Assert ) => {
 
     assert.deepStrictEqual(
-        ( await REST.get( 'files/404.html' ) ).json,
-        [
-            ["html", { "lang": "en" }, [
-                ["head", {}, [
-                    ["meta", {
-                        "content": "text/html; charset=UTF-8",
-                        "http-equiv": "Content-Type"
-                    }, []
-                    ],
-                    ["meta", { "charset": "utf-8" }, []],
-                    ["title", {}, [
-                        "The page you are looking for isn't here.\n     - Mastodon"
-                    ]],
-                    ["meta", {
-                        "content": "width=device-width,initial-scale=1",
-                        "name": "viewport"
-                    }, []]
-                ]
-                ],
-                ["body", { "class": "error" }, [
-                    ["div", { "class": "dialog" }, [
-                        ["div", { "class": "dialog__illustration" }, [
-                            ["img", {
-                                "alt": "Mastodon",
-                                "src": "/oops.png"
-                            }, []]
-                        ]],
-                        ["div", { "class": "dialog__message" }, [
-                            ["h1", {}, [
-                                "The page you are looking for isn't here."
-                            ]]
-                        ]]
-                    ]]
-                ]]
-            ]]
-        ],
-        'REST should fallback to expected HTON structure.'
+        ( await REST.get( 'files/does-not-exist' ) ).json,
+        {
+            text: (
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"\n' +
+                '        "http://www.w3.org/TR/html4/strict.dtd">\n' +
+                '<html>\n' +
+                '    <head>\n' +
+                '        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">\n' +
+                '        <title>Error response</title>\n' +
+                '    </head>\n' +
+                '    <body>\n' +
+                '        <h1>Error response</h1>\n' +
+                '        <p>Error code: 404</p>\n' +
+                '        <p>Message: File not found.</p>\n' +
+                '        <p>Error code explanation: HTTPStatus.NOT_FOUND - Nothing matches the given URI.</p>\n' +
+                '    </body>\n' +
+                '</html>\n'
+            )
+        },
+        'REST should fall back to text JSON.'
     );
 
 } );

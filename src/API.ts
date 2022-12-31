@@ -1,16 +1,11 @@
-/**
- * @module tsl-mastodon-api/lib/API
- */
-
 /* *
  *
  *  Imports
  *
  * */
 
-import * as Fetch from 'node-fetch';
+import Bridge from './Bridge.js';
 import * as JSON from './JSON/index.js';
-import { OAuth2 } from 'oauth';
 import REST from './REST.js';
 
 /* *
@@ -22,7 +17,6 @@ import REST from './REST.js';
 /**
  * Mastodon API to fetch, create, and delete content.
  *
- * @inner
  * @class
  */
 export class API {
@@ -182,31 +176,15 @@ export class API {
     ): Promise<API.Result> {
         const rest: REST = this.rest;
         const result: API.Result = await rest.fetch( method, path, params as REST.Params );
-        const rateLimit = this.extractRateLimit( result.response.headers );
+        const rateLimit = (
+            result.response &&
+            this.extractRateLimit( result.response.headers )
+        );
 
         result.rateLimit = rateLimit;
         this.nextDelay = 300000 / ( rateLimit || 300 );
 
         return result;
-    }
-
-    /**
-     * Loads a file from a path.
-     *
-     * @param filePath
-     * Path to the file.
-     *
-     * @param [mimeType]
-     * Mime type of the file.
-     *
-     * @return
-     * Promise with the file, if successful.
-     */
-    public async fileFrom (
-        filePath: string,
-        mimeType?: string
-    ): Promise<File> {
-        return await Fetch.fileFrom( filePath, mimeType );
     }
 
     /**
@@ -622,7 +600,7 @@ export namespace API {
     /**
      * Creates an application in a Mastodon account.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
      *
      * @param apiURL
      * API URL of the Mastodon server.
@@ -650,7 +628,7 @@ export namespace API {
         scopes = 'read write follow',
         website?: string
     ): Promise<API.OAuthApp> {
-        const body: ( FormData | undefined ) = new FormData();
+        const body: ( FormData | undefined ) = new Bridge.FormData();
 
         body.append( 'client_name', clientName );
         body.append( 'redirect_uris', redirectURI );
@@ -660,7 +638,7 @@ export namespace API {
             body.append( 'website', website );
         }
 
-        const response = await fetch(
+        const response = await Bridge.fetch(
             `${apiURL}apps`,
             {
                 body,
@@ -674,7 +652,9 @@ export namespace API {
     /**
      * Gets the access token for the application.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
+     *
+     * @requires oauth
      */
     export async function getAccessToken (
         baseURL: string,
@@ -683,14 +663,17 @@ export namespace API {
         authorizationCode: string,
         redirectUri = 'urn:ietf:wg:oauth:2.0:oob'
     ): Promise<string> {
+        const OAuth2 = ( await import( 'oauth' ) ).OAuth2;
+
+        const oauth = new OAuth2(
+            clientId,
+            clientSecret,
+            baseURL,
+            undefined,
+            '/oauth/token'
+        );
+
         return new Promise( ( resolve, reject ) => {
-            const oauth = new OAuth2(
-                clientId,
-                clientSecret,
-                baseURL,
-                undefined,
-                '/oauth/token'
-            );
             oauth.getOAuthAccessToken(
                 authorizationCode,
                 {
@@ -711,7 +694,9 @@ export namespace API {
     /**
      * Creates an authorization url for users to authorize the application.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
+     *
+     * @requires oauth
      */
     export async function getAuthorizationUrl (
         baseURL: string,
@@ -720,21 +705,21 @@ export namespace API {
         redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
         scope = 'read write follow'
     ): Promise<string> {
-        return new Promise( ( resolve ) => {
-            const oauth = new OAuth2(
-                clientId,
-                clientSecret,
-                baseURL,
-                undefined,
-                '/oauth/token'
-            );
-            const url = oauth.getAuthorizeUrl( {
-                redirect_uri: redirectURI,
-                response_type: 'code',
-                client_id: clientId,
-                scope
-            } );
-            resolve( url );
+        const OAuth2 = ( await import( 'oauth' ) ).OAuth2;
+
+        const oauth = new OAuth2(
+            clientId,
+            clientSecret,
+            baseURL,
+            undefined,
+            '/oauth/token'
+        );
+
+        return oauth.getAuthorizeUrl( {
+            redirect_uri: redirectURI,
+            response_type: 'code',
+            client_id: clientId,
+            scope
         } );
     }
 

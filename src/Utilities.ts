@@ -4,8 +4,7 @@
  *
  * */
 
-import { Blob, FormData } from 'node-fetch';
-import { URL } from 'url';
+import Bridge from './Bridge.js';
 
 /* *
  *
@@ -15,7 +14,7 @@ import { URL } from 'url';
 
 function buildFormData (
     params?: Record<string, unknown>,
-    target: FormData = new FormData()
+    target: FormData = new Bridge.FormData()
 ): FormData {
     let value: unknown;
 
@@ -29,7 +28,7 @@ function buildFormData (
             continue;
         }
 
-        if ( value instanceof Blob ) {
+        if ( value instanceof Bridge.Blob ) {
             target.append( key, value );
         } else if ( typeof value === 'object' ) {
             target.append( key, JSON.stringify( value ) );
@@ -72,7 +71,7 @@ function buildURL (
     path: string = '.',
     params?: Record<string, unknown>
 ): URL {
-    const url = new URL( path, base );
+    const url = new Bridge.URL( path, base );
 
     if ( params ) {
         buildURLSearchParams( params, url.searchParams );
@@ -83,7 +82,7 @@ function buildURL (
 
 function buildURLSearchParams (
     params?: Record<string, unknown>,
-    target: URLSearchParams = new URLSearchParams()
+    target: URLSearchParams = new Bridge.URLSearchParams()
 ): URLSearchParams {
     let value: unknown;
 
@@ -107,6 +106,31 @@ function buildURLSearchParams (
     return target;
 }
 
+/**
+ * Loads a file from a path.
+ *
+ * @memberof Utilities
+ *
+ * @param filePath
+ * Path to the file.
+ *
+ * @param [mimeType]
+ * Mime type of the file.
+ *
+ * @return
+ * Promise with the file, if successful.
+ *
+ * @requires node-fetch
+ */
+async function fileFrom (
+    filePath: string,
+    mimeType?: string
+): Promise<File> {
+    const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
+
+    return await fileFrom( filePath, mimeType );
+}
+
 /* *
  *
  *  Default Export
@@ -117,7 +141,8 @@ export const Utilities = {
     buildHeaders,
     buildFormData,
     buildURL,
-    buildURLSearchParams
+    buildURLSearchParams,
+    fileFrom,
 };
 
 export default Utilities;

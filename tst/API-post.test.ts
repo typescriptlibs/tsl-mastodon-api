@@ -32,7 +32,7 @@ test( 'Test API.postNewList', async ( assert: test.Assert ) => {
 test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     try {
         const { json: mediaAttachment } = await API.postMediaAttachment( {
-            file: await API.fileFrom( './tst-data/files/1x1.png' )
+            file: await Mastodon.Utilities.fileFrom( './tst-data/files/1x1.png' )
         } );
         assert.strictEqual(
             mediaAttachment.id,

@@ -4,10 +4,8 @@
  *
  * */
 
-import fetch, * as Fetch from 'node-fetch';
-import HTON from './HTON.js';
-import { Response } from 'node-fetch';
-import { Utilities } from './Utilities.js';
+import Bridge from './Bridge.js';
+import Utilities from './Utilities.js';
 
 /* *
  *
@@ -54,13 +52,6 @@ export class REST {
      *
      * */
 
-    public async blobFrom (
-        path: string,
-        mimeType?: string
-    ): Promise<Blob> {
-        return await Fetch.blobFrom( path, mimeType );
-    }
-
     public delete (
         path: string,
         params?: REST.Params
@@ -89,18 +80,17 @@ export class REST {
         const timeout = new AbortController();
         const timer = setTimeout( () => timeout.abort(), config.timeout_ms );
 
-        let response = new Response(),
+        let response: ( Response | undefined ),
             text: string = '';
 
         try {
-            response = await fetch(
+            response = await Bridge.fetch(
                 url.toString(),
                 {
                     ...( config.no_follow ? {
                         follow: 9,
                         redirect: 'follow',
                     } : {} ),
-                    compress: true,
                     headers: Utilities.buildHeaders( {
                         Accept: '*/*',
                         Authorization: `Bearer ${config.access_token}`,
@@ -128,7 +118,7 @@ export class REST {
             catch ( error ) {
                 return {
                     failed: !response.ok,
-                    json: HTON.parseText( text ),
+                    json: { text },
                     path,
                     response,
                     status: response.status,
@@ -209,7 +199,7 @@ export namespace REST {
         failed: boolean;
         json: any;
         path: string;
-        response: Response;
+        response?: Response;
         status: number;
     }
 

@@ -1,9 +1,7 @@
-import { Response } from 'node-fetch';
 export declare class REST {
     constructor(config: REST.Config);
     readonly apiURL: string;
     readonly config: Required<REST.Config>;
-    blobFrom(path: string, mimeType?: string): Promise<Blob>;
     delete(path: string, params?: REST.Params): Promise<REST.Result>;
     fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: REST.Params): Promise<REST.Result>;
     get(path: string, params?: REST.Params): Promise<REST.Result>;
@@ -25,7 +23,7 @@ export declare namespace REST {
         failed: boolean;
         json: any;
         path: string;
-        response: Response;
+        response?: Response;
         status: number;
     }
     interface Success<T = unknown> extends Result {
