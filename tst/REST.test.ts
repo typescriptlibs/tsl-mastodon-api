@@ -9,31 +9,23 @@ const REST = new Mastodon.REST( {
 test( 'Test REST.get fallback', async ( assert: test.Assert ) => {
 
     assert.deepStrictEqual(
-        ( await REST.get( 'files/404.html' ) ).json,
+        ( await REST.get( 'files/does-not-exist' ) ).json,
         {
             text: (
-                '<!DOCTYPE html>\n' +
-                "<html lang='en'>\n" +
-                '<head>\n' +
-                "    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>\n" +
-                "    <meta charset='utf-8'>\n" +
-                '    <title>The page you are looking for isn&#39;t here.\n' +
-                '     - Mastodon</title>\n' +
-                "    <meta content='width=device-width,initial-scale=1' name='viewport'>\n" +
-                '</head>\n' +
-                "<body class='error'>\n" +
-                "    <div class='dialog'>\n" +
-                "        <div class='dialog__illustration'>\n" +
-                "            <img alt='Mastodon' src='/oops.png'>\n" +
-                '        </div>\n' +
-                "        <div class='dialog__message'>\n" +
-                '            <h1>The page you are looking for isn&#39;t here.\n' +
-                '            </h1>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</body>\n' +
-                '</html>\n' +
-                '\n'
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"\n' +
+                '        "http://www.w3.org/TR/html4/strict.dtd">\n' +
+                '<html>\n' +
+                '    <head>\n' +
+                '        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">\n' +
+                '        <title>Error response</title>\n' +
+                '    </head>\n' +
+                '    <body>\n' +
+                '        <h1>Error response</h1>\n' +
+                '        <p>Error code: 404</p>\n' +
+                '        <p>Message: File not found.</p>\n' +
+                '        <p>Error code explanation: HTTPStatus.NOT_FOUND - Nothing matches the given URI.</p>\n' +
+                '    </body>\n' +
+                '</html>\n'
             )
         },
         'REST should fall back to text JSON.'
