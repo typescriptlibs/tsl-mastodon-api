@@ -4,8 +4,8 @@
  *
  * */
 
-import { fetch } from './Bridge.js';
-import { Utilities } from './Utilities.js';
+import Bridge from './Bridge.js';
+import Utilities from './Utilities.js';
 
 /* *
  *
@@ -52,6 +52,20 @@ export class REST {
      *
      * */
 
+    /**
+     * Loads a blob from a path.
+     *
+     * @param path
+     * Path to the blob.
+     *
+     * @param [mimeType]
+     * Mime type of the blob.
+     *
+     * @return
+     * Promise with the blob, if successful.
+     *
+     * @requires node-fetch
+     */
     public async blobFrom (
         path: string,
         mimeType?: string
@@ -93,7 +107,7 @@ export class REST {
             text: string = '';
 
         try {
-            response = await fetch(
+            response = await Bridge.fetch(
                 url.toString(),
                 {
                     ...( config.no_follow ? {

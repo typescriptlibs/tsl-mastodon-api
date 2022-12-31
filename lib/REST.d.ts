@@ -2,6 +2,20 @@ export declare class REST {
     constructor(config: REST.Config);
     readonly apiURL: string;
     readonly config: Required<REST.Config>;
+    /**
+     * Loads a blob from a path.
+     *
+     * @param path
+     * Path to the blob.
+     *
+     * @param [mimeType]
+     * Mime type of the blob.
+     *
+     * @return
+     * Promise with the blob, if successful.
+     *
+     * @requires node-fetch
+     */
     blobFrom(path: string, mimeType?: string): Promise<Blob>;
     delete(path: string, params?: REST.Params): Promise<REST.Result>;
     fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: REST.Params): Promise<REST.Result>;
