@@ -1,4 +1,3 @@
-import { Response } from 'node-fetch';
 export declare class REST {
     constructor(config: REST.Config);
     readonly apiURL: string;
@@ -25,7 +24,7 @@ export declare namespace REST {
         failed: boolean;
         json: any;
         path: string;
-        response: Response;
+        response?: Response;
         status: number;
     }
     interface Success<T = unknown> extends Result {

@@ -4,8 +4,7 @@
  *
  * */
 
-import { Blob, FormData } from 'node-fetch';
-import { URL } from 'url';
+import { FormData, URL, URLSearchParams } from './Bridge.js';
 
 /* *
  *

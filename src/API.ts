@@ -1,16 +1,11 @@
-/**
- * @module tsl-mastodon-api/lib/API
- */
-
 /* *
  *
  *  Imports
  *
  * */
 
-import * as Fetch from 'node-fetch';
+import { fetch, FormData } from './Bridge.js';
 import * as JSON from './JSON/index.js';
-import { OAuth2 } from 'oauth';
 import REST from './REST.js';
 
 /* *
@@ -22,7 +17,6 @@ import REST from './REST.js';
 /**
  * Mastodon API to fetch, create, and delete content.
  *
- * @inner
  * @class
  */
 export class API {
@@ -182,7 +176,10 @@ export class API {
     ): Promise<API.Result> {
         const rest: REST = this.rest;
         const result: API.Result = await rest.fetch( method, path, params as REST.Params );
-        const rateLimit = this.extractRateLimit( result.response.headers );
+        const rateLimit = (
+            result.response &&
+            this.extractRateLimit( result.response.headers )
+        );
 
         result.rateLimit = rateLimit;
         this.nextDelay = 300000 / ( rateLimit || 300 );
@@ -201,12 +198,16 @@ export class API {
      *
      * @return
      * Promise with the file, if successful.
+     *
+     * @requires node-fetch
      */
     public async fileFrom (
         filePath: string,
         mimeType?: string
     ): Promise<File> {
-        return await Fetch.fileFrom( filePath, mimeType );
+        const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
+
+        return await fileFrom( filePath, mimeType );
     }
 
     /**
@@ -622,7 +623,7 @@ export namespace API {
     /**
      * Creates an application in a Mastodon account.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
      *
      * @param apiURL
      * API URL of the Mastodon server.
@@ -674,7 +675,9 @@ export namespace API {
     /**
      * Gets the access token for the application.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
+     *
+     * @requires oauth
      */
     export async function getAccessToken (
         baseURL: string,
@@ -683,14 +686,17 @@ export namespace API {
         authorizationCode: string,
         redirectUri = 'urn:ietf:wg:oauth:2.0:oob'
     ): Promise<string> {
+        const OAuth2 = ( await import( 'oauth' ) ).OAuth2;
+
+        const oauth = new OAuth2(
+            clientId,
+            clientSecret,
+            baseURL,
+            undefined,
+            '/oauth/token'
+        );
+
         return new Promise( ( resolve, reject ) => {
-            const oauth = new OAuth2(
-                clientId,
-                clientSecret,
-                baseURL,
-                undefined,
-                '/oauth/token'
-            );
             oauth.getOAuthAccessToken(
                 authorizationCode,
                 {
@@ -711,7 +717,9 @@ export namespace API {
     /**
      * Creates an authorization url for users to authorize the application.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
+     *
+     * @requires oauth
      */
     export async function getAuthorizationUrl (
         baseURL: string,
@@ -720,21 +728,21 @@ export namespace API {
         redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
         scope = 'read write follow'
     ): Promise<string> {
-        return new Promise( ( resolve ) => {
-            const oauth = new OAuth2(
-                clientId,
-                clientSecret,
-                baseURL,
-                undefined,
-                '/oauth/token'
-            );
-            const url = oauth.getAuthorizeUrl( {
-                redirect_uri: redirectURI,
-                response_type: 'code',
-                client_id: clientId,
-                scope
-            } );
-            resolve( url );
+        const OAuth2 = ( await import( 'oauth' ) ).OAuth2;
+
+        const oauth = new OAuth2(
+            clientId,
+            clientSecret,
+            baseURL,
+            undefined,
+            '/oauth/token'
+        );
+
+        return oauth.getAuthorizeUrl( {
+            redirect_uri: redirectURI,
+            response_type: 'code',
+            client_id: clientId,
+            scope
         } );
     }
 
