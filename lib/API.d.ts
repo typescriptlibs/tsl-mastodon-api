@@ -1,12 +1,8 @@
-/**
- * @module tsl-mastodon-api/lib/API
- */
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 /**
  * Mastodon API to fetch, create, and delete content.
  *
- * @inner
  * @class
  */
 export declare class API {
@@ -77,6 +73,8 @@ export declare class API {
      *
      * @return
      * Promise with the file, if successful.
+     *
+     * @requires node-fetch
      */
     fileFrom(filePath: string, mimeType?: string): Promise<File>;
     /**
@@ -244,7 +242,7 @@ export declare namespace API {
     /**
      * Creates an application in a Mastodon account.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
      *
      * @param apiURL
      * API URL of the Mastodon server.
@@ -269,13 +267,17 @@ export declare namespace API {
     /**
      * Gets the access token for the application.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
+     *
+     * @requires oauth
      */
     function getAccessToken(baseURL: string, clientId: string, clientSecret: string, authorizationCode: string, redirectUri?: string): Promise<string>;
     /**
      * Creates an authorization url for users to authorize the application.
      *
-     * @memberof module:tsl-mastodon-api/lib/API~API
+     * @memberof API
+     *
+     * @requires oauth
      */
     function getAuthorizationUrl(baseURL: string, clientId: string, clientSecret: string, redirectURI?: string, scope?: string): Promise<string>;
 }
