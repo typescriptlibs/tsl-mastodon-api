@@ -16,8 +16,6 @@ import REST from './REST.js';
 
 /**
  * Mastodon API to fetch, create, and delete content.
- *
- * @class
  */
 export class API {
 
@@ -65,7 +63,7 @@ export class API {
      * server send during the last communication.
      *
      * @return
-     * Promise.
+     * Promise with resolve after delay.
      */
     public async delay (): Promise<void> {
         return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
@@ -554,10 +552,6 @@ export class API {
  *
  * */
 
-/**
- * @namespace
- * @name API
- */
 export namespace API {
 
     /* *

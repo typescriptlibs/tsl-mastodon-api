@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>REST - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,11 +29,39 @@
 
 <div id="main">
     
+    <h1 class="page-title">REST</h1>
+    
 
     
 
 
 
+
+<section>
+
+<header>
+    
+        <h2>
+        REST
+        </h2>
+        
+            <div class="class-description"><p>REST class to run delete, fetch, get, patch, post, and put on an server API.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+<div class="section-method">
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="REST"><span class="type-signature"></span>new REST<span class="signature">(config)</span><span class="type-signature"></span></h4>
+
     
 
 
@@ -42,34 +70,353 @@
 
 
 
+<dl class="details">
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>REST configuration with the URL to the server API.</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="REST.html">REST</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="fetch"><span class="type-signature">(async) </span>fetch<span class="signature">(method, path, params<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
 
-    <section class="readme">
-        <article><h1>tsl-mastadon-api</h1>
-<p>This is the API of the <a href="https://typescriptlibs.org/tsl-mastodon-api/">tsl-mastodon-api</a> package.</p>
-<ul>
-<li>
-<p><a href="https://typescriptlibs.org/tsl-mastodon-api/">Homepage</a></p>
-</li>
-<li>
-<p><a href="https://typescriptlibs.org/package/tsl-mastodon-api.html">Downloads</a></p>
-</li>
-<li>
-<p><a href="https://typescriptlibs.org/tsl-mastodon-api/SECURITY.html">Security Policy</a></p>
-</li>
-<li>
-<p><a href="https://typescriptlibs.org/tsl-mastodon-api/LICENSE.html">MIT License</a></p>
-</li>
-<li>
-<p><a href="https://typescriptlibs.org/">All Libraries</a></p>
-</li>
-</ul></article>
-    </section>
+
+<div class="description">
+    <p>Fetch from the relative API path with the given method and parameters.</p>
+</div>
 
 
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>REST method to use.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>Relative API path to use.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>REST parameters that get converted either to a query or to a form data.</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+
+<div class="param-desc">
+    <p>Promise with the result object, if successful.</p>
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

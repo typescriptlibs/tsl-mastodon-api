@@ -13,6 +13,9 @@ import Utilities from './Utilities.js';
  *
  * */
 
+/**
+ * REST class to run delete, fetch, get, patch, post, and put on an server API.
+ */
 export class REST {
 
     /* *
@@ -21,6 +24,10 @@ export class REST {
      *
      * */
 
+    /**
+     * @param config
+     * REST configuration with the URL to the server API.
+     */
     public constructor (
         config: REST.Config
     ) {
@@ -59,6 +66,21 @@ export class REST {
         return this.fetch( 'DELETE', path, params );
     }
 
+    /**
+     * Fetch from the relative API path with the given method and parameters.
+     *
+     * @param method
+     * REST method to use.
+     *
+     * @param path
+     * Relative API path to use.
+     *
+     * @param [params]
+     * REST parameters that get converted either to a query or to a form data.
+     *
+     * @return
+     * Promise with the result object, if successful.
+     */
     public async fetch (
         method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,

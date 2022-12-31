@@ -2,8 +2,6 @@ import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 /**
  * Mastodon API to fetch, create, and delete content.
- *
- * @class
  */
 export declare class API {
     /**
@@ -24,7 +22,7 @@ export declare class API {
      * server send during the last communication.
      *
      * @return
-     * Promise.
+     * Promise with resolve after delay.
      */
     delay(): Promise<void>;
     /**
@@ -199,10 +197,6 @@ export declare class API {
      */
     search(search: JSON.Search): Promise<API.Success<JSON.SearchResults>>;
 }
-/**
- * @namespace
- * @name API
- */
 export declare namespace API {
     type Config = REST.Config;
     interface OAuthApp {
