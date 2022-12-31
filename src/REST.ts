@@ -52,29 +52,6 @@ export class REST {
      *
      * */
 
-    /**
-     * Loads a blob from a path.
-     *
-     * @param path
-     * Path to the blob.
-     *
-     * @param [mimeType]
-     * Mime type of the blob.
-     *
-     * @return
-     * Promise with the blob, if successful.
-     *
-     * @requires node-fetch
-     */
-    public async blobFrom (
-        path: string,
-        mimeType?: string
-    ): Promise<Blob> {
-        const nodeFetch = await import( 'node-fetch' );
-
-        return await nodeFetch.blobFrom( path, mimeType );
-    }
-
     public delete (
         path: string,
         params?: REST.Params

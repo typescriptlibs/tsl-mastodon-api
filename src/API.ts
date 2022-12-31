@@ -188,29 +188,6 @@ export class API {
     }
 
     /**
-     * Loads a file from a path.
-     *
-     * @param filePath
-     * Path to the file.
-     *
-     * @param [mimeType]
-     * Mime type of the file.
-     *
-     * @return
-     * Promise with the file, if successful.
-     *
-     * @requires node-fetch
-     */
-    public async fileFrom (
-        filePath: string,
-        mimeType?: string
-    ): Promise<File> {
-        const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
-
-        return await fileFrom( filePath, mimeType );
-    }
-
-    /**
      * Gets the connected account.
      *
      * @return
