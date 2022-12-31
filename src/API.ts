@@ -4,7 +4,7 @@
  *
  * */
 
-import { fetch, FormData } from './Bridge.js';
+import Bridge from './Bridge.js';
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 
@@ -651,7 +651,7 @@ export namespace API {
         scopes = 'read write follow',
         website?: string
     ): Promise<API.OAuthApp> {
-        const body: ( FormData | undefined ) = new FormData();
+        const body: ( FormData | undefined ) = new Bridge.FormData();
 
         body.append( 'client_name', clientName );
         body.append( 'redirect_uris', redirectURI );
@@ -661,7 +661,7 @@ export namespace API {
             body.append( 'website', website );
         }
 
-        const response = await fetch(
+        const response = await Bridge.fetch(
             `${apiURL}apps`,
             {
                 body,

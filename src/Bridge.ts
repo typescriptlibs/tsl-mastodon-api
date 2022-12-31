@@ -4,48 +4,68 @@
  *
  * */
 
-export const global = (
+const global = (
     typeof window === 'undefined' ?
         globalThis :
         window
 );
 
-export const fetch = (
+const fetch = (
     global.fetch ||
     ( await import( 'node-fetch' ) ).default
 );
 
-export const Blob = (
+const Blob = (
     global.Blob ||
     ( await import( 'node-fetch' ) ).Blob
 );
 
-export const File = (
+const File = (
     global.File ||
     ( await import( 'node-fetch' ) ).File
 );
 
-export const FormData = (
+const FormData = (
     global.FormData ||
     ( await import( 'node-fetch' ) ).FormData
 );
 
-export const Header = (
+const Header = (
     global.Headers ||
     ( await import( 'node-fetch' ) ).Headers
 );
 
-export const Response = (
+const Response = (
     global.Response ||
     ( await import( 'node-fetch' ) ).Response
 );
 
-export const URL = (
+const URL = (
     global.URL ||
     ( await import( 'url' ) ).URL
 );
 
-export const URLSearchParams = (
+const URLSearchParams = (
     global.URLSearchParams ||
     ( await import( 'url' ) ).URLSearchParams
 );
+
+/* *
+ *
+ *  Default Export
+ *
+ * */
+
+export const Bridge = {
+    global,
+    fetch,
+    Blob,
+    File,
+    FormData,
+    Header,
+    Response,
+    URL,
+    URLSearchParams
+};
+
+export default Bridge;

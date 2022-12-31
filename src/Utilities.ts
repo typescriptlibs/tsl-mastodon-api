@@ -4,7 +4,7 @@
  *
  * */
 
-import { FormData, URL, URLSearchParams } from './Bridge.js';
+import Bridge from './Bridge.js';
 
 /* *
  *
@@ -14,7 +14,7 @@ import { FormData, URL, URLSearchParams } from './Bridge.js';
 
 function buildFormData (
     params?: Record<string, unknown>,
-    target: FormData = new FormData()
+    target: FormData = new Bridge.FormData()
 ): FormData {
     let value: unknown;
 
@@ -28,7 +28,7 @@ function buildFormData (
             continue;
         }
 
-        if ( value instanceof Blob ) {
+        if ( value instanceof Bridge.Blob ) {
             target.append( key, value );
         } else if ( typeof value === 'object' ) {
             target.append( key, JSON.stringify( value ) );
@@ -71,7 +71,7 @@ function buildURL (
     path: string = '.',
     params?: Record<string, unknown>
 ): URL {
-    const url = new URL( path, base );
+    const url = new Bridge.URL( path, base );
 
     if ( params ) {
         buildURLSearchParams( params, url.searchParams );
@@ -82,7 +82,7 @@ function buildURL (
 
 function buildURLSearchParams (
     params?: Record<string, unknown>,
-    target: URLSearchParams = new URLSearchParams()
+    target: URLSearchParams = new Bridge.URLSearchParams()
 ): URLSearchParams {
     let value: unknown;
 
