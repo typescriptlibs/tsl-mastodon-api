@@ -89,12 +89,6 @@ API.deleteStatus(statusID)
 ```
 
 ```TypeScript
-HTON.create(tagName, attributes?, children?)
-HTON.isHTML(text)
-HTON.parseText(text)
-```
-
-```TypeScript
 JSON.isAccount(json)
 JSON.isList(json)
 JSON.isMediaAttachment(json)
@@ -112,7 +106,10 @@ REST.post(path, params?)
 REST.put(path, params?)
 ```
 
-
+```TypeScript
+Bridge.fetch(url, options?)
+Utilities.fileFrom(path, mimeType?)
+```
 
 Links
 -----
