@@ -11,9 +11,9 @@
         "tutorials": "./.jsdoc/tutorials/"
     },
     "plugins": [
-        "plugins/underscore",
-        "plugins/escapeHTML",
-        "plugins/markdown"
+        "./node_modules/jsdoc/plugins/underscore",
+        "./node_modules/jsdoc/plugins/escapeHTML",
+        "./node_modules/jsdoc/plugins/markdown"
     ],
     "source": {
         "includePattern": ".+\\.jsx?$",
