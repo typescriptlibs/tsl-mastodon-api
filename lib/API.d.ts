@@ -63,21 +63,6 @@ export declare class API {
     protected extractRateLimit(headers: Headers): (number | undefined);
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
     /**
-     * Loads a file from a path.
-     *
-     * @param filePath
-     * Path to the file.
-     *
-     * @param [mimeType]
-     * Mime type of the file.
-     *
-     * @return
-     * Promise with the file, if successful.
-     *
-     * @requires node-fetch
-     */
-    fileFrom(filePath: string, mimeType?: string): Promise<File>;
-    /**
      * Gets the connected account.
      *
      * @return
