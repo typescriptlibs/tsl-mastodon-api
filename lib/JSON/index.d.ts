@@ -4,6 +4,7 @@ export * from './Card.js';
 export * from './Emoji.js';
 export * from './List.js';
 export * from './MediaAttachment.js';
+export * from './Notification.js';
 export * from './Poll.js';
 export * from './Search.js';
 export * from './Status.js';

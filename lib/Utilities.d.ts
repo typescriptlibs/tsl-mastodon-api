@@ -1,7 +1,10 @@
-declare function buildFormData(params?: Record<string, unknown>, target?: FormData): FormData;
+import REST from './REST.js';
+declare function buildFormData(params?: REST.Params, target?: FormData): FormData;
 declare function buildHeaders(params?: Record<string, unknown>, target?: Record<string, string>): Record<string, string>;
-declare function buildURL(base: string, path?: string, params?: Record<string, unknown>): URL;
-declare function buildURLSearchParams(params?: Record<string, unknown>, target?: URLSearchParams): URLSearchParams;
+declare function buildKeyValues(params: REST.Params, callback: (key: string, val: string | Blob) => void): void;
+declare function buildURL(base: string, path?: string, params?: REST.Params): URL;
+declare function buildURLSearchParams(params?: REST.Params, target?: URLSearchParams): URLSearchParams;
+declare function buildValue(value: unknown): string | Blob | null;
 /**
  * Loads a file from a path.
  *
@@ -24,6 +27,8 @@ export declare const Utilities: {
     buildFormData: typeof buildFormData;
     buildURL: typeof buildURL;
     buildURLSearchParams: typeof buildURLSearchParams;
+    buildKeyValues: typeof buildKeyValues;
+    buildValue: typeof buildValue;
     fileFrom: typeof fileFrom;
 };
 export default Utilities;

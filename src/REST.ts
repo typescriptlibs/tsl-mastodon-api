@@ -191,9 +191,11 @@ export namespace REST {
         user_agent?: string;
     }
 
-    export interface Params extends Record<string, unknown> {
-        // nothing to add
-    }
+    export type Params = ParamSet | ParamList;
+
+    export type ParamSet = Record<string, unknown>;
+
+    export type ParamList = [ string, unknown ][];
 
     export interface Result {
         failed: boolean;
@@ -209,6 +211,19 @@ export namespace REST {
         status: 200;
     }
 
+    /* *
+    *
+    *  Functions
+    *
+    * */
+
+    export function isParamList (
+        params?: Params
+    ): params is ParamList {
+        return (
+            Array.isArray( params )
+        );
+    }
 }
 
 /* *

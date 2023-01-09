@@ -78,6 +78,25 @@ test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
     }
 } );
 
+test( 'Test API.getNotifications', async ( assert: test.Assert ) => {
+    try {
+        const { json: notifications } = await API.getNotifications();
+        assert.equal(
+            notifications[0].id,
+            'ID-10',
+            'Notification ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
+
 test( 'Test API.getStatus', async ( assert: test.Assert ) => {
     try {
         const { json: status } = await API.getStatus( 'ID-7' );

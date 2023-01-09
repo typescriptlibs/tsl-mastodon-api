@@ -374,6 +374,76 @@ export class API {
     }
 
     /**
+     * Get notifications
+     *
+     * @param types
+     * An optional array to filter notifications by type
+     *   'mention' = Someone mentioned you in their status
+     *   'status' = Someone you enabled notifications for has posted a status
+     *   'reblog' = Someone boosted one of your statuses
+     *   'follow' = Someone followed you
+     *   'follow_request' = Someone requested to follow you
+     *   'favourite' = Someone favourited one of your statuses
+     *   'poll' = A poll you have voted in or created has ended
+     *   'update' = A status you boosted with has been edited
+     *   'admin.sign_up' = Someone signed up (optionally sent to admins)
+     *   'admin.report' = A new report has been filed
+     *
+     * @param exclude_types
+     * An optional array of notifications to filter
+     * (see the 'types' param above for possible values)
+     *
+     * @param account_id
+     * Return only notifications received from the specified account (optional)
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     */
+    public async getNotifications (
+        types?: string[],
+        exclude_types?: string[],
+        account_id?: string,
+        queryParameters?: API.QueryParameters
+    ): Promise<API.Success<Array<JSON.Notification>>> {
+
+        const paramList: REST.ParamList = [];
+
+        if ( types ) {
+            types.forEach(
+                ( val ) => paramList.push( [ 'types[]', val ] )
+            );
+        }
+
+        if ( exclude_types ) {
+            exclude_types.forEach(
+                ( val ) => paramList.push( [ 'exclude_types[]', val ] )
+            );
+        }
+
+        if ( account_id ) {
+            paramList.push( [ 'account_id', account_id ] );
+        }
+
+        if ( queryParameters ) {
+            Object.entries( queryParameters ).forEach(
+                ( keyVal ) => paramList.push( [ keyVal[ 0 ], keyVal[ 1 ] ] )
+            );
+        }
+
+        const result = await this.fetch( 'GET', 'notifications', paramList );
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isNotifications( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Notification>>;
+    }
+
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list
