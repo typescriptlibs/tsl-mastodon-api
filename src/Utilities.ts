@@ -5,6 +5,7 @@
  * */
 
 import Bridge from './Bridge.js';
+import REST from './REST.js';
 
 /* *
  *
@@ -13,28 +14,13 @@ import Bridge from './Bridge.js';
  * */
 
 function buildFormData (
-    params?: Record<string, unknown>,
+    params?: REST.Params,
     target: FormData = new Bridge.FormData()
 ): FormData {
-    let value: unknown;
 
-    for ( const key in params ) {
-        value = params[key];
-
-        if (
-            typeof value === 'undefined' ||
-            value === null
-        ) {
-            continue;
-        }
-
-        if ( value instanceof Bridge.Blob ) {
-            target.append( key, value );
-        } else if ( typeof value === 'object' ) {
-            target.append( key, JSON.stringify( value ) );
-        } else {
-            target.append( key, `${value}` );
-        }
+    if ( params ) {
+        buildKeyValues( params,
+            ( key, val ) => target.append( key, val ) );
     }
 
     return target;
@@ -44,32 +30,49 @@ function buildHeaders (
     params?: Record<string, unknown>,
     target: Record<string, string> = {}
 ): Record<string, string> {
-    let value: unknown;
 
-    for ( const key in params ) {
-        value = params[key];
-
-        if (
-            typeof value === 'undefined' ||
-            value === null
-        ) {
-            continue;
-        }
-
-        if ( typeof value === 'object' ) {
-            target[key] = JSON.stringify( value );
-        } else {
-            target[key] = `${value}`;
-        }
+    if ( params ) {
+        buildKeyValues( params,
+            ( key, val ) => target[key] = val as string );
     }
 
     return target;
 }
 
+function buildKeyValues (
+    params: REST.Params,
+    callback: ( key: string, val: string | Blob ) => void
+): void {
+
+    if ( REST.isParamList( params ) ) {
+
+        for ( const keyVal of params ) {
+
+            const key = keyVal[ 0 ];
+            const val = buildValue( keyVal[1] );
+
+            if ( val !== null ) {
+                callback( key, val );
+            }
+        }
+
+    } else {
+
+        for ( const key in params ) {
+
+            const val = buildValue( params[ key ] );
+
+            if ( val !== null ) {
+                callback( key, val );
+            }
+        }
+    }
+}
+
 function buildURL (
     base: string,
     path: string = '.',
-    params?: Record<string, unknown>
+    params?: REST.Params
 ): URL {
     const url = new Bridge.URL( path, base );
 
@@ -81,29 +84,33 @@ function buildURL (
 }
 
 function buildURLSearchParams (
-    params?: Record<string, unknown>,
+    params?: REST.Params,
     target: URLSearchParams = new Bridge.URLSearchParams()
 ): URLSearchParams {
-    let value: unknown;
 
-    for ( const key in params ) {
-        value = params[key];
-
-        if (
-            typeof value === 'undefined' ||
-            value === null
-        ) {
-            continue;
-        }
-
-        if ( typeof value === 'object' ) {
-            target.append( key, JSON.stringify( value ) );
-        } else {
-            target.append( key, `${value}` );
-        }
+    if ( params ) {
+        buildKeyValues( params,
+            ( key, val ) => target.append( key, val as string ) );
     }
 
     return target;
+}
+
+function buildValue ( value: unknown ): string | Blob | null {
+    if (
+        typeof value === 'undefined' ||
+        value === null
+    ) {
+        return null
+    }
+
+    if ( value instanceof Bridge.Blob ) {
+        return value;
+    } else if ( typeof value === 'object' ) {
+        return JSON.stringify( value );
+    } else {
+        return `${value}`;
+    }
 }
 
 /**
@@ -142,6 +149,8 @@ export const Utilities = {
     buildFormData,
     buildURL,
     buildURLSearchParams,
+    buildKeyValues,
+    buildValue,
     fileFrom,
 };
 
