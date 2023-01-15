@@ -5,7 +5,17 @@
  * */
 
 import Bridge from './Bridge.js';
-import REST from './REST.js';
+
+/* *
+ *
+ *  Declarations
+ *
+ * */
+
+type Params = (
+    | Array<[string, unknown]>
+    | Record<string, unknown>
+);
 
 /* *
  *
@@ -14,65 +24,34 @@ import REST from './REST.js';
  * */
 
 function buildFormData (
-    params?: REST.Params,
+    params?: Params,
     target: FormData = new Bridge.FormData()
 ): FormData {
+    let value: unknown;
 
     if ( params ) {
-        buildKeyValues( params,
-            ( key, val ) => target.append( key, val ) );
+        transferParams( params, target );
     }
 
     return target;
 }
 
 function buildHeaders (
-    params?: REST.Params,
-    target: Record<string, string> = {}
-): Record<string, string> {
+    params?: Params,
+    target: Headers = new Bridge.Headers()
+): Headers {
 
     if ( params ) {
-        buildKeyValues( params,
-            ( key, val ) => target[key] = val as string );
+        transferParams( params, target );
     }
 
     return target;
 }
 
-function buildKeyValues (
-    params: REST.Params,
-    callback: ( key: string, val: string | Blob ) => void
-): void {
-
-    if ( REST.isParamArray( params ) ) {
-
-        for ( const keyVal of params ) {
-
-            const key = keyVal[0];
-            const val = buildValue( keyVal[1] );
-
-            if ( val !== null ) {
-                callback( key, val );
-            }
-        }
-
-    } else {
-
-        for ( const key in params ) {
-
-            const val = buildValue( params[key] );
-
-            if ( val !== null ) {
-                callback( key, val );
-            }
-        }
-    }
-}
-
 function buildURL (
     base: string,
     path: string = '.',
-    params?: REST.Params
+    params?: Params
 ): URL {
     const url = new Bridge.URL( path, base );
 
@@ -84,32 +63,75 @@ function buildURL (
 }
 
 function buildURLSearchParams (
-    params?: REST.Params,
+    params?: Params,
     target: URLSearchParams = new Bridge.URLSearchParams()
 ): URLSearchParams {
 
     if ( params ) {
-        buildKeyValues( params,
-            ( key, val ) => target.append( key, val as string ) );
+        transferParams( params, target );
     }
 
     return target;
 }
 
-function buildValue ( value: unknown ): string | Blob | null {
-    if (
-        typeof value === 'undefined' ||
-        value === null
-    ) {
-        return null
-    }
+function transferParams (
+    params: Params,
+    target: ( FormData | Headers | URLSearchParams )
+): void {
+    let value: unknown;
 
-    if ( value instanceof Bridge.Blob ) {
-        return value;
-    } else if ( typeof value === 'object' ) {
-        return JSON.stringify( value );
+    if ( Array.isArray( params ) ) {
+        let key: string;
+
+        for ( const pair of params ) {
+
+            key = pair[0];
+            value = pair[1];
+
+            if (
+                typeof value === 'undefined' ||
+                value === null
+            ) {
+                continue;
+            }
+
+            if (
+                value instanceof Bridge.Blob &&
+                target instanceof Bridge.FormData
+            ) {
+                target.append( key, value );
+            }
+            else if ( typeof value === 'object' ) {
+                target.append( key, JSON.stringify( value ) );
+            }
+            else {
+                target.append( key, `${value}` );
+            }
+        }
     } else {
-        return `${value}`;
+        for ( const key in params ) {
+
+            value = params[key];
+
+            if (
+                typeof value === 'undefined' ||
+                value === null
+            ) {
+                continue;
+            }
+            if (
+                value instanceof Bridge.Blob &&
+                target instanceof Bridge.FormData
+            ) {
+                target.append( key, value );
+            }
+            else if ( typeof value === 'object' ) {
+                target.append( key, JSON.stringify( value ) );
+            }
+            else {
+                target.append( key, `${value}` );
+            }
+        }
     }
 }
 
@@ -149,9 +171,8 @@ export const Utilities = {
     buildFormData,
     buildURL,
     buildURLSearchParams,
-    buildKeyValues,
-    buildValue,
     fileFrom,
+    transferParams
 };
 
 export default Utilities;

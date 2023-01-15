@@ -30,7 +30,7 @@ export declare const Bridge: {
         revokeObjectURL(url: string): void;
     };
     URLSearchParams: {
-        new (init?: string | Record<string, string> | URLSearchParams | string[][] | undefined): URLSearchParams;
+        new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
         prototype: URLSearchParams;
         toString(): string;
     };
