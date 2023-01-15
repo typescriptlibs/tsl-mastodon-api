@@ -30,7 +30,7 @@ const FormData = (
     ( await import( 'node-fetch' ) ).FormData
 );
 
-const Header = (
+const Headers = (
     global.Headers ||
     ( await import( 'node-fetch' ) ).Headers
 );
@@ -62,7 +62,7 @@ export const Bridge = {
     Blob,
     File,
     FormData,
-    Header,
+    Headers,
     Response,
     URL,
     URLSearchParams
