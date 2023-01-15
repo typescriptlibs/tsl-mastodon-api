@@ -113,6 +113,24 @@ export declare class API {
      */
     getMediaAttachment(mediaAttachmentID: string): Promise<API.Success<JSON.MediaAttachment>>;
     /**
+     * Get notifications
+     *
+     * @param [types]
+     * An array to filter notifications by type. (See
+     * {@link JSON.NotificationType}.)
+     *
+     * @param [exclude_types]
+     * An array of notifications to filter out. (See
+     * {@link JSON.NotificationType}.)
+     *
+     * @param [account_id]
+     * Return only notifications received from the specified account.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     */
+    getNotifications(types?: Array<JSON.NotificationType>, exclude_types?: Array<JSON.NotificationType>, account_id?: string, queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Notification>>>;
+    /**
      * Gets a status.
      *
      * @param statusID
@@ -132,33 +150,6 @@ export declare class API {
      * Promise with the array of statuses, if successful.
      */
     getStatuses(queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
-    /**
-     * Get notifications
-     *
-     * @param types
-     * An optional array to filter notifications by type
-     *   'mention' = Someone mentioned you in their status
-     *   'status' = Someone you enabled notifications for has posted a status
-     *   'reblog' = Someone boosted one of your statuses
-     *   'follow' = Someone followed you
-     *   'follow_request' = Someone requested to follow you
-     *   'favourite' = Someone favourited one of your statuses
-     *   'poll' = A poll you have voted in or created has ended
-     *   'update' = A status you boosted with has been edited
-     *   'admin.sign_up' = Someone signed up (optionally sent to admins)
-     *   'admin.report' = A new report has been filed
-     *
-     * @param exclude_types
-     * An optional array of notifications to filter
-     * (see the 'types' param above for possible values)
-     *
-     * @param account_id
-     * Return only notifications received from the specified account (optional)
-     *
-     * @param [queryParameters]
-     * Query parameters to limit the amount of statuses to get.
-     */
-    getNotifications(types?: string[], exclude_types?: string[], account_id?: string, queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Notification>>>;
     /**
      * Posts a new list or updates an existing list.
      *
