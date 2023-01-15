@@ -406,31 +406,31 @@ export class API {
         queryParameters?: API.QueryParameters
     ): Promise<API.Success<Array<JSON.Notification>>> {
 
-        const paramList: REST.ParamList = [];
+        const paramArray: REST.ParamArray = [];
 
         if ( types ) {
             types.forEach(
-                ( val ) => paramList.push( [ 'types[]', val ] )
+                ( val ) => paramArray.push( ['types[]', val] )
             );
         }
 
         if ( exclude_types ) {
             exclude_types.forEach(
-                ( val ) => paramList.push( [ 'exclude_types[]', val ] )
+                ( val ) => paramArray.push( ['exclude_types[]', val] )
             );
         }
 
         if ( account_id ) {
-            paramList.push( [ 'account_id', account_id ] );
+            paramArray.push( ['account_id', account_id] );
         }
 
         if ( queryParameters ) {
             Object.entries( queryParameters ).forEach(
-                ( keyVal ) => paramList.push( [ keyVal[ 0 ], keyVal[ 1 ] ] )
+                ( keyVal ) => paramArray.push( [keyVal[0], keyVal[1]] )
             );
         }
 
-        const result = await this.fetch( 'GET', 'notifications', paramList );
+        const result = await this.fetch( 'GET', 'notifications', paramArray );
         if (
             result.failed ||
             result.status !== 200 ||

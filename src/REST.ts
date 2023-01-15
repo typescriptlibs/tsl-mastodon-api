@@ -191,11 +191,11 @@ export namespace REST {
         user_agent?: string;
     }
 
-    export type Params = ParamSet | ParamList;
+    export type ParamArray = Array<[string, unknown]>;
 
-    export type ParamSet = Record<string, unknown>;
+    export type ParamRecord = Record<string, unknown>;
 
-    export type ParamList = [ string, unknown ][];
+    export type Params = ( ParamArray | ParamRecord );
 
     export interface Result {
         failed: boolean;
@@ -212,18 +212,23 @@ export namespace REST {
     }
 
     /* *
-    *
-    *  Functions
-    *
-    * */
+     *
+     *  Functions
+     *
+     * */
 
-    export function isParamList (
+    export function isParamArray (
         params?: Params
-    ): params is ParamList {
+    ): params is ParamArray {
         return (
-            Array.isArray( params )
+            Array.isArray( params ) &&
+            (
+                !params.length ||
+                typeof params[0][0] === 'string'
+            )
         );
     }
+
 }
 
 /* *
