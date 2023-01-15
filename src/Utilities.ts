@@ -27,7 +27,7 @@ function buildFormData (
 }
 
 function buildHeaders (
-    params?: Record<string, unknown>,
+    params?: REST.Params,
     target: Record<string, string> = {}
 ): Record<string, string> {
 
@@ -44,11 +44,11 @@ function buildKeyValues (
     callback: ( key: string, val: string | Blob ) => void
 ): void {
 
-    if ( REST.isParamList( params ) ) {
+    if ( REST.isParamArray( params ) ) {
 
         for ( const keyVal of params ) {
 
-            const key = keyVal[ 0 ];
+            const key = keyVal[0];
             const val = buildValue( keyVal[1] );
 
             if ( val !== null ) {
@@ -60,7 +60,7 @@ function buildKeyValues (
 
         for ( const key in params ) {
 
-            const val = buildValue( params[ key ] );
+            const val = buildValue( params[key] );
 
             if ( val !== null ) {
                 callback( key, val );

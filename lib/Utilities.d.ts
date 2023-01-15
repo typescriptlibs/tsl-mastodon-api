@@ -1,6 +1,6 @@
 import REST from './REST.js';
 declare function buildFormData(params?: REST.Params, target?: FormData): FormData;
-declare function buildHeaders(params?: Record<string, unknown>, target?: Record<string, string>): Record<string, string>;
+declare function buildHeaders(params?: REST.Params, target?: Record<string, string>): Record<string, string>;
 declare function buildKeyValues(params: REST.Params, callback: (key: string, val: string | Blob) => void): void;
 declare function buildURL(base: string, path?: string, params?: REST.Params): URL;
 declare function buildURLSearchParams(params?: REST.Params, target?: URLSearchParams): URLSearchParams;

@@ -17,9 +17,9 @@ export declare namespace REST {
         timeout_ms?: number;
         user_agent?: string;
     }
-    type Params = ParamSet | ParamList;
-    type ParamSet = Record<string, unknown>;
-    type ParamList = [string, unknown][];
+    type ParamArray = Array<[string, unknown]>;
+    type ParamRecord = Record<string, unknown>;
+    type Params = (ParamArray | ParamRecord);
     interface Result {
         failed: boolean;
         json: any;
@@ -32,6 +32,6 @@ export declare namespace REST {
         json: T;
         status: 200;
     }
-    function isParamList(params?: Params): params is ParamList;
+    function isParamArray(params?: Params): params is ParamArray;
 }
 export default REST;
