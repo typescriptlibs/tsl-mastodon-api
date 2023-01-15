@@ -13,7 +13,7 @@ export declare const Bridge: {
         new (form?: HTMLFormElement | undefined): FormData;
         prototype: FormData;
     };
-    Header: {
+    Headers: {
         new (init?: HeadersInit | undefined): Headers;
         prototype: Headers;
     };
