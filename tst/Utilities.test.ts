@@ -5,12 +5,9 @@ const baseURL = 'https://domain.example';
 
 const basePath = '/foo';
 
-const file = new Mastodon.Bridge.File(
-    [
-        JSON.stringify( { hello: "world" } )
-    ],
-    'hello'
-);
+const blob = new Mastodon.Bridge.Blob( [
+    JSON.stringify( { hello: "world" } )
+] );
 
 const paramArray: Mastodon.REST.ParamArray = [
     ['types[]', 'mention'],
@@ -183,7 +180,7 @@ test( 'Test Utilities.transferParams', ( assert: test.Assert ) => {
             'hello': 'hello',
             'ab': { 'a': 1, 'b': '2' },
             'xy': ['x', 'y'],
-            'file': file
+            'blob': blob
         },
         target
     );
@@ -193,5 +190,9 @@ test( 'Test Utilities.transferParams', ( assert: test.Assert ) => {
     assert.equal( target.get( 'hello' ), 'hello' );
     assert.equal( target.get( 'ab' ), '{"a":1,"b":"2"}' );
     assert.equal( target.get( 'xy' ), '["x","y"]' );
-    assert.equal( target.get( 'file' ), file );
+    assert.ok(
+        // return type differs between Node.js v16 (File) and v18 (Blob)
+        target.get( 'blob' ) instanceof Mastodon.Bridge.Blob
+    );
+
 } );
