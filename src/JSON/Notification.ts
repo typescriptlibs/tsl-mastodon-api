@@ -14,30 +14,59 @@ import Status, { isStatus } from './Status.js';
  * */
 
 export interface Notification {
-  account: Account;
-  created_at: string;
-  id: string;
-  type: NotificationType;
-  status: Status;
+    account: Account;
+    created_at: string;
+    id: string;
+    type: NotificationType;
+    status: Status;
 };
 
+/**
+ * Possible notification types:
+ * - 'mention' = Someone mentioned you in their status.
+ * - 'status' = Someone you enabled notifications for has posted a status.
+ * - 'reblog' = Someone boosted one of your statuses.
+ * - 'follow' = Someone followed you.
+ * - 'follow_request' = Someone requested to follow you.
+ * - 'favourite' = Someone favourited one of your statuses.
+ * - 'poll' = A poll you have voted in or created has ended.
+ * - 'update' = A status you boosted with has been edited.
+ * - 'admin.sign_up' = Someone signed up (optionally sent to admins).
+ * - 'admin.report' = A new report has been filed.
+ */
 export type NotificationType =
-  | 'mention'
-  | 'status'
-  | 'reblog'
-  | 'follow'
-  | 'follow_request'
-  | 'favourite'
-  | 'poll'
-  | 'update'
-  | 'admin.sign_up'
-  | 'admin.report';
+    | 'mention'
+    | 'status'
+    | 'reblog'
+    | 'follow'
+    | 'follow_request'
+    | 'favourite'
+    | 'poll'
+    | 'update'
+    | 'admin.sign_up'
+    | 'admin.report';
 
 /* *
  *
  *  Functions
  *
  * */
+
+export function isNotification (
+    json: Partial<Notification>
+): json is Notification {
+    return (
+        typeof json === 'object' &&
+        typeof json.account === 'object' &&
+        typeof json.created_at === 'string' &&
+        typeof json.id === 'string' &&
+        typeof json.status === 'object' &&
+        typeof json.type === 'string' &&
+        isAccount( json.account ) &&
+        isNotificationType( json.type ) &&
+        isStatus( json.status )
+    );
+}
 
 export function isNotifications (
     json: Partial<Array<Partial<Notification>>>
@@ -51,21 +80,8 @@ export function isNotifications (
     );
 }
 
-export function isNotification(
-    json: Partial<Notification>
-): json is Notification {
-    return (
-        typeof json === 'object' &&
-        typeof json.id === 'string' &&
-        isNotificationType( json.type ) &&
-        typeof json.created_at === 'string' &&
-        (!json.status || isStatus( json.status )) &&
-        (!json.account || isAccount( json.account ))
-    );
-}
-
-export function isNotificationType(
-    type?: string
+export function isNotificationType (
+    type: string
 ): type is NotificationType {
     return (
         type === 'mention' ||
