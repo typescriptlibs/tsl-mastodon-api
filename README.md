@@ -131,11 +131,11 @@ Links
 <!-- Logos and Badges -->
 
 [reuse status]:
-    <https://api.reuse.software/info/github.com/cla-assistant/cla-assistant>
+    <https://api.reuse.software/info/github.com/typescriptlibs/tsl-mastodon-api>
     "REUSE"
 
 [reuse status badge]:
-    <https://api.reuse.software/badge/github.com/cla-assistant/cla-assistant>
+    <https://api.reuse.software/badge/github.com/typescriptlibs/tsl-mastodon-api>
     "REUSE Status"
 
 [github actions ci]:
