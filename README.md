@@ -4,7 +4,6 @@ TypeScript Library for the Mastodon API
 This is a TypeScript-optimized library to access a Mastodon server.
 
 [![github actions ci badge]][github actions ci]
-[![reuse status badge]][reuse status]
 
 
 Installation
@@ -129,14 +128,6 @@ Links
 
 
 <!-- Logos and Badges -->
-
-[reuse status]:
-    <https://api.reuse.software/info/github.com/typescriptlibs/tsl-mastodon-api>
-    "REUSE"
-
-[reuse status badge]:
-    <https://api.reuse.software/badge/github.com/typescriptlibs/tsl-mastodon-api>
-    "REUSE Status"
 
 [github actions ci]:
     <https://github.com/openssl/openssl/actions?query=workflow%3A%22GitHub+CI%22>
