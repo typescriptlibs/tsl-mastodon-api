@@ -3,7 +3,6 @@ TypeScript Library for the Mastodon API
 
 This is a TypeScript-optimized library to access a Mastodon server.
 
-[![github actions ci badge]][github actions ci]
 
 
 Installation
@@ -124,15 +123,3 @@ Links
 * [npmjs.com/package/tsl-mastodon-api](https://www.npmjs.com/package/tsl-mastodon-api)
 
 * [typescriptlibs.org](https://typescriptlibs.org/)
-
-
-
-<!-- Logos and Badges -->
-
-[github actions ci]:
-    <https://github.com/openssl/openssl/actions?query=workflow%3A%22GitHub+CI%22>
-    "GitHub Actions CI"
-
-[github actions ci badge]:
-    <https://github.com/openssl/openssl/workflows/GitHub%20CI/badge.svg>
-    "GitHub Actions CI Status"
