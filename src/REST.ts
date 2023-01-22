@@ -109,7 +109,7 @@ export class REST {
                     } ),
                     method,
                     signal: timeout.signal,
-                    body: supportsBody && Utilities.buildFormData( params )
+                    body: params ? supportsBody && Utilities.buildFormData( params ) : undefined
                 }
             );
 

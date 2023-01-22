@@ -62,6 +62,16 @@ export declare class API {
      */
     deleteListAccounts(listID: string, listAccounts: JSON.ListAccountsDelete): Promise<API.Success<object>>;
     /**
+     * Dismiss a single notification
+     *
+     * @param [id]
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty .json object.
+     */
+    deleteNotification(notificationId: string): Promise<API.Success<{}>>;
+    /**
      * Deletes a status.
      *
      * @param statusID

@@ -57,6 +57,25 @@ test( 'Test API.deleteList', async ( assert: test.Assert ) => {
     }
 } );
 
+test( 'Test API.deleteNotification', async ( assert: test.Assert ) => {
+    try {
+        const { json: body } = await API.deleteNotification( 'ID-11' );
+        console.log(body)
+        assert.deepEqual(
+            body,
+            {},
+            'Response should contain a {} body.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+})
+
 test( 'Test API.deleteStatus', async ( assert: test.Assert ) => {
     try {
         const { json: status } = await API.deleteStatus( 'ID-7' );
