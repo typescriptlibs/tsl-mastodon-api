@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Imports
@@ -8,156 +20,166 @@ import Bridge from './Bridge.js';
 
 /* *
  *
- *  Declarations
+ *  Namespace
  *
  * */
 
-type Params = (
-    | Array<[string, unknown]>
-    | Record<string, unknown>
-);
+export namespace Utilities {
 
-/* *
- *
- *  Functions
- *
- * */
+    /* *
+     *
+     *  Declarations
+     *
+     * */
 
-function buildFormData (
-    params?: Params,
-    target: FormData = new Bridge.FormData()
-): FormData {
-    let value: unknown;
+    export type Params = (
+        | Array<[string, unknown]>
+        | Record<string, unknown>
+    );
 
-    if ( params ) {
-        transferParams( params, target );
+    /* *
+     *
+     *  Functions
+     *
+     * */
+
+    export function buildFormData (
+        params?: Params,
+        target: FormData = new Bridge.FormData()
+    ): FormData {
+        let value: unknown;
+
+        if ( params ) {
+            transferParams( params, target );
+        }
+
+        return target;
     }
 
-    return target;
-}
+    export function buildHeaders (
+        params?: Params,
+        target: Headers = new Bridge.Headers()
+    ): Headers {
 
-function buildHeaders (
-    params?: Params,
-    target: Headers = new Bridge.Headers()
-): Headers {
+        if ( params ) {
+            transferParams( params, target );
+        }
 
-    if ( params ) {
-        transferParams( params, target );
+        return target;
     }
 
-    return target;
-}
+    export function buildURL (
+        base: string,
+        path: string = '.',
+        params?: Params
+    ): URL {
+        const url = new Bridge.URL( path, base );
 
-function buildURL (
-    base: string,
-    path: string = '.',
-    params?: Params
-): URL {
-    const url = new Bridge.URL( path, base );
+        if ( params ) {
+            buildURLSearchParams( params, url.searchParams );
+        }
 
-    if ( params ) {
-        buildURLSearchParams( params, url.searchParams );
+        return url;
     }
 
-    return url;
-}
+    export function buildURLSearchParams (
+        params?: Params,
+        target: URLSearchParams = new Bridge.URLSearchParams()
+    ): URLSearchParams {
 
-function buildURLSearchParams (
-    params?: Params,
-    target: URLSearchParams = new Bridge.URLSearchParams()
-): URLSearchParams {
+        if ( params ) {
+            transferParams( params, target );
+        }
 
-    if ( params ) {
-        transferParams( params, target );
+        return target;
     }
 
-    return target;
-}
+    /**
+     * Loads a file from a path.
+     *
+     * @memberof Utilities
+     *
+     * @param filePath
+     * Path to the file.
+     *
+     * @param [mimeType]
+     * Mime type of the file.
+     *
+     * @return
+     * Promise with the file, if successful.
+     *
+     * @requires node-fetch
+     */
+    export async function fileFrom (
+        filePath: string,
+        mimeType?: string
+    ): Promise<File> {
+        const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
 
-function transferParams (
-    params: Params,
-    target: ( FormData | Headers | URLSearchParams )
-): void {
-    let value: unknown;
+        return await fileFrom( filePath, mimeType );
+    }
 
-    if ( Array.isArray( params ) ) {
-        let key: string;
+    export function transferParams (
+        params: Params,
+        target: ( FormData | Headers | URLSearchParams )
+    ): void {
+        let value: unknown;
 
-        for ( const pair of params ) {
+        if ( Array.isArray( params ) ) {
+            let key: string;
 
-            key = pair[0];
-            value = pair[1];
+            for ( const pair of params ) {
 
-            if (
-                typeof value === 'undefined' ||
-                value === null
-            ) {
-                continue;
+                key = pair[0];
+                value = pair[1];
+
+                if (
+                    typeof value === 'undefined' ||
+                    value === null
+                ) {
+                    continue;
+                }
+
+                if (
+                    value instanceof Bridge.Blob &&
+                    target instanceof Bridge.FormData
+                ) {
+                    target.append( key, value );
+                }
+                else if ( typeof value === 'object' ) {
+                    target.append( key, JSON.stringify( value ) );
+                }
+                else {
+                    target.append( key, `${value}` );
+                }
             }
+        } else {
+            for ( const key in params ) {
 
-            if (
-                value instanceof Bridge.Blob &&
-                target instanceof Bridge.FormData
-            ) {
-                target.append( key, value );
-            }
-            else if ( typeof value === 'object' ) {
-                target.append( key, JSON.stringify( value ) );
-            }
-            else {
-                target.append( key, `${value}` );
+                value = params[key];
+
+                if (
+                    typeof value === 'undefined' ||
+                    value === null
+                ) {
+                    continue;
+                }
+                if (
+                    value instanceof Bridge.Blob &&
+                    target instanceof Bridge.FormData
+                ) {
+                    target.append( key, value );
+                }
+                else if ( typeof value === 'object' ) {
+                    target.append( key, JSON.stringify( value ) );
+                }
+                else {
+                    target.append( key, `${value}` );
+                }
             }
         }
-    } else {
-        for ( const key in params ) {
-
-            value = params[key];
-
-            if (
-                typeof value === 'undefined' ||
-                value === null
-            ) {
-                continue;
-            }
-            if (
-                value instanceof Bridge.Blob &&
-                target instanceof Bridge.FormData
-            ) {
-                target.append( key, value );
-            }
-            else if ( typeof value === 'object' ) {
-                target.append( key, JSON.stringify( value ) );
-            }
-            else {
-                target.append( key, `${value}` );
-            }
-        }
     }
-}
 
-/**
- * Loads a file from a path.
- *
- * @memberof Utilities
- *
- * @param filePath
- * Path to the file.
- *
- * @param [mimeType]
- * Mime type of the file.
- *
- * @return
- * Promise with the file, if successful.
- *
- * @requires node-fetch
- */
-async function fileFrom (
-    filePath: string,
-    mimeType?: string
-): Promise<File> {
-    const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
-
-    return await fileFrom( filePath, mimeType );
 }
 
 /* *
@@ -165,14 +187,5 @@ async function fileFrom (
  *  Default Export
  *
  * */
-
-export const Utilities = {
-    buildHeaders,
-    buildFormData,
-    buildURL,
-    buildURLSearchParams,
-    fileFrom,
-    transferParams
-};
 
 export default Utilities;

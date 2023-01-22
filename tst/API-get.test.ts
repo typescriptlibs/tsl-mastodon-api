@@ -1,5 +1,29 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
+/* *
+ *
+ *  Imports
+ *
+ * */
+
 import * as Mastodon from 'tsl-mastodon-api';
 import test from '@typescriptlibs/tst';
+
+/* *
+ *
+ *  Preperations
+ *
+ * */
 
 const API = new Mastodon.API( {
     access_token: '0', // test server does not validate
@@ -9,6 +33,12 @@ const APIM = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-get-multiple/'
 } );
+
+/* *
+ *
+ *  Tests
+ *
+ * */
 
 test( 'Test API.getAccount', async ( assert: test.Assert ) => {
     try {

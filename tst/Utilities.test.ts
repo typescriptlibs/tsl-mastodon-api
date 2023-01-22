@@ -1,9 +1,33 @@
-import test from '@typescriptlibs/tst';
-import * as Mastodon from 'tsl-mastodon-api';
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
-const baseURL = 'https://domain.example';
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
+/* *
+ *
+ *  Imports
+ *
+ * */
+
+import * as Mastodon from 'tsl-mastodon-api';
+import test from '@typescriptlibs/tst';
+
+/* *
+ *
+ *  Preperations
+ *
+ * */
 
 const basePath = '/foo';
+
+const baseURL = 'https://domain.example';
 
 const blob = new Mastodon.Bridge.Blob( [
     JSON.stringify( { hello: "world" } )
@@ -28,6 +52,12 @@ const paramRecord: Mastodon.REST.ParamRecord = {
     'some_object': { 'a': '1', 'b': 2 },
     'some_array': ['x', 'y', 'z']
 };
+
+/* *
+ *
+ *  Tests
+ *
+ * */
 
 test( 'Test Utilities.buildFormData - Array', ( assert: test.Assert ) => {
 
