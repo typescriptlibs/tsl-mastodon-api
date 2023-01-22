@@ -140,6 +140,30 @@ export class API {
     }
 
     /**
+     * Dismiss a single notification
+     *
+     * @param [id]
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty .json object.
+     */
+    public async deleteNotification (
+        notificationId: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.fetch( 'POST', `notifications/${notificationId}/dismiss` );
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
      * Deletes a status.
      *
      * @param statusID
