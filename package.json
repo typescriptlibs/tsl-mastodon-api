@@ -5,7 +5,7 @@
     "license": "MIT",
     "name": "tsl-mastodon-api",
     "type": "module",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "bugs": "https://github.com/typescriptlibs/tsl-mastodon-api/issues",
@@ -19,7 +19,7 @@
     "devDependencies": {
         "@types/node": "~16.7.13",
         "@typescriptlibs/tst": "^0.0.5",
-        "husky": "^8.0.2",
+        "husky": "^8.0.3",
         "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.4"
     },
