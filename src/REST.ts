@@ -21,6 +21,18 @@ import Utilities from './Utilities.js';
 
 /* *
  *
+ *  Declarations
+ *
+ * */
+
+declare global {
+    interface RequestInit {
+        follow?: number;
+    }
+}
+
+/* *
+ *
  *  Class
  *
  * */
@@ -77,6 +89,8 @@ export class REST {
     ): Promise<REST.Result> {
         const apiURL = this.apiURL;
         const config = this.config;
+
+        // build fetch parameter
         const supportsBody = (
             method === 'PATCH' ||
             method === 'POST' ||
@@ -87,7 +101,18 @@ export class REST {
                 Utilities.buildURL( apiURL, path ) :
                 Utilities.buildURL( apiURL, path, params )
         );
+        const headers = Utilities.buildHeaders( {
+            Accept: '*/*',
+            Authorization: `Bearer ${config.access_token}`,
+            'User-Agent': config.user_agent
+        } );
+        const body = (
+            supportsBody && params ?
+                Utilities.buildFormData( params ) :
+                undefined
+        );
 
+        // start timer
         const timeout = new AbortController();
         const timer = setTimeout( () => timeout.abort(), config.timeout_ms );
 
@@ -98,18 +123,12 @@ export class REST {
             response = await Bridge.fetch(
                 url.toString(),
                 {
-                    ...( config.no_follow ? {
-                        follow: 9,
-                        redirect: 'follow',
-                    } : {} ),
-                    headers: Utilities.buildHeaders( {
-                        Accept: '*/*',
-                        Authorization: `Bearer ${config.access_token}`,
-                        'User-Agent': config.user_agent
-                    } ),
+                    follow: config.no_follow ? 0 : 9,
+                    redirect: config.no_follow ? 'manual' : 'follow',
+                    headers,
                     method,
                     signal: timeout.signal,
-                    body: params ? supportsBody && Utilities.buildFormData( params ) : undefined
+                    body
                 }
             );
 

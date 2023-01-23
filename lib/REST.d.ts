@@ -9,6 +9,11 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+declare global {
+    interface RequestInit {
+        follow?: number;
+    }
+}
 export declare class REST {
     constructor(config: REST.Config);
     readonly apiURL: string;

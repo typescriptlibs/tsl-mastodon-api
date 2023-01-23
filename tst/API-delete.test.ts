@@ -60,7 +60,6 @@ test( 'Test API.deleteList', async ( assert: test.Assert ) => {
 test( 'Test API.deleteNotification', async ( assert: test.Assert ) => {
     try {
         const { json: body } = await API.deleteNotification( 'ID-11' );
-        console.log(body)
         assert.deepEqual(
             body,
             {},
@@ -74,7 +73,7 @@ test( 'Test API.deleteNotification', async ( assert: test.Assert ) => {
             'Request should not fail.'
         );
     }
-})
+} )
 
 test( 'Test API.deleteStatus', async ( assert: test.Assert ) => {
     try {
