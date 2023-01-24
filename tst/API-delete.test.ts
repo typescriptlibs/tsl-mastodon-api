@@ -17,7 +17,7 @@
  * */
 
 import * as Mastodon from 'tsl-mastodon-api';
-import Utilities from './Utilities.js';
+import TestUtilities from './TestUtilities.js';
 import test from '@typescriptlibs/tst';
 
 /* *
@@ -31,7 +31,7 @@ const API = new Mastodon.API( {
     api_url: 'http://127.0.0.1:8000/v1-delete/'
 } );
 
-Utilities.forceGetFetch( API );
+TestUtilities.forceGetFetch( API );
 
 /* *
  *
