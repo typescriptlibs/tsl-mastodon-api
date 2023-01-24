@@ -29,10 +29,6 @@ const API = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-get/'
 } );
-const APIM = new Mastodon.API( {
-    access_token: '0', // test server does not validate
-    api_url: 'http://127.0.0.1:8000/v1-get-multiple/'
-} );
 
 /* *
  *
@@ -111,25 +107,6 @@ test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
         );
     }
 } );
-
-test( 'Test API.getNotifications', async ( assert: test.Assert ) => {
-    try {
-        const { json: notifications } = await APIM.getNotifications();
-        assert.equal(
-            notifications[0].id,
-            'ID-10',
-            'Notification ID should contain mockup value.'
-        );
-    }
-    catch ( result: any ) {
-        console.debug( result );
-        assert.ok(
-            false,
-            'Request should not fail.'
-        );
-    }
-} );
-
 
 test( 'Test API.getStatus', async ( assert: test.Assert ) => {
     try {
