@@ -16,19 +16,8 @@
  *
  * */
 
-import * as Mastodon from 'tsl-mastodon-api';
+import Setup from '../Setup.js';
 import test from '@typescriptlibs/tst';
-
-/* *
- *
- *  Preperations
- *
- * */
-
-const API = new Mastodon.API( {
-    access_token: '0', // test server does not validate
-    api_url: 'http://127.0.0.1:8000/v1-get/'
-} );
 
 /* *
  *
@@ -36,13 +25,15 @@ const API = new Mastodon.API( {
  *
  * */
 
-test( 'Test API.getAccount', async ( assert: test.Assert ) => {
+test( 'Test API.postNewList', async ( assert: test.Assert ) => {
     try {
-        const { json: account } = await API.getAccount();
+        const { json: list } = await Setup.v1Post.postList( {
+            "title": "test",
+        } );
         assert.strictEqual(
-            account.id,
-            'ID-1',
-            'Account ID should contain mockup value.'
+            list.id,
+            'ID-8',
+            'List ID should contain mockup value.'
         );
     }
     catch ( result: any ) {
@@ -56,7 +47,7 @@ test( 'Test API.getAccount', async ( assert: test.Assert ) => {
 
 test( 'Test API.getList', async ( assert: test.Assert ) => {
     try {
-        const { json: list } = await API.getList( 'ID-8' );
+        const { json: list } = await Setup.v1Get.getList( 'ID-8' );
         assert.strictEqual(
             list.id,
             'ID-8',
@@ -74,7 +65,7 @@ test( 'Test API.getList', async ( assert: test.Assert ) => {
 
 test( 'Test API.getListAccounts', async ( assert: test.Assert ) => {
     try {
-        const { json: listAccounts } = await API.getListAccounts( 'ID-9' );
+        const { json: listAccounts } = await Setup.v1Get.getListAccounts( 'ID-9' );
         assert.strictEqual(
             listAccounts.length,
             1,
@@ -90,31 +81,13 @@ test( 'Test API.getListAccounts', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
+test( 'Test API.deleteList', async ( assert: test.Assert ) => {
     try {
-        const { json: mediaAttachment } = await API.getMediaAttachment( 'ID-2' );
+        const { json: list } = await Setup.v1Delete.deleteList( 'ID-8' );
         assert.strictEqual(
-            mediaAttachment.id,
-            'ID-2',
-            'Media ID should contain mockup value.'
-        );
-    }
-    catch ( result: any ) {
-        console.debug( result );
-        assert.ok(
-            false,
-            'Request should not fail.'
-        );
-    }
-} );
-
-test( 'Test API.getStatus', async ( assert: test.Assert ) => {
-    try {
-        const { json: status } = await API.getStatus( 'ID-7' );
-        assert.strictEqual(
-            status.id,
-            'ID-7',
-            'Status ID should contain mockup value.'
+            list.id,
+            'ID-8',
+            'List ID should contain mockup value.'
         );
     }
     catch ( result: any ) {

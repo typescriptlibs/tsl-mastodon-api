@@ -20,6 +20,35 @@ import * as Mastodon from 'tsl-mastodon-api';
 
 /* *
  *
+ *  Constants
+ *
+ * */
+
+const v1Delete = new Mastodon.API( {
+    access_token: '0', // test server does not validate
+    api_url: 'http://127.0.0.1:8000/v1-delete/'
+} );
+
+const v1Get = new Mastodon.API( {
+    access_token: '0', // test server does not validate
+    api_url: 'http://127.0.0.1:8000/v1-get/'
+} );
+
+const v1GetMultiple = new Mastodon.API( {
+    access_token: '0', // test server does not validate
+    api_url: 'http://127.0.0.1:8000/v1-get-multiple/'
+} );
+
+const v1Post = new Mastodon.API( {
+    access_token: '0', // test server does not validate
+    api_url: 'http://127.0.0.1:8000/v1-post/'
+} );
+
+forceGetFetch( v1Delete );
+forceGetFetch( v1Post );
+
+/* *
+ *
  *  Functions
  *
  * */
@@ -45,8 +74,12 @@ function forceGetFetch (
  *
  * */
 
-export const Utilities = {
-    forceGetFetch
+export const Setup = {
+    v1Delete,
+    v1Get,
+    v1GetMultiple,
+    v1Post,
+    fileFrom: Mastodon.Utilities.fileFrom
 };
 
-export default Utilities;
+export default Setup;
