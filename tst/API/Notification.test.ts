@@ -16,27 +16,8 @@
  *
  * */
 
-import * as Mastodon from 'tsl-mastodon-api';
-import TestUtilities from '../TestUtilities.js';
+import Setup from '../Setup.js';
 import test from '@typescriptlibs/tst';
-
-/* *
- *
- *  Preperations
- *
- * */
-
-const APID = new Mastodon.API( {
-    access_token: '0', // test server does not validate
-    api_url: 'http://127.0.0.1:8000/v1-delete/'
-} );
-
-const APIGM = new Mastodon.API( {
-    access_token: '0', // test server does not validate
-    api_url: 'http://127.0.0.1:8000/v1-get-multiple/'
-} );
-
-TestUtilities.forceGetFetch( APID );
 
 /* *
  *
@@ -46,7 +27,12 @@ TestUtilities.forceGetFetch( APID );
 
 test( 'Test API.getNotifications', async ( assert: test.Assert ) => {
     try {
-        const { json: notifications } = await APIGM.getNotifications();
+        const { json: notifications } = await Setup.v1GetMultiple.getNotifications();
+        assert.notStrictEqual(
+            notifications.length,
+            0,
+            'Notifications should be returned.'
+        );
         assert.equal(
             notifications[0].id,
             'ID-10',
@@ -64,7 +50,7 @@ test( 'Test API.getNotifications', async ( assert: test.Assert ) => {
 
 test( 'Test API.deleteNotification', async ( assert: test.Assert ) => {
     try {
-        const { json: body } = await APID.deleteNotification( 'ID-11' );
+        const { json: body } = await Setup.v1Delete.deleteNotification( 'ID-11' );
         assert.deepEqual(
             body,
             {},

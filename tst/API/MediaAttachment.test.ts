@@ -16,22 +16,8 @@
  *
  * */
 
-import * as Mastodon from 'tsl-mastodon-api';
-import TestUtilities from './TestUtilities.js';
+import Setup from '../Setup.js';
 import test from '@typescriptlibs/tst';
-
-/* *
- *
- *  Preperations
- *
- * */
-
-const API = new Mastodon.API( {
-    access_token: '0', // test server does not validate
-    api_url: 'http://127.0.0.1:8000/v1-delete/'
-} );
-
-TestUtilities.forceGetFetch( API );
 
 /* *
  *
@@ -39,13 +25,15 @@ TestUtilities.forceGetFetch( API );
  *
  * */
 
-test( 'Test API.deleteList', async ( assert: test.Assert ) => {
+test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     try {
-        const { json: list } = await API.deleteList( 'ID-8' );
+        const { json: mediaAttachment } = await Setup.v1Post.postMediaAttachment( {
+            file: await Setup.fileFrom( './tst-data/files/1x1.png' )
+        } );
         assert.strictEqual(
-            list.id,
-            'ID-8',
-            'List ID should contain mockup value.'
+            mediaAttachment.id,
+            'ID-3',
+            'Media Attachment ID should contain mockup value.'
         );
     }
     catch ( result: any ) {
@@ -57,13 +45,13 @@ test( 'Test API.deleteList', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.deleteStatus', async ( assert: test.Assert ) => {
+test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
     try {
-        const { json: status } = await API.deleteStatus( 'ID-7' );
+        const { json: mediaAttachment } = await Setup.v1Get.getMediaAttachment( 'ID-2' );
         assert.strictEqual(
-            status.id,
-            'ID-7',
-            'Status ID should contain mockup value.'
+            mediaAttachment.id,
+            'ID-2',
+            'Media ID should contain mockup value.'
         );
     }
     catch ( result: any ) {
