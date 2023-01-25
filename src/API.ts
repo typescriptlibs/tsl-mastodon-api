@@ -446,7 +446,10 @@ export class API {
     }
 
     /**
-     * Gets statuses.
+     * Gets statuses of an account.
+     *
+     * @param accountID
+     * ID of the related account.
      *
      * @param [queryParameters]
      * Query parameters to limit the amount of statuses to get.
@@ -455,9 +458,10 @@ export class API {
      * Promise with the array of statuses, if successful.
      */
     public async getStatuses (
+        accountID: string,
         queryParameters?: API.QueryParameters
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'statuses', queryParameters );
+        const result = await this.fetch( 'GET', `accounts/${accountID}/statuses`, queryParameters );
 
         if (
             result.failed ||

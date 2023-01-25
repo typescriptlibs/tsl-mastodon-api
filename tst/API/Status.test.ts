@@ -64,34 +64,28 @@ test( 'Test API.getStatus', async ( assert: test.Assert ) => {
     }
 } );
 
-// test( 'Test API.getStatuses', async ( assert: test.Assert ) => {
-//     try {
-//         const { json: account } = await Setup.v1Get.getAccount();
-//         assert.strictEqual(
-//             account.id,
-//             'ID-1',
-//             'Account ID should contain mockup value.'
-//         );
-//         const { json: statuses } = await Setup.v1GetMultiple.getStatuses( account.id );
-//         assert.notStrictEqual(
-//             statuses.length,
-//             0,
-//             'Statuses should be returned.'
-//         );
-//         assert.strictEqual(
-//             statuses[0].id,
-//             'ID-7',
-//             'Status ID should contain mockup value.'
-//         );
-//     }
-//     catch ( result: any ) {
-//         console.debug( result );
-//         assert.ok(
-//             false,
-//             'Request should not fail.'
-//         );
-//     }
-// } );
+test( 'Test API.getStatuses', async ( assert: test.Assert ) => {
+    try {
+        const { json: statuses } = await Setup.v1GetMultiple.getStatuses( 'ID-1' );
+        assert.notStrictEqual(
+            statuses.length,
+            0,
+            'Statuses should be returned.'
+        );
+        assert.strictEqual(
+            statuses[0].id,
+            'ID-7',
+            'Status ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
 
 test( 'Test API.deleteStatus', async ( assert: test.Assert ) => {
     try {

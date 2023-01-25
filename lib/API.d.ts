@@ -162,7 +162,10 @@ export declare class API {
      */
     getStatus(statusID: string): Promise<API.Success<JSON.Status>>;
     /**
-     * Gets statuses.
+     * Gets statuses of an account.
+     *
+     * @param accountID
+     * ID of the related account.
      *
      * @param [queryParameters]
      * Query parameters to limit the amount of statuses to get.
@@ -170,7 +173,7 @@ export declare class API {
      * @return
      * Promise with the array of statuses, if successful.
      */
-    getStatuses(queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
+    getStatuses(accountID: string, queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
     /**
      * Posts a new list or updates an existing list.
      *
