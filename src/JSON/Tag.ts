@@ -49,6 +49,18 @@ export function isTag (
     );
 }
 
+export function isTags (
+    json: Partial<Array<Partial<Tag>>>
+): json is Array<Tag> {
+    return (
+        json instanceof Array &&
+        (
+            !json.length ||
+            isTag( json[0] || {} )
+        )
+    );
+}
+
 export function isTagStatistic (
     json: Partial<TagStatistic>
 ): json is TagStatistic {
