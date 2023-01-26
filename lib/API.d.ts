@@ -175,6 +175,52 @@ export declare class API {
      */
     getStatuses(accountID: string, queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
     /**
+     * Gets statuses from followed accounts and tags.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfFollowing(queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets public statuses for a list of accounts.
+     *
+     * @param listID
+     * ID of the list.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfList(listID: string, queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets public statuses for a tag.
+     *
+     * @param tag
+     * Tag to search for.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfTag(tag: string, queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets statuses from the timeline.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfTimeline(queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list

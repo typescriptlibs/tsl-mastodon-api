@@ -476,6 +476,118 @@ export class API {
     }
 
     /**
+     * Gets statuses from followed accounts and tags.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    public async getStatusesOfFollowing (
+        queryParameters?: API.QueryParameters
+    ): Promise<API.Success<Array<JSON.Status>>> {
+        const result = await this.fetch( 'GET', 'timelines/home', queryParameters );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatuses( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Status>>;
+    }
+
+    /**
+     * Gets public statuses for a list of accounts.
+     *
+     * @param listID
+     * ID of the list.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    public async getStatusesOfList (
+        listID: string,
+        queryParameters?: API.QueryParameters
+    ): Promise<API.Success<Array<JSON.Status>>> {
+        const result = await this.fetch( 'GET', `timelines/list/${listID}`, queryParameters );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatuses( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Status>>;
+    }
+
+    /**
+     * Gets public statuses for a tag.
+     *
+     * @param tag
+     * Tag to search for.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    public async getStatusesOfTag (
+        tag: string,
+        queryParameters?: API.QueryParameters
+    ): Promise<API.Success<Array<JSON.Status>>> {
+        const result = await this.fetch( 'GET', `timelines/tag/${tag}`, queryParameters );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatuses( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Status>>;
+    }
+
+    /**
+     * Gets statuses from the timeline.
+     *
+     * @param [queryParameters]
+     * Query parameters to limit the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    public async getStatusesOfTimeline (
+        queryParameters?: API.QueryParameters
+    ): Promise<API.Success<Array<JSON.Status>>> {
+        const result = await this.fetch( 'GET', 'timelines/public', queryParameters );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatuses( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Status>>;
+    }
+
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list
