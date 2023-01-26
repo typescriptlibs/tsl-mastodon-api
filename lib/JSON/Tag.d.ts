@@ -20,5 +20,6 @@ export interface TagStatistic {
     uses: number;
 }
 export declare function isTag(json: Partial<Tag>): json is Tag;
+export declare function isTags(json: Partial<Array<Partial<Tag>>>): json is Array<Tag>;
 export declare function isTagStatistic(json: Partial<TagStatistic>): json is TagStatistic;
 export default Tag;
