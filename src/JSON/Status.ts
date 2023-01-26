@@ -26,6 +26,7 @@ import type Tag from './Tag.js';
 import type Visibility from './Visibility.js';
 
 import { isAccount } from './Account.js';
+import { isTags } from './Tag.js';
 
 /* *
  *
@@ -139,7 +140,8 @@ export function isStatus (
         typeof json.tags === 'object' &&
         typeof json.uri === 'string' &&
         typeof json.visibility === 'string' &&
-        isAccount( json.account )
+        isAccount( json.account ) &&
+        isTags( json.tags )
     );
 }
 
