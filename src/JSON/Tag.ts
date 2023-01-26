@@ -41,10 +41,13 @@ export function isTag (
         typeof json === 'object' &&
         typeof json.name === 'string' &&
         typeof json.url === 'string' &&
-        json.history instanceof Array &&
         (
-            !json.history.length ||
-            isTagStatistic( json.history[0] )
+            typeof json.history === 'undefined' ||
+            json.history instanceof Array &&
+            (
+                !json.history.length ||
+                isTagStatistic( json.history[0] || {} )
+            )
         )
     );
 }
