@@ -259,6 +259,61 @@ export namespace REST {
         );
     }
 
+    /**
+     * Converts a Params structure into a ParamArray structure. Value arrays of
+     * params will be split into multiple pairs of the ParamArray. If no special
+     * handling of arrays is needed, convert from ParamRecord to ParamArray with
+     * the `Object.entries` function.
+     *
+     * @param params
+     * Params structure to convert or split.
+     *
+     * @param [array]
+     * ParamArray structure to use.
+     *
+     * @return
+     * ParamArray with params pairs.
+     */
+    export function toParamArray (
+        params?: undefined,
+        array?: ParamArray
+    ): undefined;
+    export function toParamArray (
+        params?: Params,
+        array?: ParamArray
+    ): ParamArray;
+    export function toParamArray (
+        params: ( Params | undefined ),
+        array: ParamArray = []
+    ): ( ParamArray | undefined ) {
+
+        if ( !params ) {
+            return;
+        }
+
+        const pairs = ( Array.isArray( params ) ? params : Object.entries( params ) );
+
+        let pair: [string, unknown];
+
+        for ( let i = 0, iEnd = pairs.length; i < iEnd; ++i ) {
+            pair = pairs[i];
+
+            if ( Array.isArray( pair[1] ) ) {
+                const key = pair[0];
+                const values = pair[1];
+
+                for ( let j = 0, jEnd = values.length; j < jEnd; ++j ) {
+                    array.push( [key, values[j]] );
+                }
+            }
+            else {
+                array.push( pair );
+            }
+        }
+
+        return array;
+    }
+
 }
 
 /* *

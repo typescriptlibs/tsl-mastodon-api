@@ -70,3 +70,43 @@ test( 'Test REST.get fallback', async ( assert: test.Assert ) => {
     );
 
 } );
+
+test( 'Test REST.toParamArray', async ( assert: test.Assert ) => {
+
+    assert.deepStrictEqual(
+        Mastodon.REST.toParamArray( {
+            'array[]': ['a', 'b', 'c'],
+            false: false,
+            NaN: NaN,
+            null: null,
+            string: 'string',
+            zero: 0
+        } ),
+        [
+            ['array[]', 'a'],
+            ['array[]', 'b'],
+            ['array[]', 'c'],
+            ['false', false],
+            ['NaN', NaN],
+            ['null', null],
+            ['string', 'string'],
+            ['zero', 0]
+        ],
+        'REST should split value arrays.'
+    );
+
+    assert.deepStrictEqual(
+        Mastodon.REST.toParamArray( [
+            ['array[]', [['a', 'b', 'c'], false, NaN, null, 0]],
+        ] ),
+        [
+            ['array[]', ['a', 'b', 'c']],
+            ['array[]', false],
+            ['array[]', NaN],
+            ['array[]', null],
+            ['array[]', 0],
+        ],
+        'REST should split value arrays.'
+    );
+
+} );
