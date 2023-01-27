@@ -87,9 +87,9 @@ test( 'Test API.getStatuses', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.getStatusesOfFollowing', async ( assert: test.Assert ) => {
+test( 'Test API.getStatusesOfHome', async ( assert: test.Assert ) => {
     try {
-        const { json: statuses } = await Setup.v1GetMultiple.getStatusesOfFollowing();
+        const { json: statuses } = await Setup.v1GetMultiple.getStatusesOfHome();
         assert.notStrictEqual(
             statuses.length,
             0,
@@ -133,9 +133,9 @@ test( 'Test API.getStatusesOfList', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.getStatusesOfTag', async ( assert: test.Assert ) => {
+test( 'Test API.getStatusesOfPublic', async ( assert: test.Assert ) => {
     try {
-        const { json: statuses } = await Setup.v1GetMultiple.getStatusesOfTag( 'world' );
+        const { json: statuses } = await Setup.v1GetMultiple.getStatusesOfPublic();
         assert.notStrictEqual(
             statuses.length,
             0,
@@ -156,9 +156,9 @@ test( 'Test API.getStatusesOfTag', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.getStatusesOfTimeline', async ( assert: test.Assert ) => {
+test( 'Test API.getStatusesOfTag', async ( assert: test.Assert ) => {
     try {
-        const { json: statuses } = await Setup.v1GetMultiple.getStatusesOfTimeline();
+        const { json: statuses } = await Setup.v1GetMultiple.getStatusesOfTag( 'world' );
         assert.notStrictEqual(
             statuses.length,
             0,
