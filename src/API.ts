@@ -19,6 +19,7 @@
 import Bridge from './Bridge.js';
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
+import Utilities from './Utilities.js';
 
 /* *
  *
@@ -208,7 +209,7 @@ export class API {
     protected async fetch (
         method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,
-        params?: unknown
+        params?: NonNullable<Object>
     ): Promise<API.Result> {
         const rest: REST = this.rest;
         const result: API.Result = await rest.fetch( method, path, params as REST.Params );
@@ -277,7 +278,7 @@ export class API {
      * @param listID
      * ID of the list to get accounts from.
      *
-     * @param [queryParameters]
+     * @param [queryParams]
      * Query parameters to limit the amount of accounts to get.
      *
      * @return
@@ -285,9 +286,9 @@ export class API {
      */
     public async getListAccounts (
         listID: string,
-        queryParameters?: API.QueryParameters
+        queryParams?: API.QueryParams
     ): Promise<API.Success<JSON.ListAccounts>> {
-        const result = await this.fetch( 'GET', `lists/${listID}/accounts`, queryParameters );
+        const result = await this.fetch( 'GET', `lists/${listID}/accounts`, queryParams );
 
         if (
             result.failed ||
@@ -304,16 +305,16 @@ export class API {
     /**
      * Gets lists.
      *
-     * @param [queryParameters]
+     * @param [queryParams]
      * Query parameters to limit the amount of lists to get.
      *
      * @return
      * Promise with the array of lists, if successful.
      */
     public async getLists (
-        queryParameters: API.QueryParameters
+        queryParams: API.QueryParams
     ): Promise<API.Success<Array<JSON.List>>> {
-        const result = await this.fetch( 'GET', `lists`, { queryParameters } );
+        const result = await this.fetch( 'GET', `lists`, queryParams );
 
         if (
             result.failed ||
@@ -372,38 +373,32 @@ export class API {
      * @param [account_id]
      * Return only notifications received from the specified account.
      *
-     * @param [queryParameters]
+     * @param [queryParams]
      * Query parameters to limit the amount of statuses to get.
      */
     public async getNotifications (
         types?: Array<JSON.NotificationType>,
         exclude_types?: Array<JSON.NotificationType>,
         account_id?: string,
-        queryParameters?: API.QueryParameters
+        queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Notification>>> {
 
         const paramArray: REST.ParamArray = [];
 
         if ( types ) {
-            types.forEach(
-                ( val ) => paramArray.push( ['types[]', val] )
-            );
+            types.forEach( value => paramArray.push( ['types[]', value] ) );
         }
 
         if ( exclude_types ) {
-            exclude_types.forEach(
-                ( val ) => paramArray.push( ['exclude_types[]', val] )
-            );
+            exclude_types.forEach( value => paramArray.push( ['exclude_types[]', value] ) );
         }
 
         if ( account_id ) {
             paramArray.push( ['account_id', account_id] );
         }
 
-        if ( queryParameters ) {
-            Object.entries( queryParameters ).forEach(
-                ( keyVal ) => paramArray.push( [keyVal[0], keyVal[1]] )
-            );
+        if ( queryParams ) {
+            paramArray.push( ...Object.entries( queryParams ) );
         }
 
         const result = await this.fetch( 'GET', 'notifications', paramArray );
@@ -451,7 +446,7 @@ export class API {
      * @param accountID
      * ID of the related account.
      *
-     * @param [queryParameters]
+     * @param [queryParams]
      * Query parameters to limit the amount of statuses to get.
      *
      * @return
@@ -459,9 +454,9 @@ export class API {
      */
     public async getStatuses (
         accountID: string,
-        queryParameters?: API.QueryParameters
+        queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `accounts/${accountID}/statuses`, queryParameters );
+        const result = await this.fetch( 'GET', `accounts/${accountID}/statuses`, queryParams );
 
         if (
             result.failed ||
@@ -476,18 +471,18 @@ export class API {
     }
 
     /**
-     * Gets statuses from followed accounts and tags.
+     * Gets statuses from the personal timeline.
      *
-     * @param [queryParameters]
-     * Query parameters to limit the amount of statuses to get.
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
      *
      * @return
      * Promise with the array of statuses, if successful.
      */
-    public async getStatusesOfFollowing (
-        queryParameters?: API.QueryParameters
+    public async getStatusesOfHome (
+        queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'timelines/home', queryParameters );
+        const result = await this.fetch( 'GET', 'timelines/home', queryParams );
 
         if (
             result.failed ||
@@ -502,22 +497,22 @@ export class API {
     }
 
     /**
-     * Gets public statuses for a list of accounts.
+     * Gets statuses from a list of accounts.
      *
      * @param listID
      * ID of the list.
      *
-     * @param [queryParameters]
-     * Query parameters to limit the amount of statuses to get.
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
      *
      * @return
      * Promise with the array of statuses, if successful.
      */
     public async getStatusesOfList (
         listID: string,
-        queryParameters?: API.QueryParameters
+        queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `timelines/list/${listID}`, queryParameters );
+        const result = await this.fetch( 'GET', `timelines/list/${listID}`, queryParams );
 
         if (
             result.failed ||
@@ -532,48 +527,48 @@ export class API {
     }
 
     /**
-     * Gets public statuses for a tag.
+     * Gets statuses from the public timeline.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    public async getStatusesOfPublic (
+        queryParams?: API.StatusesOfPublicParams
+    ): Promise<API.Success<Array<JSON.Status>>> {
+        const result = await this.fetch( 'GET', 'timelines/public', REST.toParamArray( queryParams ) );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatuses( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Status>>;
+    }
+
+    /**
+     * Gets statuses for a tag.
      *
      * @param tag
-     * Tag to search for.
+     * Tag to search.
      *
-     * @param [queryParameters]
-     * Query parameters to limit the amount of statuses to get.
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
      *
      * @return
      * Promise with the array of statuses, if successful.
      */
     public async getStatusesOfTag (
         tag: string,
-        queryParameters?: API.QueryParameters
+        queryParams?: API.StatusesOfTagParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `timelines/tag/${tag}`, queryParameters );
-
-        if (
-            result.failed ||
-            result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
-        ) {
-            result.failed = true;
-            return Promise.reject( result );
-        }
-
-        return result as API.Success<Array<JSON.Status>>;
-    }
-
-    /**
-     * Gets statuses from the timeline.
-     *
-     * @param [queryParameters]
-     * Query parameters to limit the amount of statuses to get.
-     *
-     * @return
-     * Promise with the array of statuses, if successful.
-     */
-    public async getStatusesOfTimeline (
-        queryParameters?: API.QueryParameters
-    ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'timelines/public', queryParameters );
+        const result = await this.fetch( 'GET', `timelines/tag/${tag}`, REST.toParamArray( queryParams ) );
 
         if (
             result.failed ||
@@ -788,10 +783,23 @@ export namespace API {
         client_secret: string;
     }
 
-    export interface QueryParameters {
+    export interface QueryParams extends REST.ParamRecord {
+        /**
+         * Maximum number of results to return. Server defaults to 20 statuses.
+         * Server maximum is 40 statuses.
+         */
         limit?: number;
+        /**
+         * Return results older than ID.
+         */
         max_id?: string;
+        /**
+         * Return results newer than ID.
+         */
         min_id?: string;
+        /**
+         * Return newest results newer than ID.
+         */
         since_id?: string;
     }
 
@@ -803,6 +811,36 @@ export namespace API {
         failed: false;
         json: T;
         status: ( 200 | 202 | 206 );
+    }
+
+    export interface StatusesOfPublicParams extends QueryParams {
+        /**
+         * Get only local statuses.
+         */
+        local?: boolean;
+        /**
+         * Get only statuses with media attachment.
+         */
+        only_media?: boolean;
+        /**
+         * Get only remote statuses.
+         */
+        remote?: boolean;
+    }
+
+    export interface StatusesOfTagParams extends StatusesOfPublicParams {
+        /**
+         * Get statuses with all of these tags.
+         */
+        'all[]'?: Array<string>;
+        /**
+         * Get statuses with any of these tags.
+         */
+        'any[]'?: Array<string>;
+        /**
+         * Do not get statuses with any of these tags.
+         */
+        'none[]'?: Array<string>;
     }
 
     /* *
