@@ -49,5 +49,22 @@ export declare namespace REST {
         status: 200;
     }
     function isParamArray(params?: Params): params is ParamArray;
+    /**
+     * Converts a Params structure into a ParamArray structure. Value arrays of
+     * params will be split into multiple pairs of the ParamArray. If no special
+     * handling of arrays is needed, convert from ParamRecord to ParamArray with
+     * the `Object.entries` function.
+     *
+     * @param params
+     * Params structure to convert or split.
+     *
+     * @param [array]
+     * ParamArray structure to use.
+     *
+     * @return
+     * ParamArray with params pairs.
+     */
+    function toParamArray(params?: undefined, array?: ParamArray): undefined;
+    function toParamArray(params?: Params, array?: ParamArray): ParamArray;
 }
 export default REST;
