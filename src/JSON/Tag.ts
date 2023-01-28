@@ -43,7 +43,7 @@ export function isTag (
         typeof json.url === 'string' &&
         (
             typeof json.history === 'undefined' ||
-            json.history instanceof Array &&
+            Array.isArray( json.history ) &&
             (
                 !json.history.length ||
                 isTagStatistic( json.history[0] || {} )
@@ -56,7 +56,7 @@ export function isTags (
     json: Partial<Array<Partial<Tag>>>
 ): json is Array<Tag> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isTag( json[0] || {} )

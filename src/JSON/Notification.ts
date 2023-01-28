@@ -84,7 +84,7 @@ export function isNotifications (
     json: Partial<Array<Partial<Notification>>>
 ): json is Array<Notification> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isNotification( json[0] || {} )
