@@ -69,9 +69,9 @@ export function isSearchResults (
 ): json is SearchResults {
     return (
         typeof json === 'object' &&
-        json.accounts instanceof Array &&
-        json.hashtags instanceof Array &&
-        json.statuses instanceof Array &&
+        Array.isArray( json.accounts ) &&
+        Array.isArray( json.hashtags ) &&
+        Array.isArray( json.statuses ) &&
         (
             !json.accounts.length ||
             isAccount( json.accounts[0] )

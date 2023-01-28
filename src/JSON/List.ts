@@ -75,7 +75,7 @@ export function isLists (
     json: Partial<Array<Partial<List>>>
 ): json is Array<List> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isList( json[0] || {} )

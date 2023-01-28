@@ -66,7 +66,7 @@ export function isAccounts (
     json: Partial<Array<Partial<Account>>>
 ): json is Array<Account> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isAccount( json[0] || {} )
