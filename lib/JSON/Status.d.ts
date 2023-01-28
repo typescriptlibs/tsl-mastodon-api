@@ -60,6 +60,10 @@ export interface Status {
     url?: (string | null);
     visibility: Visibility;
 }
+export interface StatusContext {
+    ancestors: Array<Status>;
+    descendants: Array<Status>;
+}
 export interface StatusMention {
     acct: string;
     id: string;
@@ -91,6 +95,7 @@ export interface TextStatusPostPoll {
     options: Array<string>;
 }
 export declare function isStatus(json: Partial<Status>): json is Status;
+export declare function isStatusContext(json: Partial<StatusContext>): json is StatusContext;
 export declare function isStatuses(json: Partial<Array<Partial<Status>>>): json is Array<Status>;
 export declare function isStatusMention(json: Partial<StatusMention>): json is StatusMention;
 export declare function isStatusSchedule(json: Partial<StatusSchedule>): json is StatusSchedule;

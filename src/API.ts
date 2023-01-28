@@ -441,6 +441,32 @@ export class API {
     }
 
     /**
+     * Gets the context of a status with ancestors and descendants.
+     *
+     * @param statusID
+     * ID of the status to get the context of.
+     *
+     * @return
+     * Promise with the status context, if successful.
+     */
+    public async getStatusContext (
+        statusID: string
+    ): Promise<API.Success<JSON.StatusContext>> {
+        const result = await this.fetch( 'GET', `statuses/${statusID}/context` );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isStatusContext( result?.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<JSON.StatusContext>;
+    }
+
+    /**
      * Gets statuses of an account.
      *
      * @param accountID

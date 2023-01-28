@@ -79,6 +79,11 @@ export interface Status {
     visibility: Visibility;
 }
 
+export interface StatusContext {
+    ancestors: Array<Status>;
+    descendants: Array<Status>;
+}
+
 export interface StatusMention {
     acct: string;
     id: string;
@@ -145,11 +150,23 @@ export function isStatus (
     );
 }
 
+export function isStatusContext (
+    json: Partial<StatusContext>
+): json is StatusContext {
+    return (
+        typeof json === 'object' &&
+        typeof json.ancestors === 'object' &&
+        typeof json.descendants === 'object' &&
+        isStatuses( json.ancestors ) &&
+        isStatuses( json.descendants )
+    );
+}
+
 export function isStatuses (
     json: Partial<Array<Partial<Status>>>
 ): json is Array<Status> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isStatus( json[0] || {} )
