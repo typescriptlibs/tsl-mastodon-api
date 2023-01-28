@@ -362,46 +362,14 @@ export class API {
     /**
      * Get notifications
      *
-     * @param [types]
-     * An array to filter notifications by type. (See
-     * {@link JSON.NotificationType}.)
-     *
-     * @param [exclude_types]
-     * An array of notifications to filter out. (See
-     * {@link JSON.NotificationType}.)
-     *
-     * @param [account_id]
-     * Return only notifications received from the specified account.
-     *
      * @param [queryParams]
      * Query parameters to limit the amount of statuses to get.
      */
     public async getNotifications (
-        types?: Array<JSON.NotificationType>,
-        exclude_types?: Array<JSON.NotificationType>,
-        account_id?: string,
-        queryParams?: API.QueryParams
+        queryParams?: API.NotificationParams
     ): Promise<API.Success<Array<JSON.Notification>>> {
+        const result = await this.fetch( 'GET', 'notifications', REST.toParamArray( queryParams ) );
 
-        const paramArray: REST.ParamArray = [];
-
-        if ( types ) {
-            types.forEach( value => paramArray.push( ['types[]', value] ) );
-        }
-
-        if ( exclude_types ) {
-            exclude_types.forEach( value => paramArray.push( ['exclude_types[]', value] ) );
-        }
-
-        if ( account_id ) {
-            paramArray.push( ['account_id', account_id] );
-        }
-
-        if ( queryParams ) {
-            paramArray.push( ...Object.entries( queryParams ) );
-        }
-
-        const result = await this.fetch( 'GET', 'notifications', paramArray );
         if (
             result.failed ||
             result.status !== 200 ||
@@ -802,6 +770,23 @@ export namespace API {
      * */
 
     export type Config = REST.Config;
+
+    export interface NotificationParams extends QueryParams {
+        /**
+         * Get only notifications received from the specified account.
+         */
+        account_id?: string;
+        /**
+         * An array of notification types to filter out. (See
+         * {@link JSON.NotificationType}.)
+         */
+        exclude_types?: Array<JSON.NotificationType>,
+        /**
+         * An array to filter notifications by type. (See
+         * {@link JSON.NotificationType}.)
+         */
+        types?: Array<JSON.NotificationType>;
+    }
 
     export interface OAuthApp {
         id: string;

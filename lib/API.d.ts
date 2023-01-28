@@ -136,21 +136,10 @@ export declare class API {
     /**
      * Get notifications
      *
-     * @param [types]
-     * An array to filter notifications by type. (See
-     * {@link JSON.NotificationType}.)
-     *
-     * @param [exclude_types]
-     * An array of notifications to filter out. (See
-     * {@link JSON.NotificationType}.)
-     *
-     * @param [account_id]
-     * Return only notifications received from the specified account.
-     *
      * @param [queryParams]
      * Query parameters to limit the amount of statuses to get.
      */
-    getNotifications(types?: Array<JSON.NotificationType>, exclude_types?: Array<JSON.NotificationType>, account_id?: string, queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.Notification>>>;
+    getNotifications(queryParams?: API.NotificationParams): Promise<API.Success<Array<JSON.Notification>>>;
     /**
      * Gets a status.
      *
@@ -303,6 +292,22 @@ export declare class API {
  */
 export declare namespace API {
     type Config = REST.Config;
+    interface NotificationParams extends QueryParams {
+        /**
+         * Get only notifications received from the specified account.
+         */
+        account_id?: string;
+        /**
+         * An array of notification types to filter out. (See
+         * {@link JSON.NotificationType}.)
+         */
+        exclude_types?: Array<JSON.NotificationType>;
+        /**
+         * An array to filter notifications by type. (See
+         * {@link JSON.NotificationType}.)
+         */
+        types?: Array<JSON.NotificationType>;
+    }
     interface OAuthApp {
         id: string;
         client_id: string;
