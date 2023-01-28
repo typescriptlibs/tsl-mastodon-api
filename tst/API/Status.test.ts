@@ -64,6 +64,29 @@ test( 'Test API.getStatus', async ( assert: test.Assert ) => {
     }
 } );
 
+test( 'Test API.getStatusContext', async ( assert: test.Assert ) => {
+    try {
+        const { json: statusContext } = await Setup.v1GetMultiple.getStatusContext( 'ID-12' );
+        assert.strictEqual(
+            statusContext.ancestors[0].id,
+            'ID-7',
+            'Status ID should contain mockup value.'
+        );
+        assert.strictEqual(
+            statusContext.descendants[0].id,
+            'ID-13',
+            'Status ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
 test( 'Test API.getStatuses', async ( assert: test.Assert ) => {
     try {
         const { json: statuses } = await Setup.v1GetMultiple.getStatuses( 'ID-1' );

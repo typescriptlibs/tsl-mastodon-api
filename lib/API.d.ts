@@ -162,6 +162,16 @@ export declare class API {
      */
     getStatus(statusID: string): Promise<API.Success<JSON.Status>>;
     /**
+     * Gets the context of a status with ancestors and descendants.
+     *
+     * @param statusID
+     * ID of the status to get the context of.
+     *
+     * @return
+     * Promise with the status context, if successful.
+     */
+    getStatusContext(statusID: string): Promise<API.Success<JSON.StatusContext>>;
+    /**
      * Gets statuses of an account.
      *
      * @param accountID
