@@ -19,7 +19,6 @@
 import Bridge from './Bridge.js';
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
-import Utilities from './Utilities.js';
 
 /* *
  *
@@ -780,12 +779,12 @@ export namespace API {
          * An array of notification types to filter out. (See
          * {@link JSON.NotificationType}.)
          */
-        exclude_types?: Array<JSON.NotificationType>,
+        'exclude_types[]'?: Array<JSON.NotificationType>,
         /**
          * An array to filter notifications by type. (See
          * {@link JSON.NotificationType}.)
          */
-        types?: Array<JSON.NotificationType>;
+        'types[]'?: Array<JSON.NotificationType>;
     }
 
     export interface OAuthApp {

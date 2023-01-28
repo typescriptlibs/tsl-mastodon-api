@@ -301,12 +301,12 @@ export declare namespace API {
          * An array of notification types to filter out. (See
          * {@link JSON.NotificationType}.)
          */
-        exclude_types?: Array<JSON.NotificationType>;
+        'exclude_types[]'?: Array<JSON.NotificationType>;
         /**
          * An array to filter notifications by type. (See
          * {@link JSON.NotificationType}.)
          */
-        types?: Array<JSON.NotificationType>;
+        'types[]'?: Array<JSON.NotificationType>;
     }
     interface OAuthApp {
         id: string;
