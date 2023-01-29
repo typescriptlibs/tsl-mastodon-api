@@ -19,7 +19,6 @@
 import Bridge from './Bridge.js';
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
-import Utilities from './Utilities.js';
 
 /* *
  *
@@ -85,6 +84,25 @@ export class API {
     }
 
     /**
+     * Deletes a path.
+     *
+     * @param path
+     * Path to delete.
+     *
+     * @param [params]
+     * Parameter to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async delete (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'DELETE', path, params );
+    }
+
+    /**
      * Deletes a list of accounts.
      *
      * @param listId
@@ -96,7 +114,7 @@ export class API {
     public async deleteList (
         listID: string
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'DELETE', `lists/${listID}` );
+        const result = await this.delete( `lists/${listID}` );
 
         if (
             result.failed ||
@@ -126,7 +144,7 @@ export class API {
         listID: string,
         listAccounts: JSON.ListAccountsDelete
     ): Promise<API.Success<object>> {
-        const result = await this.fetch( 'DELETE', `lists/${listID}/accounts`, listAccounts );
+        const result = await this.delete( `lists/${listID}/accounts`, listAccounts );
 
         if (
             result.failed ||
@@ -150,9 +168,9 @@ export class API {
      * Promise with an empty .json object.
      */
     public async deleteNotification (
-        notificationId: string
+        notificationID: string
     ): Promise<API.Success<{}>> {
-        const result = await this.fetch( 'POST', `notifications/${notificationId}/dismiss` );
+        const result = await this.delete( `notifications/${notificationID}/dismiss` );
         if (
             result.failed ||
             result.status !== 200
@@ -176,7 +194,7 @@ export class API {
     public async deleteStatus (
         statusID: string
     ): Promise<API.Success<JSON.Status>> {
-        const result = await this.fetch( 'DELETE', `statuses/${statusID}` );
+        const result = await this.delete( `statuses/${statusID}` );
 
         if (
             result.failed ||
@@ -209,7 +227,7 @@ export class API {
     protected async fetch (
         method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,
-        params?: NonNullable<Object>
+        params?: object
     ): Promise<API.Result> {
         const rest: REST = this.rest;
         const result: API.Result = await rest.fetch( method, path, params as REST.Params );
@@ -225,13 +243,32 @@ export class API {
     }
 
     /**
+     * Get a result from a path.
+     *
+     * @param path
+     * Path to get a result from.
+     *
+     * @param [params]
+     * Parameter to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async get (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'GET', path, params );
+    }
+
+    /**
      * Gets the connected account.
      *
      * @return
      * Promise with the account, if successful.
      */
     public async getAccount (): Promise<API.Success<JSON.Account>> {
-        const result = await this.fetch( 'GET', 'accounts/verify_credentials' );
+        const result = await this.get( 'accounts/verify_credentials' );
         const json = result.json;
 
         if (
@@ -258,7 +295,7 @@ export class API {
     public async getList (
         listID: string
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'GET', `lists/${listID}` );
+        const result = await this.get( `lists/${listID}` );
 
         if (
             result.failed ||
@@ -288,7 +325,7 @@ export class API {
         listID: string,
         queryParams?: API.QueryParams
     ): Promise<API.Success<JSON.ListAccounts>> {
-        const result = await this.fetch( 'GET', `lists/${listID}/accounts`, queryParams );
+        const result = await this.get( `lists/${listID}/accounts`, queryParams );
 
         if (
             result.failed ||
@@ -314,7 +351,7 @@ export class API {
     public async getLists (
         queryParams: API.QueryParams
     ): Promise<API.Success<Array<JSON.List>>> {
-        const result = await this.fetch( 'GET', `lists`, queryParams );
+        const result = await this.get( `lists`, queryParams );
 
         if (
             result.failed ||
@@ -340,7 +377,7 @@ export class API {
     public async getMediaAttachment (
         mediaAttachmentID: string
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.fetch( 'GET', `media/${mediaAttachmentID}` );
+        const result = await this.get( `media/${mediaAttachmentID}` );
         const json = result.json;
 
         if (
@@ -401,7 +438,7 @@ export class API {
             paramArray.push( ...Object.entries( queryParams ) );
         }
 
-        const result = await this.fetch( 'GET', 'notifications', paramArray );
+        const result = await this.get( 'notifications', paramArray );
         if (
             result.failed ||
             result.status !== 200 ||
@@ -426,7 +463,7 @@ export class API {
     public async getStatus (
         statusID: string
     ): Promise<API.Success<JSON.Status>> {
-        const result = await this.fetch( 'GET', `statuses/${statusID}` );
+        const result = await this.get( `statuses/${statusID}` );
 
         if (
             result.failed ||
@@ -452,7 +489,7 @@ export class API {
     public async getStatusContext (
         statusID: string
     ): Promise<API.Success<JSON.StatusContext>> {
-        const result = await this.fetch( 'GET', `statuses/${statusID}/context` );
+        const result = await this.get( `statuses/${statusID}/context` );
 
         if (
             result.failed ||
@@ -482,7 +519,7 @@ export class API {
         accountID: string,
         queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `accounts/${accountID}/statuses`, queryParams );
+        const result = await this.get( `accounts/${accountID}/statuses`, queryParams );
 
         if (
             result.failed ||
@@ -508,7 +545,7 @@ export class API {
     public async getStatusesOfHome (
         queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'timelines/home', queryParams );
+        const result = await this.get( 'timelines/home', queryParams );
 
         if (
             result.failed ||
@@ -538,7 +575,7 @@ export class API {
         listID: string,
         queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `timelines/list/${listID}`, queryParams );
+        const result = await this.get( `timelines/list/${listID}`, queryParams );
 
         if (
             result.failed ||
@@ -564,7 +601,7 @@ export class API {
     public async getStatusesOfPublic (
         queryParams?: API.StatusesOfPublicParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'timelines/public', REST.toParamArray( queryParams ) );
+        const result = await this.get( 'timelines/public', REST.toParamArray( queryParams ) );
 
         if (
             result.failed ||
@@ -594,7 +631,7 @@ export class API {
         tag: string,
         queryParams?: API.StatusesOfTagParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `timelines/tag/${tag}`, REST.toParamArray( queryParams ) );
+        const result = await this.get( `timelines/tag/${tag}`, REST.toParamArray( queryParams ) );
 
         if (
             result.failed ||
@@ -609,6 +646,25 @@ export class API {
     }
 
     /**
+     * Post parameters to a path.
+     *
+     * @param path
+     * Path to post to.
+     *
+     * @param [params]
+     * Parameter to post.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async post (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'POST', path, params );
+    }
+
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list
@@ -620,7 +676,7 @@ export class API {
     public async postList (
         list: JSON.ListPost,
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'POST', 'lists', list );
+        const result = await this.post( 'lists', list );
 
         if (
             result.failed ||
@@ -650,7 +706,7 @@ export class API {
         listId: string,
         listAccounts: JSON.ListAccountsPost
     ): Promise<API.Success<void>> {
-        const result = await this.fetch( 'POST', `lists/${listId}/accounts`, listAccounts );
+        const result = await this.post( `lists/${listId}/accounts`, listAccounts );
 
         if (
             result.failed ||
@@ -676,7 +732,7 @@ export class API {
     public async postMediaAttachment (
         mediaAttachment: JSON.MediaAttachmentPost
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.fetch( 'POST', 'media', mediaAttachment );
+        const result = await this.post( 'media', mediaAttachment );
 
         if (
             result.failed ||
@@ -709,7 +765,7 @@ export class API {
         pollId: string,
         pollVote: JSON.PollVotePost
     ): Promise<API.Success<JSON.Poll>> {
-        const result = await this.fetch( 'POST', `polls/${pollId}/votes`, pollVote );
+        const result = await this.post( `polls/${pollId}/votes`, pollVote );
 
         if (
             result.failed ||
@@ -735,7 +791,7 @@ export class API {
     public async postStatus (
         status: JSON.StatusPost
     ): Promise<API.Success<( JSON.Status | JSON.StatusSchedule )>> {
-        const result = await this.fetch( 'POST', 'statuses', status );
+        const result = await this.post( 'statuses', status );
 
         if (
             result.failed ||
@@ -767,7 +823,7 @@ export class API {
     public async search (
         search: JSON.Search
     ): Promise<API.Success<JSON.SearchResults>> {
-        const result = await this.fetch( 'GET', 'search', search );
+        const result = await this.get( 'search', search );
 
         if (
             result.failed ||

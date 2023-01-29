@@ -39,6 +39,19 @@ export declare class API {
      */
     delay(): Promise<void>;
     /**
+     * Deletes a path.
+     *
+     * @param path
+     * Path to delete.
+     *
+     * @param [params]
+     * Parameter to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    delete(path: string, params?: object): Promise<API.Result>;
+    /**
      * Deletes a list of accounts.
      *
      * @param listId
@@ -70,7 +83,7 @@ export declare class API {
      * @return
      * Promise with an empty .json object.
      */
-    deleteNotification(notificationId: string): Promise<API.Success<{}>>;
+    deleteNotification(notificationID: string): Promise<API.Success<{}>>;
     /**
      * Deletes a status.
      *
@@ -82,7 +95,20 @@ export declare class API {
      */
     deleteStatus(statusID: string): Promise<API.Success<JSON.Status>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
-    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: NonNullable<Object>): Promise<API.Result>;
+    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: object): Promise<API.Result>;
+    /**
+     * Get a result from a path.
+     *
+     * @param path
+     * Path to get a result from.
+     *
+     * @param [params]
+     * Parameter to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    get(path: string, params?: object): Promise<API.Result>;
     /**
      * Gets the connected account.
      *
@@ -230,6 +256,19 @@ export declare class API {
      * Promise with the array of statuses, if successful.
      */
     getStatusesOfTag(tag: string, queryParams?: API.StatusesOfTagParams): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Post parameters to a path.
+     *
+     * @param path
+     * Path to post to.
+     *
+     * @param [params]
+     * Parameter to post.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    post(path: string, params?: object): Promise<API.Result>;
     /**
      * Posts a new list or updates an existing list.
      *
