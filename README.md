@@ -91,6 +91,7 @@ API.postStatus(status)
 
 API.deleteList(listID)
 API.deleteListAccounts(listID, listAccounts)
+API.deleteNotification(notificationID)
 API.deleteStatus(statusID)
 ```
 
