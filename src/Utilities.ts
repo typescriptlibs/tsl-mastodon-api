@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Imports
@@ -8,127 +20,166 @@ import Bridge from './Bridge.js';
 
 /* *
  *
- *  Functions
+ *  Namespace
  *
  * */
 
-function buildFormData (
-    params?: Record<string, unknown>,
-    target: FormData = new Bridge.FormData()
-): FormData {
-    let value: unknown;
+export namespace Utilities {
 
-    for ( const key in params ) {
-        value = params[key];
+    /* *
+     *
+     *  Declarations
+     *
+     * */
 
-        if (
-            typeof value === 'undefined' ||
-            value === null
-        ) {
-            continue;
+    export type Params = (
+        | Array<[string, unknown]>
+        | Record<string, unknown>
+    );
+
+    /* *
+     *
+     *  Functions
+     *
+     * */
+
+    export function buildFormData (
+        params?: Params,
+        target: FormData = new Bridge.FormData()
+    ): FormData {
+        let value: unknown;
+
+        if ( params ) {
+            transferParams( params, target );
         }
 
-        if ( value instanceof Bridge.Blob ) {
-            target.append( key, value );
-        } else if ( typeof value === 'object' ) {
-            target.append( key, JSON.stringify( value ) );
+        return target;
+    }
+
+    export function buildHeaders (
+        params?: Params,
+        target: Headers = new Bridge.Headers()
+    ): Headers {
+
+        if ( params ) {
+            transferParams( params, target );
+        }
+
+        return target;
+    }
+
+    export function buildURL (
+        base: string,
+        path: string = '.',
+        params?: Params
+    ): URL {
+        const url = new Bridge.URL( path, base );
+
+        if ( params ) {
+            buildURLSearchParams( params, url.searchParams );
+        }
+
+        return url;
+    }
+
+    export function buildURLSearchParams (
+        params?: Params,
+        target: URLSearchParams = new Bridge.URLSearchParams()
+    ): URLSearchParams {
+
+        if ( params ) {
+            transferParams( params, target );
+        }
+
+        return target;
+    }
+
+    /**
+     * Loads a file from a path.
+     *
+     * @memberof Utilities
+     *
+     * @param filePath
+     * Path to the file.
+     *
+     * @param [mimeType]
+     * Mime type of the file.
+     *
+     * @return
+     * Promise with the file, if successful.
+     *
+     * @requires node-fetch
+     */
+    export async function fileFrom (
+        filePath: string,
+        mimeType?: string
+    ): Promise<File> {
+        const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
+
+        return await fileFrom( filePath, mimeType );
+    }
+
+    export function transferParams (
+        params: Params,
+        target: ( FormData | Headers | URLSearchParams )
+    ): void {
+        let value: unknown;
+
+        if ( Array.isArray( params ) ) {
+            let key: string;
+
+            for ( const pair of params ) {
+
+                key = pair[0];
+                value = pair[1];
+
+                if (
+                    typeof value === 'undefined' ||
+                    value === null
+                ) {
+                    continue;
+                }
+
+                if (
+                    value instanceof Bridge.Blob &&
+                    target instanceof Bridge.FormData
+                ) {
+                    target.append( key, value );
+                }
+                else if ( typeof value === 'object' ) {
+                    target.append( key, JSON.stringify( value ) );
+                }
+                else {
+                    target.append( key, `${value}` );
+                }
+            }
         } else {
-            target.append( key, `${value}` );
+            for ( const key in params ) {
+
+                value = params[key];
+
+                if (
+                    typeof value === 'undefined' ||
+                    value === null
+                ) {
+                    continue;
+                }
+                if (
+                    value instanceof Bridge.Blob &&
+                    target instanceof Bridge.FormData
+                ) {
+                    target.append( key, value );
+                }
+                else if ( typeof value === 'object' ) {
+                    target.append( key, JSON.stringify( value ) );
+                }
+                else {
+                    target.append( key, `${value}` );
+                }
+            }
         }
     }
 
-    return target;
-}
-
-function buildHeaders (
-    params?: Record<string, unknown>,
-    target: Record<string, string> = {}
-): Record<string, string> {
-    let value: unknown;
-
-    for ( const key in params ) {
-        value = params[key];
-
-        if (
-            typeof value === 'undefined' ||
-            value === null
-        ) {
-            continue;
-        }
-
-        if ( typeof value === 'object' ) {
-            target[key] = JSON.stringify( value );
-        } else {
-            target[key] = `${value}`;
-        }
-    }
-
-    return target;
-}
-
-function buildURL (
-    base: string,
-    path: string = '.',
-    params?: Record<string, unknown>
-): URL {
-    const url = new Bridge.URL( path, base );
-
-    if ( params ) {
-        buildURLSearchParams( params, url.searchParams );
-    }
-
-    return url;
-}
-
-function buildURLSearchParams (
-    params?: Record<string, unknown>,
-    target: URLSearchParams = new Bridge.URLSearchParams()
-): URLSearchParams {
-    let value: unknown;
-
-    for ( const key in params ) {
-        value = params[key];
-
-        if (
-            typeof value === 'undefined' ||
-            value === null
-        ) {
-            continue;
-        }
-
-        if ( typeof value === 'object' ) {
-            target.append( key, JSON.stringify( value ) );
-        } else {
-            target.append( key, `${value}` );
-        }
-    }
-
-    return target;
-}
-
-/**
- * Loads a file from a path.
- *
- * @memberof Utilities
- *
- * @param filePath
- * Path to the file.
- *
- * @param [mimeType]
- * Mime type of the file.
- *
- * @return
- * Promise with the file, if successful.
- *
- * @requires node-fetch
- */
-async function fileFrom (
-    filePath: string,
-    mimeType?: string
-): Promise<File> {
-    const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
-
-    return await fileFrom( filePath, mimeType );
 }
 
 /* *
@@ -136,13 +187,5 @@ async function fileFrom (
  *  Default Export
  *
  * */
-
-export const Utilities = {
-    buildHeaders,
-    buildFormData,
-    buildURL,
-    buildURLSearchParams,
-    fileFrom,
-};
 
 export default Utilities;

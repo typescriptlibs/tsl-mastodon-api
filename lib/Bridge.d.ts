@@ -1,3 +1,14 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 export declare const Bridge: {
     global: typeof globalThis;
     fetch: typeof globalThis.fetch;
@@ -13,7 +24,7 @@ export declare const Bridge: {
         new (form?: HTMLFormElement | undefined): FormData;
         prototype: FormData;
     };
-    Header: {
+    Headers: {
         new (init?: HeadersInit | undefined): Headers;
         prototype: Headers;
     };
@@ -30,7 +41,7 @@ export declare const Bridge: {
         revokeObjectURL(url: string): void;
     };
     URLSearchParams: {
-        new (init?: string | Record<string, string> | URLSearchParams | string[][] | undefined): URLSearchParams;
+        new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
         prototype: URLSearchParams;
         toString(): string;
     };

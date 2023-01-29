@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Imports
@@ -14,6 +26,7 @@ import type Tag from './Tag.js';
 import type Visibility from './Visibility.js';
 
 import { isAccount } from './Account.js';
+import { isTags } from './Tag.js';
 
 /* *
  *
@@ -64,6 +77,11 @@ export interface Status {
     uri: string;
     url?: ( string | null );
     visibility: Visibility;
+}
+
+export interface StatusContext {
+    ancestors: Array<Status>;
+    descendants: Array<Status>;
 }
 
 export interface StatusMention {
@@ -127,7 +145,20 @@ export function isStatus (
         typeof json.tags === 'object' &&
         typeof json.uri === 'string' &&
         typeof json.visibility === 'string' &&
-        isAccount( json.account )
+        isAccount( json.account ) &&
+        isTags( json.tags )
+    );
+}
+
+export function isStatusContext (
+    json: Partial<StatusContext>
+): json is StatusContext {
+    return (
+        typeof json === 'object' &&
+        typeof json.ancestors === 'object' &&
+        typeof json.descendants === 'object' &&
+        isStatuses( json.ancestors ) &&
+        isStatuses( json.descendants )
     );
 }
 
@@ -135,7 +166,7 @@ export function isStatuses (
     json: Partial<Array<Partial<Status>>>
 ): json is Array<Status> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isStatus( json[0] || {} )

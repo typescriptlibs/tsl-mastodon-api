@@ -74,8 +74,14 @@ API.getList(listID)
 API.getListAccounts(listID, queryParameters?)
 API.getLists(queryParameters?)
 API.getMediaAttachment(mediaAttachmentID)
+API.getNotifications()
 API.getStatus(statusID)
+API.getStatusContext(statusID)
 API.getStatuses(queryParameters?)
+API.getStatusesOfHome(queryParameters?)
+API.getStatusesOfList(listID, queryParameters?)
+API.getStatusesOfPublic(queryParameters?)
+API.getStatusesOfTag(tag, queryParameters?)
 
 API.postList(list)
 API.postListAccounts(listID, listAccounts)
@@ -92,6 +98,7 @@ API.deleteStatus(statusID)
 JSON.isAccount(json)
 JSON.isList(json)
 JSON.isMediaAttachment(json)
+JSON.isNotification(json)
 JSON.isPoll(json)
 JSON.isSearchResults(json)
 JSON.isStatus(json)
@@ -110,6 +117,8 @@ REST.put(path, params?)
 Bridge.fetch(url, options?)
 Utilities.fileFrom(path, mimeType?)
 ```
+
+
 
 Links
 -----

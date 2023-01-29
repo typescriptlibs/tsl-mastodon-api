@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Imports
@@ -6,6 +18,18 @@
 
 import Bridge from './Bridge.js';
 import Utilities from './Utilities.js';
+
+/* *
+ *
+ *  Declarations
+ *
+ * */
+
+declare global {
+    interface RequestInit {
+        follow?: number;
+    }
+}
 
 /* *
  *
@@ -34,8 +58,7 @@ export class REST {
         this.apiURL = config.api_url;
 
         config.timeout_ms = (
-            typeof config.timeout_ms === 'number' &&
-                config.timeout_ms > 0 ?
+            typeof config.timeout_ms === 'number' && config.timeout_ms > 0 ?
                 config.timeout_ms :
                 60000
         );
@@ -88,6 +111,8 @@ export class REST {
     ): Promise<REST.Result> {
         const apiURL = this.apiURL;
         const config = this.config;
+
+        // build fetch parameter
         const supportsBody = (
             method === 'PATCH' ||
             method === 'POST' ||
@@ -98,7 +123,18 @@ export class REST {
                 Utilities.buildURL( apiURL, path ) :
                 Utilities.buildURL( apiURL, path, params )
         );
+        const headers = Utilities.buildHeaders( {
+            Accept: '*/*',
+            Authorization: `Bearer ${config.access_token}`,
+            'User-Agent': config.user_agent
+        } );
+        const body = (
+            supportsBody && params ?
+                Utilities.buildFormData( params ) :
+                undefined
+        );
 
+        // start timer
         const timeout = new AbortController();
         const timer = setTimeout( () => timeout.abort(), config.timeout_ms );
 
@@ -109,18 +145,12 @@ export class REST {
             response = await Bridge.fetch(
                 url.toString(),
                 {
-                    ...( config.no_follow ? {
-                        follow: 9,
-                        redirect: 'follow',
-                    } : {} ),
-                    headers: Utilities.buildHeaders( {
-                        Accept: '*/*',
-                        Authorization: `Bearer ${config.access_token}`,
-                        'User-Agent': config.user_agent
-                    } ),
+                    follow: config.no_follow ? 0 : 9,
+                    redirect: config.no_follow ? 'manual' : 'follow',
+                    headers,
                     method,
                     signal: timeout.signal,
-                    body: supportsBody && Utilities.buildFormData( params )
+                    body
                 }
             );
 
@@ -213,9 +243,11 @@ export namespace REST {
         user_agent?: string;
     }
 
-    export interface Params extends Record<string, unknown> {
-        // nothing to add
-    }
+    export type ParamArray = Array<[string, unknown]>;
+
+    export type ParamRecord = Record<string, unknown>;
+
+    export type Params = ( ParamArray | ParamRecord );
 
     export interface Result {
         failed: boolean;
@@ -229,6 +261,79 @@ export namespace REST {
         failed: false;
         json: T;
         status: 200;
+    }
+
+    /* *
+     *
+     *  Functions
+     *
+     * */
+
+    export function isParamArray (
+        params?: Params
+    ): params is ParamArray {
+        return (
+            Array.isArray( params ) &&
+            (
+                !params.length ||
+                typeof params[0][0] === 'string'
+            )
+        );
+    }
+
+    /**
+     * Converts a Params structure into a ParamArray structure. Value arrays of
+     * params will be split into multiple pairs of the ParamArray. If no special
+     * handling of arrays is needed, convert from ParamRecord to ParamArray with
+     * the `Object.entries` function.
+     *
+     * @param params
+     * Params structure to convert or split.
+     *
+     * @param [array]
+     * ParamArray structure to use.
+     *
+     * @return
+     * ParamArray with params pairs.
+     */
+    export function toParamArray (
+        params?: undefined,
+        array?: ParamArray
+    ): undefined;
+    export function toParamArray (
+        params?: Params,
+        array?: ParamArray
+    ): ParamArray;
+    export function toParamArray (
+        params: ( Params | undefined ),
+        array: ParamArray = []
+    ): ( ParamArray | undefined ) {
+
+        if ( !params ) {
+            return;
+        }
+
+        const pairs = ( Array.isArray( params ) ? params : Object.entries( params ) );
+
+        let pair: [string, unknown];
+
+        for ( let i = 0, iEnd = pairs.length; i < iEnd; ++i ) {
+            pair = pairs[i];
+
+            if ( Array.isArray( pair[1] ) ) {
+                const key = pair[0];
+                const values = pair[1];
+
+                for ( let j = 0, jEnd = values.length; j < jEnd; ++j ) {
+                    array.push( [key, values[j]] );
+                }
+            }
+            else {
+                array.push( pair );
+            }
+        }
+
+        return array;
     }
 
 }

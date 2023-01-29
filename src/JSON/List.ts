@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Imports
@@ -21,7 +33,7 @@ export interface List {
 export type ListAccounts = Array<Account>;
 
 /**
- * Interface to delete accounts from a list.
+ * Interface to remove accounts from a list.
  */
 export interface ListAccountsDelete {
     account_ids: Array<string>;
@@ -63,7 +75,7 @@ export function isLists (
     json: Partial<Array<Partial<List>>>
 ): json is Array<List> {
     return (
-        json instanceof Array &&
+        Array.isArray( json ) &&
         (
             !json.length ||
             isList( json[0] || {} )

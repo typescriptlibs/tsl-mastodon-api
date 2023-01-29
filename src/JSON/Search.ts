@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Declarations
@@ -57,9 +69,9 @@ export function isSearchResults (
 ): json is SearchResults {
     return (
         typeof json === 'object' &&
-        json.accounts instanceof Array &&
-        json.hashtags instanceof Array &&
-        json.statuses instanceof Array &&
+        Array.isArray( json.accounts ) &&
+        Array.isArray( json.hashtags ) &&
+        Array.isArray( json.statuses ) &&
         (
             !json.accounts.length ||
             isAccount( json.accounts[0] )

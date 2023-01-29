@@ -1,3 +1,14 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 /**
@@ -49,6 +60,16 @@ export declare class API {
      */
     deleteListAccounts(listID: string, listAccounts: JSON.ListAccountsDelete): Promise<API.Success<object>>;
     /**
+     * Dismiss a single notification
+     *
+     * @param [id]
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty .json object.
+     */
+    deleteNotification(notificationId: string): Promise<API.Success<{}>>;
+    /**
      * Deletes a status.
      *
      * @param statusID
@@ -59,7 +80,7 @@ export declare class API {
      */
     deleteStatus(statusID: string): Promise<API.Success<JSON.Status>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
-    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: unknown): Promise<API.Result>;
+    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: NonNullable<Object>): Promise<API.Result>;
     /**
      * Gets the connected account.
      *
@@ -83,23 +104,23 @@ export declare class API {
      * @param listID
      * ID of the list to get accounts from.
      *
-     * @param [queryParameters]
+     * @param [queryParams]
      * Query parameters to limit the amount of accounts to get.
      *
      * @return
      * Promise with the list accounts, if successful.
      */
-    getListAccounts(listID: string, queryParameters?: API.QueryParameters): Promise<API.Success<JSON.ListAccounts>>;
+    getListAccounts(listID: string, queryParams?: API.QueryParams): Promise<API.Success<JSON.ListAccounts>>;
     /**
      * Gets lists.
      *
-     * @param [queryParameters]
+     * @param [queryParams]
      * Query parameters to limit the amount of lists to get.
      *
      * @return
      * Promise with the array of lists, if successful.
      */
-    getLists(queryParameters: API.QueryParameters): Promise<API.Success<Array<JSON.List>>>;
+    getLists(queryParams: API.QueryParams): Promise<API.Success<Array<JSON.List>>>;
     /**
      * Gets a media attachment.
      *
@@ -111,6 +132,24 @@ export declare class API {
      */
     getMediaAttachment(mediaAttachmentID: string): Promise<API.Success<JSON.MediaAttachment>>;
     /**
+     * Get notifications
+     *
+     * @param [types]
+     * An array to filter notifications by type. (See
+     * {@link JSON.NotificationType}.)
+     *
+     * @param [exclude_types]
+     * An array of notifications to filter out. (See
+     * {@link JSON.NotificationType}.)
+     *
+     * @param [account_id]
+     * Return only notifications received from the specified account.
+     *
+     * @param [queryParams]
+     * Query parameters to limit the amount of statuses to get.
+     */
+    getNotifications(types?: Array<JSON.NotificationType>, exclude_types?: Array<JSON.NotificationType>, account_id?: string, queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.Notification>>>;
+    /**
      * Gets a status.
      *
      * @param statusID
@@ -121,15 +160,74 @@ export declare class API {
      */
     getStatus(statusID: string): Promise<API.Success<JSON.Status>>;
     /**
-     * Gets statuses.
+     * Gets the context of a status with ancestors and descendants.
      *
-     * @param [queryParameters]
+     * @param statusID
+     * ID of the status to get the context of.
+     *
+     * @return
+     * Promise with the status context, if successful.
+     */
+    getStatusContext(statusID: string): Promise<API.Success<JSON.StatusContext>>;
+    /**
+     * Gets statuses of an account.
+     *
+     * @param accountID
+     * ID of the related account.
+     *
+     * @param [queryParams]
      * Query parameters to limit the amount of statuses to get.
      *
      * @return
      * Promise with the array of statuses, if successful.
      */
-    getStatuses(queryParameters?: API.QueryParameters): Promise<API.Success<Array<JSON.Status>>>;
+    getStatuses(accountID: string, queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets statuses from the personal timeline.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfHome(queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets statuses from a list of accounts.
+     *
+     * @param listID
+     * ID of the list.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfList(listID: string, queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets statuses from the public timeline.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfPublic(queryParams?: API.StatusesOfPublicParams): Promise<API.Success<Array<JSON.Status>>>;
+    /**
+     * Gets statuses for a tag.
+     *
+     * @param tag
+     * Tag to search.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount of statuses to get.
+     *
+     * @return
+     * Promise with the array of statuses, if successful.
+     */
+    getStatusesOfTag(tag: string, queryParams?: API.StatusesOfTagParams): Promise<API.Success<Array<JSON.Status>>>;
     /**
      * Posts a new list or updates an existing list.
      *
@@ -204,10 +302,23 @@ export declare namespace API {
         client_id: string;
         client_secret: string;
     }
-    interface QueryParameters {
+    interface QueryParams extends REST.ParamRecord {
+        /**
+         * Maximum number of results to return. Server defaults to 20 statuses.
+         * Server maximum is 40 statuses.
+         */
         limit?: number;
+        /**
+         * Return results older than ID.
+         */
         max_id?: string;
+        /**
+         * Return results newer than ID.
+         */
         min_id?: string;
+        /**
+         * Return newest results newer than ID.
+         */
         since_id?: string;
     }
     interface Result extends REST.Result {
@@ -217,6 +328,34 @@ export declare namespace API {
         failed: false;
         json: T;
         status: (200 | 202 | 206);
+    }
+    interface StatusesOfPublicParams extends QueryParams {
+        /**
+         * Get only local statuses.
+         */
+        local?: boolean;
+        /**
+         * Get only statuses with media attachment.
+         */
+        only_media?: boolean;
+        /**
+         * Get only remote statuses.
+         */
+        remote?: boolean;
+    }
+    interface StatusesOfTagParams extends StatusesOfPublicParams {
+        /**
+         * Get statuses with all of these tags.
+         */
+        'all[]'?: Array<string>;
+        /**
+         * Get statuses with any of these tags.
+         */
+        'any[]'?: Array<string>;
+        /**
+         * Do not get statuses with any of these tags.
+         */
+        'none[]'?: Array<string>;
     }
     /**
      * Creates an application in a Mastodon account.
