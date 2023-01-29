@@ -62,6 +62,11 @@ const URLSearchParams = (
     ( await import( 'url' ) ).URLSearchParams
 );
 
+const WebSocket = (
+    global.WebSocket ||
+    ( await import( 'ws' ) ).WebSocket
+);
+
 /* *
  *
  *  Default Export
@@ -77,7 +82,8 @@ export const Bridge = {
     Headers,
     Response,
     URL,
-    URLSearchParams
+    URLSearchParams,
+    WebSocket
 };
 
 export default Bridge;
