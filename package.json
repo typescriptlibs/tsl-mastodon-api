@@ -13,13 +13,12 @@
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "dependencies": {
         "@types/oauth": "~0.9.1",
+        "@types/ws": "^8.5.4",
         "node-fetch": "^3.3.0",
-        "oauth": "~0.10.0",
-        "ws": "^8.12.0"
+        "oauth": "~0.10.0"
     },
     "devDependencies": {
         "@types/node": "~16.7.13",
-        "@types/ws": "^8.5.4",
         "@typescriptlibs/tst": "^0.0.5",
         "husky": "^8.0.3",
         "tsl-mastodon-api": "file:./",
@@ -38,6 +37,9 @@
         "Mastodon",
         "TypeScript"
     ],
+    "optionalDependencies": {
+        "ws": "^8.12.0"
+    },
     "scripts": {
         "build": "npm run clean && tsc -b src",
         "clean": "rm -rf lib tst-run",
