@@ -108,6 +108,7 @@ JSON.isNotification(json)
 JSON.isPoll(json)
 JSON.isSearchResults(json)
 JSON.isStatus(json)
+JSON.isStreamData(json)
 ```
 
 ```TypeScript
