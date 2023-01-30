@@ -121,6 +121,13 @@ REST.put(path, params?)
 ```
 
 ```TypeScript
+StreamAPI.off(eventType, eventListener)
+StreamAPI.on(eventType, eventListener)
+StreamAPI.subscribe(streamType, streamParams?, eventListener?)
+StreamAPI.unsubscribe(streamType, streamParams?, eventListener?)
+```
+
+```TypeScript
 Bridge.fetch(url, options?)
 Utilities.fileFrom(path, mimeType?)
 ```
