@@ -21,7 +21,7 @@
         "@typescriptlibs/tst": "^0.0.5",
         "husky": "^8.0.3",
         "tsl-mastodon-api": "file:./",
-        "typescript": "~4.9.4"
+        "typescript": "~4.9.5"
     },
     "engines": {
         "node": ">=16.8.0"
