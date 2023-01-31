@@ -90,7 +90,7 @@ export class API {
      * Path to delete.
      *
      * @param [params]
-     * Parameter to use.
+     * Parameters to use.
      *
      * @return
      * Promise with the result, if successful.
@@ -249,7 +249,7 @@ export class API {
      * Path to get a result from.
      *
      * @param [params]
-     * Parameter to use.
+     * Parameters to use.
      *
      * @return
      * Promise with the result, if successful.
@@ -652,7 +652,7 @@ export class API {
      * Path to post to.
      *
      * @param [params]
-     * Parameter to post.
+     * Parameters to post.
      *
      * @return
      * Promise with the result, if successful.
