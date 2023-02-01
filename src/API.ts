@@ -48,6 +48,7 @@ export class API {
     ) {
         this.nextDelay = 1;
         this.rest = new REST( config );
+        this.version = parseInt( ( config.api_url.match( /\Wv(\d+)\W/u ) || ['', '0'] )[1] );
     }
 
     /* *
@@ -65,6 +66,13 @@ export class API {
      * Underlying REST API of this instance.
      */
     public readonly rest: REST;
+
+    /**
+     * Version extracted from `rest.config.api_url`.
+     *
+     * A value of `0` indicates that no version could be extracted.
+     */
+    public readonly version: number;
 
     /* *
      *

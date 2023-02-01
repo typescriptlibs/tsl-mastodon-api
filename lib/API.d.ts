@@ -31,6 +31,12 @@ export declare class API {
      */
     readonly rest: REST;
     /**
+     * Version extracted from `rest.config.api_url`.
+     *
+     * A value of `0` indicates that no version could be extracted.
+     */
+    readonly version: number;
+    /**
      * Delays a async promise by the expected amount of time, which the Mastodon
      * server send during the last communication.
      *
