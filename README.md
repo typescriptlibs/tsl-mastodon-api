@@ -62,7 +62,7 @@ postHelloWorld();
 API Overview
 ------------
 
-The following snippets show an excerpt of the v0.0.6 API.
+The following snippets show an excerpt of the API.
 
 ```TypeScript
 API(config)
