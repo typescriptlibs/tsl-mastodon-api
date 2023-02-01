@@ -75,6 +75,7 @@ function forceGetFetch (
  * */
 
 export const Setup = {
+    Mastodon,
     v1Delete,
     v1Get,
     v1GetMultiple,
