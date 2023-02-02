@@ -38,8 +38,7 @@ async function postHelloWorld(): Promise<void> {
     // create the API instance
     const mastodon = new Mastodon.API({
         access_token: 'ABC',
-        api_url: 'https://mastodon.example/api/v1/',
-        auto_delay: true
+        api_url: 'https://mastodon.example/api/v1/'
     });
     // expect client / server errors
     try {
