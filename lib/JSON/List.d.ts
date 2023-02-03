@@ -10,9 +10,25 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 import Account from './Account.js';
+/**
+ * Represents a list of some users that the authenticated user follows.
+ * @since 2.1.0
+ */
 export interface List {
+    /**
+     * The internal database ID of the list.
+     * @since 2.1.0
+     */
     id: string;
-    replies_policy?: string;
+    /**
+     * Which replies should be shown in the list.
+     * @since 3.3.0
+     */
+    replies_policy?: ListReplyPolicy;
+    /**
+     * The user-defined title of the list.
+     * @since 2.1.0
+     */
     title: string;
 }
 export type ListAccounts = Array<Account>;
@@ -32,10 +48,45 @@ export interface ListAccountsPost {
  * Interface to post a new list, or update an existing list.
  */
 export interface ListPost {
+    /**
+     * The internal database ID of the list.
+     * @since 2.1.0
+     */
     id?: string;
+    /**
+     * Which replies should be shown in the list.
+     * @since 3.3.0
+     */
     replies_policy?: string;
+    /**
+     * The user-defined title of the list.
+     * @since 2.1.0
+     */
     title: string;
 }
+/**
+ * Which replies should be shown in the list.
+ * @since 3.3.0
+ */
+export type ListReplyPolicy = ('followed' | 'list' | 'none');
+/**
+ * Tests JSON object for a List structure.
+ *
+ * @param json
+ * JSON object to test.
+ *
+ * @return
+ * True, if the JSON object has a List structure.
+ */
 export declare function isList(json: Partial<List>): json is List;
+/**
+ * Tests JSON array contains a List structure.
+ *
+ * @param json
+ * JSON array to test.
+ *
+ * @return
+ * True, if the JSON array contains a List structure.
+ */
 export declare function isLists(json: Partial<Array<Partial<List>>>): json is Array<List>;
 export default List;
