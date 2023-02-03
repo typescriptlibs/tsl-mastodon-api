@@ -48,7 +48,10 @@ export class API {
     ) {
         this.nextDelay = 1;
         this.rest = new REST( config );
-        this.version = parseInt( ( config.api_url.match( /\Wv(\d+)\W/u ) || ['', '0'] )[1] );
+        this.version = (
+            config.api_version ||
+            parseInt( ( config.api_url.match( /\Wv(\d+)\W/u ) || ['', '0'] )[1] )
+        );
     }
 
     /* *
@@ -68,7 +71,7 @@ export class API {
     public readonly rest: REST;
 
     /**
-     * Version extracted from `rest.config.api_url`.
+     * Version from extracted from `config.api_version` or `config.api_url`.
      *
      * A value of `0` indicates that no version could be extracted.
      */
@@ -865,7 +868,9 @@ export namespace API {
      *
      * */
 
-    export type Config = REST.Config;
+    export interface Config extends REST.Config {
+        api_version?: number;
+    }
 
     export interface OAuthApp {
         id: string;

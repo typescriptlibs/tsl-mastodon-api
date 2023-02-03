@@ -31,7 +31,7 @@ export declare class API {
      */
     readonly rest: REST;
     /**
-     * Version extracted from `rest.config.api_url`.
+     * Version from extracted from `config.api_version` or `config.api_url`.
      *
      * A value of `0` indicates that no version could be extracted.
      */
@@ -347,7 +347,9 @@ export declare class API {
  * @name API
  */
 export declare namespace API {
-    type Config = REST.Config;
+    interface Config extends REST.Config {
+        api_version?: number;
+    }
     interface OAuthApp {
         id: string;
         client_id: string;
