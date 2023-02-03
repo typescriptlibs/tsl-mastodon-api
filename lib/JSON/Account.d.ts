@@ -149,23 +149,23 @@ export interface Account {
     username: string;
 }
 /**
- * Tests json for Account structure.
+ * Tests the JSON for a Account structure.
  *
  * @param json
  * JSON to test.
  *
  * @return
- * True, if the JSON has Account structure.
+ * True, if the JSON has a Account structure.
  */
 export declare function isAccount(json: Partial<Account>): json is Account;
 /**
- * Tests JSON array for Account structures.
+ * Tests the JSON array for a Account structure.
  *
  * @param json
  * JSON array to test.
  *
  * @return
- * True, if the JSON array contains Account structures.
+ * True, if the JSON array contains Account structure.
  */
 export declare function isAccounts(json: Partial<Array<Partial<Account>>>): json is Array<Account>;
 export default Account;

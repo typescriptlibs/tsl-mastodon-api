@@ -70,7 +70,7 @@ export interface ListPost {
  */
 export type ListReplyPolicy = ('followed' | 'list' | 'none');
 /**
- * Tests JSON object for a List structure.
+ * Tests the JSON object for a List structure.
  *
  * @param json
  * JSON object to test.
@@ -80,7 +80,7 @@ export type ListReplyPolicy = ('followed' | 'list' | 'none');
  */
 export declare function isList(json: Partial<List>): json is List;
 /**
- * Tests JSON array contains a List structure.
+ * Tests the JSON array for a List structure.
  *
  * @param json
  * JSON array to test.

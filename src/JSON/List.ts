@@ -100,7 +100,7 @@ export type ListReplyPolicy = (
  * */
 
 /**
- * Tests JSON object for a List structure.
+ * Tests the JSON object for a List structure.
  *
  * @param json
  * JSON object to test.
@@ -119,7 +119,7 @@ export function isList (
 }
 
 /**
- * Tests JSON array contains a List structure.
+ * Tests the JSON array for a List structure.
  *
  * @param json
  * JSON array to test.

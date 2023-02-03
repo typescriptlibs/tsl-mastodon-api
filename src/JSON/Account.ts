@@ -170,13 +170,13 @@ export interface Account {
  * */
 
 /**
- * Tests json for Account structure.
+ * Tests the JSON for a Account structure.
  *
  * @param json
  * JSON to test.
  *
  * @return
- * True, if the JSON has Account structure.
+ * True, if the JSON has a Account structure.
  */
 export function isAccount (
     json: Partial<Account>
@@ -205,13 +205,13 @@ export function isAccount (
 }
 
 /**
- * Tests JSON array for Account structures.
+ * Tests the JSON array for a Account structure.
  *
  * @param json
  * JSON array to test.
  *
  * @return
- * True, if the JSON array contains Account structures.
+ * True, if the JSON array contains Account structure.
  */
 export function isAccounts (
     json: Partial<Array<Partial<Account>>>

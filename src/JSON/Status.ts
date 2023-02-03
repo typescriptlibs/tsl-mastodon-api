@@ -218,6 +218,7 @@ export interface StatusContext {
 }
 
 /**
+ * Mention of a user within the status content.
  * @since 0.6.0
  */
 export interface StatusMention {

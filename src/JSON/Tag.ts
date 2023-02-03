@@ -98,6 +98,15 @@ export function isTag (
     );
 }
 
+/**
+ * Tests the JSON array for a Tag structure.
+ *
+ * @param json
+ * JSON array to test.
+ *
+ * @return
+ * True, if the JSON array contains a Tag structure.
+ */
 export function isTags (
     json: Partial<Array<Partial<Tag>>>
 ): json is Array<Tag> {

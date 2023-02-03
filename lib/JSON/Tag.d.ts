@@ -66,6 +66,15 @@ export interface TagStatistic {
  * True, if the JSON object has a Tag structure.
  */
 export declare function isTag(json: Partial<Tag>): json is Tag;
+/**
+ * Tests the JSON array for a Tag structure.
+ *
+ * @param json
+ * JSON array to test.
+ *
+ * @return
+ * True, if the JSON array contains a Tag structure.
+ */
 export declare function isTags(json: Partial<Array<Partial<Tag>>>): json is Array<Tag>;
 /**
  * Tests the JSON object for a TagStatistic structure.

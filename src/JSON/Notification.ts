@@ -128,7 +128,7 @@ export function isNotification (
 }
 
 /**
- * Tests a JSON array for a Notification structure.
+ * Tests the JSON array for a Notification structure.
  *
  * @param json
  * JSON array to test.

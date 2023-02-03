@@ -81,7 +81,7 @@ export type NotificationType = 'mention' | 'status' | 'reblog' | 'follow' | 'fol
  */
 export declare function isNotification(json: Partial<Notification>): json is Notification;
 /**
- * Tests a JSON array for a Notification structure.
+ * Tests the JSON array for a Notification structure.
  *
  * @param json
  * JSON array to test.
