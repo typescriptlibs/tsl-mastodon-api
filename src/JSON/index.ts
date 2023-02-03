@@ -21,4 +21,3 @@ export * from './Poll.js';
 export * from './Search.js';
 export * from './Status.js';
 export * from './Tag.js';
-export * from './Visibility.js';
