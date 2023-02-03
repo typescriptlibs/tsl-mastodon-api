@@ -332,7 +332,9 @@ export declare class API {
      */
     postStatus(status: JSON.StatusPost): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
     /**
-     * Search for accounts, hashtags, and statuses.
+     * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
+     *
+     * @since 3.0.0
      *
      * @param search
      * Search parameters to use.
