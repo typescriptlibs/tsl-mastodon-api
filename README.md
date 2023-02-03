@@ -2,9 +2,9 @@ TypeScript Library for the Mastodon API
 =======================================
 
 [![CodeQL](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml)
-[![Node.js](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/Node.js.yml)
+[![Node.js](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/node.js.yml)
 [![npm](https://img.shields.io/npm/v/tsl-mastodon-api.svg)](https://www.npmjs.com/package/tsl-mastodon-api)
-[![license](https://img.shields.io/npm/l/tsl-mastodon-api.svg)](/License.md)
+[![license](https://img.shields.io/npm/l/tsl-mastodon-api.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/blob/main/LICENSE.md)
 
 
 
