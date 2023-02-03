@@ -30,6 +30,10 @@ import { isTag } from './Tag.js';
  *
  * */
 
+/**
+ * Search parameter to use for a search.
+ * @since 1.1.0
+ */
 export interface Search {
     account_id?: string;
     exclude_unreviewed?: boolean;
@@ -43,9 +47,25 @@ export interface Search {
     type?: string;
 }
 
+/**
+ * Search results of a search.
+ * @since 1.1.0
+ */
 export interface SearchResults {
+    /**
+     * Accounts which match the given query.
+     * @since 1.1.0
+     */
     accounts: Array<Account>;
+    /**
+     * Hashtags which match the given query.
+     * @since 3.0.0
+     */
     hashtags: Array<Tag>;
+    /**
+     * Statuses which match the given query.
+     * @since 1.1.0
+     */
     statuses: Array<Status>;
 }
 
@@ -55,6 +75,15 @@ export interface SearchResults {
  *
  * */
 
+/**
+ * Tests the JSON object for a Search structure.
+ *
+ * @param json
+ * JSON object to test.
+ *
+ * @return
+ * True, if the JSON object has a Search structure.
+ */
 export function isSearch (
     json: Partial<Search>
 ): json is Search {
@@ -64,6 +93,15 @@ export function isSearch (
     );
 }
 
+/**
+ * Tests the JSON object for a SearchResults structure.
+ *
+ * @param json
+ * JSON object to test.
+ *
+ * @return
+ * True, if the JSON object has a SearchResults structure.
+ */
 export function isSearchResults (
     json: Partial<SearchResults>
 ): json is SearchResults {
