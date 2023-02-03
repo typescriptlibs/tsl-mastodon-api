@@ -1,12 +1,11 @@
 TypeScript Library for the Mastodon API
 =======================================
 
-This is a TypeScript-optimized library to access a Mastodon server.
+[![codeql badge]][codeql] [![nodejs badge]][nodejs] [![version badge]][version] [![license badge]][license]
 
-[![github actions codeql badge]][github actions codeql]
-[![github actions nodejs badge]][github actions nodejs]
-[![shields npm version badge]][shields npm version]
-[![shields npm license badge]][shields npm license]
+
+
+This is a TypeScript-optimized library to access a Mastodon server.
 
 
 
@@ -137,34 +136,34 @@ Links
 
 <!-- Badges -->
 
-[github actions codeql]:
+[codeql]:
     <https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml>
     "CodeQL"
 
-[github actions codeql badge]:
+[codeql badge]:
     <https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL/badge.svg>
     "CodeQL Status"
 
-[github actions nodejs]:
+[nodejs]:
     <https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/node.js.yml>
     "Node.js"
 
-[github actions nodejs badge]:
+[nodejs badge]:
     <https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg>
     "Node.js Status"
 
-[shields npm license]:
+[license]:
     <https://github.com/typescriptlibs/tsl-mastodon-api/blob/main/LICENSE.md>
     "Package License"
 
-[shields npm license badge]:
+[license badge]:
     <https://img.shields.io/npm/l/tsl-mastodon-api.svg>
     "Package License Status"
 
-[shields npm version]:
+[version]:
     <https://www.npmjs.com/package/tsl-mastodon-api>
     "Package Version"
 
-[shields npm version badge]:
+[version badge]:
     <https://img.shields.io/npm/v/tsl-mastodon-api.svg>
     "Package Version Status"
