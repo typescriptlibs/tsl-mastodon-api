@@ -50,7 +50,7 @@ export class API {
         this.rest = new REST( config );
         this.version = (
             config.api_version ||
-            parseInt( ( config.api_url.match( /\Wv(\d+)\W/u ) || ['', '0'] )[1] )
+            parseInt( config.api_url.match( /\Wv(\d+)\W/u )?.[1] || '0' )
         );
     }
 
