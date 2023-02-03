@@ -153,7 +153,7 @@ Links
     "Node.js Status"
 
 [license]:
-    <https://github.com/typescriptlibs/tsl-mastodon-api/blob/main/LICENSE.md>
+    <\/LICENSE.md>
     "Package License"
 
 [license badge]:
