@@ -1,7 +1,10 @@
 TypeScript Library for the Mastodon API
 =======================================
 
-[![codeql badge]][codeql] [![nodejs badge]][nodejs] [![version badge]][version] [![license badge]][license]
+[![CodeQL](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml)
+[![Node.js](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/Node.js.yml)
+[![npm](https://img.shields.io/npm/v/tsl-mastodon-api.svg)](https://www.npmjs.com/package/tsl-mastodon-api)
+[![license](https://img.shields.io/npm/l/tsl-mastodon-api.svg)](/License.md)
 
 
 
@@ -131,39 +134,3 @@ Links
 * [npmjs.com/package/tsl-mastodon-api](https://www.npmjs.com/package/tsl-mastodon-api)
 
 * [typescriptlibs.org](https://typescriptlibs.org/)
-
-
-
-<!-- Badges -->
-
-[codeql]:
-    <https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml>
-    "CodeQL"
-
-[codeql badge]:
-    <https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL/badge.svg>
-    "CodeQL Status"
-
-[nodejs]:
-    <https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/node.js.yml>
-    "Node.js"
-
-[nodejs badge]:
-    <https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg>
-    "Node.js Status"
-
-[license]:
-    <\/LICENSE.md>
-    "Package License"
-
-[license badge]:
-    <https://img.shields.io/npm/l/tsl-mastodon-api.svg>
-    "Package License Status"
-
-[version]:
-    <https://www.npmjs.com/package/tsl-mastodon-api>
-    "Package Version"
-
-[version badge]:
-    <https://img.shields.io/npm/v/tsl-mastodon-api.svg>
-    "Package Version Status"
