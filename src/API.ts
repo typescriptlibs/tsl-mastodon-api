@@ -704,6 +704,27 @@ export class API {
     }
 
     /**
+     * Dismisses all notifications.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async postDismissAllNotifications (): Promise<API.Success<{}>> {
+        const result = await this.post( `notifications/clear` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
      * Dismisses an announcement.
      *
      * @param announcementID
@@ -732,7 +753,7 @@ export class API {
     /**
      * Dismisses a single notification.
      *
-     * @param [id]
+     * @param notificationID
      * The ID of the Notification in the database.
      *
      * @return
