@@ -429,11 +429,6 @@ export declare namespace API {
     interface Config extends REST.Config {
         api_version?: number;
     }
-    interface OAuthApp {
-        id: string;
-        client_id: string;
-        client_secret: string;
-    }
     interface QueryParams extends REST.ParamRecord {
         /**
          * Maximum number of results to return. Server defaults to 20 statuses.
@@ -489,46 +484,5 @@ export declare namespace API {
          */
         'none[]'?: Array<string>;
     }
-    /**
-     * Creates an application in a Mastodon account.
-     *
-     * @memberof API
-     *
-     * @param apiURL
-     * API URL of the Mastodon server.
-     *
-     * @param [clientName]
-     * Public name of the application.
-     *
-     * @param [redirectURI]
-     * OAuth URI.
-     *
-     * @param [scopes]
-     * Application permissions to grant.
-     *
-     * @param [website]
-     * Public website of the application.
-     *
-     * @return
-     * Promise with an object of applications `id`, `client_id` and
-     * `client_secret`.
-     */
-    function createOAuthApp(apiURL: string, clientName?: string, redirectURI?: string, scopes?: string, website?: string): Promise<API.OAuthApp>;
-    /**
-     * Gets the access token for the application.
-     *
-     * @memberof API
-     *
-     * @requires oauth
-     */
-    function getAccessToken(baseURL: string, clientId: string, clientSecret: string, authorizationCode: string, redirectUri?: string): Promise<string>;
-    /**
-     * Creates an authorization url for users to authorize the application.
-     *
-     * @memberof API
-     *
-     * @requires oauth
-     */
-    function getAuthorizationUrl(baseURL: string, clientId: string, clientSecret: string, redirectURI?: string, scope?: string): Promise<string>;
 }
 export default API;
