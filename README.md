@@ -102,11 +102,10 @@ API.deleteStatus(statusID)
 
 ```TypeScript
 JSON.isAccount(json)
+JSON.isAnnouncement(json)
 JSON.isList(json)
 JSON.isMediaAttachment(json)
 JSON.isNotification(json)
-JSON.isPoll(json)
-JSON.isSearchResults(json)
 JSON.isStatus(json)
 JSON.isStreamData(json)
 ```

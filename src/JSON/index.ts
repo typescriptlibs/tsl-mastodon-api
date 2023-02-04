@@ -11,6 +11,7 @@
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
 export * from './Account.js';
+export * from './Announcement.js';
 export * from './Application.js';
 export * from './Card.js';
 export * from './Emoji.js';
