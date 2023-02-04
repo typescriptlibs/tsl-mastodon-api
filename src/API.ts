@@ -194,6 +194,36 @@ export class API {
     }
 
     /**
+     * Deletes reaction from an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to delete from.
+     *
+     * @param emojiName
+     * Unicode emoji, or the shortcode of a custom emoji.
+     *
+     * @return
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async deleteAnnouncementReaction (
+        announcementID: string,
+        emojiName: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.delete( `announcements/${announcementID}/reactions/${emojiName}` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
      * Deletes a status.
      *
      * @param statusID
@@ -895,7 +925,7 @@ export class API {
      * @param announcementID
      * ID of the announcement to put to.
      *
-     * @param reactionName
+     * @param emojiName
      * Unicode emoji, or the shortcode of a custom emoji.
      *
      * @return
@@ -904,9 +934,9 @@ export class API {
      */
     public async putAnnouncementReaction (
         announcementID: string,
-        reactionName: string
+        emojiName: string
     ): Promise<API.Success<{}>> {
-        const result = await this.put( `announcements/${announcementID}/reactions/${reactionName}` );
+        const result = await this.put( `announcements/${announcementID}/reactions/${emojiName}` );
 
         if (
             result.failed ||

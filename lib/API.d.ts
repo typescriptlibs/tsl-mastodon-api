@@ -91,6 +91,20 @@ export declare class API {
      */
     deleteNotification(notificationID: string): Promise<API.Success<{}>>;
     /**
+     * Deletes reaction from an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to delete from.
+     *
+     * @param emojiName
+     * Unicode emoji, or the shortcode of a custom emoji.
+     *
+     * @return
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    deleteAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
+    /**
      * Deletes a status.
      *
      * @param statusID
@@ -368,14 +382,14 @@ export declare class API {
      * @param announcementID
      * ID of the announcement to put to.
      *
-     * @param reactionName
+     * @param emojiName
      * Unicode emoji, or the shortcode of a custom emoji.
      *
      * @return
      * Promise with an empty `json`, if successful. Otherwise the `json`
      * contains an `error` property.
      */
-    putAnnouncementReaction(announcementID: string, reactionName: string): Promise<API.Success<{}>>;
+    putAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
     /**
      * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
      *

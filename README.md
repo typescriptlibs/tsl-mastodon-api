@@ -97,6 +97,9 @@ API.postMediaAttachment(mediaAttachment)
 API.postPollVote(pollID, pollVote)
 API.postStatus(status)
 
+API.pusAnnouncementReaction(announcementID, emojiName)
+
+API.deleteAnnouncementReaction(announcementID, emojiName)
 API.deleteList(listID)
 API.deleteListAccounts(listID, listAccounts)
 API.deleteStatus(statusID)
