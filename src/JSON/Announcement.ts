@@ -34,7 +34,7 @@ import { isTags } from './Tag.js';
  * Represents an announcement set by an administrator.
  * @since 3.1.0
  */
-interface Announcement {
+export interface Announcement {
     /**
      * Whether the announcement should start and end on dates only instead of
      * datetimes. Will be false if there is no `starts_at` or `ends_at` time.
@@ -70,7 +70,7 @@ interface Announcement {
      * Whether the announcement is currently active.
      * @since 3.1.0
      */
-    published: boolean;
+    published?: boolean;
     /**
      * When the announcement was published.
      * @since 3.1.0
@@ -178,7 +178,6 @@ export function isAnnouncement (
         typeof json.emojis === 'object' &&
         typeof json.id === 'string' &&
         typeof json.mentions === 'object' &&
-        typeof json.published === 'boolean' &&
         typeof json.reactions === 'object' &&
         typeof json.statuses === 'object' &&
         typeof json.tags === 'object' &&

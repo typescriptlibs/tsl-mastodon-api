@@ -280,18 +280,40 @@ export class API {
      */
     public async getAccount (): Promise<API.Success<JSON.Account>> {
         const result = await this.get( 'accounts/verify_credentials' );
-        const json = result.json;
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isAccount( json )
+            !JSON.isAccount( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
         }
 
         return result as API.Success<JSON.Account>;
+    }
+
+    /**
+     * Gets the connected account.
+     *
+     * @return
+     * Promise with the account, if successful.
+     */
+    public async getAnnouncements (
+        queryParams?: API.AnnouncementsParams
+    ): Promise<API.Success<Array<JSON.Announcement>>> {
+        const result = await this.get( 'announcements' );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isAnnouncements( result.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Announcement>>;
     }
 
     /**
@@ -341,7 +363,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isAccounts( result?.json )
+            !JSON.isAccounts( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -360,14 +382,14 @@ export class API {
      * Promise with the array of lists, if successful.
      */
     public async getLists (
-        queryParams: API.QueryParams
+        queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.List>>> {
         const result = await this.get( `lists`, queryParams );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isLists( result?.json )
+            !JSON.isLists( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -389,7 +411,6 @@ export class API {
         mediaAttachmentID: string
     ): Promise<API.Success<JSON.MediaAttachment>> {
         const result = await this.get( `media/${mediaAttachmentID}` );
-        const json = result.json;
 
         if (
             result.failed ||
@@ -397,7 +418,7 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
-            !JSON.isMediaAttachment( json )
+            !JSON.isMediaAttachment( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -450,10 +471,11 @@ export class API {
         }
 
         const result = await this.get( 'notifications', paramArray );
+
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isNotifications( result?.json )
+            !JSON.isNotifications( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -479,7 +501,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatus( result?.json )
+            !JSON.isStatus( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -505,7 +527,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatusContext( result?.json )
+            !JSON.isStatusContext( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -535,7 +557,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -561,7 +583,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -591,7 +613,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -617,7 +639,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -647,7 +669,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -692,7 +714,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isList( result?.json )
+            !JSON.isList( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -722,7 +744,7 @@ export class API {
         if (
             result.failed ||
             result.status !== 200 ||
-            typeof result.json !== 'object'
+            !JSON.isAccounts( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -869,6 +891,16 @@ export namespace API {
      *  Declarations
      *
      * */
+
+    /**
+     * Query parameters to retrieve announcements.
+     */
+    export interface AnnouncementsParams {
+        /**
+         * If true, response will include announcements dismissed by the user.
+         */
+        with_dismissed?: boolean;
+    }
 
     export interface Config extends REST.Config {
         api_version?: number;
