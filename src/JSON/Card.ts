@@ -20,7 +20,7 @@
  * Represents a rich preview card that is generated using OpenGraph tags from a
  * URL.
  */
-interface BasePreviewCard {
+interface BaseCard {
     /**
      * Description of preview.
      * @since 1.0.0
@@ -50,7 +50,7 @@ interface BasePreviewCard {
 export type Card = (
     | LinkCard
     | PhotoCard
-    | RichPreviewCard
+    | IframeCard
     | VideoCard
 );
 
@@ -58,7 +58,7 @@ export type Card = (
  * Represents an iframe preview card that is generated using OpenGraph tags from
  * an URL. Iframe is not currently accepted, so won’t show up in practice.
  */
-export interface RichPreviewCard extends BasePreviewCard {
+export interface IframeCard extends BaseCard {
     /**
      * The type of the preview card.
      * @since 1.3.0
@@ -70,7 +70,7 @@ export interface RichPreviewCard extends BasePreviewCard {
  * Represents a link preview card that is generated using OpenGraph tags from an
  * URL.
  */
-export interface LinkCard extends BasePreviewCard {
+export interface LinkCard extends BaseCard {
     /**
      * The type of the preview card.
      * @since 1.3.0
@@ -82,7 +82,7 @@ export interface LinkCard extends BasePreviewCard {
  * Represents a photo preview card that is generated using OpenGraph tags from
  * an URL.
  */
-export interface PhotoCard extends BasePreviewCard {
+export interface PhotoCard extends BaseCard {
     /**
      * The author of the original resource.
      * @since 1.3.0
@@ -142,7 +142,7 @@ export interface PhotoCard extends BasePreviewCard {
  * Represents a video preview card that is generated using OpenGraph tags from
  * an URL.
  */
-export interface VideoCard extends BasePreviewCard {
+export interface VideoCard extends BaseCard {
     /**
      * The author of the original resource.
      * @since 1.3.0
