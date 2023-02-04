@@ -83,6 +83,7 @@ API.getNotifications()
 API.getStatusesOfPublic(queryParameters?)
 
 API.postDismissAnnouncement(announcementID)
+API.postDismissNotification(notificationID)
 API.postListAccounts(listID, listAccounts)
 API.postMediaAttachment(mediaAttachment)
 API.postPollVote(pollID, pollVote)
