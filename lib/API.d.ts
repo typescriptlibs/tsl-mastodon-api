@@ -123,6 +123,13 @@ export declare class API {
      */
     getAccount(): Promise<API.Success<JSON.Account>>;
     /**
+     * Gets the connected account.
+     *
+     * @return
+     * Promise with the account, if successful.
+     */
+    getAnnouncements(queryParams?: API.AnnouncementsParams): Promise<API.Success<Array<JSON.Announcement>>>;
+    /**
      * Gets a list.
      *
      * @param listID
@@ -154,7 +161,7 @@ export declare class API {
      * @return
      * Promise with the array of lists, if successful.
      */
-    getLists(queryParams: API.QueryParams): Promise<API.Success<Array<JSON.List>>>;
+    getLists(queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.List>>>;
     /**
      * Gets a media attachment.
      *
@@ -349,6 +356,15 @@ export declare class API {
  * @name API
  */
 export declare namespace API {
+    /**
+     * Query parameters to retrieve announcements.
+     */
+    interface AnnouncementsParams {
+        /**
+         * If true, response will include announcements dismissed by the user.
+         */
+        with_dismissed?: boolean;
+    }
     interface Config extends REST.Config {
         api_version?: number;
     }

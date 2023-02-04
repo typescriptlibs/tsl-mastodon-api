@@ -76,6 +76,7 @@ API.delay()
 API.search(search)
 
 API.getAccount()
+API.getAnnouncements()
 API.getList(listID)
 API.getListAccounts(listID, queryParameters?)
 API.getLists(queryParameters?)
