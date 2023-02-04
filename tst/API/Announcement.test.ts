@@ -40,3 +40,14 @@ test( 'Test API.getAnnouncements', async ( assert: test.Assert ) => {
     );
 
 } );
+
+test( 'Test API.postDismissAnnouncement', async ( assert: test.Assert ) => {
+    const { json } = await Setup.v1Post.postDismissAnnouncement( 'ID-14' );
+
+    assert.strictEqual(
+        Object.keys( json ).length,
+        0,
+        'Dismiss of announcement should not fail.'
+    );
+
+} );

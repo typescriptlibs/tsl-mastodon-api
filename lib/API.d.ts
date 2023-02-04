@@ -283,6 +283,17 @@ export declare class API {
      */
     post(path: string, params?: object): Promise<API.Result>;
     /**
+     * Dismisses an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to dismiss.
+     *
+     * @return
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    postDismissAnnouncement(announcementID: string): Promise<API.Success<{}>>;
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list
