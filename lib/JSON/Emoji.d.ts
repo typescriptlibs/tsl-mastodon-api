@@ -41,13 +41,23 @@ export interface Emoji {
     visible_in_picker: boolean;
 }
 /**
- * Tests the JSON object for a CustomEmoji structure.
+ * Tests the JSON object for a Emoji structure.
  *
  * @param json
  * JSON to test.
  *
  * @return
- * True, if the JSON has a CustomEmoji structure.
+ * True, if the JSON has a Emoji structure.
  */
 export declare function isEmoji(json: Partial<Emoji>): json is Emoji;
+/**
+ * Tests the JSON array for a Emoji structure.
+ *
+ * @param json
+ * JSON array to test.
+ *
+ * @return
+ * True, if the JSON array contains a Emoji structure.
+ */
+export declare function isEmojis(json: Partial<Array<Partial<Emoji>>>): json is Array<Emoji>;
 export default Emoji;
