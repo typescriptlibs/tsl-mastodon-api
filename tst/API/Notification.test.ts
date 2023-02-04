@@ -48,9 +48,9 @@ test( 'Test API.getNotifications', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.deleteNotification', async ( assert: test.Assert ) => {
+test( 'Test API.postDismissNotification', async ( assert: test.Assert ) => {
     try {
-        const { json: body } = await Setup.v1Delete.deleteNotification( 'ID-11' );
+        const { json: body } = await Setup.v1Post.postDismissNotification( 'ID-11' );
         assert.deepEqual(
             body,
             {},
