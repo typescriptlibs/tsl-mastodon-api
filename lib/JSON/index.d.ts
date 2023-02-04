@@ -18,6 +18,7 @@ export * from './MediaAttachment.js';
 export * from './StreamData.js';
 export * from './Notification.js';
 export * from './Poll.js';
+export * from './Reaction.js';
 export * from './Search.js';
 export * from './Status.js';
 export * from './Tag.js';
