@@ -83,7 +83,7 @@ export class REST {
     }
 
     public async fetch (
-        method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
+        method: REST.Method,
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
@@ -220,6 +220,14 @@ export namespace REST {
         timeout_ms?: number;
         user_agent?: string;
     }
+
+    export type Method = (
+        | 'DELETE'
+        | 'GET'
+        | 'PATCH'
+        | 'POST'
+        | 'PUT'
+    );
 
     export type ParamArray = Array<[string, unknown]>;
 

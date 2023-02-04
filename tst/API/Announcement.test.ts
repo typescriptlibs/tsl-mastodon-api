@@ -51,3 +51,14 @@ test( 'Test API.postDismissAnnouncement', async ( assert: test.Assert ) => {
     );
 
 } );
+
+test( 'Test API.putAnnouncementReaction', async ( assert: test.Assert ) => {
+    const { json } = await Setup.v1Put.putAnnouncementReaction( 'ID-14', '🐘' );
+
+    assert.strictEqual(
+        Object.keys( json ).length,
+        0,
+        'Reaction to announcement should not fail.'
+    );
+
+} );

@@ -871,6 +871,55 @@ export class API {
     }
 
     /**
+     * Put parameters to a path.
+     *
+     * @param path
+     * Path to put to.
+     *
+     * @param [params]
+     * Parameters to put.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async put (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'PUT', path, params );
+    }
+
+    /**
+     * Put a new reaction to an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to put to.
+     *
+     * @param reactionName
+     * Unicode emoji, or the shortcode of a custom emoji.
+     *
+     * @return
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async putAnnouncementReaction (
+        announcementID: string,
+        reactionName: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.put( `announcements/${announcementID}/reactions/${reactionName}` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
      * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
      *
      * @since 3.0.0

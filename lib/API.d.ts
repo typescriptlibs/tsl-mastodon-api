@@ -329,7 +329,7 @@ export declare class API {
     /**
      * Posts a poll vote.
      *
-     * @param pollId
+     * @param pollID
      * Related poll ID to vote for.
      *
      * @param pollVote
@@ -338,7 +338,7 @@ export declare class API {
      * @return
      * Promise with the updated poll, if successful.
      */
-    postPollVote(pollId: string, pollVote: JSON.PollVotePost): Promise<API.Success<JSON.Poll>>;
+    postPollVote(pollID: string, pollVote: JSON.PollVotePost): Promise<API.Success<JSON.Poll>>;
     /**
      * Posts a new status or updates an existing status.
      *
@@ -349,6 +349,33 @@ export declare class API {
      * Promise with the status, if successful.
      */
     postStatus(status: JSON.StatusPost): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
+    /**
+     * Put parameters to a path.
+     *
+     * @param path
+     * Path to put to.
+     *
+     * @param [params]
+     * Parameters to put.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    put(path: string, params?: object): Promise<API.Result>;
+    /**
+     * Put a new reaction to an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to put to.
+     *
+     * @param reactionName
+     * Unicode emoji, or the shortcode of a custom emoji.
+     *
+     * @return
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    putAnnouncementReaction(announcementID: string, reactionName: string): Promise<API.Success<{}>>;
     /**
      * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
      *
