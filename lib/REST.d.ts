@@ -19,7 +19,7 @@ export declare class REST {
     readonly apiURL: string;
     readonly config: Required<REST.Config>;
     delete(path: string, params?: REST.Params): Promise<REST.Result>;
-    fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: REST.Params): Promise<REST.Result>;
+    fetch(method: REST.Method, path: string, params?: REST.Params): Promise<REST.Result>;
     get(path: string, params?: REST.Params): Promise<REST.Result>;
     patch(path: string, params?: REST.Params): Promise<REST.Result>;
     post(path: string, params?: REST.Params): Promise<REST.Result>;
@@ -33,6 +33,7 @@ export declare namespace REST {
         timeout_ms?: number;
         user_agent?: string;
     }
+    type Method = ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT');
     type ParamArray = Array<[string, unknown]>;
     type ParamRecord = Record<string, unknown>;
     type Params = (ParamArray | ParamRecord);
