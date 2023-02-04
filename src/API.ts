@@ -698,6 +698,32 @@ export class API {
     }
 
     /**
+     * Dismisses an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to dismiss.
+     *
+     * @return
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async postDismissAnnouncement (
+        announcementID: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.post( `announcements/${announcementID}/dismiss` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list
@@ -785,7 +811,7 @@ export class API {
     /**
      * Posts a poll vote.
      *
-     * @param pollId
+     * @param pollID
      * Related poll ID to vote for.
      *
      * @param pollVote
@@ -795,10 +821,10 @@ export class API {
      * Promise with the updated poll, if successful.
      */
     public async postPollVote (
-        pollId: string,
+        pollID: string,
         pollVote: JSON.PollVotePost
     ): Promise<API.Success<JSON.Poll>> {
-        const result = await this.post( `polls/${pollId}/votes`, pollVote );
+        const result = await this.post( `polls/${pollID}/votes`, pollVote );
 
         if (
             result.failed ||
