@@ -287,6 +287,14 @@ export declare class API {
      */
     post(path: string, params?: object): Promise<API.Result>;
     /**
+     * Dismisses all notifications.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    postDismissAllNotifications(): Promise<API.Success<{}>>;
+    /**
      * Dismisses an announcement.
      *
      * @param announcementID
@@ -300,7 +308,7 @@ export declare class API {
     /**
      * Dismisses a single notification.
      *
-     * @param [id]
+     * @param notificationID
      * The ID of the Notification in the database.
      *
      * @return
