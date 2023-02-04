@@ -170,30 +170,6 @@ export class API {
     }
 
     /**
-     * Dismiss a single notification
-     *
-     * @param [id]
-     * The ID of the Notification in the database.
-     *
-     * @return
-     * Promise with an empty .json object.
-     */
-    public async deleteNotification (
-        notificationID: string
-    ): Promise<API.Success<{}>> {
-        const result = await this.delete( `notifications/${notificationID}/dismiss` );
-        if (
-            result.failed ||
-            result.status !== 200
-        ) {
-            result.failed = true;
-            return Promise.reject( result );
-        }
-
-        return result as API.Success<{}>;
-    }
-
-    /**
      * Deletes reaction from an announcement.
      *
      * @param announcementID
@@ -734,13 +710,39 @@ export class API {
      * ID of the announcement to dismiss.
      *
      * @return
-     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
      * contains an `error` property.
      */
     public async postDismissAnnouncement (
         announcementID: string
     ): Promise<API.Success<{}>> {
         const result = await this.post( `announcements/${announcementID}/dismiss` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
+     * Dismisses a single notification.
+     *
+     * @param [id]
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async postDismissNotification (
+        notificationID: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.post( `notifications/${notificationID}/dismiss` );
 
         if (
             result.failed ||
@@ -929,7 +931,7 @@ export class API {
      * Unicode emoji, or the shortcode of a custom emoji.
      *
      * @return
-     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
      * contains an `error` property.
      */
     public async putAnnouncementReaction (

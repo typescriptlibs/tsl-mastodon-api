@@ -81,16 +81,6 @@ export declare class API {
      */
     deleteListAccounts(listID: string, listAccounts: JSON.ListAccountsDelete): Promise<API.Success<object>>;
     /**
-     * Dismiss a single notification
-     *
-     * @param [id]
-     * The ID of the Notification in the database.
-     *
-     * @return
-     * Promise with an empty .json object.
-     */
-    deleteNotification(notificationID: string): Promise<API.Success<{}>>;
-    /**
      * Deletes reaction from an announcement.
      *
      * @param announcementID
@@ -303,10 +293,21 @@ export declare class API {
      * ID of the announcement to dismiss.
      *
      * @return
-     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
      * contains an `error` property.
      */
     postDismissAnnouncement(announcementID: string): Promise<API.Success<{}>>;
+    /**
+     * Dismisses a single notification.
+     *
+     * @param [id]
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    postDismissNotification(notificationID: string): Promise<API.Success<{}>>;
     /**
      * Posts a new list or updates an existing list.
      *
@@ -386,7 +387,7 @@ export declare class API {
      * Unicode emoji, or the shortcode of a custom emoji.
      *
      * @return
-     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
      * contains an `error` property.
      */
     putAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
