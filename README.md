@@ -39,7 +39,7 @@ You need an access token for communication with a Mastodon server.
 
 3. Create a new application and use the related access token.
 
-Or you can use the `Mastodon.API.createOAuthApp` function.
+Or you can use the `Mastodon.OAuth.createOAuthApp` function.
 
 
 
