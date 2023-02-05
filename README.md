@@ -15,10 +15,17 @@ This is a TypeScript-optimized library to access a Mastodon server.
 Installation
 ------------
 
-```sh
+Run the following command for client/server or server-only projects:
+
+```Shell
 npm install tsl-mastodon-api
 ```
 
+Run the following command for client-only projects:
+
+```Shell
+npm install tsl-mastodon-api --omit=optional
+```
 
 
 Access Token
@@ -39,7 +46,7 @@ Or you can use the `Mastodon.API.createOAuthApp` function.
 Examples
 --------
 
-```ts
+```TypeScript
 import * as Mastodon from 'tsl-mastodon-api';
 async function postHelloWorld(): Promise<void> {
     // create the API instance
