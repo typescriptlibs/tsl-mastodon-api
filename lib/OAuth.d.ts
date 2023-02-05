@@ -9,7 +9,7 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-declare namespace OAuth {
+export declare namespace OAuth {
     interface App {
         id: string;
         client_id: string;
@@ -23,7 +23,7 @@ declare namespace OAuth {
      * @param apiURL
      * API URL of the Mastodon server.
      *
-     * @param [clientName]
+     * @param appName
      * Public name of the application.
      *
      * @param [redirectURI]
@@ -39,20 +39,14 @@ declare namespace OAuth {
      * Promise with an object of applications `id`, `client_id` and
      * `client_secret`.
      */
-    function createOAuthApp(apiURL: string, clientName?: string, redirectURI?: string, scopes?: string, website?: string): Promise<OAuth.App>;
+    function createApp(apiURL: string, appName: string, redirectURI?: string, scopes?: string, appWebsite?: string): Promise<OAuth.App>;
     /**
      * Gets the access token for the application.
-     *
-     * @memberof API
-     *
      * @requires oauth
      */
     function getAccessToken(baseURL: string, clientId: string, clientSecret: string, authorizationCode: string, redirectUri?: string): Promise<string>;
     /**
      * Creates an authorization url for users to authorize the application.
-     *
-     * @memberof API
-     *
      * @requires oauth
      */
     function getAuthorizationUrl(baseURL: string, clientId: string, clientSecret: string, redirectURI?: string, scope?: string): Promise<string>;

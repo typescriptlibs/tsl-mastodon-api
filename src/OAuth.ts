@@ -28,7 +28,7 @@ import Bridge from './Bridge.js';
  * */
 
 
-namespace OAuth {
+export namespace OAuth {
 
 
     /* *
@@ -60,7 +60,7 @@ namespace OAuth {
      * @param apiURL
      * API URL of the Mastodon server.
      *
-     * @param [clientName]
+     * @param appName
      * Public name of the application.
      *
      * @param [redirectURI]
@@ -76,21 +76,21 @@ namespace OAuth {
      * Promise with an object of applications `id`, `client_id` and
      * `client_secret`.
      */
-    export async function createOAuthApp (
+    export async function createApp (
         apiURL: string,
-        clientName = 'mastodon-node',
+        appName: string,
         redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
         scopes = 'read write follow',
-        website?: string
+        appWebsite?: string
     ): Promise<OAuth.App> {
         const body: ( FormData | undefined ) = new Bridge.FormData();
 
-        body.append( 'client_name', clientName );
+        body.append( 'client_name', appName );
         body.append( 'redirect_uris', redirectURI );
         body.append( 'scopes', scopes );
 
-        if ( website ) {
-            body.append( 'website', website );
+        if ( appWebsite ) {
+            body.append( 'website', appWebsite );
         }
 
         const response = await Bridge.fetch(
@@ -107,9 +107,6 @@ namespace OAuth {
 
     /**
      * Gets the access token for the application.
-     *
-     * @memberof API
-     *
      * @requires oauth
      */
     export async function getAccessToken (
@@ -150,9 +147,6 @@ namespace OAuth {
 
     /**
      * Creates an authorization url for users to authorize the application.
-     *
-     * @memberof API
-     *
      * @requires oauth
      */
     export async function getAuthorizationUrl (
