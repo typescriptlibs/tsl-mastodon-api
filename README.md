@@ -39,7 +39,7 @@ You need an access token for communication with a Mastodon server.
 
 3. Create a new application and use the related access token.
 
-Or you can use the `OAuth.createOAuthApp` function (import `tsl-mastodon-api/lib/OAuth.js`).
+Or you can use the `OAuth.createApp` function (import `tsl-mastodon-api/lib/OAuth.js`).
 
 
 
@@ -114,6 +114,7 @@ JSON.isStreamData(json)
 ```
 
 ```TypeScript
+REST(config)
 REST.delete(path, params?)
 REST.fetch(method, path, params?)
 REST.get(path, params?)
@@ -122,16 +123,22 @@ REST.post(path, params?)
 REST.put(path, params?)
 ```
 
+Optional with import of `tsl-mastodon-api/lib/OAuth.js`:
+
 ```TypeScript
+OAuth.createApp(apiURL, appName, redirectURI?, scopes?, website?)
+OAuth.getAccessToken(baseURL, clientId, clientSecret, authorizationCode, redirectUri?)
+OAuth.getAuthorizationUrl(baseURL, clientId, clientSecret, redirectUri?, scope?)
+```
+
+Optional with import of `tsl-mastodon-api/lib/StreamAPI.js`:
+
+```TypeScript
+StreamAPI(config)
 StreamAPI.off(eventType, eventListener)
 StreamAPI.on(eventType, eventListener)
 StreamAPI.subscribe(streamType, streamParams?, eventListener?)
 StreamAPI.unsubscribe(streamType, streamParams?, eventListener?)
-```
-
-```TypeScript
-Bridge.fetch(url, options?)
-Utilities.fileFrom(path, mimeType?)
 ```
 
 
