@@ -1,7 +1,7 @@
 TypeScript Library for the Mastodon API
 =======================================
 
-TypeScript library to access a Mastodon server from front-end and back-end environments.
+TypeScript library to access a Mastodon server from front-end or back-end environments.
 
 
 
