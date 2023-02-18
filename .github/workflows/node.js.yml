@@ -29,7 +29,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install Dependencies
-      run: HUSKY=0 npm ci
+      run: npm ci
     - name: Build Package
       run: npm run build
     - name: Run Server
