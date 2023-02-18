@@ -13,7 +13,6 @@
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "devDependencies": {
         "@typescriptlibs/tst": "^0.0.5",
-        "husky": "^8.0.3",
         "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.5"
     },
@@ -38,7 +37,6 @@
     "scripts": {
         "build": "npm run clean && tsc -b src",
         "clean": "rm -rf lib tst-run",
-        "prepare": "husky install",
         "server:start": "cd tst-data && python3 -m http.server 8000 &",
         "server:stop": "kill $(lsof -t -i:8000)",
         "test": "npm run server:start ; npm run build && tst --reset --verbose tst/ && npm run server:stop",
