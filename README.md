@@ -1,17 +1,31 @@
 TypeScript Library for the Mastodon API
 =======================================
 
-This is a TypeScript-optimized library to access a Mastodon server.
+TypeScript library to access a Mastodon server from front-end or back-end environments.
+
+
+
+[![CodeQL](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml)
+[![Node.js](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/node.js.yml)
+[![npm](https://img.shields.io/npm/v/tsl-mastodon-api.svg)](https://www.npmjs.com/package/tsl-mastodon-api)
+[![license](https://img.shields.io/npm/l/tsl-mastodon-api.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/blob/main/LICENSE.md)
 
 
 
 Installation
 ------------
 
-```sh
+Run the following command for client/server or server-only projects:
+
+```Shell
 npm install tsl-mastodon-api
 ```
 
+Run the following command for client-only projects:
+
+```Shell
+npm install tsl-mastodon-api --omit=optional
+```
 
 
 Access Token
@@ -25,21 +39,20 @@ You need an access token for communication with a Mastodon server.
 
 3. Create a new application and use the related access token.
 
-Or you can use the `Mastodon.API.createOAuthApp` function.
+Or you can use the `OAuth.createApp` function (import `tsl-mastodon-api/lib/OAuth.js`).
 
 
 
 Examples
 --------
 
-```ts
+```TypeScript
 import * as Mastodon from 'tsl-mastodon-api';
 async function postHelloWorld(): Promise<void> {
     // create the API instance
     const mastodon = new Mastodon.API({
         access_token: 'ABC',
-        api_url: 'https://mastodon.example/api/v1/',
-        auto_delay: true
+        api_url: 'https://mastodon.example/api/v1/'
     });
     // expect client / server errors
     try {
@@ -62,7 +75,7 @@ postHelloWorld();
 API Overview
 ------------
 
-The following snippets show an excerpt of the v0.0.6 API.
+The following snippets show an excerpt of the API.
 
 ```TypeScript
 API(config)
@@ -70,26 +83,22 @@ API.delay()
 API.search(search)
 
 API.getAccount()
-API.getList(listID)
+API.getAnnouncements(queryParameters?)
 API.getListAccounts(listID, queryParameters?)
-API.getLists(queryParameters?)
 API.getMediaAttachment(mediaAttachmentID)
-API.getNotifications(queryParameters?)
-API.getStatus(statusID)
-API.getStatusContext(statusID)
-API.getStatuses(queryParameters?)
-API.getStatusesOfHome(queryParameters?)
-API.getStatusesOfList(listID, queryParameters?)
+API.getNotifications()
 API.getStatusesOfPublic(queryParameters?)
-API.getStatusesOfTag(tag, queryParameters?)
 
-API.postList(list)
+API.postDismissAnnouncement(announcementID)
+API.postDismissNotification(notificationID)
 API.postListAccounts(listID, listAccounts)
 API.postMediaAttachment(mediaAttachment)
-API.postPollVote(pollId, pollVote)
+API.postPollVote(pollID, pollVote)
 API.postStatus(status)
 
-API.deleteList(listID)
+API.putAnnouncementReaction(announcementID, emojiName)
+
+API.deleteAnnouncementReaction(announcementID, emojiName)
 API.deleteListAccounts(listID, listAccounts)
 API.deleteNotification(notificationID)
 API.deleteStatus(statusID)
@@ -97,15 +106,16 @@ API.deleteStatus(statusID)
 
 ```TypeScript
 JSON.isAccount(json)
+JSON.isAnnouncement(json)
 JSON.isList(json)
 JSON.isMediaAttachment(json)
 JSON.isNotification(json)
-JSON.isPoll(json)
-JSON.isSearchResults(json)
 JSON.isStatus(json)
+JSON.isStreamData(json)
 ```
 
 ```TypeScript
+REST(config)
 REST.delete(path, params?)
 REST.fetch(method, path, params?)
 REST.get(path, params?)
@@ -114,9 +124,22 @@ REST.post(path, params?)
 REST.put(path, params?)
 ```
 
+Optional with import of `tsl-mastodon-api/lib/OAuth.js`:
+
 ```TypeScript
-Bridge.fetch(url, options?)
-Utilities.fileFrom(path, mimeType?)
+OAuth.createApp(apiURL, appName, redirectURI?, scopes?, website?)
+OAuth.getAccessToken(baseURL, clientId, clientSecret, authorizationCode, redirectUri?)
+OAuth.getAuthorizationUrl(baseURL, clientId, clientSecret, redirectUri?, scope?)
+```
+
+Optional with import of `tsl-mastodon-api/lib/StreamAPI.js`:
+
+```TypeScript
+StreamAPI(config)
+StreamAPI.off(eventType, eventListener)
+StreamAPI.on(eventType, eventListener)
+StreamAPI.subscribe(streamType, streamParams?, eventListener?)
+StreamAPI.unsubscribe(streamType, streamParams?, eventListener?)
 ```
 
 

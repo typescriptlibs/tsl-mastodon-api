@@ -16,7 +16,6 @@
  *
  * */
 
-import Bridge from './Bridge.js';
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 
@@ -48,6 +47,10 @@ export class API {
     ) {
         this.nextDelay = 1;
         this.rest = new REST( config );
+        this.version = (
+            config.api_version ||
+            parseInt( config.api_url.match( /\Wv(\d+)\W/u )?.[1] || '0' )
+        );
     }
 
     /* *
@@ -65,6 +68,13 @@ export class API {
      * Underlying REST API of this instance.
      */
     public readonly rest: REST;
+
+    /**
+     * Version from extracted from `config.api_version` or `config.api_url`.
+     *
+     * A value of `0` indicates that no version could be extracted.
+     */
+    public readonly version: number;
 
     /* *
      *
@@ -84,6 +94,25 @@ export class API {
     }
 
     /**
+     * Deletes a path.
+     *
+     * @param path
+     * Path to delete.
+     *
+     * @param [params]
+     * Parameters to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async delete (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'DELETE', path, params );
+    }
+
+    /**
      * Deletes a list of accounts.
      *
      * @param listId
@@ -95,7 +124,7 @@ export class API {
     public async deleteList (
         listID: string
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'DELETE', `lists/${listID}` );
+        const result = await this.delete( `lists/${listID}` );
 
         if (
             result.failed ||
@@ -125,7 +154,7 @@ export class API {
         listID: string,
         listAccounts: JSON.ListAccountsDelete
     ): Promise<API.Success<object>> {
-        const result = await this.fetch( 'DELETE', `lists/${listID}/accounts`, listAccounts );
+        const result = await this.delete( `lists/${listID}/accounts`, listAccounts );
 
         if (
             result.failed ||
@@ -140,18 +169,24 @@ export class API {
     }
 
     /**
-     * Dismiss a single notification
+     * Deletes reaction from an announcement.
      *
-     * @param [id]
-     * The ID of the Notification in the database.
+     * @param announcementID
+     * ID of the announcement to delete from.
+     *
+     * @param emojiName
+     * Unicode emoji, or the shortcode of a custom emoji.
      *
      * @return
-     * Promise with an empty .json object.
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
      */
-    public async deleteNotification (
-        notificationId: string
+    public async deleteAnnouncementReaction (
+        announcementID: string,
+        emojiName: string
     ): Promise<API.Success<{}>> {
-        const result = await this.fetch( 'POST', `notifications/${notificationId}/dismiss` );
+        const result = await this.delete( `announcements/${announcementID}/reactions/${emojiName}` );
+
         if (
             result.failed ||
             result.status !== 200
@@ -175,7 +210,7 @@ export class API {
     public async deleteStatus (
         statusID: string
     ): Promise<API.Success<JSON.Status>> {
-        const result = await this.fetch( 'DELETE', `statuses/${statusID}` );
+        const result = await this.delete( `statuses/${statusID}` );
 
         if (
             result.failed ||
@@ -208,7 +243,7 @@ export class API {
     protected async fetch (
         method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,
-        params?: NonNullable<Object>
+        params?: object
     ): Promise<API.Result> {
         const rest: REST = this.rest;
         const result: API.Result = await rest.fetch( method, path, params as REST.Params );
@@ -224,25 +259,66 @@ export class API {
     }
 
     /**
+     * Get a result from a path.
+     *
+     * @param path
+     * Path to get a result from.
+     *
+     * @param [params]
+     * Parameters to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async get (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'GET', path, params );
+    }
+
+    /**
      * Gets the connected account.
      *
      * @return
      * Promise with the account, if successful.
      */
     public async getAccount (): Promise<API.Success<JSON.Account>> {
-        const result = await this.fetch( 'GET', 'accounts/verify_credentials' );
-        const json = result.json;
+        const result = await this.get( 'accounts/verify_credentials' );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isAccount( json )
+            !JSON.isAccount( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
         }
 
         return result as API.Success<JSON.Account>;
+    }
+
+    /**
+     * Gets the connected account.
+     *
+     * @return
+     * Promise with the account, if successful.
+     */
+    public async getAnnouncements (
+        queryParams?: API.AnnouncementsParams
+    ): Promise<API.Success<Array<JSON.Announcement>>> {
+        const result = await this.get( 'announcements' );
+
+        if (
+            result.failed ||
+            result.status !== 200 ||
+            !JSON.isAnnouncements( result.json )
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<Array<JSON.Announcement>>;
     }
 
     /**
@@ -257,7 +333,7 @@ export class API {
     public async getList (
         listID: string
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'GET', `lists/${listID}` );
+        const result = await this.get( `lists/${listID}` );
 
         if (
             result.failed ||
@@ -287,12 +363,12 @@ export class API {
         listID: string,
         queryParams?: API.QueryParams
     ): Promise<API.Success<JSON.ListAccounts>> {
-        const result = await this.fetch( 'GET', `lists/${listID}/accounts`, queryParams );
+        const result = await this.get( `lists/${listID}/accounts`, queryParams );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isAccounts( result?.json )
+            !JSON.isAccounts( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -311,14 +387,14 @@ export class API {
      * Promise with the array of lists, if successful.
      */
     public async getLists (
-        queryParams: API.QueryParams
+        queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.List>>> {
-        const result = await this.fetch( 'GET', `lists`, queryParams );
+        const result = await this.get( `lists`, queryParams );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isLists( result?.json )
+            !JSON.isLists( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -339,8 +415,7 @@ export class API {
     public async getMediaAttachment (
         mediaAttachmentID: string
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.fetch( 'GET', `media/${mediaAttachmentID}` );
-        const json = result.json;
+        const result = await this.get( `media/${mediaAttachmentID}` );
 
         if (
             result.failed ||
@@ -348,7 +423,7 @@ export class API {
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
-            !JSON.isMediaAttachment( json )
+            !JSON.isMediaAttachment( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -367,12 +442,12 @@ export class API {
     public async getNotifications (
         queryParams?: API.NotificationParams
     ): Promise<API.Success<Array<JSON.Notification>>> {
-        const result = await this.fetch( 'GET', 'notifications', REST.toParamArray( queryParams ) );
+        const result = await this.get( 'notifications', REST.toParamArray( queryParams ) );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isNotifications( result?.json )
+            !JSON.isNotifications( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -393,12 +468,12 @@ export class API {
     public async getStatus (
         statusID: string
     ): Promise<API.Success<JSON.Status>> {
-        const result = await this.fetch( 'GET', `statuses/${statusID}` );
+        const result = await this.get( `statuses/${statusID}` );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatus( result?.json )
+            !JSON.isStatus( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -419,12 +494,12 @@ export class API {
     public async getStatusContext (
         statusID: string
     ): Promise<API.Success<JSON.StatusContext>> {
-        const result = await this.fetch( 'GET', `statuses/${statusID}/context` );
+        const result = await this.get( `statuses/${statusID}/context` );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatusContext( result?.json )
+            !JSON.isStatusContext( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -449,12 +524,12 @@ export class API {
         accountID: string,
         queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `accounts/${accountID}/statuses`, queryParams );
+        const result = await this.get( `accounts/${accountID}/statuses`, queryParams );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -475,12 +550,12 @@ export class API {
     public async getStatusesOfHome (
         queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'timelines/home', queryParams );
+        const result = await this.get( 'timelines/home', queryParams );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -505,12 +580,12 @@ export class API {
         listID: string,
         queryParams?: API.QueryParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `timelines/list/${listID}`, queryParams );
+        const result = await this.get( `timelines/list/${listID}`, queryParams );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -531,12 +606,12 @@ export class API {
     public async getStatusesOfPublic (
         queryParams?: API.StatusesOfPublicParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', 'timelines/public', REST.toParamArray( queryParams ) );
+        const result = await this.get( 'timelines/public', REST.toParamArray( queryParams ) );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -561,18 +636,110 @@ export class API {
         tag: string,
         queryParams?: API.StatusesOfTagParams
     ): Promise<API.Success<Array<JSON.Status>>> {
-        const result = await this.fetch( 'GET', `timelines/tag/${tag}`, REST.toParamArray( queryParams ) );
+        const result = await this.get( `timelines/tag/${tag}`, REST.toParamArray( queryParams ) );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isStatuses( result?.json )
+            !JSON.isStatuses( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
         }
 
         return result as API.Success<Array<JSON.Status>>;
+    }
+
+    /**
+     * Post parameters to a path.
+     *
+     * @param path
+     * Path to post to.
+     *
+     * @param [params]
+     * Parameters to post.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async post (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'POST', path, params );
+    }
+
+    /**
+     * Dismisses all notifications.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async postDismissAllNotifications (): Promise<API.Success<{}>> {
+        const result = await this.post( `notifications/clear` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
+     * Dismisses an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to dismiss.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async postDismissAnnouncement (
+        announcementID: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.post( `announcements/${announcementID}/dismiss` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
+     * Dismisses a single notification.
+     *
+     * @param notificationID
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async postDismissNotification (
+        notificationID: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.post( `notifications/${notificationID}/dismiss` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
     }
 
     /**
@@ -587,12 +754,12 @@ export class API {
     public async postList (
         list: JSON.ListPost,
     ): Promise<API.Success<JSON.List>> {
-        const result = await this.fetch( 'POST', 'lists', list );
+        const result = await this.post( 'lists', list );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            !JSON.isList( result?.json )
+            !JSON.isList( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -617,12 +784,12 @@ export class API {
         listId: string,
         listAccounts: JSON.ListAccountsPost
     ): Promise<API.Success<void>> {
-        const result = await this.fetch( 'POST', `lists/${listId}/accounts`, listAccounts );
+        const result = await this.post( `lists/${listId}/accounts`, listAccounts );
 
         if (
             result.failed ||
             result.status !== 200 ||
-            typeof result.json !== 'object'
+            !JSON.isAccounts( result.json )
         ) {
             result.failed = true;
             return Promise.reject( result );
@@ -643,7 +810,7 @@ export class API {
     public async postMediaAttachment (
         mediaAttachment: JSON.MediaAttachmentPost
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.fetch( 'POST', 'media', mediaAttachment );
+        const result = await this.post( 'media', mediaAttachment );
 
         if (
             result.failed ||
@@ -663,7 +830,7 @@ export class API {
     /**
      * Posts a poll vote.
      *
-     * @param pollId
+     * @param pollID
      * Related poll ID to vote for.
      *
      * @param pollVote
@@ -673,10 +840,10 @@ export class API {
      * Promise with the updated poll, if successful.
      */
     public async postPollVote (
-        pollId: string,
+        pollID: string,
         pollVote: JSON.PollVotePost
     ): Promise<API.Success<JSON.Poll>> {
-        const result = await this.fetch( 'POST', `polls/${pollId}/votes`, pollVote );
+        const result = await this.post( `polls/${pollID}/votes`, pollVote );
 
         if (
             result.failed ||
@@ -702,7 +869,7 @@ export class API {
     public async postStatus (
         status: JSON.StatusPost
     ): Promise<API.Success<( JSON.Status | JSON.StatusSchedule )>> {
-        const result = await this.fetch( 'POST', 'statuses', status );
+        const result = await this.post( 'statuses', status );
 
         if (
             result.failed ||
@@ -723,7 +890,58 @@ export class API {
     }
 
     /**
-     * Search for accounts, hashtags, and statuses.
+     * Put parameters to a path.
+     *
+     * @param path
+     * Path to put to.
+     *
+     * @param [params]
+     * Parameters to put.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    public async put (
+        path: string,
+        params?: object
+    ): Promise<API.Result> {
+        return this.fetch( 'PUT', path, params );
+    }
+
+    /**
+     * Put a new reaction to an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to put to.
+     *
+     * @param emojiName
+     * Unicode emoji, or the shortcode of a custom emoji.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    public async putAnnouncementReaction (
+        announcementID: string,
+        emojiName: string
+    ): Promise<API.Success<{}>> {
+        const result = await this.put( `announcements/${announcementID}/reactions/${emojiName}` );
+
+        if (
+            result.failed ||
+            result.status !== 200
+        ) {
+            result.failed = true;
+            return Promise.reject( result );
+        }
+
+        return result as API.Success<{}>;
+    }
+
+    /**
+     * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
+     *
+     * @since 3.0.0
      *
      * @param search
      * Search parameters to use.
@@ -734,7 +952,7 @@ export class API {
     public async search (
         search: JSON.Search
     ): Promise<API.Success<JSON.SearchResults>> {
-        const result = await this.fetch( 'GET', 'search', search );
+        const result = await this.get( 'search', search );
 
         if (
             result.failed ||
@@ -768,7 +986,19 @@ export namespace API {
      *
      * */
 
-    export type Config = REST.Config;
+    /**
+     * Query parameters to retrieve announcements.
+     */
+    export interface AnnouncementsParams {
+        /**
+         * If true, response will include announcements dismissed by the user.
+         */
+        with_dismissed?: boolean;
+    }
+
+    export interface Config extends REST.Config {
+        api_version?: number;
+    }
 
     export interface NotificationParams extends QueryParams {
         /**
@@ -785,12 +1015,6 @@ export namespace API {
          * {@link JSON.NotificationType}.)
          */
         'types[]'?: Array<JSON.NotificationType>;
-    }
-
-    export interface OAuthApp {
-        id: string;
-        client_id: string;
-        client_secret: string;
     }
 
     export interface QueryParams extends REST.ParamRecord {
@@ -851,138 +1075,6 @@ export namespace API {
          * Do not get statuses with any of these tags.
          */
         'none[]'?: Array<string>;
-    }
-
-    /* *
-     *
-     *  Functions
-     *
-     * */
-
-    /**
-     * Creates an application in a Mastodon account.
-     *
-     * @memberof API
-     *
-     * @param apiURL
-     * API URL of the Mastodon server.
-     *
-     * @param [clientName]
-     * Public name of the application.
-     *
-     * @param [redirectURI]
-     * OAuth URI.
-     *
-     * @param [scopes]
-     * Application permissions to grant.
-     *
-     * @param [website]
-     * Public website of the application.
-     *
-     * @return
-     * Promise with an object of applications `id`, `client_id` and
-     * `client_secret`.
-     */
-    export async function createOAuthApp (
-        apiURL: string,
-        clientName = 'mastodon-node',
-        redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
-        scopes = 'read write follow',
-        website?: string
-    ): Promise<API.OAuthApp> {
-        const body: ( FormData | undefined ) = new Bridge.FormData();
-
-        body.append( 'client_name', clientName );
-        body.append( 'redirect_uris', redirectURI );
-        body.append( 'scopes', scopes );
-
-        if ( website ) {
-            body.append( 'website', website );
-        }
-
-        const response = await Bridge.fetch(
-            `${apiURL}apps`,
-            {
-                body,
-                method: 'POST'
-            }
-        );
-
-        return await response.json();
-    }
-
-    /**
-     * Gets the access token for the application.
-     *
-     * @memberof API
-     *
-     * @requires oauth
-     */
-    export async function getAccessToken (
-        baseURL: string,
-        clientId: string,
-        clientSecret: string,
-        authorizationCode: string,
-        redirectUri = 'urn:ietf:wg:oauth:2.0:oob'
-    ): Promise<string> {
-        const OAuth2 = ( await import( 'oauth' ) ).OAuth2;
-
-        const oauth = new OAuth2(
-            clientId,
-            clientSecret,
-            baseURL,
-            undefined,
-            '/oauth/token'
-        );
-
-        return new Promise( ( resolve, reject ) => {
-            oauth.getOAuthAccessToken(
-                authorizationCode,
-                {
-                    grant_type: 'authorization_code',
-                    redirect_uri: redirectUri
-                },
-                ( err, accessToken ) => {
-                    if ( err ) {
-                        reject( err )
-                        return
-                    }
-                    resolve( accessToken )
-                }
-            );
-        } );
-    }
-
-    /**
-     * Creates an authorization url for users to authorize the application.
-     *
-     * @memberof API
-     *
-     * @requires oauth
-     */
-    export async function getAuthorizationUrl (
-        baseURL: string,
-        clientId: string,
-        clientSecret: string,
-        redirectURI = 'urn:ietf:wg:oauth:2.0:oob',
-        scope = 'read write follow'
-    ): Promise<string> {
-        const OAuth2 = ( await import( 'oauth' ) ).OAuth2;
-
-        const oauth = new OAuth2(
-            clientId,
-            clientSecret,
-            baseURL,
-            undefined,
-            '/oauth/token'
-        );
-
-        return oauth.getAuthorizeUrl( {
-            redirect_uri: redirectURI,
-            response_type: 'code',
-            client_id: clientId,
-            scope
-        } );
     }
 
 }

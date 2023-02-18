@@ -5,23 +5,16 @@
     "license": "MIT",
     "name": "tsl-mastodon-api",
     "type": "module",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "bugs": "https://github.com/typescriptlibs/tsl-mastodon-api/issues",
     "homepage": "https://typescriptlibs.org/tsl-mastodon-api/",
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
-    "dependencies": {
-        "@types/oauth": "~0.9.1",
-        "node-fetch": "^3.3.0",
-        "oauth": "~0.10.0"
-    },
     "devDependencies": {
-        "@types/node": "~16.7.13",
         "@typescriptlibs/tst": "^0.0.5",
-        "husky": "^8.0.3",
         "tsl-mastodon-api": "file:./",
-        "typescript": "~4.9.4"
+        "typescript": "~4.9.5"
     },
     "engines": {
         "node": ">=16.8.0"
@@ -36,10 +29,14 @@
         "Mastodon",
         "TypeScript"
     ],
+    "optionalDependencies": {
+        "node-fetch": "^3.3.0",
+        "oauth": "~0.10.0",
+        "ws": "^8.12.0"
+    },
     "scripts": {
         "build": "npm run clean && tsc -b src",
         "clean": "rm -rf lib tst-run",
-        "prepare": "husky install",
         "server:start": "cd tst-data && python3 -m http.server 8000 &",
         "server:stop": "kill $(lsof -t -i:8000)",
         "test": "npm run server:start ; npm run build && tst --reset --verbose tst/ && npm run server:stop",

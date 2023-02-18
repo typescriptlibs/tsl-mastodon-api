@@ -31,6 +31,12 @@ export declare class API {
      */
     readonly rest: REST;
     /**
+     * Version from extracted from `config.api_version` or `config.api_url`.
+     *
+     * A value of `0` indicates that no version could be extracted.
+     */
+    readonly version: number;
+    /**
      * Delays a async promise by the expected amount of time, which the Mastodon
      * server send during the last communication.
      *
@@ -38,6 +44,19 @@ export declare class API {
      * Promise.
      */
     delay(): Promise<void>;
+    /**
+     * Deletes a path.
+     *
+     * @param path
+     * Path to delete.
+     *
+     * @param [params]
+     * Parameters to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    delete(path: string, params?: object): Promise<API.Result>;
     /**
      * Deletes a list of accounts.
      *
@@ -62,15 +81,19 @@ export declare class API {
      */
     deleteListAccounts(listID: string, listAccounts: JSON.ListAccountsDelete): Promise<API.Success<object>>;
     /**
-     * Dismiss a single notification
+     * Deletes reaction from an announcement.
      *
-     * @param [id]
-     * The ID of the Notification in the database.
+     * @param announcementID
+     * ID of the announcement to delete from.
+     *
+     * @param emojiName
+     * Unicode emoji, or the shortcode of a custom emoji.
      *
      * @return
-     * Promise with an empty .json object.
+     * Promise with an empty `json`, if successful. Otherwise the `json`
+     * contains an `error` property.
      */
-    deleteNotification(notificationId: string): Promise<API.Success<{}>>;
+    deleteAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
     /**
      * Deletes a status.
      *
@@ -82,7 +105,20 @@ export declare class API {
      */
     deleteStatus(statusID: string): Promise<API.Success<JSON.Status>>;
     protected extractRateLimit(headers: Headers): (number | undefined);
-    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: NonNullable<Object>): Promise<API.Result>;
+    protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: object): Promise<API.Result>;
+    /**
+     * Get a result from a path.
+     *
+     * @param path
+     * Path to get a result from.
+     *
+     * @param [params]
+     * Parameters to use.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    get(path: string, params?: object): Promise<API.Result>;
     /**
      * Gets the connected account.
      *
@@ -90,6 +126,13 @@ export declare class API {
      * Promise with the account, if successful.
      */
     getAccount(): Promise<API.Success<JSON.Account>>;
+    /**
+     * Gets the connected account.
+     *
+     * @return
+     * Promise with the account, if successful.
+     */
+    getAnnouncements(queryParams?: API.AnnouncementsParams): Promise<API.Success<Array<JSON.Announcement>>>;
     /**
      * Gets a list.
      *
@@ -122,7 +165,7 @@ export declare class API {
      * @return
      * Promise with the array of lists, if successful.
      */
-    getLists(queryParams: API.QueryParams): Promise<API.Success<Array<JSON.List>>>;
+    getLists(queryParams?: API.QueryParams): Promise<API.Success<Array<JSON.List>>>;
     /**
      * Gets a media attachment.
      *
@@ -220,6 +263,49 @@ export declare class API {
      */
     getStatusesOfTag(tag: string, queryParams?: API.StatusesOfTagParams): Promise<API.Success<Array<JSON.Status>>>;
     /**
+     * Post parameters to a path.
+     *
+     * @param path
+     * Path to post to.
+     *
+     * @param [params]
+     * Parameters to post.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    post(path: string, params?: object): Promise<API.Result>;
+    /**
+     * Dismisses all notifications.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    postDismissAllNotifications(): Promise<API.Success<{}>>;
+    /**
+     * Dismisses an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to dismiss.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    postDismissAnnouncement(announcementID: string): Promise<API.Success<{}>>;
+    /**
+     * Dismisses a single notification.
+     *
+     * @param notificationID
+     * The ID of the Notification in the database.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    postDismissNotification(notificationID: string): Promise<API.Success<{}>>;
+    /**
      * Posts a new list or updates an existing list.
      *
      * @param list
@@ -255,7 +341,7 @@ export declare class API {
     /**
      * Posts a poll vote.
      *
-     * @param pollId
+     * @param pollID
      * Related poll ID to vote for.
      *
      * @param pollVote
@@ -264,7 +350,7 @@ export declare class API {
      * @return
      * Promise with the updated poll, if successful.
      */
-    postPollVote(pollId: string, pollVote: JSON.PollVotePost): Promise<API.Success<JSON.Poll>>;
+    postPollVote(pollID: string, pollVote: JSON.PollVotePost): Promise<API.Success<JSON.Poll>>;
     /**
      * Posts a new status or updates an existing status.
      *
@@ -276,7 +362,36 @@ export declare class API {
      */
     postStatus(status: JSON.StatusPost): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
     /**
-     * Search for accounts, hashtags, and statuses.
+     * Put parameters to a path.
+     *
+     * @param path
+     * Path to put to.
+     *
+     * @param [params]
+     * Parameters to put.
+     *
+     * @return
+     * Promise with the result, if successful.
+     */
+    put(path: string, params?: object): Promise<API.Result>;
+    /**
+     * Put a new reaction to an announcement.
+     *
+     * @param announcementID
+     * ID of the announcement to put to.
+     *
+     * @param emojiName
+     * Unicode emoji, or the shortcode of a custom emoji.
+     *
+     * @return
+     * Promise with an empty `json` object, if successful. Otherwise the `json`
+     * contains an `error` property.
+     */
+    putAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
+    /**
+     * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
+     *
+     * @since 3.0.0
      *
      * @param search
      * Search parameters to use.
@@ -291,7 +406,18 @@ export declare class API {
  * @name API
  */
 export declare namespace API {
-    type Config = REST.Config;
+    /**
+     * Query parameters to retrieve announcements.
+     */
+    interface AnnouncementsParams {
+        /**
+         * If true, response will include announcements dismissed by the user.
+         */
+        with_dismissed?: boolean;
+    }
+    interface Config extends REST.Config {
+        api_version?: number;
+    }
     interface NotificationParams extends QueryParams {
         /**
          * Get only notifications received from the specified account.
@@ -307,11 +433,6 @@ export declare namespace API {
          * {@link JSON.NotificationType}.)
          */
         'types[]'?: Array<JSON.NotificationType>;
-    }
-    interface OAuthApp {
-        id: string;
-        client_id: string;
-        client_secret: string;
     }
     interface QueryParams extends REST.ParamRecord {
         /**
@@ -368,46 +489,5 @@ export declare namespace API {
          */
         'none[]'?: Array<string>;
     }
-    /**
-     * Creates an application in a Mastodon account.
-     *
-     * @memberof API
-     *
-     * @param apiURL
-     * API URL of the Mastodon server.
-     *
-     * @param [clientName]
-     * Public name of the application.
-     *
-     * @param [redirectURI]
-     * OAuth URI.
-     *
-     * @param [scopes]
-     * Application permissions to grant.
-     *
-     * @param [website]
-     * Public website of the application.
-     *
-     * @return
-     * Promise with an object of applications `id`, `client_id` and
-     * `client_secret`.
-     */
-    function createOAuthApp(apiURL: string, clientName?: string, redirectURI?: string, scopes?: string, website?: string): Promise<API.OAuthApp>;
-    /**
-     * Gets the access token for the application.
-     *
-     * @memberof API
-     *
-     * @requires oauth
-     */
-    function getAccessToken(baseURL: string, clientId: string, clientSecret: string, authorizationCode: string, redirectUri?: string): Promise<string>;
-    /**
-     * Creates an authorization url for users to authorize the application.
-     *
-     * @memberof API
-     *
-     * @requires oauth
-     */
-    function getAuthorizationUrl(baseURL: string, clientId: string, clientSecret: string, redirectURI?: string, scope?: string): Promise<string>;
 }
 export default API;

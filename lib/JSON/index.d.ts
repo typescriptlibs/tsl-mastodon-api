@@ -10,14 +10,21 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 export * from './Account.js';
+export * from './Announcement.js';
 export * from './Application.js';
 export * from './Card.js';
 export * from './Emoji.js';
 export * from './List.js';
 export * from './MediaAttachment.js';
+export * from './StreamData.js';
 export * from './Notification.js';
 export * from './Poll.js';
+export * from './Reaction.js';
 export * from './Search.js';
 export * from './Status.js';
 export * from './Tag.js';
-export * from './Visibility.js';
+export declare const parse: (text: string, reviver?: ((this: any, key: string, value: any) => any) | undefined) => any;
+export declare const stringify: {
+    (value: any, replacer?: ((this: any, key: string, value: any) => any) | undefined, space?: string | number | undefined): string;
+    (value: any, replacer?: (string | number)[] | null | undefined, space?: string | number | undefined): string;
+};
