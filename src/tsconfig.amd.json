@@ -3,13 +3,15 @@
     "compilerOptions": {
         "declaration": true,
         "sourceMap": true,
-        "outDir": "../lib/",
+        "module": "amd",
+        "moduleResolution": "node",
+        "outFile": "../amd/tsl-mastodon-api.js",
         "rootDir": "./"
     },
     "exclude": [
-        "Bridge-AMD.ts"
+        "Bridge"
     ],
     "include": [
-        "*.ts"
+        "**/*"
     ]
 }

@@ -12,6 +12,7 @@
     "homepage": "https://typescriptlibs.org/tsl-mastodon-api/",
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "devDependencies": {
+        "@typescriptlibs/amd": "^1.0.0",
         "@typescriptlibs/tst": "^0.0.5",
         "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.5"
@@ -20,6 +21,7 @@
         "node": ">=16.8.0"
     },
     "files": [
+        "amd/",
         "lib/",
         "AUTHORS.md",
         "LICENSE.md",
@@ -35,12 +37,14 @@
         "ws": "^8.12.0"
     },
     "scripts": {
-        "build": "npm run clean && tsc -b src",
-        "clean": "rm -rf lib tst-run",
-        "server:start": "cd tst-data && python3 -m http.server 8000 &",
+        "build": "npm run clean && npm run build:amd && npm run build:lib",
+        "build:amd": "tsc -p src/tsconfig.amd.json",
+        "build:lib": "tsc -p src/tsconfig.json",
+        "clean": "rm -rf amd/ lib/ tst-run/",
+        "server:start": "cd tst-data && python3 -m http.server 8000 & sleep 5",
         "server:stop": "kill $(lsof -t -i:8000)",
-        "test": "npm run server:start ; npm run build && tst --reset --verbose tst/ && npm run server:stop",
-        "test:ci": "tst --reset --verbose tst/",
+        "test": "npm run build && npm run server:start && npm run test:run && npm run server:stop",
+        "test:run": "tst --reset --verbose tst/",
         "watch": "npm run build -- --watch"
     }
 }

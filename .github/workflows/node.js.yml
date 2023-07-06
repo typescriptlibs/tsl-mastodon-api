@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
     - name: Checkout The Branch
@@ -32,9 +32,9 @@ jobs:
       run: npm ci
     - name: Build Package
       run: npm run build
-    - name: Run Server
+    - name: Start Server
       run: npm run server:start
     - name: Run Tests
-      run: npm run test:ci
+      run: npm run test:run
     - name: Stop Server
       run: npm run server:stop

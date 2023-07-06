@@ -9,9 +9,10 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/Bridge" />
 export declare const Bridge: {
     global: typeof globalThis;
-    fetch: typeof globalThis.fetch;
+    fetch: typeof fetch;
     Blob: {
         new (blobParts?: BlobPart[] | undefined, options?: BlobPropertyBag | undefined): Blob;
         prototype: Blob;
@@ -41,7 +42,7 @@ export declare const Bridge: {
         revokeObjectURL(url: string): void;
     };
     URLSearchParams: {
-        new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
+        new (init?: string | Record<string, string> | URLSearchParams | string[][] | undefined): URLSearchParams;
         prototype: URLSearchParams;
         toString(): string;
     };

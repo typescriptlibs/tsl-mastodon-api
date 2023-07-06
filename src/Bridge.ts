@@ -10,11 +10,16 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+
+/// <amd-module name="tsl-mastodon-api/Bridge" />
+
+
 /* *
  *
  *  Constants
  *
  * */
+
 
 const global = (
     typeof window === 'undefined' ?
@@ -22,50 +27,58 @@ const global = (
         window
 );
 
-const fetch = (
-    global.fetch ||
-    ( await import( 'node-fetch' ) ).default
-);
 
-const Blob = (
-    global.Blob ||
-    ( await import( 'node-fetch' ) ).Blob
-);
+export const Bridge = {
+    global,
+    fetch: global.fetch,
+    Blob: global.Blob,
+    File: global.File,
+    FormData: global.FormData,
+    Headers: global.Headers,
+    Response: global.Response,
+    URL: global.URL,
+    URLSearchParams: global.URLSearchParams,
+    WebSocket: global.WebSocket
+};
 
-const File = (
-    global.File ||
-    ( await import( 'node-fetch' ) ).File
-);
 
-const FormData = (
-    global.FormData ||
-    ( await import( 'node-fetch' ) ).FormData
-);
+/* *
+ *
+ *  Imports
+ *
+ * */
 
-const Headers = (
-    global.Headers ||
-    ( await import( 'node-fetch' ) ).Headers
-);
 
-const Response = (
-    global.Response ||
-    ( await import( 'node-fetch' ) ).Response
-);
+( async () => {
+    if ( !Bridge.fetch ) {
+        Bridge.fetch = ( await import( 'node-fetch' ) ).default as typeof Bridge.fetch;
+    }
+    if ( !Bridge.Blob ) {
+        Bridge.Blob = ( await import( 'node-fetch' ) ).Blob;
+    }
+    if ( !Bridge.File ) {
+        Bridge.File = ( await import( 'node-fetch' ) ).File;
+    }
+    if ( !Bridge.FormData ) {
+        Bridge.FormData = ( await import( 'node-fetch' ) ).FormData;
+    }
+    if ( !Bridge.Headers ) {
+        Bridge.Headers = ( await import( 'node-fetch' ) ).Headers;
+    }
+    if ( !Bridge.Response ) {
+        Bridge.Response = ( await import( 'node-fetch' ) ).Response as unknown as typeof Bridge.Response;
+    }
+    if ( !Bridge.URL ) {
+        Bridge.URL = ( await import( 'node:url' ) ).URL as unknown as typeof Bridge.URL;
+    }
+    if ( !Bridge.URLSearchParams ) {
+        Bridge.URLSearchParams = ( await import( 'url' ) ).URLSearchParams as unknown as typeof Bridge.URLSearchParams;
+    }
+    if ( !Bridge.WebSocket ) {
+        Bridge.WebSocket = ( await import( 'ws' ) ).WebSocket;
+    }
+} )();
 
-const URL = (
-    global.URL ||
-    ( await import( 'url' ) ).URL
-);
-
-const URLSearchParams = (
-    global.URLSearchParams ||
-    ( await import( 'url' ) ).URLSearchParams
-);
-
-const WebSocket = (
-    global.WebSocket ||
-    ( await import( 'ws' ) ).WebSocket
-);
 
 /* *
  *
@@ -73,17 +86,5 @@ const WebSocket = (
  *
  * */
 
-export const Bridge = {
-    global,
-    fetch,
-    Blob,
-    File,
-    FormData,
-    Headers,
-    Response,
-    URL,
-    URLSearchParams,
-    WebSocket
-};
 
 export default Bridge;
