@@ -9,6 +9,7 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/JSON/Card" />
 /**
  * Represents a rich preview card that is generated using OpenGraph tags from a
  * URL.

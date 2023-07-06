@@ -9,6 +9,7 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/API" />
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 /**

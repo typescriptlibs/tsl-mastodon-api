@@ -9,6 +9,7 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/JSON/List" />
 import Account from './Account.js';
 /**
  * Represents a list of some users that the authenticated user follows.

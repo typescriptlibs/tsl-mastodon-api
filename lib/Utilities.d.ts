@@ -9,6 +9,7 @@
   https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/Utilities" />
 export declare namespace Utilities {
     type Params = (Array<[string, unknown]> | Record<string, unknown>);
     function buildFormData(params?: Params, target?: FormData): FormData;

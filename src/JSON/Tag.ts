@@ -10,6 +10,8 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+/// <amd-module name="tsl-mastodon-api/JSON/Tag" />
+
 /* *
  *
  *  Declarations

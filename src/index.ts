@@ -10,6 +10,8 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+/// <amd-module name="tsl-mastodon-api/index" />
+
 export * as JSON from './JSON/index.js';
 export * from './API.js';
 export * from './Bridge.js';
