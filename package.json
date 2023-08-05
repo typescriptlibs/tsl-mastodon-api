@@ -13,7 +13,7 @@
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "devDependencies": {
         "@typescriptlibs/amd": "^1.0.0",
-        "@typescriptlibs/tst": "^0.0.5",
+        "@typescriptlibs/tst": "^0.1.0",
         "tsl-mastodon-api": "file:./",
         "typescript": "~4.9.5"
     },
