@@ -72,7 +72,7 @@ export const Bridge = {
         Bridge.URL = ( await import( 'node:url' ) ).URL as unknown as typeof Bridge.URL;
     }
     if ( !Bridge.URLSearchParams ) {
-        Bridge.URLSearchParams = ( await import( 'url' ) ).URLSearchParams as unknown as typeof Bridge.URLSearchParams;
+        Bridge.URLSearchParams = ( await import( 'node:url' ) ).URLSearchParams as unknown as typeof Bridge.URLSearchParams;
     }
     if ( !Bridge.WebSocket ) {
         Bridge.WebSocket = ( await import( 'ws' ) ).WebSocket;

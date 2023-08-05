@@ -1152,7 +1152,7 @@ define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exp
             exports.Bridge.URL = (await new Promise((resolve_7, reject_7) => { require(['node:url'], resolve_7, reject_7); })).URL;
         }
         if (!exports.Bridge.URLSearchParams) {
-            exports.Bridge.URLSearchParams = (await new Promise((resolve_8, reject_8) => { require(['url'], resolve_8, reject_8); })).URLSearchParams;
+            exports.Bridge.URLSearchParams = (await new Promise((resolve_8, reject_8) => { require(['node:url'], resolve_8, reject_8); })).URLSearchParams;
         }
         if (!exports.Bridge.WebSocket) {
             exports.Bridge.WebSocket = (await new Promise((resolve_9, reject_9) => { require(['ws'], resolve_9, reject_9); })).WebSocket;
