@@ -587,9 +587,6 @@ export function isImageAttachmentMeta (
 ): json is ImageAttachmentMeta {
     return (
         typeof json === 'object' &&
-        typeof json.focus === 'object' &&
-        typeof json.focus.x === 'number' &&
-        typeof json.focus.y === 'number' &&
         typeof json.original === 'object' &&
         typeof json.original.aspect === 'number' &&
         typeof json.original.height === 'number' &&

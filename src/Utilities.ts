@@ -47,7 +47,6 @@ export namespace Utilities {
         params?: Params,
         target: FormData = new Bridge.FormData()
     ): FormData {
-        let value: unknown;
 
         if ( params ) {
             transferParams( params, target );
