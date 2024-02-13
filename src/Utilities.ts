@@ -4,9 +4,9 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
@@ -139,21 +139,39 @@ export namespace Utilities {
                     continue;
                 }
 
-                if (
+                if ( Array.isArray( value ) ) {
+                    if ( target instanceof URLSearchParams ) {
+                        key += '[]';
+                    }
+                    for ( const v of value ) {
+                        target.append( key, v );
+                    }
+                }
+                else if (
                     value instanceof Bridge.Blob &&
                     target instanceof Bridge.FormData
                 ) {
                     target.append( key, value );
                 }
                 else if ( typeof value === 'object' ) {
-                    target.append( key, JSON.stringify( value ) );
+                    if ( target instanceof URLSearchParams ) {
+                        for ( const k in value ) {
+                            target.append(
+                                `${key}[${k}]`,
+                                `${( value as Record<string, unknown> )[k]}`
+                            );
+                        }
+                    }
+                    else {
+                        target.append( key, JSON.stringify( value ) );
+                    }
                 }
                 else {
                     target.append( key, `${value}` );
                 }
             }
         } else {
-            for ( const key in params ) {
+            for ( let key in params ) {
 
                 value = params[key];
 
@@ -163,14 +181,33 @@ export namespace Utilities {
                 ) {
                     continue;
                 }
-                if (
+
+                if ( Array.isArray( value ) ) {
+                    if ( target instanceof URLSearchParams ) {
+                        key += '[]';
+                    }
+                    for ( const v of value ) {
+                        target.append( key, v );
+                    }
+                }
+                else if (
                     value instanceof Bridge.Blob &&
                     target instanceof Bridge.FormData
                 ) {
                     target.append( key, value );
                 }
                 else if ( typeof value === 'object' ) {
-                    target.append( key, JSON.stringify( value ) );
+                    if ( target instanceof URLSearchParams ) {
+                        for ( const k in value ) {
+                            target.append(
+                                `${key}[${k}]`,
+                                `${( value as Record<string, unknown> )[k]}`
+                            );
+                        }
+                    }
+                    else {
+                        target.append( key, JSON.stringify( value ) );
+                    }
                 }
                 else {
                     target.append( key, `${value}` );

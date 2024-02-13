@@ -4,9 +4,9 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
@@ -73,7 +73,9 @@ test( 'Test Utilities.buildFormData - Array', ( assert: test.Assert ) => {
         ['some_string', '123'],
         ['some_number', '234'],
         ['some_object', '{"a":"1","b":2}'],
-        ['some_array', '["x","y","z"]']
+        ['some_array', 'x'],
+        ['some_array', 'y'],
+        ['some_array', 'z']
     ] );
 
     const target = new Mastodon.Bridge.FormData();
@@ -92,7 +94,9 @@ test( 'Test Utilities.buildFormData - Array', ( assert: test.Assert ) => {
         ['some_string', '123'],
         ['some_number', '234'],
         ['some_object', '{"a":"1","b":2}'],
-        ['some_array', '["x","y","z"]']
+        ['some_array', 'x'],
+        ['some_array', 'y'],
+        ['some_array', 'z']
     ] );
 } );
 
@@ -105,7 +109,7 @@ test( 'Test Utilities.buildHeaders - Array', ( assert: test.Assert ) => {
 
     let result = Mastodon.Utilities.buildHeaders( params );
     assert.deepEqual( Array.from( result ), [
-        ['some_array', '["x","y","z"]'],
+        ['some_array', 'x, y, z'],
         ['some_number', '234'],
         ['some_object', '{"a":"1","b":2}'],
         ['some_string', '123']
@@ -129,7 +133,7 @@ test( 'Test Utilities.buildHeaders - Record', ( assert: test.Assert ) => {
     result = Mastodon.Utilities.buildHeaders( params, headers );
     assert.deepEqual( Array.from( result ), [
         ['other', 'bar'],
-        ['some_array', '["x","y","z"]'],
+        ['some_array', 'x, y, z'],
         ['some_number', '234'],
         ['some_object', '{"a":"1","b":2}'],
         ['some_string', 'foo, 123']
@@ -145,17 +149,23 @@ test( 'Test Utilities.buildURL - ParamList', ( assert: test.Assert ) => {
     assert.deepEqual( types, ['mention', 'follow', 'reblog'] );
     assert.equal( urlSearchParams.get( 'some_string' ), '123' );
     assert.equal( urlSearchParams.get( 'some_number' ), '234' );
-    assert.equal( urlSearchParams.get( 'some_object' ), '{"a":"1","b":2}' );
-    assert.equal( urlSearchParams.get( 'some_array' ), '["x","y","z"]' );
+    assert.equal( urlSearchParams.get( 'some_object[a]' ), '1' );
+    assert.deepEqual( urlSearchParams.getAll( 'some_array[]' ), ['x', 'y', 'z'] );
 
-    assert.equal( url.href, 'https://domain.example/foo?' +
+    assert.equal(
+        url.href,
+        'https://domain.example/foo?' +
         'types%5B%5D=mention&' +
         'types%5B%5D=follow&' +
         'types%5B%5D=reblog&' +
         'some_string=123&' +
         'some_number=234&' +
-        'some_object=%7B%22a%22%3A%221%22%2C%22b%22%3A2%7D&' +
-        'some_array=%5B%22x%22%2C%22y%22%2C%22z%22%5D' );
+        'some_object%5Ba%5D=1&' +
+        'some_object%5Bb%5D=2&' +
+        'some_array%5B%5D=x&' +
+        'some_array%5B%5D=y&' +
+        'some_array%5B%5D=z'
+    );
 } );
 
 test( 'Test Utilities.buildURL - ParamSet', ( assert: test.Assert ) => {
@@ -166,14 +176,20 @@ test( 'Test Utilities.buildURL - ParamSet', ( assert: test.Assert ) => {
     assert.equal( urlSearchParams.get( 'types[]' ), 'mention' );
     assert.equal( urlSearchParams.get( 'some_string' ), '123' );
     assert.equal( urlSearchParams.get( 'some_number' ), '234' );
-    assert.equal( urlSearchParams.get( 'some_object' ), '{"a":"1","b":2}' );
-    assert.equal( urlSearchParams.get( 'some_array' ), '["x","y","z"]' );
-    assert.equal( url.href, 'https://domain.example/foo?' +
+    assert.strictEqual( urlSearchParams.get( 'some_object[b]' ), '2' );
+    assert.deepEqual( urlSearchParams.getAll( 'some_array[]' ), ['x', 'y', 'z'] );
+    assert.equal(
+        url.href,
+        'https://domain.example/foo?' +
         'types%5B%5D=mention&' +
         'some_string=123&' +
         'some_number=234&' +
-        'some_object=%7B%22a%22%3A%221%22%2C%22b%22%3A2%7D&' +
-        'some_array=%5B%22x%22%2C%22y%22%2C%22z%22%5D' );
+        'some_object%5Ba%5D=1&' +
+        'some_object%5Bb%5D=2&' +
+        'some_array%5B%5D=x&' +
+        'some_array%5B%5D=y&' +
+        'some_array%5B%5D=z'
+    );
 } );
 
 test( 'Test Utilities.buildURLSearchParams - ParamList', ( assert: test.Assert ) => {
@@ -184,8 +200,8 @@ test( 'Test Utilities.buildURLSearchParams - ParamList', ( assert: test.Assert )
     assert.deepEqual( types, ['mention', 'follow', 'reblog'] );
     assert.equal( urlSearchParams.get( 'some_string' ), '123' );
     assert.equal( urlSearchParams.get( 'some_number' ), '234' );
-    assert.equal( urlSearchParams.get( 'some_object' ), '{"a":"1","b":2}' );
-    assert.equal( urlSearchParams.get( 'some_array' ), '["x","y","z"]' );
+    assert.equal( urlSearchParams.get( 'some_object[a]' ), '1' );
+    assert.deepEqual( urlSearchParams.getAll( 'some_array[]' ), ['x', 'y', 'z'] );
 } );
 
 test( 'Test Utilities.buildURLSearchParams - ParamSet', ( assert: test.Assert ) => {
@@ -195,8 +211,8 @@ test( 'Test Utilities.buildURLSearchParams - ParamSet', ( assert: test.Assert ) 
     assert.equal( urlSearchParams.get( 'types[]' ), 'mention' );
     assert.equal( urlSearchParams.get( 'some_string' ), '123' );
     assert.equal( urlSearchParams.get( 'some_number' ), '234' );
-    assert.equal( urlSearchParams.get( 'some_object' ), '{"a":"1","b":2}' );
-    assert.equal( urlSearchParams.get( 'some_array' ), '["x","y","z"]' );
+    assert.equal( urlSearchParams.get( 'some_object[b]' ), '2' );
+    assert.deepEqual( urlSearchParams.getAll( 'some_array[]' ), ['x', 'y', 'z'] );
 } );
 
 test( 'Test Utilities.transferParams', ( assert: test.Assert ) => {
@@ -219,7 +235,7 @@ test( 'Test Utilities.transferParams', ( assert: test.Assert ) => {
     assert.equal( target.get( 'undefined' ), null );
     assert.equal( target.get( 'hello' ), 'hello' );
     assert.equal( target.get( 'ab' ), '{"a":1,"b":"2"}' );
-    assert.equal( target.get( 'xy' ), '["x","y"]' );
+    assert.deepEqual( target.getAll( 'xy' ), ['x', 'y'] );
     assert.ok(
         // return type differs between Node.js v16 (File) and v18 (Blob)
         target.get( 'blob' ) instanceof Mastodon.Bridge.Blob
