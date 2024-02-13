@@ -602,9 +602,6 @@ define("tsl-mastodon-api/JSON/MediaAttachment", ["require", "exports"], function
      */
     function isImageAttachmentMeta(json) {
         return (typeof json === 'object' &&
-            typeof json.focus === 'object' &&
-            typeof json.focus.x === 'number' &&
-            typeof json.focus.y === 'number' &&
             typeof json.original === 'object' &&
             typeof json.original.aspect === 'number' &&
             typeof json.original.height === 'number' &&
@@ -1198,7 +1195,6 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
          *
          * */
         function buildFormData(params, target = new Bridge_js_1.default.FormData()) {
-            let value;
             if (params) {
                 transferParams(params, target);
             }

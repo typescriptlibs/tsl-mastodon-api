@@ -60,7 +60,7 @@ export interface AudioAttachment {
      * @deprecated
      * @since 3.5.0
      */
-    text_url?: string;
+    text_url?: ( string | null );
     /**
      * The type of the attachment.
      * @since 0.6.0
@@ -138,7 +138,7 @@ export interface GIFVAttachment {
      * @deprecated
      * @since 3.5.0
      */
-    text_url?: string;
+    text_url?: ( string | null );
     /**
      * The type of the attachment.
      * @since 0.6.0
@@ -206,6 +206,10 @@ export interface ImageAttachment {
      */
     meta: ImageAttachmentMeta;
     /**
+     * @since unknown
+     */
+    preview_remote_url?: ( string | null );
+    /**
      * The location of a scaled-down preview of the attachment.
      * @since 0.6.0
      */
@@ -220,7 +224,7 @@ export interface ImageAttachment {
      * @deprecated
      * @since 3.5.0
      */
-    text_url?: string;
+    text_url?: ( string | null );
     /**
      * The type of the attachment.
      * @since 0.6.0
@@ -238,7 +242,7 @@ export interface ImageAttachment {
  * @since 1.5.0
  */
 export interface ImageAttachmentMeta {
-    focus: ImageAttachmentMetaFocus;
+    focus?: ImageAttachmentMetaFocus;
     original: ImageAttachmentMetaOriginal;
     small: ImageAttachmentMetaSmall;
 }
@@ -332,7 +336,7 @@ export interface UnknownAttachment {
      * @deprecated
      * @since 3.5.0
      */
-    text_url?: string;
+    text_url?: ( string | null );
     /**
      * The type of the attachment.
      * @since 0.6.0
@@ -383,7 +387,7 @@ export interface VideoAttachment {
      */
     remote_url?: ( string | null );
     /** @deprecated */
-    text_url?: string;
+    text_url?: ( string | null );
     /**
      * The type of the attachment.
      * @since 0.6.0
@@ -589,9 +593,6 @@ export function isImageAttachmentMeta (
 ): json is ImageAttachmentMeta {
     return (
         typeof json === 'object' &&
-        typeof json.focus === 'object' &&
-        typeof json.focus.x === 'number' &&
-        typeof json.focus.y === 'number' &&
         typeof json.original === 'object' &&
         typeof json.original.aspect === 'number' &&
         typeof json.original.height === 'number' &&

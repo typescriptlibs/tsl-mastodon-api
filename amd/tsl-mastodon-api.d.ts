@@ -979,7 +979,7 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
          * @deprecated
          * @since 3.5.0
          */
-        text_url?: string;
+        text_url?: (string | null);
         /**
          * The type of the attachment.
          * @since 0.6.0
@@ -1054,7 +1054,7 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
          * @deprecated
          * @since 3.5.0
          */
-        text_url?: string;
+        text_url?: (string | null);
         /**
          * The type of the attachment.
          * @since 0.6.0
@@ -1118,6 +1118,10 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
          */
         meta: ImageAttachmentMeta;
         /**
+         * @since unknown
+         */
+        preview_remote_url?: (string | null);
+        /**
          * The location of a scaled-down preview of the attachment.
          * @since 0.6.0
          */
@@ -1132,7 +1136,7 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
          * @deprecated
          * @since 3.5.0
          */
-        text_url?: string;
+        text_url?: (string | null);
         /**
          * The type of the attachment.
          * @since 0.6.0
@@ -1149,7 +1153,7 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
      * @since 1.5.0
      */
     export interface ImageAttachmentMeta {
-        focus: ImageAttachmentMetaFocus;
+        focus?: ImageAttachmentMetaFocus;
         original: ImageAttachmentMetaOriginal;
         small: ImageAttachmentMetaSmall;
     }
@@ -1231,7 +1235,7 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
          * @deprecated
          * @since 3.5.0
          */
-        text_url?: string;
+        text_url?: (string | null);
         /**
          * The type of the attachment.
          * @since 0.6.0
@@ -1281,7 +1285,7 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
          */
         remote_url?: (string | null);
         /** @deprecated */
-        text_url?: string;
+        text_url?: (string | null);
         /**
          * The type of the attachment.
          * @since 0.6.0
