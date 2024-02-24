@@ -148,8 +148,11 @@ export namespace Utilities {
                     }
                 }
                 else if (
-                    value instanceof Bridge.Blob &&
-                    target instanceof Bridge.FormData
+                    target instanceof Bridge.FormData &&
+                    (
+                        value instanceof Bridge.Blob ||
+                        value instanceof Bridge.File
+                    )
                 ) {
                     target.append( key, value );
                 }
@@ -191,8 +194,11 @@ export namespace Utilities {
                     }
                 }
                 else if (
-                    value instanceof Bridge.Blob &&
-                    target instanceof Bridge.FormData
+                    target instanceof Bridge.FormData &&
+                    (
+                        value instanceof Bridge.Blob ||
+                        value instanceof Bridge.File
+                    )
                 ) {
                     target.append( key, value );
                 }
