@@ -10,13 +10,16 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+
 /* *
  *
  *  Imports
  *
  * */
 
+
 import Bridge from './Bridge.js';
+
 
 /* *
  *
@@ -24,7 +27,9 @@ import Bridge from './Bridge.js';
  *
  * */
 
+
 export namespace Utilities {
+
 
     /* *
      *
@@ -32,16 +37,19 @@ export namespace Utilities {
      *
      * */
 
+
     export type Params = (
         | Array<[string, unknown]>
         | Record<string, unknown>
     );
+
 
     /* *
      *
      *  Functions
      *
      * */
+
 
     export function buildFormData (
         params?: Params,
@@ -55,6 +63,7 @@ export namespace Utilities {
         return target;
     }
 
+
     export function buildHeaders (
         params?: Params,
         target: Headers = new Bridge.Headers()
@@ -66,6 +75,7 @@ export namespace Utilities {
 
         return target;
     }
+
 
     export function buildURL (
         base: string,
@@ -81,6 +91,7 @@ export namespace Utilities {
         return url;
     }
 
+
     export function buildURLSearchParams (
         params?: Params,
         target: URLSearchParams = new Bridge.URLSearchParams()
@@ -92,6 +103,7 @@ export namespace Utilities {
 
         return target;
     }
+
 
     /**
      * Loads a file from a path.
@@ -118,6 +130,7 @@ export namespace Utilities {
         return await fileFrom( filePath, mimeType );
     }
 
+
     export function transferParams (
         params: Params,
         target: ( FormData | Headers | URLSearchParams )
@@ -140,12 +153,20 @@ export namespace Utilities {
                 }
 
                 if ( Array.isArray( value ) ) {
-                    if ( target instanceof URLSearchParams ) {
+
+                    // Add brackets for query structures
+                    if ( !( target instanceof Headers ) ) {
+
                         key += '[]';
+
                     }
+
                     for ( const v of value ) {
+
                         target.append( key, v );
+
                     }
+
                 }
                 else if (
                     target instanceof Bridge.FormData &&
@@ -154,26 +175,42 @@ export namespace Utilities {
                         value instanceof Bridge.File
                     )
                 ) {
+
                     target.append( key, value );
+
                 }
                 else if ( typeof value === 'object' ) {
-                    if ( target instanceof URLSearchParams ) {
+
+                    // Add brackets for query structures
+                    if ( !( target instanceof Headers ) ) {
+
                         for ( const k in value ) {
+
                             target.append(
                                 `${key}[${k}]`,
                                 `${( value as Record<string, unknown> )[k]}`
                             );
+
                         }
+
                     }
                     else {
+
                         target.append( key, JSON.stringify( value ) );
+
                     }
+
                 }
                 else {
+
                     target.append( key, `${value}` );
+
                 }
+
             }
+
         } else {
+
             for ( let key in params ) {
 
                 value = params[key];
@@ -186,12 +223,20 @@ export namespace Utilities {
                 }
 
                 if ( Array.isArray( value ) ) {
-                    if ( target instanceof URLSearchParams ) {
+
+                    // Add brackets for query structures
+                    if ( !( target instanceof Headers ) ) {
+
                         key += '[]';
+
                     }
+
                     for ( const v of value ) {
+
                         target.append( key, v );
+
                     }
+
                 }
                 else if (
                     target instanceof Bridge.FormData &&
@@ -200,34 +245,53 @@ export namespace Utilities {
                         value instanceof Bridge.File
                     )
                 ) {
+
                     target.append( key, value );
+
                 }
                 else if ( typeof value === 'object' ) {
-                    if ( target instanceof URLSearchParams ) {
+
+                    // Add brackets for query structures
+                    if ( !( target instanceof Headers ) ) {
+
                         for ( const k in value ) {
+
                             target.append(
                                 `${key}[${k}]`,
                                 `${( value as Record<string, unknown> )[k]}`
                             );
+
                         }
+
                     }
                     else {
+
                         target.append( key, JSON.stringify( value ) );
+
                     }
+
                 }
                 else {
+
                     target.append( key, `${value}` );
+
                 }
+
             }
+
         }
+
     }
 
+
 }
+
 
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export default Utilities;
