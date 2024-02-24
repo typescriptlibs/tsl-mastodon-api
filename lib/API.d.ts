@@ -4,9 +4,9 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 import * as JSON from './JSON/index.js';
@@ -416,6 +416,9 @@ export declare namespace API {
         with_dismissed?: boolean;
     }
     interface Config extends REST.Config {
+        /**
+         * API version to distinguish between multiple instances of the API.
+         */
         api_version?: number;
     }
     interface NotificationParams extends QueryParams {
