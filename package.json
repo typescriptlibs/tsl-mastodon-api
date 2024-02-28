@@ -44,8 +44,8 @@
         "clean": "rm -rf amd/ lib/ tst-run/",
         "server:start": "cd tst-data && python3 -m http.server 8000 & sleep 5",
         "server:stop": "kill $(lsof -t -i:8000)",
-        "test": "npm run build && npm run server:start && npm run test:ci ; npm run server:stop",
-        "test:ci": "tst --reset --verbose tst/",
+        "test": "npm run build && npm run server:start && npm run test:run ; npm run server:stop",
+        "test:run": "tst --reset --verbose tst/",
         "watch": "npm run build -- --watch"
     }
 }
