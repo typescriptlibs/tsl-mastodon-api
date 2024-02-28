@@ -4,9 +4,9 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
@@ -18,9 +18,13 @@
  *
  * */
 
+
 import Bridge from './Bridge.js';
+
 import * as JSON from './JSON/index.js';
+
 import Utilities from './Utilities.js';
+
 
 /* *
  *
@@ -28,16 +32,19 @@ import Utilities from './Utilities.js';
  *
  * */
 
+
 /**
  * Mastodon streaming API to listen to new content.
  */
 export class StreamAPI {
+
 
     /* *
      *
      *  Constructor
      *
      * */
+
 
     /**
      * @param config
@@ -56,8 +63,11 @@ export class StreamAPI {
             error: [],
             message: []
         };
+
         this.config = config;
+
     }
+
 
     /* *
      *
@@ -65,17 +75,22 @@ export class StreamAPI {
      *
      * */
 
+
     public readonly listeners: Record<string, Array<Function>>;
+
 
     public readonly config: StreamAPI.Config;
 
+
     public webSocket?: WebSocket;
+
 
     /* *
      *
      *  Functions
      *
      * */
+
 
     protected dispatch<K extends keyof StreamAPI.EventMap> (
         eventType: K,
@@ -94,7 +109,9 @@ export class StreamAPI {
         for ( let i = 0, iEnd = listeners.length; i < iEnd; ++i ) {
             listeners[i].call( this, e );
         }
+
     }
+
 
     public off<K extends keyof StreamAPI.EventMap> (
         eventType: K,
@@ -110,6 +127,7 @@ export class StreamAPI {
         return this;
     }
 
+
     public on<K extends keyof StreamAPI.EventMap> (
         eventType: K,
         eventListener: ( e: StreamAPI.EventMap[K] ) => void
@@ -119,6 +137,7 @@ export class StreamAPI {
 
         return this;
     }
+
 
     protected async setup (): Promise<WebSocket> {
         const config = this.config;
@@ -154,6 +173,7 @@ export class StreamAPI {
         } );
     }
 
+
     public async subscribe (
         streamType: JSON.StreamType,
         streamParams?: JSON.StreamParams,
@@ -173,6 +193,7 @@ export class StreamAPI {
 
         return this;
     }
+
 
     public async unsubsribe (
         streamType: JSON.StreamType,
@@ -194,7 +215,9 @@ export class StreamAPI {
         return this;
     }
 
+
 }
+
 
 /* *
  *
@@ -202,7 +225,9 @@ export class StreamAPI {
  *
  * */
 
+
 export namespace StreamAPI {
+
 
     /* *
      *
@@ -210,10 +235,12 @@ export namespace StreamAPI {
      *
      * */
 
+
     export interface Config {
         access_token: string;
         api_url: string;
     }
+
 
     export interface EventMap {
         close: CloseEvent;
@@ -221,14 +248,18 @@ export namespace StreamAPI {
         message: MessageEvent;
     }
 
+
     export type MessageEvent = globalThis.MessageEvent<JSON.StreamData>;
 
+
 }
+
 
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export default StreamAPI;

@@ -1091,9 +1091,9 @@ define("tsl-mastodon-api/JSON/index", ["require", "exports", "tsl-mastodon-api/J
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exports) {
@@ -1168,9 +1168,9 @@ define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exp
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Bridge"], function (require, exports, Bridge_js_1) {
@@ -1255,12 +1255,30 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
                         value === null) {
                         continue;
                     }
-                    if (value instanceof Bridge_js_1.default.Blob &&
-                        target instanceof Bridge_js_1.default.FormData) {
+                    if (Array.isArray(value)) {
+                        // Add brackets for query structures
+                        if (!(target instanceof Headers)) {
+                            key += '[]';
+                        }
+                        for (const v of value) {
+                            target.append(key, v);
+                        }
+                    }
+                    else if (target instanceof Bridge_js_1.default.FormData &&
+                        (value instanceof Bridge_js_1.default.Blob ||
+                            value instanceof Bridge_js_1.default.File)) {
                         target.append(key, value);
                     }
                     else if (typeof value === 'object') {
-                        target.append(key, JSON.stringify(value));
+                        // Add brackets for query structures
+                        if (!(target instanceof Headers)) {
+                            for (const k in value) {
+                                target.append(`${key}[${k}]`, `${value[k]}`);
+                            }
+                        }
+                        else {
+                            target.append(key, JSON.stringify(value));
+                        }
                     }
                     else {
                         target.append(key, `${value}`);
@@ -1268,18 +1286,36 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
                 }
             }
             else {
-                for (const key in params) {
+                for (let key in params) {
                     value = params[key];
                     if (typeof value === 'undefined' ||
                         value === null) {
                         continue;
                     }
-                    if (value instanceof Bridge_js_1.default.Blob &&
-                        target instanceof Bridge_js_1.default.FormData) {
+                    if (Array.isArray(value)) {
+                        // Add brackets for query structures
+                        if (!(target instanceof Headers)) {
+                            key += '[]';
+                        }
+                        for (const v of value) {
+                            target.append(key, v);
+                        }
+                    }
+                    else if (target instanceof Bridge_js_1.default.FormData &&
+                        (value instanceof Bridge_js_1.default.Blob ||
+                            value instanceof Bridge_js_1.default.File)) {
                         target.append(key, value);
                     }
                     else if (typeof value === 'object') {
-                        target.append(key, JSON.stringify(value));
+                        // Add brackets for query structures
+                        if (!(target instanceof Headers)) {
+                            for (const k in value) {
+                                target.append(`${key}[${k}]`, `${value[k]}`);
+                            }
+                        }
+                        else {
+                            target.append(key, JSON.stringify(value));
+                        }
                     }
                     else {
                         target.append(key, `${value}`);
@@ -1302,9 +1338,9 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge", "tsl-mastodon-api/Utilities"], function (require, exports, Bridge_js_2, Utilities_js_1) {
@@ -1447,7 +1483,9 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
             if (!params) {
                 return;
             }
-            const pairs = (Array.isArray(params) ? params : Object.entries(params));
+            const pairs = (Array.isArray(params) ?
+                params :
+                Object.entries(params));
             let pair;
             for (let i = 0, iEnd = pairs.length; i < iEnd; ++i) {
                 pair = pairs[i];
@@ -1479,9 +1517,9 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/index", "tsl-mastodon-api/REST"], function (require, exports, JSON, REST_js_1) {
@@ -1655,7 +1693,6 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
                 return parseInt(value);
             }
         }
-        ;
         async fetch(method, path, params) {
             const rest = this.rest;
             const result = await rest.fetch(method, path, params);
@@ -2196,9 +2233,9 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge"], function (require, exports, Bridge_js_3) {
@@ -2311,9 +2348,9 @@ define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/StreamAPI", ["require", "exports", "tsl-mastodon-api/Bridge", "tsl-mastodon-api/JSON/index", "tsl-mastodon-api/Utilities"], function (require, exports, Bridge_js_4, JSON, Utilities_js_2) {
@@ -2453,9 +2490,9 @@ define("tsl-mastodon-api/StreamAPI", ["require", "exports", "tsl-mastodon-api/Br
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/index", ["require", "exports", "tsl-mastodon-api/JSON/index", "tsl-mastodon-api/API", "tsl-mastodon-api/Bridge", "tsl-mastodon-api/REST", "tsl-mastodon-api/Utilities"], function (require, exports, JSON, API_js_1, Bridge_js_5, REST_js_2, Utilities_js_3) {

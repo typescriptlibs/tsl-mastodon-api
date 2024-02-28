@@ -2331,9 +2331,9 @@ declare module "tsl-mastodon-api/API" {
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     import * as JSON from "tsl-mastodon-api/JSON/index";
@@ -2743,6 +2743,9 @@ declare module "tsl-mastodon-api/API" {
             with_dismissed?: boolean;
         }
         interface Config extends REST.Config {
+            /**
+             * API version to distinguish between multiple instances of the API.
+             */
             api_version?: number;
         }
         interface NotificationParams extends QueryParams {
@@ -2909,9 +2912,9 @@ declare module "tsl-mastodon-api/index" {
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     export * as JSON from "tsl-mastodon-api/JSON/index";

@@ -4,9 +4,9 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
@@ -18,14 +18,18 @@
  *
  * */
 
+
 import * as JSON from './JSON/index.js';
+
 import REST from './REST.js';
+
 
 /* *
  *
  *  Class
  *
  * */
+
 
 /**
  * Mastodon API to fetch, create, and delete content.
@@ -34,11 +38,13 @@ import REST from './REST.js';
  */
 export class API {
 
+
     /* *
      *
      *  Constructor
      *
      * */
+
 
     /**
      * @param config
@@ -55,21 +61,25 @@ export class API {
         );
     }
 
+
     /* *
      *
      *  Properties
      *
      * */
 
+
     /**
      * Expected communication delay by the Mastodon server.
      */
     public nextDelay: number;
 
+
     /**
      * Underlying REST API of this instance.
      */
     public readonly rest: REST;
+
 
     /**
      * Version from extracted from `config.api_version` or `config.api_url`.
@@ -78,11 +88,13 @@ export class API {
      */
     public readonly version: number;
 
+
     /* *
      *
      *  Functions
      *
      * */
+
 
     /**
      * Delays a async promise by the expected amount of time, which the Mastodon
@@ -94,6 +106,7 @@ export class API {
     public async delay (): Promise<void> {
         return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
     }
+
 
     /**
      * Deletes a path.
@@ -113,6 +126,7 @@ export class API {
     ): Promise<API.Result> {
         return this.fetch( 'DELETE', path, params );
     }
+
 
     /**
      * Deletes a list of accounts.
@@ -139,6 +153,7 @@ export class API {
 
         return result as API.Success<JSON.List>;
     }
+
 
     /**
      * Deletes a list of accounts.
@@ -170,6 +185,7 @@ export class API {
         return result as API.Success<object>;
     }
 
+
     /**
      * Deletes reaction from an announcement.
      *
@@ -200,6 +216,7 @@ export class API {
         return result as API.Success<{}>;
     }
 
+
     /**
      * Deletes a status.
      *
@@ -226,6 +243,7 @@ export class API {
         return result as API.Success<JSON.Status>;
     }
 
+
     protected extractRateLimit (
         headers: Headers
     ): ( number | undefined ) {
@@ -240,7 +258,9 @@ export class API {
         if ( typeof value === 'string' ) {
             return parseInt( value );
         }
-    };
+
+    }
+
 
     protected async fetch (
         method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
@@ -260,6 +280,7 @@ export class API {
         return result;
     }
 
+
     /**
      * Get a result from a path.
      *
@@ -278,6 +299,7 @@ export class API {
     ): Promise<API.Result> {
         return this.fetch( 'GET', path, params );
     }
+
 
     /**
      * Gets the connected account.
@@ -299,6 +321,7 @@ export class API {
 
         return result as API.Success<JSON.Account>;
     }
+
 
     /**
      * Gets the connected account.
@@ -322,6 +345,7 @@ export class API {
 
         return result as API.Success<Array<JSON.Announcement>>;
     }
+
 
     /**
      * Gets a list.
@@ -348,6 +372,7 @@ export class API {
 
         return result as API.Success<JSON.List>;
     }
+
 
     /**
      * Gets the accounts of a list.
@@ -379,6 +404,7 @@ export class API {
         return result as API.Success<JSON.ListAccounts>;
     }
 
+
     /**
      * Gets lists.
      *
@@ -404,6 +430,7 @@ export class API {
 
         return result as API.Success<Array<JSON.List>>;
     }
+
 
     /**
      * Gets a media attachment.
@@ -458,6 +485,7 @@ export class API {
         return result as API.Success<Array<JSON.Notification>>;
     }
 
+
     /**
      * Gets a status.
      *
@@ -484,6 +512,7 @@ export class API {
         return result as API.Success<JSON.Status>;
     }
 
+
     /**
      * Gets the context of a status with ancestors and descendants.
      *
@@ -509,6 +538,7 @@ export class API {
 
         return result as API.Success<JSON.StatusContext>;
     }
+
 
     /**
      * Gets statuses of an account.
@@ -540,6 +570,7 @@ export class API {
         return result as API.Success<Array<JSON.Status>>;
     }
 
+
     /**
      * Gets statuses from the personal timeline.
      *
@@ -565,6 +596,7 @@ export class API {
 
         return result as API.Success<Array<JSON.Status>>;
     }
+
 
     /**
      * Gets statuses from a list of accounts.
@@ -596,6 +628,7 @@ export class API {
         return result as API.Success<Array<JSON.Status>>;
     }
 
+
     /**
      * Gets statuses from the public timeline.
      *
@@ -621,6 +654,7 @@ export class API {
 
         return result as API.Success<Array<JSON.Status>>;
     }
+
 
     /**
      * Gets statuses for a tag.
@@ -652,6 +686,7 @@ export class API {
         return result as API.Success<Array<JSON.Status>>;
     }
 
+
     /**
      * Post parameters to a path.
      *
@@ -670,6 +705,7 @@ export class API {
     ): Promise<API.Result> {
         return this.fetch( 'POST', path, params );
     }
+
 
     /**
      * Dismisses all notifications.
@@ -691,6 +727,7 @@ export class API {
 
         return result as API.Success<{}>;
     }
+
 
     /**
      * Dismisses an announcement.
@@ -718,6 +755,7 @@ export class API {
         return result as API.Success<{}>;
     }
 
+
     /**
      * Dismisses a single notification.
      *
@@ -744,6 +782,7 @@ export class API {
         return result as API.Success<{}>;
     }
 
+
     /**
      * Posts a new list or updates an existing list.
      *
@@ -769,6 +808,7 @@ export class API {
 
         return result as API.Success<JSON.List>;
     }
+
 
     /**
      * Posts a new list or updates an existing list.
@@ -800,6 +840,7 @@ export class API {
         return result as API.Success<void>;
     }
 
+
     /**
      * Posts a new media attachment.
      *
@@ -828,6 +869,7 @@ export class API {
 
         return result as API.Success<JSON.MediaAttachment>;
     }
+
 
     /**
      * Posts a poll vote.
@@ -858,6 +900,7 @@ export class API {
 
         return result as API.Success<JSON.Poll>;
     }
+
 
     /**
      * Posts a new status or updates an existing status.
@@ -891,6 +934,7 @@ export class API {
         return result as API.Success<( JSON.Status | JSON.StatusSchedule )>;
     }
 
+
     /**
      * Put parameters to a path.
      *
@@ -909,6 +953,7 @@ export class API {
     ): Promise<API.Result> {
         return this.fetch( 'PUT', path, params );
     }
+
 
     /**
      * Put a new reaction to an announcement.
@@ -940,6 +985,7 @@ export class API {
         return result as API.Success<{}>;
     }
 
+
     /**
      * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
      *
@@ -968,7 +1014,9 @@ export class API {
         return result as API.Success<JSON.SearchResults>;
     }
 
+
 }
+
 
 /* *
  *
@@ -976,11 +1024,13 @@ export class API {
  *
  * */
 
+
 /**
  * @namespace
  * @name API
  */
 export namespace API {
+
 
     /* *
      *
@@ -988,60 +1038,82 @@ export namespace API {
      *
      * */
 
+
     /**
      * Query parameters to retrieve announcements.
      */
     export interface AnnouncementsParams {
+
         /**
          * If true, response will include announcements dismissed by the user.
          */
         with_dismissed?: boolean;
+
     }
+
 
     export interface Config extends REST.Config {
+
+        /**
+         * API version to distinguish between multiple instances of the API.
+         */
         api_version?: number;
+
     }
 
+
     export interface NotificationParams extends QueryParams {
+
         /**
          * Get only notifications received from the specified account.
          */
         account_id?: string;
+
         /**
          * An array of notification types to filter out. (See
          * {@link JSON.NotificationType}.)
          */
-        'exclude_types[]'?: Array<JSON.NotificationType>,
+        'exclude_types[]'?: Array<JSON.NotificationType>;
+
         /**
          * An array to filter notifications by type. (See
          * {@link JSON.NotificationType}.)
          */
         'types[]'?: Array<JSON.NotificationType>;
+
     }
 
+
     export interface QueryParams extends REST.ParamRecord {
+
         /**
          * Maximum number of results to return. Server defaults to 20 statuses.
          * Server maximum is 40 statuses.
          */
         limit?: number;
+
         /**
          * Return results older than ID.
          */
         max_id?: string;
+
         /**
          * Return results newer than ID.
          */
         min_id?: string;
+
         /**
          * Return newest results newer than ID.
          */
         since_id?: string;
+
     }
+
 
     export interface Result extends REST.Result {
         rateLimit?: number;
     }
+
 
     export interface Success<T = unknown> extends Result {
         failed: false;
@@ -1049,42 +1121,55 @@ export namespace API {
         status: ( 200 | 202 | 206 );
     }
 
+
     export interface StatusesOfPublicParams extends QueryParams {
+
         /**
          * Get only local statuses.
          */
         local?: boolean;
+
         /**
          * Get only statuses with media attachment.
          */
         only_media?: boolean;
+
         /**
          * Get only remote statuses.
          */
         remote?: boolean;
+
     }
 
+
     export interface StatusesOfTagParams extends StatusesOfPublicParams {
+
         /**
          * Get statuses with all of these tags.
          */
         'all[]'?: Array<string>;
+
         /**
          * Get statuses with any of these tags.
          */
         'any[]'?: Array<string>;
+
         /**
          * Do not get statuses with any of these tags.
          */
         'none[]'?: Array<string>;
+
     }
 
+
 }
+
 
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export default API;

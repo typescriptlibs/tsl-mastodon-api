@@ -4,9 +4,9 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
@@ -18,8 +18,11 @@
  *
  * */
 
+
 import Bridge from './Bridge.js';
+
 import Utilities from './Utilities.js';
+
 
 /* *
  *
@@ -27,11 +30,17 @@ import Utilities from './Utilities.js';
  *
  * */
 
+
 declare global {
+
+
     interface RequestInit {
         follow?: number;
     }
+
+
 }
+
 
 /* *
  *
@@ -39,7 +48,9 @@ declare global {
  *
  * */
 
+
 export class REST {
+
 
     /* *
      *
@@ -47,9 +58,11 @@ export class REST {
      *
      * */
 
+
     public constructor (
         config: REST.Config
     ) {
+
         this.apiURL = config.api_url;
 
         config.timeout_ms = (
@@ -59,7 +72,9 @@ export class REST {
         );
 
         this.config = config as Required<REST.Config>;
+
     }
+
 
     /* *
      *
@@ -67,9 +82,12 @@ export class REST {
      *
      * */
 
+
     public readonly apiURL: string;
 
+
     public readonly config: Required<REST.Config>;
+
 
     /* *
      *
@@ -77,12 +95,14 @@ export class REST {
      *
      * */
 
+
     public delete (
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
         return this.fetch( 'DELETE', path, params );
     }
+
 
     public async fetch (
         method: REST.Method,
@@ -171,12 +191,14 @@ export class REST {
         }
     }
 
+
     public get (
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
         return this.fetch( 'GET', path, params );
     }
+
 
     public patch (
         path: string,
@@ -185,12 +207,14 @@ export class REST {
         return this.fetch( 'PATCH', path, params );
     }
 
+
     public post (
         path: string,
         params?: REST.Params
     ): Promise<REST.Result> {
         return this.fetch( 'POST', path, params );
     }
+
 
     public put (
         path: string,
@@ -199,7 +223,9 @@ export class REST {
         return this.fetch( 'PUT', path, params );
     }
 
+
 }
+
 
 /* *
  *
@@ -207,13 +233,16 @@ export class REST {
  *
  * */
 
+
 export namespace REST {
+
 
     /* *
      *
      *  Declarations
      *
      * */
+
 
     export interface Config {
         access_token: string;
@@ -223,6 +252,7 @@ export namespace REST {
         user_agent?: string;
     }
 
+
     export type Method = (
         | 'DELETE'
         | 'GET'
@@ -231,11 +261,15 @@ export namespace REST {
         | 'PUT'
     );
 
+
     export type ParamArray = Array<[string, unknown]>;
+
 
     export type ParamRecord = Record<string, unknown>;
 
+
     export type Params = ( ParamArray | ParamRecord );
+
 
     export interface Result {
         failed: boolean;
@@ -245,17 +279,20 @@ export namespace REST {
         status: number;
     }
 
+
     export interface Success<T = unknown> extends Result {
         failed: false;
         json: T;
         status: 200;
     }
 
+
     /* *
      *
      *  Functions
      *
      * */
+
 
     export function isParamArray (
         params?: Params
@@ -268,6 +305,7 @@ export namespace REST {
             )
         );
     }
+
 
     /**
      * Converts a Params structure into a ParamArray structure. Value arrays of
@@ -301,7 +339,11 @@ export namespace REST {
             return;
         }
 
-        const pairs = ( Array.isArray( params ) ? params : Object.entries( params ) );
+        const pairs = (
+            Array.isArray( params ) ?
+                params :
+                Object.entries( params )
+        );
 
         let pair: [string, unknown];
 
@@ -324,12 +366,15 @@ export namespace REST {
         return array;
     }
 
+
 }
+
 
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export default REST;
