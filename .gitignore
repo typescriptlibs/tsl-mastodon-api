@@ -106,5 +106,8 @@ dist
 # MacOS
 .DS_Store
 
+# Bridge
+/src/Bridge.ts
+
 # Test
-tst-run/
+/tst-run/

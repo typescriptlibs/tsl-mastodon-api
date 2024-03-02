@@ -15,10 +15,10 @@
         "@typescriptlibs/amd": "^1.0.0",
         "@typescriptlibs/tst": "^0.1.0",
         "tsl-mastodon-api": "file:./",
-        "typescript": "~4.9.5"
+        "typescript": "~5.3.3"
     },
     "engines": {
-        "node": ">=16.8.0"
+        "node": ">=18.16.0"
     },
     "files": [
         "amd/",
@@ -39,8 +39,8 @@
     },
     "scripts": {
         "build": "npm run clean && npm run build:amd && npm run build:lib",
-        "build:amd": "tsc -p src/tsconfig.amd.json",
-        "build:lib": "tsc -p src/tsconfig.json",
+        "build:amd": "mv src/Bridge-AMD.ts src/Bridge.ts && tsc -p src/tsconfig-amd.json ; mv src/Bridge.ts src/Bridge-AMD.ts",
+        "build:lib": "mv src/Bridge-Node.ts src/Bridge.ts && tsc -p src/tsconfig.json ; mv src/Bridge.ts src/Bridge-Node.ts",
         "clean": "rm -rf amd/ lib/ tst-run/",
         "server:start": "cd tst-data && python3 -m http.server 8000 & sleep 5",
         "server:stop": "kill $(lsof -t -i:8000)",

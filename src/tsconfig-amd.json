@@ -9,7 +9,7 @@
         "rootDir": "./"
     },
     "exclude": [
-        "Bridge"
+        "Bridge-Node.ts"
     ],
     "include": [
         "**/*"
