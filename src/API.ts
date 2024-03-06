@@ -81,9 +81,10 @@ export class API {
 
 
     /**
-     * Version from extracted from `config.api_version` or `config.api_url`.
+     * Version that has been provided with `config.api_version` or has been
+     * extracted from `config.api_url`.
      *
-     * A value of `0` indicates that no version could be extracted.
+     * A value of `0` indicates that no version has been found.
      */
     public readonly version: number;
 
@@ -96,8 +97,8 @@ export class API {
 
 
     /**
-     * Delays a async promise by the expected amount of time, which the Mastodon
-     * server send during the last communication.
+     * Delays an async promise by the expected amount of time, which the
+     * Mastodon server sends during the last communication.
      *
      * @return
      * Promise.
@@ -935,7 +936,7 @@ export class API {
 
 
     /**
-     * Put parameters to a path.
+     * Puts parameters to a path.
      *
      * @param path
      * Path to put to.
@@ -955,7 +956,7 @@ export class API {
 
 
     /**
-     * Put a new reaction to an announcement.
+     * Puts a new reaction to an announcement.
      *
      * @param announcementID
      * ID of the announcement to put to.
