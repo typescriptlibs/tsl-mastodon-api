@@ -20,15 +20,24 @@
 
 export declare namespace Bridge {
     const fetch: Window['fetch'];
-    const Blob: Blob;
-    const File: File;
-    const FormData: FormData;
-    const Headers: Headers;
-    const Response: Response;
-    const URL: URL;
-    const URLSearchParams: URLSearchParams;
-    const WebSocket: WebSocket;
+    const Blob: Class<Blob>;
+    const File: Class<File>;
+    const FormData: Class<FormData>;
+    const Headers: Class<Headers>;
+    const Response: Class<Response>;
+    const URL: Class<URL>;
+    const URLSearchParams: Class<URLSearchParams>;
+    const WebSocket: Class<WebSocket>;
 }
+
+
+/**
+ * Utility type to create a virtual class based on an interface type.
+ */
+export declare type Class<T> = (
+    & { new( ...args: Array<unknown> ): T }
+    & T
+);
 
 
 /* *

@@ -10,7 +10,9 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
-/// <amd-module name="tsl-mastodon-api/OAuth" />
+
+/// <amd-module name="tsl-mastodon-api/lib/OAuth" />
+
 
 /* *
  *
