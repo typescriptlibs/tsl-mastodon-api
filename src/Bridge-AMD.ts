@@ -11,7 +11,7 @@
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
 
-/// <amd-module name="tsl-mastodon-api/Bridge" />
+/// <amd-module name="tsl-mastodon-api/lib/Bridge" />
 
 
 /* *
@@ -30,7 +30,7 @@ const global = (
 
 export const Bridge = {
     global,
-    fetch: global.fetch,
+    fetch: global.fetch.bind( global ),
     Blob: global.Blob,
     File: global.File,
     FormData: global.FormData,
