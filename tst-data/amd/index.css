@@ -1,0 +1,97 @@
+:root {
+    --bgc: #FFF;
+    --fgc: #000;
+    --hlc: #609;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bgc: #000;
+        --fgc: #FFF;
+        --hlc: #C9F;
+    }
+}
+
+* {
+    background-color: var(--bgc);
+    color: var(--fgc);
+    font-family: Verdana, sans-serif;
+}
+
+a,
+a:visited {
+    color: var(--hlc);
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    color: var(--hlc);
+    text-decoration: underline;
+}
+
+code {
+    font-family: monospace;
+}
+
+fieldset {
+    border-style: double;
+    border-width: 6px;
+    display: inline-block;
+    margin: 1em;
+    padding: 0.5em;
+    text-align: left;
+    width: 30em;
+    vertical-align: top;
+}
+
+fieldset p {
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+header,
+footer,
+section {
+    clear: both;
+    margin: 1em;
+    overflow: auto;
+    text-align: center;
+}
+
+button,
+input,
+textarea {
+    border-color: var(--hlc);
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 2px;
+    font-size: 1em;
+    padding: 0.5em;
+    width: 60%;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    width: 30%;
+}
+
+legend {
+    padding: 0 0.5em;
+}
+
+section {
+    clear: both;
+    text-align: center;
+}
