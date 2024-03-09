@@ -31,6 +31,7 @@ const global = (
 export const Bridge = {
     global,
     fetch: global.fetch.bind( global ),
+    fileFrom: undefined,
     Blob: global.Blob,
     File: global.File,
     FormData: global.FormData,

@@ -18,15 +18,16 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Emoji", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Emoji", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isEmojis = exports.isEmoji = void 0;
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/Emoji" />
     /* *
      *
      *  Functions
@@ -72,12 +73,12 @@ define("tsl-mastodon-api/JSON/Emoji", ["require", "exports"], function (require,
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Account", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isAccounts = exports.isAccount = void 0;
@@ -139,15 +140,16 @@ define("tsl-mastodon-api/JSON/Account", ["require", "exports"], function (requir
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Reaction", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Reaction", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isReactions = exports.isReaction = void 0;
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/Reaction" />
     /* *
      *
      *  Functions
@@ -190,15 +192,16 @@ define("tsl-mastodon-api/JSON/Reaction", ["require", "exports"], function (requi
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Tag", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Tag", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isTagStatistic = exports.isTags = exports.isTag = void 0;
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/Tag" />
     /* *
      *
      *  Functions
@@ -261,12 +264,12 @@ define("tsl-mastodon-api/JSON/Tag", ["require", "exports"], function (require, e
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Announcement", ["require", "exports", "tsl-mastodon-api/JSON/Emoji", "tsl-mastodon-api/JSON/Reaction", "tsl-mastodon-api/JSON/Tag"], function (require, exports, Emoji_js_1, Reaction_js_1, Tag_js_1) {
+define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Emoji_js_1, Reaction_js_1, Tag_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isAnnouncementStatuses = exports.isAnnouncementStatus = exports.isAnnouncements = exports.isAnnouncementAccounts = exports.isAnnouncementAccount = exports.isAnnouncement = void 0;
@@ -385,14 +388,15 @@ define("tsl-mastodon-api/JSON/Announcement", ["require", "exports", "tsl-mastodo
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Application", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Application", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/Application" />
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -400,14 +404,15 @@ define("tsl-mastodon-api/JSON/Application", ["require", "exports"], function (re
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Card", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Card", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/Card" />
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -415,12 +420,12 @@ define("tsl-mastodon-api/JSON/Card", ["require", "exports"], function (require, 
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/List", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/List", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isLists = exports.isList = void 0;
@@ -466,15 +471,16 @@ define("tsl-mastodon-api/JSON/List", ["require", "exports"], function (require, 
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/MediaAttachment", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isVideoAttachmentMeta = exports.isVideoAttachment = exports.isUnknownAttachment = exports.isMediaAttachment = exports.isImageAttachmentMeta = exports.isImageAttachment = exports.isGIFVAttachmentMeta = exports.isGIFVAttachment = exports.isAudioAttachmentMeta = exports.isAudioAttachment = void 0;
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/MediaAttachment" />
     /* *
      *
      *  Functions
@@ -710,12 +716,12 @@ define("tsl-mastodon-api/JSON/MediaAttachment", ["require", "exports"], function
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Poll", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/Poll", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isPollOptions = exports.isPoll = void 0;
@@ -768,12 +774,12 @@ define("tsl-mastodon-api/JSON/Poll", ["require", "exports"], function (require, 
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Status", ["require", "exports", "tsl-mastodon-api/JSON/Account", "tsl-mastodon-api/JSON/Tag"], function (require, exports, Account_js_1, Tag_js_2) {
+define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_1, Tag_js_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isStatusSchedule = exports.isStatusMention = exports.isStatuses = exports.isStatusContext = exports.isStatus = void 0;
@@ -882,12 +888,12 @@ define("tsl-mastodon-api/JSON/Status", ["require", "exports", "tsl-mastodon-api/
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Notification", ["require", "exports", "tsl-mastodon-api/JSON/Account", "tsl-mastodon-api/JSON/Status"], function (require, exports, Account_js_2, Status_js_1) {
+define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status"], function (require, exports, Account_js_2, Status_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isNotificationType = exports.isNotifications = exports.isNotification = void 0;
@@ -962,12 +968,12 @@ define("tsl-mastodon-api/JSON/Notification", ["require", "exports", "tsl-mastodo
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/StreamData", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/JSON/StreamData", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isStreamData = void 0;
@@ -1001,12 +1007,12 @@ define("tsl-mastodon-api/JSON/StreamData", ["require", "exports"], function (req
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/Search", ["require", "exports", "tsl-mastodon-api/JSON/Account", "tsl-mastodon-api/JSON/Status", "tsl-mastodon-api/JSON/Tag"], function (require, exports, Account_js_3, Status_js_2, Tag_js_3) {
+define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_3, Status_js_2, Tag_js_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isSearchResults = exports.isSearch = void 0;
@@ -1058,16 +1064,21 @@ define("tsl-mastodon-api/JSON/Search", ["require", "exports", "tsl-mastodon-api/
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/JSON/index", ["require", "exports", "tsl-mastodon-api/JSON/Account", "tsl-mastodon-api/JSON/Announcement", "tsl-mastodon-api/JSON/Application", "tsl-mastodon-api/JSON/Card", "tsl-mastodon-api/JSON/Emoji", "tsl-mastodon-api/JSON/List", "tsl-mastodon-api/JSON/MediaAttachment", "tsl-mastodon-api/JSON/StreamData", "tsl-mastodon-api/JSON/Notification", "tsl-mastodon-api/JSON/Poll", "tsl-mastodon-api/JSON/Reaction", "tsl-mastodon-api/JSON/Search", "tsl-mastodon-api/JSON/Status", "tsl-mastodon-api/JSON/Tag"], function (require, exports, Account_js_4, Announcement_js_1, Application_js_1, Card_js_1, Emoji_js_2, List_js_1, MediaAttachment_js_1, StreamData_js_1, Notification_js_1, Poll_js_1, Reaction_js_2, Search_js_1, Status_js_3, Tag_js_4) {
+define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Announcement", "tsl-mastodon-api/lib/JSON/Application", "tsl-mastodon-api/lib/JSON/Card", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/List", "tsl-mastodon-api/lib/JSON/MediaAttachment", "tsl-mastodon-api/lib/JSON/StreamData", "tsl-mastodon-api/lib/JSON/Notification", "tsl-mastodon-api/lib/JSON/Poll", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Search", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_4, Announcement_js_1, Application_js_1, Card_js_1, Emoji_js_2, List_js_1, MediaAttachment_js_1, StreamData_js_1, Notification_js_1, Poll_js_1, Reaction_js_2, Search_js_1, Status_js_3, Tag_js_4) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.stringify = exports.parse = void 0;
-    /// <amd-module name="tsl-mastodon-api/JSON/index" />
+    /// <amd-module name="tsl-mastodon-api/lib/JSON/index" />
+    /* *
+     *
+     *  Exports
+     *
+     * */
     __exportStar(Account_js_4, exports);
     __exportStar(Announcement_js_1, exports);
     __exportStar(Application_js_1, exports);
@@ -1082,6 +1093,11 @@ define("tsl-mastodon-api/JSON/index", ["require", "exports", "tsl-mastodon-api/J
     __exportStar(Search_js_1, exports);
     __exportStar(Status_js_3, exports);
     __exportStar(Tag_js_4, exports);
+    /* *
+     *
+     *  Functions
+     *
+     * */
     exports.parse = JSON.parse;
     exports.stringify = JSON.stringify;
 });
@@ -1096,11 +1112,11 @@ define("tsl-mastodon-api/JSON/index", ["require", "exports", "tsl-mastodon-api/J
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exports) {
+define("tsl-mastodon-api/lib/Bridge", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Bridge = void 0;
-    /// <amd-module name="tsl-mastodon-api/Bridge" />
+    /// <amd-module name="tsl-mastodon-api/lib/Bridge" />
     /* *
      *
      *  Constants
@@ -1111,7 +1127,8 @@ define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exp
         window);
     exports.Bridge = {
         global,
-        fetch: global.fetch,
+        fetch: global.fetch.bind(global),
+        fileFrom: undefined,
         Blob: global.Blob,
         File: global.File,
         FormData: global.FormData,
@@ -1121,40 +1138,6 @@ define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exp
         URLSearchParams: global.URLSearchParams,
         WebSocket: global.WebSocket
     };
-    /* *
-     *
-     *  Imports
-     *
-     * */
-    (async () => {
-        if (!exports.Bridge.fetch) {
-            exports.Bridge.fetch = (await new Promise((resolve_1, reject_1) => { require(['node-fetch'], resolve_1, reject_1); })).default;
-        }
-        if (!exports.Bridge.Blob) {
-            exports.Bridge.Blob = (await new Promise((resolve_2, reject_2) => { require(['node-fetch'], resolve_2, reject_2); })).Blob;
-        }
-        if (!exports.Bridge.File) {
-            exports.Bridge.File = (await new Promise((resolve_3, reject_3) => { require(['node-fetch'], resolve_3, reject_3); })).File;
-        }
-        if (!exports.Bridge.FormData) {
-            exports.Bridge.FormData = (await new Promise((resolve_4, reject_4) => { require(['node-fetch'], resolve_4, reject_4); })).FormData;
-        }
-        if (!exports.Bridge.Headers) {
-            exports.Bridge.Headers = (await new Promise((resolve_5, reject_5) => { require(['node-fetch'], resolve_5, reject_5); })).Headers;
-        }
-        if (!exports.Bridge.Response) {
-            exports.Bridge.Response = (await new Promise((resolve_6, reject_6) => { require(['node-fetch'], resolve_6, reject_6); })).Response;
-        }
-        if (!exports.Bridge.URL) {
-            exports.Bridge.URL = (await new Promise((resolve_7, reject_7) => { require(['node:url'], resolve_7, reject_7); })).URL;
-        }
-        if (!exports.Bridge.URLSearchParams) {
-            exports.Bridge.URLSearchParams = (await new Promise((resolve_8, reject_8) => { require(['node:url'], resolve_8, reject_8); })).URLSearchParams;
-        }
-        if (!exports.Bridge.WebSocket) {
-            exports.Bridge.WebSocket = (await new Promise((resolve_9, reject_9) => { require(['ws'], resolve_9, reject_9); })).WebSocket;
-        }
-    })();
     /* *
      *
      *  Default Export
@@ -1173,7 +1156,7 @@ define("tsl-mastodon-api/Bridge", ["require", "exports"], function (require, exp
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Bridge"], function (require, exports, Bridge_js_1) {
+define("tsl-mastodon-api/lib/Utilities", ["require", "exports", "tsl-mastodon-api/lib/Bridge"], function (require, exports, Bridge_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Utilities = void 0;
@@ -1189,6 +1172,28 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
          *  Declarations
          *
          * */
+        /* *
+         *
+         *  Constants
+         *
+         * */
+        /**
+         * Loads a file from a path.
+         *
+         * @memberof Utilities
+         *
+         * @param filePath
+         * Path to the file.
+         *
+         * @param mimeType
+         * Mime type of the file.
+         *
+         * @return
+         * Promise with the file, if successful.
+         *
+         * @requires node
+         */
+        Utilities.fileFrom = Bridge_js_1.default.fileFrom;
         /* *
          *
          *  Functions
@@ -1223,27 +1228,6 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
             return target;
         }
         Utilities.buildURLSearchParams = buildURLSearchParams;
-        /**
-         * Loads a file from a path.
-         *
-         * @memberof Utilities
-         *
-         * @param filePath
-         * Path to the file.
-         *
-         * @param [mimeType]
-         * Mime type of the file.
-         *
-         * @return
-         * Promise with the file, if successful.
-         *
-         * @requires node-fetch
-         */
-        async function fileFrom(filePath, mimeType) {
-            const fileFrom = (await new Promise((resolve_10, reject_10) => { require(['node-fetch'], resolve_10, reject_10); })).fileFrom;
-            return await fileFrom(filePath, mimeType);
-        }
-        Utilities.fileFrom = fileFrom;
         function transferParams(params, target) {
             let value;
             if (Array.isArray(params)) {
@@ -1324,7 +1308,7 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
             }
         }
         Utilities.transferParams = transferParams;
-    })(Utilities = exports.Utilities || (exports.Utilities = {}));
+    })(Utilities || (exports.Utilities = Utilities = {}));
     /* *
      *
      *  Default Export
@@ -1343,7 +1327,7 @@ define("tsl-mastodon-api/Utilities", ["require", "exports", "tsl-mastodon-api/Br
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge", "tsl-mastodon-api/Utilities"], function (require, exports, Bridge_js_2, Utilities_js_1) {
+define("tsl-mastodon-api/lib/REST", ["require", "exports", "tsl-mastodon-api/lib/Bridge", "tsl-mastodon-api/lib/Utilities"], function (require, exports, Bridge_js_2, Utilities_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.REST = void 0;
@@ -1415,7 +1399,6 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
                 text = await response.text();
                 try {
                     return {
-                        failed: !response.ok,
                         json: JSON.parse(text),
                         path,
                         response,
@@ -1424,7 +1407,7 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
                 }
                 catch (error) {
                     return {
-                        failed: !response.ok,
+                        error: (error || new Error()),
                         json: { text },
                         path,
                         response,
@@ -1435,7 +1418,7 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
             catch (error) {
                 clearTimeout(timer);
                 return {
-                    failed: true,
+                    error: (error || new Error()),
                     json: { text },
                     path,
                     response,
@@ -1503,7 +1486,7 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
             return array;
         }
         REST.toParamArray = toParamArray;
-    })(REST = exports.REST || (exports.REST = {}));
+    })(REST || (exports.REST = REST = {}));
     /* *
      *
      *  Default Export
@@ -1522,7 +1505,7 @@ define("tsl-mastodon-api/REST", ["require", "exports", "tsl-mastodon-api/Bridge"
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/index", "tsl-mastodon-api/REST"], function (require, exports, JSON, REST_js_1) {
+define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/JSON/index", "tsl-mastodon-api/lib/REST"], function (require, exports, JSON, REST_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.API = void 0;
@@ -1612,11 +1595,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async deleteList(listID) {
             const result = await this.delete(`lists/${listID}`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isList(result?.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1634,11 +1617,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async deleteListAccounts(listID, listAccounts) {
             const result = await this.delete(`lists/${listID}/accounts`, listAccounts);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 typeof result.json !== 'object') {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1657,10 +1640,10 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async deleteAnnouncementReaction(announcementID, emojiName) {
             const result = await this.delete(`announcements/${announcementID}/reactions/${emojiName}`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1675,14 +1658,15 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async deleteStatus(statusID) {
             const result = await this.delete(`statuses/${statusID}`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatus(result?.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
+        /** @todo Add doclet. */
         extractRateLimit(headers) {
             let value = headers.get('X-RateLimit-Limit');
             if (typeof value === 'string') {
@@ -1693,6 +1677,7 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
                 return parseInt(value);
             }
         }
+        /** @todo Add doclet. */
         async fetch(method, path, params) {
             const rest = this.rest;
             const result = await rest.fetch(method, path, params);
@@ -1725,11 +1710,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getAccount() {
             const result = await this.get('accounts/verify_credentials');
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isAccount(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1741,11 +1726,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getAnnouncements(queryParams) {
             const result = await this.get('announcements');
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isAnnouncements(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1760,11 +1745,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getList(listID) {
             const result = await this.get(`lists/${listID}`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isList(result?.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1782,11 +1767,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getListAccounts(listID, queryParams) {
             const result = await this.get(`lists/${listID}/accounts`, queryParams);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isAccounts(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1801,11 +1786,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getLists(queryParams) {
             const result = await this.get(`lists`, queryParams);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isLists(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1820,12 +1805,12 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getMediaAttachment(mediaAttachmentID) {
             const result = await this.get(`media/${mediaAttachmentID}`);
-            if (result.failed ||
+            if (result.error ||
                 (result.status !== 200 &&
                     result.status !== 206) ||
                 !JSON.isMediaAttachment(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1837,11 +1822,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getNotifications(queryParams) {
             const result = await this.get('notifications', REST_js_1.default.toParamArray(queryParams));
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isNotifications(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1856,11 +1841,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatus(statusID) {
             const result = await this.get(`statuses/${statusID}`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatus(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1875,11 +1860,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatusContext(statusID) {
             const result = await this.get(`statuses/${statusID}/context`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatusContext(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1897,11 +1882,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatuses(accountID, queryParams) {
             const result = await this.get(`accounts/${accountID}/statuses`, queryParams);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatuses(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1916,11 +1901,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatusesOfHome(queryParams) {
             const result = await this.get('timelines/home', queryParams);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatuses(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1938,11 +1923,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatusesOfList(listID, queryParams) {
             const result = await this.get(`timelines/list/${listID}`, queryParams);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatuses(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1957,11 +1942,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatusesOfPublic(queryParams) {
             const result = await this.get('timelines/public', REST_js_1.default.toParamArray(queryParams));
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatuses(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -1979,11 +1964,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async getStatusesOfTag(tag, queryParams) {
             const result = await this.get(`timelines/tag/${tag}`, REST_js_1.default.toParamArray(queryParams));
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isStatuses(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2011,10 +1996,10 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postDismissAllNotifications() {
             const result = await this.post(`notifications/clear`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2030,10 +2015,10 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postDismissAnnouncement(announcementID) {
             const result = await this.post(`announcements/${announcementID}/dismiss`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2049,10 +2034,10 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postDismissNotification(notificationID) {
             const result = await this.post(`notifications/${notificationID}/dismiss`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2067,11 +2052,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postList(list) {
             const result = await this.post('lists', list);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isList(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2089,11 +2074,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postListAccounts(listId, listAccounts) {
             const result = await this.post(`lists/${listId}/accounts`, listAccounts);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isAccounts(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2108,12 +2093,12 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postMediaAttachment(mediaAttachment) {
             const result = await this.post('media', mediaAttachment);
-            if (result.failed ||
+            if (result.error ||
                 (result.status !== 200 &&
                     result.status !== 202) ||
                 !JSON.isMediaAttachment(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2131,11 +2116,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postPollVote(pollID, pollVote) {
             const result = await this.post(`polls/${pollID}/votes`, pollVote);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isPoll(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2150,13 +2135,13 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async postStatus(status) {
             const result = await this.post('statuses', status);
-            if (result.failed ||
+            if (result.error ||
                 (result.status !== 200 &&
                     result.status !== 206) ||
                 (!JSON.isStatus(result.json) &&
                     !JSON.isStatusSchedule(result.json))) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2190,10 +2175,10 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async putAnnouncementReaction(announcementID, emojiName) {
             const result = await this.put(`announcements/${announcementID}/reactions/${emojiName}`);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2210,11 +2195,11 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
          */
         async search(search) {
             const result = await this.get('search', search);
-            if (result.failed ||
+            if (result.error ||
                 result.status !== 200 ||
                 !JSON.isSearchResults(result.json)) {
-                result.failed = true;
-                return Promise.reject(result);
+                result.error = result.error || new Error();
+                throw result;
             }
             return result;
         }
@@ -2238,7 +2223,51 @@ define("tsl-mastodon-api/API", ["require", "exports", "tsl-mastodon-api/JSON/ind
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge"], function (require, exports, Bridge_js_3) {
+define("tsl-mastodon-api/lib/Bridge", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.Bridge = void 0;
+    /// <amd-module name="tsl-mastodon-api/lib/Bridge" />
+    /* *
+     *
+     *  Constants
+     *
+     * */
+    const global = (typeof window === 'undefined' ?
+        globalThis :
+        window);
+    exports.Bridge = {
+        global,
+        fetch: global.fetch.bind(global),
+        fileFrom: undefined,
+        Blob: global.Blob,
+        File: global.File,
+        FormData: global.FormData,
+        Headers: global.Headers,
+        Response: global.Response,
+        URL: global.URL,
+        URLSearchParams: global.URLSearchParams,
+        WebSocket: global.WebSocket
+    };
+    /* *
+     *
+     *  Default Export
+     *
+     * */
+    exports.default = exports.Bridge;
+});
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+define("tsl-mastodon-api/lib/OAuth", ["require", "exports", "tsl-mastodon-api/lib/Bridge"], function (require, exports, Bridge_js_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.OAuth = void 0;
@@ -2303,7 +2332,7 @@ define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge
          * @requires oauth
          */
         async function getAccessToken(baseURL, clientId, clientSecret, authorizationCode, redirectUri = 'urn:ietf:wg:oauth:2.0:oob') {
-            const OAuth2 = (await new Promise((resolve_11, reject_11) => { require(['oauth'], resolve_11, reject_11); })).OAuth2;
+            const OAuth2 = (await new Promise((resolve_1, reject_1) => { require(['oauth'], resolve_1, reject_1); })).OAuth2;
             const oauth = new OAuth2(clientId, clientSecret, baseURL, undefined, '/oauth/token');
             return new Promise((resolve, reject) => {
                 oauth.getOAuthAccessToken(authorizationCode, {
@@ -2324,7 +2353,7 @@ define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge
          * @requires oauth
          */
         async function getAuthorizationUrl(baseURL, clientId, clientSecret, redirectURI = 'urn:ietf:wg:oauth:2.0:oob', scope = 'read write follow') {
-            const OAuth2 = (await new Promise((resolve_12, reject_12) => { require(['oauth'], resolve_12, reject_12); })).OAuth2;
+            const OAuth2 = (await new Promise((resolve_2, reject_2) => { require(['oauth'], resolve_2, reject_2); })).OAuth2;
             const oauth = new OAuth2(clientId, clientSecret, baseURL, undefined, '/oauth/token');
             return oauth.getAuthorizeUrl({
                 redirect_uri: redirectURI,
@@ -2334,7 +2363,7 @@ define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge
             });
         }
         OAuth.getAuthorizationUrl = getAuthorizationUrl;
-    })(OAuth = exports.OAuth || (exports.OAuth = {}));
+    })(OAuth || (exports.OAuth = OAuth = {}));
     /* *
      *
      *  Default Export
@@ -2353,7 +2382,7 @@ define("tsl-mastodon-api/OAuth", ["require", "exports", "tsl-mastodon-api/Bridge
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/StreamAPI", ["require", "exports", "tsl-mastodon-api/Bridge", "tsl-mastodon-api/JSON/index", "tsl-mastodon-api/Utilities"], function (require, exports, Bridge_js_4, JSON, Utilities_js_2) {
+define("tsl-mastodon-api/lib/StreamAPI", ["require", "exports", "tsl-mastodon-api/lib/Bridge", "tsl-mastodon-api/lib/JSON/index", "tsl-mastodon-api/lib/Utilities"], function (require, exports, Bridge_js_4, JSON, Utilities_js_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.StreamAPI = void 0;
@@ -2495,11 +2524,16 @@ define("tsl-mastodon-api/StreamAPI", ["require", "exports", "tsl-mastodon-api/Br
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/index", ["require", "exports", "tsl-mastodon-api/JSON/index", "tsl-mastodon-api/API", "tsl-mastodon-api/Bridge", "tsl-mastodon-api/REST", "tsl-mastodon-api/Utilities"], function (require, exports, JSON, API_js_1, Bridge_js_5, REST_js_2, Utilities_js_3) {
+define("tsl-mastodon-api", ["require", "exports", "tsl-mastodon-api/lib/JSON/index", "tsl-mastodon-api/lib/API", "tsl-mastodon-api/lib/Bridge", "tsl-mastodon-api/lib/REST", "tsl-mastodon-api/lib/Utilities"], function (require, exports, JSON, API_js_1, Bridge_js_5, REST_js_2, Utilities_js_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.JSON = void 0;
-    /// <amd-module name="tsl-mastodon-api/index" />
+    /// <amd-module name="tsl-mastodon-api" />
+    /* *
+     *
+     *  Exports
+     *
+     * */
     exports.JSON = JSON;
     __exportStar(API_js_1, exports);
     __exportStar(Bridge_js_5, exports);

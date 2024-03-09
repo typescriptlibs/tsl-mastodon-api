@@ -10,13 +10,19 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+
 /* *
  *
  *  Imports
  *
  * */
 
+
+import * as FS from 'node:fs';
+
+
 import * as Mastodon from 'tsl-mastodon-api';
+
 
 /* *
  *
@@ -24,34 +30,36 @@ import * as Mastodon from 'tsl-mastodon-api';
  *
  * */
 
+
 const v1Delete = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-delete/'
 } );
+
 
 const v1Get = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-get/'
 } );
 
+
 const v1GetMultiple = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-get-multiple/'
 } );
+
 
 const v1Post = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-post/'
 } );
 
+
 const v1Put = new Mastodon.API( {
     access_token: '0', // test server does not validate
     api_url: 'http://127.0.0.1:8000/v1-put/'
 } );
 
-forceGetFetch( v1Delete );
-forceGetFetch( v1Post );
-forceGetFetch( v1Put );
 
 /* *
  *
@@ -74,20 +82,53 @@ function forceGetFetch (
     }
 }
 
+function libContains (
+    ...patterns: Array<RegExp>
+): boolean {
+    let fileContent: string;
+
+    for ( let filePath of FS.readdirSync( 'lib', { recursive: true } ) ) {
+
+        filePath = `lib/${filePath}`;
+
+        if ( FS.lstatSync( filePath ).isFile() ) {
+
+            fileContent = FS.readFileSync( filePath, 'utf8' );
+
+            for ( const pattern of patterns ) {
+
+                if ( pattern.test( fileContent ) ) {
+                    return true;
+                }
+
+            }
+
+        }
+
+    }
+
+    return false;
+}
+
 /* *
  *
  *  Default Export
  *
  * */
 
-export const Setup = {
+
+forceGetFetch( v1Delete );
+forceGetFetch( v1Post );
+forceGetFetch( v1Put );
+
+
+export default {
     Mastodon,
     v1Delete,
     v1Get,
     v1GetMultiple,
     v1Post,
     v1Put,
-    fileFrom: Mastodon.Utilities.fileFrom
+    fileFrom: Mastodon.Bridge.fileFrom,
+    libContains
 };
-
-export default Setup;

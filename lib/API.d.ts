@@ -9,7 +9,7 @@
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-/// <amd-module name="tsl-mastodon-api/API" />
+/// <amd-module name="tsl-mastodon-api/lib/API" />
 import * as JSON from './JSON/index.js';
 import REST from './REST.js';
 /**
@@ -105,7 +105,9 @@ export declare class API {
      * Promise with the deleted status, if successful.
      */
     deleteStatus(statusID: string): Promise<API.Success<JSON.Status>>;
+    /** @todo Add doclet. */
     protected extractRateLimit(headers: Headers): (number | undefined);
+    /** @todo Add doclet. */
     protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: object): Promise<API.Result>;
     /**
      * Get a result from a path.

@@ -150,7 +150,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isList( result?.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -182,7 +182,7 @@ export class API {
             result.status !== 200 ||
             typeof result.json !== 'object'
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -214,7 +214,7 @@ export class API {
             result.error ||
             result.status !== 200
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -242,7 +242,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatus( result?.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -324,7 +324,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isAccount( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -349,7 +349,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isAnnouncements( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -377,7 +377,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isList( result?.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -409,7 +409,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isAccounts( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -437,7 +437,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isLists( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -468,7 +468,7 @@ export class API {
             ) ||
             !JSON.isMediaAttachment( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -493,7 +493,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isNotifications( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -521,7 +521,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatus( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -549,7 +549,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatusContext( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -581,7 +581,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -609,7 +609,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -641,7 +641,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -669,7 +669,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -701,7 +701,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -744,7 +744,7 @@ export class API {
             result.error ||
             result.status !== 200
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -772,7 +772,7 @@ export class API {
             result.error ||
             result.status !== 200
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -800,7 +800,7 @@ export class API {
             result.error ||
             result.status !== 200
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -828,7 +828,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isList( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -860,7 +860,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isAccounts( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -891,7 +891,7 @@ export class API {
             ) ||
             !JSON.isMediaAttachment( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -923,7 +923,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isPoll( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -957,7 +957,7 @@ export class API {
                 !JSON.isStatusSchedule( result.json )
             )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -1009,7 +1009,7 @@ export class API {
             result.error ||
             result.status !== 200
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }
@@ -1039,7 +1039,7 @@ export class API {
             result.status !== 200 ||
             !JSON.isSearchResults( result.json )
         ) {
-            result.error ??= new Error();
+            result.error = result.error || new Error();
 
             throw result;
         }

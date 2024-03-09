@@ -10,14 +10,18 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+
 /* *
  *
  *  Imports
  *
  * */
 
+
 import Setup from '../Setup.js';
+
 import test from '@typescriptlibs/tst';
+
 
 /* *
  *
@@ -25,7 +29,8 @@ import test from '@typescriptlibs/tst';
  *
  * */
 
-test( '', async ( assert: test.Assert ) => {
+
+test( 'Test JSON.isMediaAttachment', async ( assert: test.Assert ) => {
     const validation = Setup.Mastodon.JSON.isMediaAttachment( {
         id: '111059411755644935',
         type: 'image',

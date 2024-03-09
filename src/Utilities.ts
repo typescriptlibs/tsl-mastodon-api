@@ -10,7 +10,9 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+
 /// <amd-module name="tsl-mastodon-api/lib/Utilities" />
+
 
 /* *
  *
@@ -43,6 +45,32 @@ export namespace Utilities {
         | Array<[string, unknown]>
         | Record<string, unknown>
     );
+
+
+    /* *
+     *
+     *  Constants
+     *
+     * */
+
+
+    /**
+     * Loads a file from a path.
+     *
+     * @memberof Utilities
+     *
+     * @param filePath
+     * Path to the file.
+     *
+     * @param mimeType
+     * Mime type of the file.
+     *
+     * @return
+     * Promise with the file, if successful.
+     *
+     * @requires node
+     */
+    export const fileFrom = Bridge.fileFrom;
 
 
     /* *
@@ -103,32 +131,6 @@ export namespace Utilities {
         }
 
         return target;
-    }
-
-
-    /**
-     * Loads a file from a path.
-     *
-     * @memberof Utilities
-     *
-     * @param filePath
-     * Path to the file.
-     *
-     * @param [mimeType]
-     * Mime type of the file.
-     *
-     * @return
-     * Promise with the file, if successful.
-     *
-     * @requires node-fetch
-     */
-    export async function fileFrom (
-        filePath: string,
-        mimeType?: string
-    ): Promise<File> {
-        const fileFrom = ( await import( 'node-fetch' ) ).fileFrom;
-
-        return await fileFrom( filePath, mimeType );
     }
 
 

@@ -9,13 +9,9 @@
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-/// <amd-module name="tsl-mastodon-api/Utilities" />
+/// <amd-module name="tsl-mastodon-api/lib/Utilities" />
 export declare namespace Utilities {
     type Params = (Array<[string, unknown]> | Record<string, unknown>);
-    function buildFormData(params?: Params, target?: FormData): FormData;
-    function buildHeaders(params?: Params, target?: Headers): Headers;
-    function buildURL(base: string, path?: string, params?: Params): URL;
-    function buildURLSearchParams(params?: Params, target?: URLSearchParams): URLSearchParams;
     /**
      * Loads a file from a path.
      *
@@ -24,15 +20,19 @@ export declare namespace Utilities {
      * @param filePath
      * Path to the file.
      *
-     * @param [mimeType]
+     * @param mimeType
      * Mime type of the file.
      *
      * @return
      * Promise with the file, if successful.
      *
-     * @requires node-fetch
+     * @requires node
      */
-    function fileFrom(filePath: string, mimeType?: string): Promise<File>;
+    const fileFrom: typeof import("./Bridge.js").fileFrom;
+    function buildFormData(params?: Params, target?: FormData): FormData;
+    function buildHeaders(params?: Params, target?: Headers): Headers;
+    function buildURL(base: string, path?: string, params?: Params): URL;
+    function buildURLSearchParams(params?: Params, target?: URLSearchParams): URLSearchParams;
     function transferParams(params: Params, target: (FormData | Headers | URLSearchParams)): void;
 }
 export default Utilities;

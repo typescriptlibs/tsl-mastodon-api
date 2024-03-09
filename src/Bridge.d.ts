@@ -19,15 +19,52 @@
 
 
 export declare namespace Bridge {
+
+
+    /* *
+     *
+     *  Functions
+     *
+     * */
+
+
     const fetch: Window['fetch'];
+
+
+    function fileFrom?( filePath: string, mimeType?: string ): Promise<Bridge['File']> );
+
+
+    /* *
+     *
+     *  Classes
+     *
+     * */
+
+
     const Blob: Class<Blob>;
+
+
     const File: Class<File>;
+
+
     const FormData: Class<FormData>;
+
+
     const Headers: Class<Headers>;
+
+
     const Response: Class<Response>;
+
+
     const URL: Class<URL>;
+
+
     const URLSearchParams: Class<URLSearchParams>;
+
+
     const WebSocket: Class<WebSocket>;
+
+
 }
 
 

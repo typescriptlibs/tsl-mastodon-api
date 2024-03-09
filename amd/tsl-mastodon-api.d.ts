@@ -1,14 +1,14 @@
-/// <amd-module name="tsl-mastodon-api/JSON/Emoji" />
-declare module "tsl-mastodon-api/JSON/Emoji" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Emoji" />
+declare module "tsl-mastodon-api/lib/JSON/Emoji" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     /**
@@ -64,20 +64,20 @@ declare module "tsl-mastodon-api/JSON/Emoji" {
     export function isEmojis(json: Partial<Array<Partial<Emoji>>>): json is Array<Emoji>;
     export default Emoji;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Account" />
-declare module "tsl-mastodon-api/JSON/Account" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Account" />
+declare module "tsl-mastodon-api/lib/JSON/Account" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import type Emoji from "tsl-mastodon-api/JSON/Emoji";
+    import type Emoji from "tsl-mastodon-api/lib/JSON/Emoji";
     /**
      * Represents a user of Mastodon and their associated profile.
      */
@@ -238,17 +238,17 @@ declare module "tsl-mastodon-api/JSON/Account" {
     export function isAccounts(json: Partial<Array<Partial<Account>>>): json is Array<Account>;
     export default Account;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Reaction" />
-declare module "tsl-mastodon-api/JSON/Reaction" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Reaction" />
+declare module "tsl-mastodon-api/lib/JSON/Reaction" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     /**
@@ -306,17 +306,17 @@ declare module "tsl-mastodon-api/JSON/Reaction" {
     export function isReactions(json: Partial<Array<Partial<Reaction>>>): json is Array<Reaction>;
     export default Reaction;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Tag" />
-declare module "tsl-mastodon-api/JSON/Tag" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Tag" />
+declare module "tsl-mastodon-api/lib/JSON/Tag" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     /**
@@ -398,22 +398,22 @@ declare module "tsl-mastodon-api/JSON/Tag" {
     export function isTagStatistic(json: Partial<TagStatistic>): json is TagStatistic;
     export default Tag;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Announcement" />
-declare module "tsl-mastodon-api/JSON/Announcement" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Announcement" />
+declare module "tsl-mastodon-api/lib/JSON/Announcement" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import type Emoji from "tsl-mastodon-api/JSON/Emoji";
-    import type Reaction from "tsl-mastodon-api/JSON/Reaction";
-    import type Tag from "tsl-mastodon-api/JSON/Tag";
+    import type Emoji from "tsl-mastodon-api/lib/JSON/Emoji";
+    import type Reaction from "tsl-mastodon-api/lib/JSON/Reaction";
+    import type Tag from "tsl-mastodon-api/lib/JSON/Tag";
     /**
      * Represents an announcement set by an administrator.
      * @since 3.1.0
@@ -596,17 +596,17 @@ declare module "tsl-mastodon-api/JSON/Announcement" {
     export function isAnnouncementStatuses(json: Partial<Array<Partial<AnnouncementStatus>>>): json is Array<AnnouncementStatus>;
     export default Announcement;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Application" />
-declare module "tsl-mastodon-api/JSON/Application" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Application" />
+declare module "tsl-mastodon-api/lib/JSON/Application" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     /**
@@ -643,17 +643,17 @@ declare module "tsl-mastodon-api/JSON/Application" {
     }
     export default Application;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Card" />
-declare module "tsl-mastodon-api/JSON/Card" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Card" />
+declare module "tsl-mastodon-api/lib/JSON/Card" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     /**
@@ -829,20 +829,20 @@ declare module "tsl-mastodon-api/JSON/Card" {
     }
     export default Card;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/List" />
-declare module "tsl-mastodon-api/JSON/List" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/List" />
+declare module "tsl-mastodon-api/lib/JSON/List" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import Account from "tsl-mastodon-api/JSON/Account";
+    import Account from "tsl-mastodon-api/lib/JSON/Account";
     /**
      * Represents a list of some users that the authenticated user follows.
      * @since 2.1.0
@@ -924,17 +924,17 @@ declare module "tsl-mastodon-api/JSON/List" {
     export function isLists(json: Partial<Array<Partial<List>>>): json is Array<List>;
     export default List;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/MediaAttachment" />
-declare module "tsl-mastodon-api/JSON/MediaAttachment" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/MediaAttachment" />
+declare module "tsl-mastodon-api/lib/JSON/MediaAttachment" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     /**
@@ -1438,20 +1438,20 @@ declare module "tsl-mastodon-api/JSON/MediaAttachment" {
     export function isVideoAttachmentMeta(json: Partial<VideoAttachmentMeta>): json is VideoAttachmentMeta;
     export default MediaAttachment;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Poll" />
-declare module "tsl-mastodon-api/JSON/Poll" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Poll" />
+declare module "tsl-mastodon-api/lib/JSON/Poll" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import type Emoji from "tsl-mastodon-api/JSON/Emoji";
+    import type Emoji from "tsl-mastodon-api/lib/JSON/Emoji";
     /**
      * Represents a poll attached to a status.
      * @since 2.8.0
@@ -1553,26 +1553,26 @@ declare module "tsl-mastodon-api/JSON/Poll" {
     export function isPollOptions(json: Partial<Array<Partial<PollOption>>>): json is Partial<Array<Partial<PollOption>>>;
     export default Poll;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Status" />
-declare module "tsl-mastodon-api/JSON/Status" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Status" />
+declare module "tsl-mastodon-api/lib/JSON/Status" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import type Account from "tsl-mastodon-api/JSON/Account";
-    import type Application from "tsl-mastodon-api/JSON/Application";
-    import type Card from "tsl-mastodon-api/JSON/Card";
-    import type Emoji from "tsl-mastodon-api/JSON/Emoji";
-    import type MediaAttachment from "tsl-mastodon-api/JSON/MediaAttachment";
-    import type Poll from "tsl-mastodon-api/JSON/Poll";
-    import type Tag from "tsl-mastodon-api/JSON/Tag";
+    import type Account from "tsl-mastodon-api/lib/JSON/Account";
+    import type Application from "tsl-mastodon-api/lib/JSON/Application";
+    import type Card from "tsl-mastodon-api/lib/JSON/Card";
+    import type Emoji from "tsl-mastodon-api/lib/JSON/Emoji";
+    import type MediaAttachment from "tsl-mastodon-api/lib/JSON/MediaAttachment";
+    import type Poll from "tsl-mastodon-api/lib/JSON/Poll";
+    import type Tag from "tsl-mastodon-api/lib/JSON/Tag";
     export interface MediaStatusPost {
         id?: string;
         in_reply_to_id?: string;
@@ -1868,21 +1868,21 @@ declare module "tsl-mastodon-api/JSON/Status" {
     export function isStatusSchedule(json: Partial<StatusSchedule>): json is StatusSchedule;
     export default Status;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Notification" />
-declare module "tsl-mastodon-api/JSON/Notification" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Notification" />
+declare module "tsl-mastodon-api/lib/JSON/Notification" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import Account from "tsl-mastodon-api/JSON/Account";
-    import Status from "tsl-mastodon-api/JSON/Status";
+    import Account from "tsl-mastodon-api/lib/JSON/Account";
+    import Status from "tsl-mastodon-api/lib/JSON/Status";
     /**
      * Represents a notification of an event relevant to the user.
      * @since 0.9.9
@@ -1974,21 +1974,21 @@ declare module "tsl-mastodon-api/JSON/Notification" {
     export function isNotificationType(type: string): type is NotificationType;
     export default Notification;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/StreamData" />
-declare module "tsl-mastodon-api/JSON/StreamData" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/StreamData" />
+declare module "tsl-mastodon-api/lib/JSON/StreamData" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import Notification from "tsl-mastodon-api/JSON/Notification";
-    import Status from "tsl-mastodon-api/JSON/Status";
+    import Notification from "tsl-mastodon-api/lib/JSON/Notification";
+    import Status from "tsl-mastodon-api/lib/JSON/Status";
     /**
      * Stream data received.
      * @since 1.0.0
@@ -2074,22 +2074,22 @@ declare module "tsl-mastodon-api/JSON/StreamData" {
     export function isStreamData(json: Partial<StreamData>): json is StreamData;
     export default StreamData;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/Search" />
-declare module "tsl-mastodon-api/JSON/Search" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/Search" />
+declare module "tsl-mastodon-api/lib/JSON/Search" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import type Account from "tsl-mastodon-api/JSON/Account";
-    import type Status from "tsl-mastodon-api/JSON/Status";
-    import type Tag from "tsl-mastodon-api/JSON/Tag";
+    import type Account from "tsl-mastodon-api/lib/JSON/Account";
+    import type Status from "tsl-mastodon-api/lib/JSON/Status";
+    import type Tag from "tsl-mastodon-api/lib/JSON/Tag";
     /**
      * Search parameter to use for a search.
      * @since 1.1.0
@@ -2149,44 +2149,45 @@ declare module "tsl-mastodon-api/JSON/Search" {
     export function isSearchResults(json: Partial<SearchResults>): json is SearchResults;
     export default Search;
 }
-/// <amd-module name="tsl-mastodon-api/JSON/index" />
-declare module "tsl-mastodon-api/JSON/index" {
+/// <amd-module name="tsl-mastodon-api/lib/JSON/index" />
+declare module "tsl-mastodon-api/lib/JSON/index" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
     
       Copyright (c) TypeScriptLibs and Contributors
     
-      Licensed under the MIT License; you may not use this file except in
-      compliance with the License. You may obtain a copy of the MIT License at
-      https://typescriptlibs.org/LICENSE.txt
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    export * from "tsl-mastodon-api/JSON/Account";
-    export * from "tsl-mastodon-api/JSON/Announcement";
-    export * from "tsl-mastodon-api/JSON/Application";
-    export * from "tsl-mastodon-api/JSON/Card";
-    export * from "tsl-mastodon-api/JSON/Emoji";
-    export * from "tsl-mastodon-api/JSON/List";
-    export * from "tsl-mastodon-api/JSON/MediaAttachment";
-    export * from "tsl-mastodon-api/JSON/StreamData";
-    export * from "tsl-mastodon-api/JSON/Notification";
-    export * from "tsl-mastodon-api/JSON/Poll";
-    export * from "tsl-mastodon-api/JSON/Reaction";
-    export * from "tsl-mastodon-api/JSON/Search";
-    export * from "tsl-mastodon-api/JSON/Status";
-    export * from "tsl-mastodon-api/JSON/Tag";
+    export * from "tsl-mastodon-api/lib/JSON/Account";
+    export * from "tsl-mastodon-api/lib/JSON/Announcement";
+    export * from "tsl-mastodon-api/lib/JSON/Application";
+    export * from "tsl-mastodon-api/lib/JSON/Card";
+    export * from "tsl-mastodon-api/lib/JSON/Emoji";
+    export * from "tsl-mastodon-api/lib/JSON/List";
+    export * from "tsl-mastodon-api/lib/JSON/MediaAttachment";
+    export * from "tsl-mastodon-api/lib/JSON/StreamData";
+    export * from "tsl-mastodon-api/lib/JSON/Notification";
+    export * from "tsl-mastodon-api/lib/JSON/Poll";
+    export * from "tsl-mastodon-api/lib/JSON/Reaction";
+    export * from "tsl-mastodon-api/lib/JSON/Search";
+    export * from "tsl-mastodon-api/lib/JSON/Status";
+    export * from "tsl-mastodon-api/lib/JSON/Tag";
     export const parse: (text: string, reviver?: ((this: any, key: string, value: any) => any) | undefined) => any;
     export const stringify: {
         (value: any, replacer?: ((this: any, key: string, value: any) => any) | undefined, space?: string | number | undefined): string;
         (value: any, replacer?: (string | number)[] | null | undefined, space?: string | number | undefined): string;
     };
 }
-/// <amd-module name="tsl-mastodon-api/Bridge" />
-declare module "tsl-mastodon-api/Bridge" {
+/// <amd-module name="tsl-mastodon-api/lib/Bridge" />
+declare module "tsl-mastodon-api/lib/Bridge" {
     export const Bridge: {
         global: typeof globalThis;
         fetch: typeof fetch;
+        fileFrom: undefined;
         Blob: {
             new (blobParts?: BlobPart[] | undefined, options?: BlobPropertyBag | undefined): Blob;
             prototype: Blob;
@@ -2196,7 +2197,7 @@ declare module "tsl-mastodon-api/Bridge" {
             prototype: File;
         };
         FormData: {
-            new (form?: HTMLFormElement | undefined): FormData;
+            new (form?: HTMLFormElement | undefined, submitter?: HTMLElement | null | undefined): FormData;
             prototype: FormData;
         };
         Headers: {
@@ -2207,38 +2208,35 @@ declare module "tsl-mastodon-api/Bridge" {
             new (body?: BodyInit | null | undefined, init?: ResponseInit | undefined): Response;
             prototype: Response;
             error(): Response;
+            json(data: any, init?: ResponseInit | undefined): Response;
             redirect(url: string | URL, status?: number | undefined): Response;
         };
         URL: {
             new (url: string | URL, base?: string | URL | undefined): URL;
             prototype: URL;
+            canParse(url: string | URL, base?: string | undefined): boolean;
             createObjectURL(obj: Blob | MediaSource): string;
             revokeObjectURL(url: string): void;
         };
         URLSearchParams: {
-            new (init?: string | Record<string, string> | URLSearchParams | string[][] | undefined): URLSearchParams;
+            new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
             prototype: URLSearchParams;
-            toString(): string;
         };
         WebSocket: {
             new (url: string | URL, protocols?: string | string[] | undefined): WebSocket;
             prototype: WebSocket;
-            readonly CLOSED: number;
-            readonly CLOSING: number;
-            readonly CONNECTING: number;
-            readonly OPEN: number;
+            readonly CONNECTING: 0;
+            readonly OPEN: 1;
+            readonly CLOSING: 2;
+            readonly CLOSED: 3;
         };
     };
     export default Bridge;
 }
-/// <amd-module name="tsl-mastodon-api/Utilities" />
-declare module "tsl-mastodon-api/Utilities" {
+/// <amd-module name="tsl-mastodon-api/lib/Utilities" />
+declare module "tsl-mastodon-api/lib/Utilities" {
     export namespace Utilities {
         type Params = (Array<[string, unknown]> | Record<string, unknown>);
-        function buildFormData(params?: Params, target?: FormData): FormData;
-        function buildHeaders(params?: Params, target?: Headers): Headers;
-        function buildURL(base: string, path?: string, params?: Params): URL;
-        function buildURLSearchParams(params?: Params, target?: URLSearchParams): URLSearchParams;
         /**
          * Loads a file from a path.
          *
@@ -2247,21 +2245,25 @@ declare module "tsl-mastodon-api/Utilities" {
          * @param filePath
          * Path to the file.
          *
-         * @param [mimeType]
+         * @param mimeType
          * Mime type of the file.
          *
          * @return
          * Promise with the file, if successful.
          *
-         * @requires node-fetch
+         * @requires node
          */
-        function fileFrom(filePath: string, mimeType?: string): Promise<File>;
+        const fileFrom: undefined;
+        function buildFormData(params?: Params, target?: FormData): FormData;
+        function buildHeaders(params?: Params, target?: Headers): Headers;
+        function buildURL(base: string, path?: string, params?: Params): URL;
+        function buildURLSearchParams(params?: Params, target?: URLSearchParams): URLSearchParams;
         function transferParams(params: Params, target: (FormData | Headers | URLSearchParams)): void;
     }
     export default Utilities;
 }
-/// <amd-module name="tsl-mastodon-api/REST" />
-declare module "tsl-mastodon-api/REST" {
+/// <amd-module name="tsl-mastodon-api/lib/REST" />
+declare module "tsl-mastodon-api/lib/REST" {
     global {
         interface RequestInit {
             follow?: number;
@@ -2291,14 +2293,14 @@ declare module "tsl-mastodon-api/REST" {
         type ParamRecord = Record<string, unknown>;
         type Params = (ParamArray | ParamRecord);
         interface Result {
-            failed: boolean;
+            error?: any;
             json: any;
             path: string;
             response?: Response;
             status: number;
         }
         interface Success<T = unknown> extends Result {
-            failed: false;
+            error?: undefined;
             json: T;
             status: 200;
         }
@@ -2323,8 +2325,8 @@ declare module "tsl-mastodon-api/REST" {
     }
     export default REST;
 }
-/// <amd-module name="tsl-mastodon-api/API" />
-declare module "tsl-mastodon-api/API" {
+/// <amd-module name="tsl-mastodon-api/lib/API" />
+declare module "tsl-mastodon-api/lib/API" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
@@ -2336,8 +2338,8 @@ declare module "tsl-mastodon-api/API" {
       You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    import * as JSON from "tsl-mastodon-api/JSON/index";
-    import REST from "tsl-mastodon-api/REST";
+    import * as JSON from "tsl-mastodon-api/lib/JSON/index";
+    import REST from "tsl-mastodon-api/lib/REST";
     /**
      * Mastodon API to fetch, create, and delete content.
      *
@@ -2431,7 +2433,9 @@ declare module "tsl-mastodon-api/API" {
          * Promise with the deleted status, if successful.
          */
         deleteStatus(statusID: string): Promise<API.Success<JSON.Status>>;
+        /** @todo Add doclet. */
         protected extractRateLimit(headers: Headers): (number | undefined);
+        /** @todo Add doclet. */
         protected fetch(method: ('DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'), path: string, params?: object): Promise<API.Result>;
         /**
          * Get a result from a path.
@@ -2822,8 +2826,59 @@ declare module "tsl-mastodon-api/API" {
     }
     export default API;
 }
-/// <amd-module name="tsl-mastodon-api/OAuth" />
-declare module "tsl-mastodon-api/OAuth" {
+/// <amd-module name="tsl-mastodon-api/lib/Bridge" />
+declare module "tsl-mastodon-api/lib/Bridge" {
+    export const Bridge: {
+        global: typeof globalThis;
+        fetch: typeof fetch;
+        fileFrom: undefined;
+        Blob: {
+            new (blobParts?: BlobPart[] | undefined, options?: BlobPropertyBag | undefined): Blob;
+            prototype: Blob;
+        };
+        File: {
+            new (fileBits: BlobPart[], fileName: string, options?: FilePropertyBag | undefined): File;
+            prototype: File;
+        };
+        FormData: {
+            new (form?: HTMLFormElement | undefined, submitter?: HTMLElement | null | undefined): FormData;
+            prototype: FormData;
+        };
+        Headers: {
+            new (init?: HeadersInit | undefined): Headers;
+            prototype: Headers;
+        };
+        Response: {
+            new (body?: BodyInit | null | undefined, init?: ResponseInit | undefined): Response;
+            prototype: Response;
+            error(): Response;
+            json(data: any, init?: ResponseInit | undefined): Response;
+            redirect(url: string | URL, status?: number | undefined): Response;
+        };
+        URL: {
+            new (url: string | URL, base?: string | URL | undefined): URL;
+            prototype: URL;
+            canParse(url: string | URL, base?: string | undefined): boolean;
+            createObjectURL(obj: Blob | MediaSource): string;
+            revokeObjectURL(url: string): void;
+        };
+        URLSearchParams: {
+            new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
+            prototype: URLSearchParams;
+        };
+        WebSocket: {
+            new (url: string | URL, protocols?: string | string[] | undefined): WebSocket;
+            prototype: WebSocket;
+            readonly CONNECTING: 0;
+            readonly OPEN: 1;
+            readonly CLOSING: 2;
+            readonly CLOSED: 3;
+        };
+    };
+    export default Bridge;
+}
+/// <amd-module name="tsl-mastodon-api/lib/OAuth" />
+declare module "tsl-mastodon-api/lib/OAuth" {
     export namespace OAuth {
         interface App {
             id: string;
@@ -2868,9 +2923,9 @@ declare module "tsl-mastodon-api/OAuth" {
     }
     export default OAuth;
 }
-/// <amd-module name="tsl-mastodon-api/StreamAPI" />
-declare module "tsl-mastodon-api/StreamAPI" {
-    import * as JSON from "tsl-mastodon-api/JSON/index";
+/// <amd-module name="tsl-mastodon-api/lib/StreamAPI" />
+declare module "tsl-mastodon-api/lib/StreamAPI" {
+    import * as JSON from "tsl-mastodon-api/lib/JSON/index";
     /**
      * Mastodon streaming API to listen to new content.
      */
@@ -2904,8 +2959,8 @@ declare module "tsl-mastodon-api/StreamAPI" {
     }
     export default StreamAPI;
 }
-/// <amd-module name="tsl-mastodon-api/index" />
-declare module "tsl-mastodon-api/index" {
+/// <amd-module name="tsl-mastodon-api" />
+declare module "tsl-mastodon-api" {
     /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
     
       TypeScript Library for the Mastodon API
@@ -2917,9 +2972,9 @@ declare module "tsl-mastodon-api/index" {
       You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
     
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-    export * as JSON from "tsl-mastodon-api/JSON/index";
-    export * from "tsl-mastodon-api/API";
-    export * from "tsl-mastodon-api/Bridge";
-    export * from "tsl-mastodon-api/REST";
-    export * from "tsl-mastodon-api/Utilities";
+    export * as JSON from "tsl-mastodon-api/lib/JSON/index";
+    export * from "tsl-mastodon-api/lib/API";
+    export * from "tsl-mastodon-api/lib/Bridge";
+    export * from "tsl-mastodon-api/lib/REST";
+    export * from "tsl-mastodon-api/lib/Utilities";
 }
