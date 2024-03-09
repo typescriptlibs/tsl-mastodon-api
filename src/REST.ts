@@ -10,7 +10,7 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
-/// <amd-module name="tsl-mastodon-api/REST" />
+/// <amd-module name="tsl-mastodon-api/lib/REST" />
 
 /* *
  *
@@ -160,7 +160,6 @@ export class REST {
 
             try {
                 return {
-                    failed: !response.ok,
                     json: JSON.parse( text ),
                     path,
                     response,
@@ -169,7 +168,7 @@ export class REST {
             }
             catch ( error ) {
                 return {
-                    failed: !response.ok,
+                    error: ( error || new Error() ),
                     json: { text },
                     path,
                     response,
@@ -182,7 +181,7 @@ export class REST {
             clearTimeout( timer );
 
             return {
-                failed: true,
+                error: ( error || new Error() ),
                 json: { text },
                 path,
                 response,
@@ -272,7 +271,7 @@ export namespace REST {
 
 
     export interface Result {
-        failed: boolean;
+        error?: any;
         json: any;
         path: string;
         response?: Response;
@@ -281,7 +280,7 @@ export namespace REST {
 
 
     export interface Success<T = unknown> extends Result {
-        failed: false;
+        error?: undefined;
         json: T;
         status: 200;
     }

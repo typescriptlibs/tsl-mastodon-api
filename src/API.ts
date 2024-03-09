@@ -10,7 +10,9 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
-/// <amd-module name="tsl-mastodon-api/API" />
+
+/// <amd-module name="tsl-mastodon-api/lib/API" />
+
 
 /* *
  *
@@ -20,6 +22,7 @@
 
 
 import * as JSON from './JSON/index.js';
+
 
 import REST from './REST.js';
 
@@ -143,12 +146,13 @@ export class API {
         const result = await this.delete( `lists/${listID}` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isList( result?.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.List>;
@@ -174,12 +178,13 @@ export class API {
         const result = await this.delete( `lists/${listID}/accounts`, listAccounts );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             typeof result.json !== 'object'
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<object>;
@@ -206,11 +211,12 @@ export class API {
         const result = await this.delete( `announcements/${announcementID}/reactions/${emojiName}` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<{}>;
@@ -232,18 +238,20 @@ export class API {
         const result = await this.delete( `statuses/${statusID}` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatus( result?.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.Status>;
     }
 
 
+    /** @todo Add doclet. */
     protected extractRateLimit (
         headers: Headers
     ): ( number | undefined ) {
@@ -262,6 +270,7 @@ export class API {
     }
 
 
+    /** @todo Add doclet. */
     protected async fetch (
         method: ( 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT' ),
         path: string,
@@ -311,12 +320,13 @@ export class API {
         const result = await this.get( 'accounts/verify_credentials' );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isAccount( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.Account>;
@@ -335,12 +345,13 @@ export class API {
         const result = await this.get( 'announcements' );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isAnnouncements( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Announcement>>;
@@ -362,12 +373,13 @@ export class API {
         const result = await this.get( `lists/${listID}` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isList( result?.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.List>;
@@ -393,12 +405,13 @@ export class API {
         const result = await this.get( `lists/${listID}/accounts`, queryParams );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isAccounts( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.ListAccounts>;
@@ -420,12 +433,13 @@ export class API {
         const result = await this.get( `lists`, queryParams );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isLists( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.List>>;
@@ -447,15 +461,16 @@ export class API {
         const result = await this.get( `media/${mediaAttachmentID}` );
 
         if (
-            result.failed ||
+            result.error ||
             (
                 result.status !== 200 &&
                 result.status !== 206
             ) ||
             !JSON.isMediaAttachment( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.MediaAttachment>;
@@ -474,12 +489,13 @@ export class API {
         const result = await this.get( 'notifications', REST.toParamArray( queryParams ) );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isNotifications( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Notification>>;
@@ -501,12 +517,13 @@ export class API {
         const result = await this.get( `statuses/${statusID}` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatus( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.Status>;
@@ -528,12 +545,13 @@ export class API {
         const result = await this.get( `statuses/${statusID}/context` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatusContext( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.StatusContext>;
@@ -559,12 +577,13 @@ export class API {
         const result = await this.get( `accounts/${accountID}/statuses`, queryParams );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Status>>;
@@ -586,12 +605,13 @@ export class API {
         const result = await this.get( 'timelines/home', queryParams );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Status>>;
@@ -617,12 +637,13 @@ export class API {
         const result = await this.get( `timelines/list/${listID}`, queryParams );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Status>>;
@@ -644,12 +665,13 @@ export class API {
         const result = await this.get( 'timelines/public', REST.toParamArray( queryParams ) );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Status>>;
@@ -675,12 +697,13 @@ export class API {
         const result = await this.get( `timelines/tag/${tag}`, REST.toParamArray( queryParams ) );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isStatuses( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<Array<JSON.Status>>;
@@ -718,11 +741,12 @@ export class API {
         const result = await this.post( `notifications/clear` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<{}>;
@@ -745,11 +769,12 @@ export class API {
         const result = await this.post( `announcements/${announcementID}/dismiss` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<{}>;
@@ -772,11 +797,12 @@ export class API {
         const result = await this.post( `notifications/${notificationID}/dismiss` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<{}>;
@@ -798,12 +824,13 @@ export class API {
         const result = await this.post( 'lists', list );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isList( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.List>;
@@ -829,12 +856,13 @@ export class API {
         const result = await this.post( `lists/${listId}/accounts`, listAccounts );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isAccounts( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<void>;
@@ -856,15 +884,16 @@ export class API {
         const result = await this.post( 'media', mediaAttachment );
 
         if (
-            result.failed ||
+            result.error ||
             (
                 result.status !== 200 &&
                 result.status !== 202
             ) ||
             !JSON.isMediaAttachment( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.MediaAttachment>;
@@ -890,12 +919,13 @@ export class API {
         const result = await this.post( `polls/${pollID}/votes`, pollVote );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isPoll( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.Poll>;
@@ -917,7 +947,7 @@ export class API {
         const result = await this.post( 'statuses', status );
 
         if (
-            result.failed ||
+            result.error ||
             (
                 result.status !== 200 &&
                 result.status !== 206
@@ -927,8 +957,9 @@ export class API {
                 !JSON.isStatusSchedule( result.json )
             )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<( JSON.Status | JSON.StatusSchedule )>;
@@ -975,11 +1006,12 @@ export class API {
         const result = await this.put( `announcements/${announcementID}/reactions/${emojiName}` );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<{}>;
@@ -1003,12 +1035,13 @@ export class API {
         const result = await this.get( 'search', search );
 
         if (
-            result.failed ||
+            result.error ||
             result.status !== 200 ||
             !JSON.isSearchResults( result.json )
         ) {
-            result.failed = true;
-            return Promise.reject( result );
+            result.error ??= new Error();
+
+            throw result;
         }
 
         return result as API.Success<JSON.SearchResults>;
