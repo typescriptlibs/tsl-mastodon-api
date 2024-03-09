@@ -11,6 +11,9 @@
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
 
+/// <amd-module name="tsl-mastodon-api/lib/StreamAPI" />
+
+
 /* *
  *
  *  Imports
@@ -20,7 +23,9 @@
 
 import Bridge from './Bridge.js';
 
+
 import * as JSON from './JSON/index.js';
+
 
 import Utilities from './Utilities.js';
 

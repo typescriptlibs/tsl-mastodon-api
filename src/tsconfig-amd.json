@@ -1,0 +1,17 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "declaration": true,
+        "sourceMap": true,
+        "module": "amd",
+        "moduleResolution": "node",
+        "outFile": "../amd/tsl-mastodon-api.js",
+        "rootDir": "./"
+    },
+    "exclude": [
+        "Bridge-Node.ts"
+    ],
+    "include": [
+        "**/*"
+    ]
+}

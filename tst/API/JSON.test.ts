@@ -4,11 +4,12 @@
 
   Copyright (c) TypeScriptLibs and Contributors
 
-  Licensed under the MIT License; you may not use this file except in
-  compliance with the License. You may obtain a copy of the MIT License at
-  https://typescriptlibs.org/LICENSE.txt
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 
 /* *
  *
@@ -16,8 +17,11 @@
  *
  * */
 
+
 import Setup from '../Setup.js';
+
 import test from '@typescriptlibs/tst';
+
 
 /* *
  *
@@ -25,7 +29,8 @@ import test from '@typescriptlibs/tst';
  *
  * */
 
-test( '', async ( assert: test.Assert ) => {
+
+test( 'Test JSON.isMediaAttachment', async ( assert: test.Assert ) => {
     const validation = Setup.Mastodon.JSON.isMediaAttachment( {
         id: '111059411755644935',
         type: 'image',

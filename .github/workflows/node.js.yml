@@ -32,9 +32,9 @@ jobs:
       run: npm ci
     - name: Build Package
       run: npm run build
-    - name: Run Server
+    - name: Start Server
       run: npm run server:start
     - name: Run Tests
-      run: npm run test:ci
+      run: npm run test:run
     - name: Stop Server
       run: npm run server:stop

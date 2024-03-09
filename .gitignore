@@ -1,3 +1,8 @@
+.DS_Store
+
+/src/Bridge.ts
+/tst-run/
+
 # Logs
 logs
 *.log
@@ -102,9 +107,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# MacOS
-.DS_Store
-
-# Test
-tst-run/

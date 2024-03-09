@@ -11,6 +11,9 @@
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
 
+/// <amd-module name="tsl-mastodon-api/lib/OAuth" />
+
+
 /* *
  *
  *  Imports

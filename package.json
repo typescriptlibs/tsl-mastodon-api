@@ -12,14 +12,16 @@
     "homepage": "https://typescriptlibs.org/tsl-mastodon-api/",
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "devDependencies": {
-        "@typescriptlibs/tst": "^0.0.5",
+        "@typescriptlibs/amd": "^1.2.2",
+        "@typescriptlibs/tst": "^0.1.0",
         "tsl-mastodon-api": "file:./",
-        "typescript": "~4.9.5"
+        "typescript": "~5.4.2"
     },
     "engines": {
-        "node": ">=16.8.0"
+        "node": ">=18.16.0"
     },
     "files": [
+        "amd/",
         "lib/",
         "AUTHORS.md",
         "CHANGELOG.md",
@@ -31,18 +33,21 @@
         "TypeScript"
     ],
     "optionalDependencies": {
-        "node-fetch": "^3.3.0",
+        "node-fetch": "^3.3.2",
         "oauth": "~0.10.0",
-        "ws": "^8.12.0"
+        "ws": "^8.16.0"
     },
     "scripts": {
-        "build": "npm run clean && tsc -b src",
-        "clean": "rm -rf lib tst-run",
-        "server:start": "cd tst-data && python3 -m http.server 8000 &",
+        "build": "npm run clean && npm run build:amd && npm run build:lib",
+        "build:amd": "cp -f src/Bridge-AMD.ts src/Bridge.ts && tsc -p src/tsconfig-amd.json ; rm src/Bridge.ts",
+        "build:lib": "cp -f src/Bridge-Node.ts src/Bridge.ts && tsc -p src/tsconfig.json ; rm src/Bridge.ts",
+        "clean": "rm -rf amd/ lib/ src/Bridge.ts tst-run/",
+        "server:start": "cd tst-data && python3 -m http.server 8000 & sleep 5",
         "server:stop": "kill $(lsof -t -i:8000)",
-        "test": "npm run server:start ; npm run test:all ; npm run server:stop",
-        "test:all": "npm run build && tst --reset --verbose tst/",
-        "test:ci": "tst --reset --verbose tst/",
-        "watch": "npm run build -- --watch"
+        "test": "npm run build && npm run server:start && npm run test:run ; npm run server:stop",
+        "test:amd": "npm run build && ( sleep 5 ; open 'http://127.0.0.1:8004/tst-data/amd/' ) & python3 -m http.server 8004",
+        "test:run": "tst --reset --verbose tst/",
+        "watch:amd": "npm run clean && cp -f src/Bridge-AMD.ts src/Bridge.ts && tsc -p src/tsconfig-amd.json --watch ; rm src/Bridge.ts",
+        "watch:node": "npm run clean && cp -f src/Bridge-Node.ts src/Bridge.ts && tsc -p src/tsconfig.json --watch ; rm src/Bridge.ts"
     }
 }

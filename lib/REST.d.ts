@@ -9,6 +9,7 @@
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/lib/REST" />
 declare global {
     interface RequestInit {
         follow?: number;
@@ -38,14 +39,14 @@ export declare namespace REST {
     type ParamRecord = Record<string, unknown>;
     type Params = (ParamArray | ParamRecord);
     interface Result {
-        failed: boolean;
+        error?: any;
         json: any;
         path: string;
         response?: Response;
         status: number;
     }
     interface Success<T = unknown> extends Result {
-        failed: false;
+        error?: undefined;
         json: T;
         status: 200;
     }

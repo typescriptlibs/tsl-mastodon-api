@@ -9,6 +9,7 @@
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api/lib/StreamAPI" />
 import * as JSON from './JSON/index.js';
 /**
  * Mastodon streaming API to listen to new content.

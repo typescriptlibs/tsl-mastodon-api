@@ -5,5 +5,11 @@
         "sourceMap": true,
         "outDir": "../lib/",
         "rootDir": "./"
-    }
+    },
+    "exclude": [
+        "Bridge-AMD.ts"
+    ],
+    "include": [
+        "**/*"
+    ]
 }

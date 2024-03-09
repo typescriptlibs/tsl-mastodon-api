@@ -35,16 +35,17 @@ const HELP = [
     'tsl-mastodon [COMMAND] [OPTIONS]',
     '',
     'COMMANDS:',
-    '  post           Post a status in the timeline.',
+    '  post  - Post a status in the timeline.',
     '',
     'OPTIONS:',
-    '  --api [str]    API address of the Mastodon server.',
-    '  --api2 [str]   API v2 address of the Mastodon server.',
-    '  --help -h      Show this help.',
-    '  --image [str]  Image path.',
-    '  --text [str]   Text string.',
-    '  --token [hex]  API token.',
-    '  --version -v   Show the version of tsl-mastodon.'
+    '  --api        [str]  API address of the Mastodon server.',
+    '  --api2       [str]  API v2 address of the Mastodon server.',
+    '  --help -h           Show this help.',
+    '  --image      [str]  Image path.',
+    '  --text       [str]  Text string.',
+    '  --token      [hex]  API token.',
+    '  --version -v        Show the version of tsl-mastodon.',
+    '  --visibility [str]  Post visibility.'
 ].join( '\n' );
 
 
@@ -177,6 +178,10 @@ async function post (
         };
 
         status = post;
+    }
+
+    if ( args.visibility ) {
+        status.visibility = '' + args.visibility;
     }
 
     console.log( 'REQUEST:', json( status ) );

@@ -1,7 +1,13 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
+        "baseUrl": "./",
         "outDir": "../tst-run",
-        "rootDir": "./"
+        "rootDir": "./",
+        "paths": {
+            "tsl-mastodon-api": [
+                "../"
+            ]
+        }
     }
 }

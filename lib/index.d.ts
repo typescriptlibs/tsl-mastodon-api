@@ -9,6 +9,7 @@
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+/// <amd-module name="tsl-mastodon-api" />
 export * as JSON from './JSON/index.js';
 export * from './API.js';
 export * from './Bridge.js';
