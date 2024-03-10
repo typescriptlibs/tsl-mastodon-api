@@ -41,7 +41,7 @@ const HELP = [
     '  --api        [str]  API address of the Mastodon server.',
     '  --api2       [str]  API v2 address of the Mastodon server.',
     '  --help -h           Show this help.',
-    '  --image      [str]  Image path.',
+    '  --media      [str]  Media path.',
     '  --text       [str]  Text string.',
     '  --token      [hex]  API token.',
     '  --version -v        Show the version of tsl-mastodon.',
@@ -138,31 +138,27 @@ async function post (
     /** @type {Mastodon.JSON.StatusPost} */
     let status;
 
-    if ( args.image ) {
-        const images = (
-            args.image instanceof Array ?
-                args.image :
-                [args.image]
+    if ( args.media ) {
+        const mediums = (
+            args.media instanceof Array ?
+                args.media :
+                [args.media]
         );
         /** @type {Mastodon.JSON.MediaStatusPost} */
         const post = {
             media_ids: []
         };
 
-        for ( const image of images ) {
-            const file = await Mastodon.Utilities.fileFrom( '' + image );
+        for ( const media of mediums ) {
+            const file = await Mastodon.Utilities.fileFrom( '' + media );
 
             console.log( file.name, file.size + ' bytes' );
 
-            let attachment = await api2.postMediaAttachment( {
+            const result = await api2.postMediaAttachment( {
                 file
-            } );
+            }, true );
 
-            if ( !attachment.json ) {
-                throw attachment;
-            }
-
-            post.media_ids.push( attachment.json.id );
+            post.media_ids.push( result.json.id );
         }
 
         if ( args.text ) {

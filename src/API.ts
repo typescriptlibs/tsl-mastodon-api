@@ -73,7 +73,7 @@ export class API {
 
 
     /**
-     * Expected communication delay by the Mastodon server.
+     * Expected communication delay (in milliseconds) by the Mastodon server.
      */
     public nextDelay: number;
 
@@ -101,14 +101,22 @@ export class API {
 
 
     /**
-     * Delays an async promise by the expected amount of time, which the
-     * Mastodon server sends during the last communication.
+     * Delays an async promise by the expected amount of time (in milliseconds),
+     * which the Mastodon server sends during the last communication.
+     *
+     * @param forcedDelay
+     * Forces a certain amount of minimum delay.
      *
      * @return
      * Promise.
      */
-    public async delay (): Promise<void> {
-        return new Promise( resolve => setTimeout( resolve, this.nextDelay ) );
+    public async delay (
+        forcedDelay?: number
+    ): Promise<void> {
+        return new Promise( resolve => setTimeout(
+            resolve,
+            Math.max( ( forcedDelay || 0 ), this.nextDelay )
+        ) );
     }
 
 
@@ -453,13 +461,37 @@ export class API {
      * @param mediaAttachmentID
      * ID of the media attachment to get.
      *
+     * @param awaitProcessing
+     * Set to true, to wait until server processing completed.
+     *
      * @return
      * Promise with the media attachment, if successful.
      */
     public async getMediaAttachment (
-        mediaAttachmentID: string
+        mediaAttachmentID: string,
+        awaitProcessing?: boolean
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.get( `media/${mediaAttachmentID}` );
+        const path = (
+            awaitProcessing ?
+                `../v1/media/${mediaAttachmentID}` :
+                `media/${mediaAttachmentID}`
+        );
+
+        let result = await this.get( path );
+
+        // Check status of media processing
+        while (
+            awaitProcessing &&
+            result.status === 206
+        ) {
+            await this.delay( 10000 );
+
+            result = await this.get( path );
+
+            if ( result.error ) {
+                throw result;
+            }
+        }
 
         if (
             result.error ||
@@ -876,13 +908,29 @@ export class API {
      * @param mediaAttachment
      * Media attachment to post.
      *
+     * @param awaitProcessing
+     * Set to true, to wait until server processing completed.
+     *
      * @return
      * Promise with the media attachment, if successful.
      */
     public async postMediaAttachment (
-        mediaAttachment: JSON.MediaAttachmentPost
+        mediaAttachment: JSON.MediaAttachmentPost,
+        awaitProcessing?: boolean
     ): Promise<API.Success<JSON.MediaAttachment>> {
-        const result = await this.post( 'media', mediaAttachment );
+        const path = (
+            awaitProcessing ?
+                '../v2/media' :
+                'media'
+        );
+        const result = await this.post( path, mediaAttachment );
+
+        if (
+            awaitProcessing &&
+            result.status === 202
+        ) {
+            return await this.getMediaAttachment( result.json.id, awaitProcessing );
+        }
 
         if (
             result.error ||
@@ -892,7 +940,7 @@ export class API {
             ) ||
             !JSON.isMediaAttachment( result.json )
         ) {
-            result.error = result.error || new Error();
+            result.error = ( result.error || new Error() );
 
             throw result;
         }
