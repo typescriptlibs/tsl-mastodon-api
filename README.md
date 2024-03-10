@@ -56,7 +56,12 @@ async function postHelloWorld(): Promise<void> {
     });
     // expect client / server errors
     try {
+        const media = await mastodon.postMediaAttachment(
+            { file: await Mastodon.Utilities.fileFrom('animation.gif') },
+            true
+        );
         const result = await mastodon.postStatus({
+            media_ids: [media.json.id],
             sensitive: true,
             spoiler_text: 'Hello',
             status: 'World'
@@ -85,18 +90,19 @@ API.search(search)
 API.getAccount()
 API.getAnnouncements(queryParameters?)
 API.getListAccounts(listID, queryParameters?)
-API.getMediaAttachment(mediaAttachmentID)
+API.getMediaAttachment(mediaAttachmentID, awaitProcessing)
 API.getNotifications()
 API.getStatusesOfPublic(queryParameters?)
 
 API.postDismissAnnouncement(announcementID)
 API.postDismissNotification(notificationID)
 API.postListAccounts(listID, listAccounts)
-API.postMediaAttachment(mediaAttachment)
+API.postMediaAttachment(mediaAttachment, awaitProcessing)
 API.postPollVote(pollID, pollVote)
 API.postStatus(status)
 
 API.putAnnouncementReaction(announcementID, emojiName)
+API.putMediaAttachmentUpdate(mediaAttachmentID, mediaAttachmentUpdate)
 
 API.deleteAnnouncementReaction(announcementID, emojiName)
 API.deleteListAccounts(listID, listAccounts)
