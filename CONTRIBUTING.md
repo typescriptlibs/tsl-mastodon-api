@@ -4,7 +4,11 @@
 ## 1. Do you have a question? ##
 
 The issue tracker is for **issues**, in other words, bugs and suggestions.
-If you have a *question*, please use [Stack Overflow](https://stackoverflow.com/questions/tagged/mastodon), your favorite search engine, or other resources.
+If you have a *question*, please use
+ * [Mastodon](https://mastodon.social/tags/MastodonAPI),
+ * [Stack Overflow](https://stackoverflow.com/questions/tagged/mastodon),
+ * your favorite search engine,
+ * or other resources.
 
 
 ## 2. Did you find a bug? ##
