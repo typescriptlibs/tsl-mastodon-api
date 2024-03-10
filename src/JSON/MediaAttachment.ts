@@ -190,8 +190,9 @@ export interface GIFVAttachment {
      * The location of the original full-size attachment.
      *
      * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
-     * still processing. However, the preview_url should be available. Use
-     * `API.getMediaAttachment` to check the status of the media attachment.
+     * still being processed in the background. However, the preview_url should
+     * be available. Use `API.getMediaAttachment` to check the status of the
+     * media attachment.
      *
      * @since 0.6.0
      */
@@ -306,8 +307,9 @@ export interface ImageAttachment {
      * The location of the original full-size attachment.
      *
      * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
-     * still processing. However, the preview_url should be available. Use
-     * `API.getMediaAttachment` to check the status of the media attachment.
+     * still being processed in the background. However, the preview_url should
+     * be available. Use `API.getMediaAttachment` to check the status of the
+     * media attachment.
      *
      * @since 0.6.0
      */
@@ -500,8 +502,9 @@ export interface UnknownAttachment {
      * The location of the original full-size attachment.
      *
      * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
-     * still processing. However, the preview_url should be available. Use
-     * `API.getMediaAttachment` to check the status of the media attachment.
+     * still being processed in the background. However, the preview_url should
+     * be available. Use `API.getMediaAttachment` to check the status of the
+     * media attachment.
      *
      * @since 0.6.0
      */
@@ -577,8 +580,9 @@ export interface VideoAttachment {
      * The location of the original full-size attachment.
      *
      * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
-     * still processing. However, the preview_url should be available. Use
-     * `API.getMediaAttachment` to check the status of the media attachment.
+     * still being processed in the background. However, the preview_url should
+     * be available. Use `API.getMediaAttachment` to check the status of the
+     * media attachment.
      *
      * @since 0.6.0
      */
