@@ -405,18 +405,18 @@ export interface VideoAttachment {
  * @since 1.5.0
  */
 export interface VideoAttachmentMeta {
-    aspect: number;
-    audio_bitrate: string;
-    audio_channels: string;
-    audio_encode: string;
-    duration: number;
-    fps: number;
-    height: number;
-    length: string;
+    aspect?: number;
+    audio_bitrate?: string;
+    audio_channels?: string;
+    audio_encode?: string;
+    duration?: number;
+    fps?: number;
+    height?: number;
+    length?: string;
     original: VideoAttachmentMetaOriginal;
-    size: string;
+    size?: string;
     small: VideoAttachmentMetaSmall;
-    width: number;
+    width?: number;
 }
 
 /**
@@ -687,16 +687,6 @@ export function isVideoAttachmentMeta (
 ): json is VideoAttachmentMeta {
     return (
         typeof json === 'object' &&
-        typeof json.aspect === 'number' &&
-        typeof json.audio_bitrate === 'string' &&
-        typeof json.audio_channels === 'string' &&
-        typeof json.audio_encode === 'string' &&
-        typeof json.duration === 'number' &&
-        typeof json.fps === 'number' &&
-        typeof json.height === 'number' &&
-        typeof json.length === 'string' &&
-        typeof json.size === 'string' &&
-        typeof json.width === 'number' &&
         typeof json.original === 'object' &&
         typeof json.original.bitrate === 'number' &&
         typeof json.original.duration === 'number' &&
