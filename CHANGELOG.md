@@ -3,6 +3,28 @@ Changelog
 
 
 
+v0.5.0
+------
+
+* AMD bundle for front-end by @sophiebremer in https://github.com/typescriptlibs/tsl-mastodon-api/pull/29
+  - Add AMD bundle for front-end implementations
+  - Add test suite for front-end implementations to the GitHub repository
+  - Improve API errors; use `API.Result.error` instead of `API.Result.failed`
+  - Improve Bridge
+
+* Support async media upload by @sophiebremer in https://github.com/typescriptlibs/tsl-mastodon-api/pull/37
+  - Add optional processing await for Mastodon API v2
+  - Add optional `forcedDelay` parameter for minimum `API.delay`
+  - Fix video attachment validation
+
+* Support media update by @sophiebremer in https://github.com/typescriptlibs/tsl-mastodon-api/pull/38
+  - Add `API.putMediaAttachmentUpdate`
+  - Update `JSON.MediaAttachment`; `url` parameter can become `null`
+
+**Full Changelog**: https://github.com/typescriptlibs/tsl-mastodon-api/compare/v0.4.2...v0.5.0
+
+
+
 v0.4.2
 ------
 
