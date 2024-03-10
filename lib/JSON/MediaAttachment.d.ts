@@ -135,6 +135,11 @@ export interface GIFVAttachment {
     type: 'gifv';
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
     url: string;
@@ -217,6 +222,11 @@ export interface ImageAttachment {
     type: 'image';
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
     url: string;
@@ -267,9 +277,41 @@ export type MediaAttachment = (AudioAttachment | GIFVAttachment | ImageAttachmen
  * Interface to post a new media attachment.
  */
 export interface MediaAttachmentPost {
-    file: (Blob | File);
-    thumbnail?: Blob;
+    /**
+     * The file to be attached, encoded using multipart form data. The file must
+     * have a MIME type.
+     */
+    file: File;
+    /**
+     * The custom thumbnail of the media to be attached, encoded using multipart
+     * form data.
+     */
+    thumbnail?: (Blob | File);
+    /**
+     * A plain-text description of the media, for accessibility purposes.
+     */
     description?: string;
+    /**
+     * Two floating points (x,y), comma-delimited, ranging from -1.0 to 1.0.
+     */
+    focus?: string;
+}
+/**
+ * Interface to update the parameters of an existing media attachment.
+ */
+export interface MediaAttachmentUpdate {
+    /**
+     * The custom thumbnail of the media to be attached, encoded using multipart
+     * form data.
+     */
+    thumbnail?: (Blob | File);
+    /**
+     * A plain-text description of the media, for accessibility purposes.
+     */
+    description?: string;
+    /**
+     * Two floating points (x,y), comma-delimited, ranging from -1.0 to 1.0.
+     */
     focus?: string;
 }
 /**
@@ -316,9 +358,14 @@ export interface UnknownAttachment {
     type: 'unknown';
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
-    url: string;
+    url: (string | null);
 }
 /**
  * Represents a video clip attachment that can be added to a status.
@@ -366,27 +413,32 @@ export interface VideoAttachment {
     type: 'video';
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
-    url: string;
+    url: (string | null);
 }
 /**
  * Metadata returned by Paperclip.
  * @since 1.5.0
  */
 export interface VideoAttachmentMeta {
-    aspect: number;
-    audio_bitrate: string;
-    audio_channels: string;
-    audio_encode: string;
-    duration: number;
-    fps: number;
-    height: number;
-    length: string;
+    aspect?: number;
+    audio_bitrate?: string;
+    audio_channels?: string;
+    audio_encode?: string;
+    duration?: number;
+    fps?: number;
+    height?: number;
+    length?: string;
     original: VideoAttachmentMetaOriginal;
-    size: string;
+    size?: string;
     small: VideoAttachmentMetaSmall;
-    width: number;
+    width?: number;
 }
 /**
  * Metadata returned by Paperclip.

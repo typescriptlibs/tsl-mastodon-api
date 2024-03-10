@@ -10,7 +10,9 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 
+
 /// <amd-module name="tsl-mastodon-api/lib/JSON/MediaAttachment" />
+
 
 /* *
  *
@@ -18,60 +20,82 @@
  *
  * */
 
+
 /**
  * Represents a file or media attachment that can be added to a status.
  * @since 2.9.1
  */
 export interface AudioAttachment {
+
+
     /**
      * A hash computed by the BlurHash algorithm, for generating colorful
      * preview thumbnails when media has not been downloaded yet.
      * @since 2.8.1
      */
     blurhash?: ( string | null );
+
+
     /**
      * Alternate text that describes what is in the media attachment, to be used
      * for the visually impaired or when media attachments do not load.
      * @since 2.0.0
      */
     description?: ( string | null );
+
+
     /**
      * The ID of the attachment in the database.
      * @since 0.6.0
      */
     id: string;
+
+
     /**
      * Metadata returned by Paperclip.
      * @since 1.5.0
      */
     meta: AudioAttachmentMeta;
+
+
     /**
      * The location of a scaled-down preview of the attachment.
      * @since 0.6.0
      */
     preview_url: string;
+
+
     /**
      * The location of the full-size original attachment on the remote
      * @since 0.6.0
      */
     remote_url?: ( string | null );
+
+
     /**
      * A shorter URL for the attachment.
      * @deprecated
      * @since 3.5.0
      */
     text_url?: ( string | null );
+
+
     /**
      * The type of the attachment.
      * @since 0.6.0
      */
     type: 'audio';
+
+
     /**
      * The location of the original full-size attachment.
      * @since 0.6.0
      */
     url: string;
+
+
 }
+
 
 /**
  * Metadata returned by Paperclip.
@@ -101,55 +125,81 @@ export interface AudioAttachmentMetaOriginal {
  * @since 0.6.0
  */
 export interface GIFVAttachment {
+
+
     /**
      * A hash computed by the BlurHash algorithm, for generating colorful
      * preview thumbnails when media has not been downloaded yet.
      * @since 2.8.1
      */
     blurhash: string;
+
+
     /**
      * Alternate text that describes what is in the media attachment, to be used
      * for the visually impaired or when media attachments do not load.
      * @since 2.0.0
      */
     description?: ( string | null );
+
+
     /**
      * The ID of the attachment in the database.
      * @since 0.6.0
      */
     id: string;
+
+
     /**
      * Metadata returned by Paperclip.
      * @since 1.5.0
      */
     meta: GIFVAttachmentMeta;
+
+
     /**
      * The location of a scaled-down preview of the attachment.
      * @since 0.6.0
      */
     preview_url: string;
+
+
     /**
      * The location of the full-size original attachment on the remote
      * @since 0.6.0
      */
     remote_url?: ( string | null );
+
+
     /**
      * A shorter URL for the attachment.
      * @deprecated
      * @since 3.5.0
      */
     text_url?: ( string | null );
+
+
     /**
      * The type of the attachment.
      * @since 0.6.0
      */
     type: 'gifv';
+
+
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
     url: string;
+
+
 }
+
 
 export interface GIFVAttachmentMeta {
     aspect: number;
@@ -171,6 +221,7 @@ export interface GIFVAttachmentMetaOriginal {
     width: number;
 }
 
+
 export interface GIFVAttachmentMetaSmall {
     aspect: number;
     height: number;
@@ -178,64 +229,93 @@ export interface GIFVAttachmentMetaSmall {
     width: number;
 }
 
+
 /**
  * Represents a static image attachment that can be added to a status.
  * @since 0.6.0
  */
 export interface ImageAttachment {
+
+
     /**
      * A hash computed by the BlurHash algorithm, for generating colorful
      * preview thumbnails when media has not been downloaded yet.
      * @since 2.8.1
      */
     blurhash: string;
+
+
     /**
      * Alternate text that describes what is in the media attachment, to be used
      * for the visually impaired or when media attachments do not load.
      * @since 2.0.0
      */
     description?: ( string | null );
+
+
     /**
      * The ID of the attachment in the database.
      * @since 0.6.0
      */
     id: string;
+
+
     /**
      * Metadata returned by Paperclip.
      * @since 1.5.0
      */
     meta: ImageAttachmentMeta;
+
+
     /**
      * @since unknown
      */
     preview_remote_url?: ( string | null );
+
+
     /**
      * The location of a scaled-down preview of the attachment.
      * @since 0.6.0
      */
     preview_url: string;
+
+
     /**
      * The location of the full-size original attachment on the remote
      * @since 0.6.0
      */
     remote_url?: ( string | null );
+
+
     /**
      * A shorter URL for the attachment.
      * @deprecated
      * @since 3.5.0
      */
     text_url?: ( string | null );
+
+
     /**
      * The type of the attachment.
      * @since 0.6.0
      */
     type: 'image';
+
+
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
     url: string;
+
+
 }
+
 
 /**
  * Metadata returned by Paperclip.
@@ -247,6 +327,7 @@ export interface ImageAttachmentMeta {
     small: ImageAttachmentMetaSmall;
 }
 
+
 /**
  * Metadata returned by Paperclip.
  * @since 2.3.0
@@ -255,6 +336,7 @@ export interface ImageAttachmentMetaFocus {
     x: number;
     y: number;
 }
+
 
 /**
  * Metadata returned by Paperclip.
@@ -267,6 +349,7 @@ export interface ImageAttachmentMetaOriginal {
     width: number;
 }
 
+
 /**
  * Metadata returned by Paperclip.
  * @since 1.5.0
@@ -277,6 +360,7 @@ export interface ImageAttachmentMetaSmall {
     size: string;
     width: number;
 }
+
 
 /**
  * Represents a file or media attachment that can be added to a status.
@@ -290,115 +374,219 @@ export type MediaAttachment = (
     | VideoAttachment
 );
 
+
 /**
  * Interface to post a new media attachment.
  */
 export interface MediaAttachmentPost {
-    file: ( Blob | File );
-    thumbnail?: Blob;
+
+
+    /**
+     * The file to be attached, encoded using multipart form data. The file must
+     * have a MIME type.
+     */
+    file: File;
+
+
+    /**
+     * The custom thumbnail of the media to be attached, encoded using multipart
+     * form data.
+     */
+    thumbnail?: ( Blob | File );
+
+
+    /**
+     * A plain-text description of the media, for accessibility purposes.
+     */
     description?: string;
+
+
+    /**
+     * Two floating points (x,y), comma-delimited, ranging from -1.0 to 1.0.
+     */
     focus?: string;
+
+
 }
+
+
+/**
+ * Interface to update the parameters of an existing media attachment.
+ */
+export interface MediaAttachmentUpdate {
+
+
+    /**
+     * The custom thumbnail of the media to be attached, encoded using multipart
+     * form data.
+     */
+    thumbnail?: ( Blob | File );
+
+
+    /**
+     * A plain-text description of the media, for accessibility purposes.
+     */
+    description?: string;
+
+
+    /**
+     * Two floating points (x,y), comma-delimited, ranging from -1.0 to 1.0.
+     */
+    focus?: string;
+
+
+}
+
 
 /**
  * Represents a unsupported or unrecognized file type.
  * @since 0.6.0
  */
 export interface UnknownAttachment {
+
+
     /**
      * Alternate text that describes what is in the media attachment, to be used
      * for the visually impaired or when media attachments do not load.
      * @since 2.0.0
      */
     description?: ( string | null );
+
+
     /**
      * The ID of the attachment in the database.
      * @since 0.6.0
      */
     id: string;
+
+
     /**
      * Metadata returned by Paperclip.
      * @since 1.5.0
      */
     meta: Record<string, Record<string, ( number | string )>>;
+
+
     /**
      * The location of a scaled-down preview of the attachment.
      * @since 0.6.0
      */
     preview_url: string;
+
+
     /**
      * The location of the full-size original attachment on the remote
      * @since 0.6.0
      */
     remote_url?: ( string | null );
+
+
     /**
      * A shorter URL for the attachment.
      * @deprecated
      * @since 3.5.0
      */
     text_url?: ( string | null );
+
+
     /**
      * The type of the attachment.
      * @since 0.6.0
      */
     type: 'unknown';
+
+
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
-    url: string;
+    url: ( string | null );
+
+
 }
+
 
 /**
  * Represents a video clip attachment that can be added to a status.
  * @since 0.6.0
  */
 export interface VideoAttachment {
+
+
     /**
      * A hash computed by the BlurHash algorithm, for generating colorful
      * preview thumbnails when media has not been downloaded yet.
      * @since 2.8.1
      */
     blurhash: string;
+
+
     /**
      * Alternate text that describes what is in the media attachment, to be used
      * for the visually impaired or when media attachments do not load.
      * @since 2.0.0
      */
     description?: ( string | null );
+
+
     /**
      * The ID of the attachment in the database.
      * @since 0.6.0
      */
     id: string;
+
+
     /**
      * Metadata returned by Paperclip.
      * @since 1.5.0
      */
     meta: VideoAttachmentMeta;
+
+
     /**
      * The location of a scaled-down preview of the attachment.
      * @since 0.6.0
      */
     preview_url: string;
+
+
     /**
      * The location of the full-size original attachment on the remote
      * @since 0.6.0
      */
     remote_url?: ( string | null );
+
+
     /** @deprecated */
     text_url?: ( string | null );
+
+
     /**
      * The type of the attachment.
      * @since 0.6.0
      */
     type: 'video';
+
+
     /**
      * The location of the original full-size attachment.
+     *
+     * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+     * still processing. However, the preview_url should be available. Use
+     * `API.getMediaAttachment` to check the status of the media attachment.
+     *
      * @since 0.6.0
      */
-    url: string;
+    url: ( string | null );
+
+
 }
+
 
 /**
  * Metadata returned by Paperclip.
@@ -419,6 +607,7 @@ export interface VideoAttachmentMeta {
     width?: number;
 }
 
+
 /**
  * Metadata returned by Paperclip.
  * @since 1.5.0
@@ -431,6 +620,7 @@ export interface VideoAttachmentMetaOriginal {
     width: number;
 }
 
+
 /**
  * Metadata returned by Paperclip.
  * @since 1.5.0
@@ -442,11 +632,13 @@ export interface VideoAttachmentMetaSmall {
     width: number;
 }
 
+
 /* *
  *
  *  Functions
  *
  * */
+
 
 /**
  * Tests the JSON object for an AudioAttachment structure.
@@ -496,6 +688,7 @@ export function isAudioAttachmentMeta (
     );
 }
 
+
 /**
  * Tests the JSON object for a GIFVAttachment structure.
  *
@@ -519,6 +712,7 @@ export function isGIFVAttachment (
         isGIFVAttachmentMeta( json.meta )
     );
 }
+
 
 /**
  * Tests the JSON object for a GIFVAttachmentMeta structure.
@@ -555,6 +749,7 @@ export function isGIFVAttachmentMeta (
     );
 }
 
+
 /**
  * Tests the JSON object for an ImageAttachment structure.
  *
@@ -578,6 +773,7 @@ export function isImageAttachment (
         isImageAttachmentMeta( json.meta )
     );
 }
+
 
 /**
  * Tests the JSON object for an ImageAttachmentMeta structure.
@@ -606,6 +802,7 @@ export function isImageAttachmentMeta (
     );
 }
 
+
 /**
  * Tests the JSON object for a MediaAttachment structure.
  *
@@ -626,6 +823,7 @@ export function isMediaAttachment (
         isVideoAttachment( json as VideoAttachment )
     );
 }
+
 
 /**
  * Tests the JSON object for an UnknownAttachment structure.
@@ -648,6 +846,7 @@ export function isUnknownAttachment (
         json.type === 'unknown'
     );
 }
+
 
 /**
  * Tests the JSON object for a VideoAttachment structure.
@@ -672,6 +871,7 @@ export function isVideoAttachment (
         isVideoAttachmentMeta( json.meta )
     );
 }
+
 
 /**
  * Tests the JSON object for a VideoAttachmentMeta structure.
@@ -701,10 +901,12 @@ export function isVideoAttachmentMeta (
     );
 }
 
+
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export default MediaAttachment;
