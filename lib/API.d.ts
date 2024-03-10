@@ -24,7 +24,7 @@ export declare class API {
      */
     constructor(config: API.Config);
     /**
-     * Expected communication delay by the Mastodon server.
+     * Expected communication delay (in milliseconds) by the Mastodon server.
      */
     nextDelay: number;
     /**
@@ -32,19 +32,23 @@ export declare class API {
      */
     readonly rest: REST;
     /**
-     * Version from extracted from `config.api_version` or `config.api_url`.
+     * Version that has been provided with `config.api_version` or has been
+     * extracted from `config.api_url`.
      *
-     * A value of `0` indicates that no version could be extracted.
+     * A value of `0` indicates that no version has been found.
      */
     readonly version: number;
     /**
-     * Delays a async promise by the expected amount of time, which the Mastodon
-     * server send during the last communication.
+     * Delays an async promise by the expected amount of time (in milliseconds),
+     * which the Mastodon server sends during the last communication.
+     *
+     * @param forcedDelay
+     * Forces a certain amount of minimum delay.
      *
      * @return
      * Promise.
      */
-    delay(): Promise<void>;
+    delay(forcedDelay?: number): Promise<void>;
     /**
      * Deletes a path.
      *
@@ -175,10 +179,13 @@ export declare class API {
      * @param mediaAttachmentID
      * ID of the media attachment to get.
      *
+     * @param awaitProcessing
+     * Set to true, to wait until server processing completed.
+     *
      * @return
      * Promise with the media attachment, if successful.
      */
-    getMediaAttachment(mediaAttachmentID: string): Promise<API.Success<JSON.MediaAttachment>>;
+    getMediaAttachment(mediaAttachmentID: string, awaitProcessing?: boolean): Promise<API.Success<JSON.MediaAttachment>>;
     /**
      * Get notifications
      *
@@ -337,10 +344,13 @@ export declare class API {
      * @param mediaAttachment
      * Media attachment to post.
      *
+     * @param awaitProcessing
+     * Set to true, to wait until server processing completed.
+     *
      * @return
      * Promise with the media attachment, if successful.
      */
-    postMediaAttachment(mediaAttachment: JSON.MediaAttachmentPost): Promise<API.Success<JSON.MediaAttachment>>;
+    postMediaAttachment(mediaAttachment: JSON.MediaAttachmentPost, awaitProcessing?: boolean): Promise<API.Success<JSON.MediaAttachment>>;
     /**
      * Posts a poll vote.
      *
@@ -365,7 +375,7 @@ export declare class API {
      */
     postStatus(status: JSON.StatusPost): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
     /**
-     * Put parameters to a path.
+     * Puts parameters to a path.
      *
      * @param path
      * Path to put to.
@@ -378,7 +388,7 @@ export declare class API {
      */
     put(path: string, params?: object): Promise<API.Result>;
     /**
-     * Put a new reaction to an announcement.
+     * Puts a new reaction to an announcement.
      *
      * @param announcementID
      * ID of the announcement to put to.
@@ -391,6 +401,16 @@ export declare class API {
      * contains an `error` property.
      */
     putAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
+    /**
+     * Puts a parameter update on an existing media attachment.
+     *
+     * @param mediaAttachmentID
+     * ID of the media attachment to get.
+     *
+     * @return
+     * Promise with the updated media attachment, if successful.
+     */
+    putMediaAttachmentUpdate(mediaAttachmentID: string, mediaAttachmentUpdate: JSON.MediaAttachmentUpdate): Promise<API.Success<JSON.MediaAttachment>>;
     /**
      * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
      *

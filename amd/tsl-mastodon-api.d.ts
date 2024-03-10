@@ -1062,6 +1062,11 @@ declare module "tsl-mastodon-api/lib/JSON/MediaAttachment" {
         type: 'gifv';
         /**
          * The location of the original full-size attachment.
+         *
+         * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+         * still processing. However, the preview_url should be available. Use
+         * `API.getMediaAttachment` to check the status of the media attachment.
+         *
          * @since 0.6.0
          */
         url: string;
@@ -1144,6 +1149,11 @@ declare module "tsl-mastodon-api/lib/JSON/MediaAttachment" {
         type: 'image';
         /**
          * The location of the original full-size attachment.
+         *
+         * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+         * still processing. However, the preview_url should be available. Use
+         * `API.getMediaAttachment` to check the status of the media attachment.
+         *
          * @since 0.6.0
          */
         url: string;
@@ -1194,9 +1204,41 @@ declare module "tsl-mastodon-api/lib/JSON/MediaAttachment" {
      * Interface to post a new media attachment.
      */
     export interface MediaAttachmentPost {
-        file: (Blob | File);
-        thumbnail?: Blob;
+        /**
+         * The file to be attached, encoded using multipart form data. The file must
+         * have a MIME type.
+         */
+        file: File;
+        /**
+         * The custom thumbnail of the media to be attached, encoded using multipart
+         * form data.
+         */
+        thumbnail?: (Blob | File);
+        /**
+         * A plain-text description of the media, for accessibility purposes.
+         */
         description?: string;
+        /**
+         * Two floating points (x,y), comma-delimited, ranging from -1.0 to 1.0.
+         */
+        focus?: string;
+    }
+    /**
+     * Interface to update the parameters of an existing media attachment.
+     */
+    export interface MediaAttachmentUpdate {
+        /**
+         * The custom thumbnail of the media to be attached, encoded using multipart
+         * form data.
+         */
+        thumbnail?: (Blob | File);
+        /**
+         * A plain-text description of the media, for accessibility purposes.
+         */
+        description?: string;
+        /**
+         * Two floating points (x,y), comma-delimited, ranging from -1.0 to 1.0.
+         */
         focus?: string;
     }
     /**
@@ -1243,9 +1285,14 @@ declare module "tsl-mastodon-api/lib/JSON/MediaAttachment" {
         type: 'unknown';
         /**
          * The location of the original full-size attachment.
+         *
+         * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+         * still processing. However, the preview_url should be available. Use
+         * `API.getMediaAttachment` to check the status of the media attachment.
+         *
          * @since 0.6.0
          */
-        url: string;
+        url: (string | null);
     }
     /**
      * Represents a video clip attachment that can be added to a status.
@@ -1293,27 +1340,32 @@ declare module "tsl-mastodon-api/lib/JSON/MediaAttachment" {
         type: 'video';
         /**
          * The location of the original full-size attachment.
+         *
+         * Since Mastodon v3.1.2 the URL can be `null`, when the full-size file is
+         * still processing. However, the preview_url should be available. Use
+         * `API.getMediaAttachment` to check the status of the media attachment.
+         *
          * @since 0.6.0
          */
-        url: string;
+        url: (string | null);
     }
     /**
      * Metadata returned by Paperclip.
      * @since 1.5.0
      */
     export interface VideoAttachmentMeta {
-        aspect: number;
-        audio_bitrate: string;
-        audio_channels: string;
-        audio_encode: string;
-        duration: number;
-        fps: number;
-        height: number;
-        length: string;
+        aspect?: number;
+        audio_bitrate?: string;
+        audio_channels?: string;
+        audio_encode?: string;
+        duration?: number;
+        fps?: number;
+        height?: number;
+        length?: string;
         original: VideoAttachmentMetaOriginal;
-        size: string;
+        size?: string;
         small: VideoAttachmentMetaSmall;
-        width: number;
+        width?: number;
     }
     /**
      * Metadata returned by Paperclip.
@@ -2308,8 +2360,8 @@ declare module "tsl-mastodon-api/lib/REST" {
         /**
          * Converts a Params structure into a ParamArray structure. Value arrays of
          * params will be split into multiple pairs of the ParamArray. If no special
-         * handling of arrays is needed, convert from ParamRecord to ParamArray with
-         * the `Object.entries` function.
+         * handling of arrays is needed, then it will convert ParamRecord to
+         * ParamArray with help of the `Object.entries` function.
          *
          * @param params
          * Params structure to convert or split.
@@ -2352,7 +2404,7 @@ declare module "tsl-mastodon-api/lib/API" {
          */
         constructor(config: API.Config);
         /**
-         * Expected communication delay by the Mastodon server.
+         * Expected communication delay (in milliseconds) by the Mastodon server.
          */
         nextDelay: number;
         /**
@@ -2360,19 +2412,23 @@ declare module "tsl-mastodon-api/lib/API" {
          */
         readonly rest: REST;
         /**
-         * Version from extracted from `config.api_version` or `config.api_url`.
+         * Version that has been provided with `config.api_version` or has been
+         * extracted from `config.api_url`.
          *
-         * A value of `0` indicates that no version could be extracted.
+         * A value of `0` indicates that no version has been found.
          */
         readonly version: number;
         /**
-         * Delays a async promise by the expected amount of time, which the Mastodon
-         * server send during the last communication.
+         * Delays an async promise by the expected amount of time (in milliseconds),
+         * which the Mastodon server sends during the last communication.
+         *
+         * @param forcedDelay
+         * Forces a certain amount of minimum delay.
          *
          * @return
          * Promise.
          */
-        delay(): Promise<void>;
+        delay(forcedDelay?: number): Promise<void>;
         /**
          * Deletes a path.
          *
@@ -2503,10 +2559,13 @@ declare module "tsl-mastodon-api/lib/API" {
          * @param mediaAttachmentID
          * ID of the media attachment to get.
          *
+         * @param awaitProcessing
+         * Set to true, to wait until server processing completed.
+         *
          * @return
          * Promise with the media attachment, if successful.
          */
-        getMediaAttachment(mediaAttachmentID: string): Promise<API.Success<JSON.MediaAttachment>>;
+        getMediaAttachment(mediaAttachmentID: string, awaitProcessing?: boolean): Promise<API.Success<JSON.MediaAttachment>>;
         /**
          * Get notifications
          *
@@ -2665,10 +2724,13 @@ declare module "tsl-mastodon-api/lib/API" {
          * @param mediaAttachment
          * Media attachment to post.
          *
+         * @param awaitProcessing
+         * Set to true, to wait until server processing completed.
+         *
          * @return
          * Promise with the media attachment, if successful.
          */
-        postMediaAttachment(mediaAttachment: JSON.MediaAttachmentPost): Promise<API.Success<JSON.MediaAttachment>>;
+        postMediaAttachment(mediaAttachment: JSON.MediaAttachmentPost, awaitProcessing?: boolean): Promise<API.Success<JSON.MediaAttachment>>;
         /**
          * Posts a poll vote.
          *
@@ -2693,7 +2755,7 @@ declare module "tsl-mastodon-api/lib/API" {
          */
         postStatus(status: JSON.StatusPost): Promise<API.Success<(JSON.Status | JSON.StatusSchedule)>>;
         /**
-         * Put parameters to a path.
+         * Puts parameters to a path.
          *
          * @param path
          * Path to put to.
@@ -2706,7 +2768,7 @@ declare module "tsl-mastodon-api/lib/API" {
          */
         put(path: string, params?: object): Promise<API.Result>;
         /**
-         * Put a new reaction to an announcement.
+         * Puts a new reaction to an announcement.
          *
          * @param announcementID
          * ID of the announcement to put to.
@@ -2719,6 +2781,16 @@ declare module "tsl-mastodon-api/lib/API" {
          * contains an `error` property.
          */
         putAnnouncementReaction(announcementID: string, emojiName: string): Promise<API.Success<{}>>;
+        /**
+         * Puts a parameter update on an existing media attachment.
+         *
+         * @param mediaAttachmentID
+         * ID of the media attachment to get.
+         *
+         * @return
+         * Promise with the updated media attachment, if successful.
+         */
+        putMediaAttachmentUpdate(mediaAttachmentID: string, mediaAttachmentUpdate: JSON.MediaAttachmentUpdate): Promise<API.Success<JSON.MediaAttachment>>;
         /**
          * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
          *

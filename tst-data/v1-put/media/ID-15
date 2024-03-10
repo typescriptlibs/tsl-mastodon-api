@@ -1,0 +1,24 @@
+{
+    "id": "ID-15",
+    "type": "image",
+    "url": null,
+    "preview_url": "http://127.0.0.1:8000/files/1x1.png",
+    "remote_url": null,
+    "text_url": "http://127.0.0.1:8000/files/1x1.png",
+    "meta": {
+        "original": {
+            "width": 1,
+            "height": 1,
+            "size": "1x1",
+            "aspect": 1
+        },
+        "small": {
+            "width": 1,
+            "height": 1,
+            "size": "1x1",
+            "aspect": 1
+        }
+    },
+    "description": "Updated description",
+    "blurhash": "UFBWY:8_0Jxv4mx]t8t64.%M-:IUWGWAt6M}"
+}

@@ -1068,6 +1068,35 @@ export class API {
 
 
     /**
+     * Puts a parameter update on an existing media attachment.
+     *
+     * @param mediaAttachmentID
+     * ID of the media attachment to get.
+     *
+     * @return
+     * Promise with the updated media attachment, if successful.
+     */
+    public async putMediaAttachmentUpdate (
+        mediaAttachmentID: string,
+        mediaAttachmentUpdate: JSON.MediaAttachmentUpdate
+    ): Promise<API.Success<JSON.MediaAttachment>> {
+        const result = await this.put( `media/${mediaAttachmentID}`, mediaAttachmentUpdate );
+
+        if (
+            result.error ||
+            result.status !== 200 ||
+            !JSON.isMediaAttachment( result.json )
+        ) {
+            result.error = result.error || new Error();
+
+            throw result;
+        }
+
+        return result as API.Success<JSON.MediaAttachment>;
+    }
+
+
+    /**
      * Search for accounts, hashtags, and statuses. Requires a `v2` API URL.
      *
      * @since 3.0.0
