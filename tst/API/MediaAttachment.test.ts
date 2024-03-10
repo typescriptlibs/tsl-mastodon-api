@@ -25,7 +25,27 @@ import test from '@typescriptlibs/tst';
  *
  * */
 
-test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
+
+test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
+    try {
+        const { json: mediaAttachment } = await Setup.v1Get.getMediaAttachment( 'ID-2' );
+        assert.strictEqual(
+            mediaAttachment.id,
+            'ID-2',
+            'Media ID should contain mockup value.'
+        );
+    }
+    catch ( result: any ) {
+        console.debug( result );
+        assert.ok(
+            false,
+            'Request should not fail.'
+        );
+    }
+} );
+
+
+test( 'Test API.postMediaAttachment', async ( assert: test.Assert ) => {
     try {
         const { json: mediaAttachment } = await Setup.v1Post.postMediaAttachment( {
             file: await Setup.fileFrom( './tst-data/files/1x1.png' )
@@ -45,13 +65,17 @@ test( 'Test API.postNewMediaAttachment', async ( assert: test.Assert ) => {
     }
 } );
 
-test( 'Test API.getMediaAttachment', async ( assert: test.Assert ) => {
+
+test( 'Test API.putMediaAttachmentUpdate', async ( assert: test.Assert ) => {
     try {
-        const { json: mediaAttachment } = await Setup.v1Get.getMediaAttachment( 'ID-2' );
+        const { json: mediaAttachment } = await Setup.v1Put.putMediaAttachmentUpdate(
+            'ID-15',
+            { description: 'Updated description' }
+        );
         assert.strictEqual(
             mediaAttachment.id,
-            'ID-2',
-            'Media ID should contain mockup value.'
+            'ID-15',
+            'Media Attachment ID should contain mockup value.'
         );
     }
     catch ( result: any ) {

@@ -686,16 +686,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
      */
     function isVideoAttachmentMeta(json) {
         return (typeof json === 'object' &&
-            typeof json.aspect === 'number' &&
-            typeof json.audio_bitrate === 'string' &&
-            typeof json.audio_channels === 'string' &&
-            typeof json.audio_encode === 'string' &&
-            typeof json.duration === 'number' &&
-            typeof json.fps === 'number' &&
-            typeof json.height === 'number' &&
-            typeof json.length === 'string' &&
-            typeof json.size === 'string' &&
-            typeof json.width === 'number' &&
             typeof json.original === 'object' &&
             typeof json.original.bitrate === 'number' &&
             typeof json.original.duration === 'number' &&
@@ -1541,7 +1531,7 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
          *
          * */
         /**
-         * Expected communication delay by the Mastodon server.
+         * Expected communication delay (in milliseconds) by the Mastodon server.
          */
         nextDelay;
         /**
@@ -1549,9 +1539,10 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
          */
         rest;
         /**
-         * Version from extracted from `config.api_version` or `config.api_url`.
+         * Version that has been provided with `config.api_version` or has been
+         * extracted from `config.api_url`.
          *
-         * A value of `0` indicates that no version could be extracted.
+         * A value of `0` indicates that no version has been found.
          */
         version;
         /* *
@@ -1560,14 +1551,17 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
          *
          * */
         /**
-         * Delays a async promise by the expected amount of time, which the Mastodon
-         * server send during the last communication.
+         * Delays an async promise by the expected amount of time (in milliseconds),
+         * which the Mastodon server sends during the last communication.
+         *
+         * @param forcedDelay
+         * Forces a certain amount of minimum delay.
          *
          * @return
          * Promise.
          */
-        async delay() {
-            return new Promise(resolve => setTimeout(resolve, this.nextDelay));
+        async delay(forcedDelay) {
+            return new Promise(resolve => setTimeout(resolve, Math.max((forcedDelay || 0), this.nextDelay)));
         }
         /**
          * Deletes a path.
@@ -1800,11 +1794,26 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
          * @param mediaAttachmentID
          * ID of the media attachment to get.
          *
+         * @param awaitProcessing
+         * Set to true, to wait until server processing completed.
+         *
          * @return
          * Promise with the media attachment, if successful.
          */
-        async getMediaAttachment(mediaAttachmentID) {
-            const result = await this.get(`media/${mediaAttachmentID}`);
+        async getMediaAttachment(mediaAttachmentID, awaitProcessing) {
+            const path = (awaitProcessing ?
+                `../v1/media/${mediaAttachmentID}` :
+                `media/${mediaAttachmentID}`);
+            let result = await this.get(path);
+            // Check status of media processing
+            while (awaitProcessing &&
+                result.status === 206) {
+                await this.delay(10000);
+                result = await this.get(path);
+                if (result.error) {
+                    throw result;
+                }
+            }
             if (result.error ||
                 (result.status !== 200 &&
                     result.status !== 206) ||
@@ -2088,16 +2097,26 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
          * @param mediaAttachment
          * Media attachment to post.
          *
+         * @param awaitProcessing
+         * Set to true, to wait until server processing completed.
+         *
          * @return
          * Promise with the media attachment, if successful.
          */
-        async postMediaAttachment(mediaAttachment) {
-            const result = await this.post('media', mediaAttachment);
+        async postMediaAttachment(mediaAttachment, awaitProcessing) {
+            const path = (awaitProcessing ?
+                '../v2/media' :
+                'media');
+            const result = await this.post(path, mediaAttachment);
+            if (awaitProcessing &&
+                result.status === 202) {
+                return await this.getMediaAttachment(result.json.id, awaitProcessing);
+            }
             if (result.error ||
                 (result.status !== 200 &&
                     result.status !== 202) ||
                 !JSON.isMediaAttachment(result.json)) {
-                result.error = result.error || new Error();
+                result.error = (result.error || new Error());
                 throw result;
             }
             return result;
@@ -2146,7 +2165,7 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
             return result;
         }
         /**
-         * Put parameters to a path.
+         * Puts parameters to a path.
          *
          * @param path
          * Path to put to.
@@ -2161,7 +2180,7 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
             return this.fetch('PUT', path, params);
         }
         /**
-         * Put a new reaction to an announcement.
+         * Puts a new reaction to an announcement.
          *
          * @param announcementID
          * ID of the announcement to put to.
@@ -2177,6 +2196,25 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
             const result = await this.put(`announcements/${announcementID}/reactions/${emojiName}`);
             if (result.error ||
                 result.status !== 200) {
+                result.error = result.error || new Error();
+                throw result;
+            }
+            return result;
+        }
+        /**
+         * Puts a parameter update on an existing media attachment.
+         *
+         * @param mediaAttachmentID
+         * ID of the media attachment to get.
+         *
+         * @return
+         * Promise with the updated media attachment, if successful.
+         */
+        async putMediaAttachmentUpdate(mediaAttachmentID, mediaAttachmentUpdate) {
+            const result = await this.put(`media/${mediaAttachmentID}`, mediaAttachmentUpdate);
+            if (result.error ||
+                result.status !== 200 ||
+                !JSON.isMediaAttachment(result.json)) {
                 result.error = result.error || new Error();
                 throw result;
             }

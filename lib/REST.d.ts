@@ -54,8 +54,8 @@ export declare namespace REST {
     /**
      * Converts a Params structure into a ParamArray structure. Value arrays of
      * params will be split into multiple pairs of the ParamArray. If no special
-     * handling of arrays is needed, convert from ParamRecord to ParamArray with
-     * the `Object.entries` function.
+     * handling of arrays is needed, then it will convert ParamRecord to
+     * ParamArray with help of the `Object.entries` function.
      *
      * @param params
      * Params structure to convert or split.
