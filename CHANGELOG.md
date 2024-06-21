@@ -3,6 +3,18 @@ Changelog
 
 
 
+v0.5.1
+------
+
+* Updated dependencies by @sophiebremer in https://github.com/typescriptlibs/tsl-mastodon-api/pull/39
+  - Updates TypeScriptLibs/AMD dependency to v1.3.1
+  - Updates TypeScript dependency to v5.5.2
+  - Updates optional WS dependency to v8.17.1 (see CVE-2024-37890)
+
+**Full Changelog**: https://github.com/typescriptlibs/tsl-mastodon-api/compare/v0.5.0...v0.5.1
+
+
+
 v0.5.0
 ------
 
