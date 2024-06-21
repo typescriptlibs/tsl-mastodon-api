@@ -108,7 +108,7 @@ export class API {
      * Forces a certain amount of minimum delay.
      *
      * @return
-     * Promise.
+     * Promise that resolves after delay.
      */
     public async delay (
         forcedDelay?: number
