@@ -26,7 +26,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 define("tsl-mastodon-api/lib/JSON/Emoji", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isEmojis = exports.isEmoji = void 0;
+    exports.isEmoji = isEmoji;
+    exports.isEmojis = isEmojis;
     /// <amd-module name="tsl-mastodon-api/lib/JSON/Emoji" />
     /* *
      *
@@ -50,7 +51,6 @@ define("tsl-mastodon-api/lib/JSON/Emoji", ["require", "exports"], function (requ
             typeof json.url === 'string' &&
             typeof json.visible_in_picker === 'boolean');
     }
-    exports.isEmoji = isEmoji;
     /**
      * Tests the JSON array for a Emoji structure.
      *
@@ -65,7 +65,6 @@ define("tsl-mastodon-api/lib/JSON/Emoji", ["require", "exports"], function (requ
             (!json.length ||
                 isEmoji(json[0] || {})));
     }
-    exports.isEmojis = isEmojis;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -81,7 +80,8 @@ define("tsl-mastodon-api/lib/JSON/Emoji", ["require", "exports"], function (requ
 define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isAccounts = exports.isAccount = void 0;
+    exports.isAccount = isAccount;
+    exports.isAccounts = isAccounts;
     /* *
      *
      *  Functions
@@ -117,7 +117,6 @@ define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (re
             json.emojis instanceof Array &&
             json.fields instanceof Array);
     }
-    exports.isAccount = isAccount;
     /**
      * Tests the JSON array for a Account structure.
      *
@@ -132,7 +131,6 @@ define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (re
             (!json.length ||
                 isAccount(json[0] || {})));
     }
-    exports.isAccounts = isAccounts;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -148,7 +146,8 @@ define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (re
 define("tsl-mastodon-api/lib/JSON/Reaction", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isReactions = exports.isReaction = void 0;
+    exports.isReaction = isReaction;
+    exports.isReactions = isReactions;
     /// <amd-module name="tsl-mastodon-api/lib/JSON/Reaction" />
     /* *
      *
@@ -169,7 +168,6 @@ define("tsl-mastodon-api/lib/JSON/Reaction", ["require", "exports"], function (r
             typeof json.count === 'number' &&
             typeof json.name === 'string');
     }
-    exports.isReaction = isReaction;
     /**
      * Tests the JSON array for a Reaction structure.
      *
@@ -184,7 +182,6 @@ define("tsl-mastodon-api/lib/JSON/Reaction", ["require", "exports"], function (r
             (!json.length ||
                 isReaction(json[0] || {})));
     }
-    exports.isReactions = isReactions;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -200,7 +197,9 @@ define("tsl-mastodon-api/lib/JSON/Reaction", ["require", "exports"], function (r
 define("tsl-mastodon-api/lib/JSON/Tag", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isTagStatistic = exports.isTags = exports.isTag = void 0;
+    exports.isTag = isTag;
+    exports.isTags = isTags;
+    exports.isTagStatistic = isTagStatistic;
     /// <amd-module name="tsl-mastodon-api/lib/JSON/Tag" />
     /* *
      *
@@ -225,7 +224,6 @@ define("tsl-mastodon-api/lib/JSON/Tag", ["require", "exports"], function (requir
                     (!json.history.length ||
                         isTagStatistic(json.history[0] || {}))));
     }
-    exports.isTag = isTag;
     /**
      * Tests the JSON array for a Tag structure.
      *
@@ -240,7 +238,6 @@ define("tsl-mastodon-api/lib/JSON/Tag", ["require", "exports"], function (requir
             (!json.length ||
                 isTag(json[0] || {})));
     }
-    exports.isTags = isTags;
     /**
      * Tests the JSON object for a TagStatistic structure.
      *
@@ -256,7 +253,6 @@ define("tsl-mastodon-api/lib/JSON/Tag", ["require", "exports"], function (requir
             typeof json.day === 'number' &&
             typeof json.uses === 'number');
     }
-    exports.isTagStatistic = isTagStatistic;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -272,7 +268,12 @@ define("tsl-mastodon-api/lib/JSON/Tag", ["require", "exports"], function (requir
 define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Emoji_js_1, Reaction_js_1, Tag_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isAnnouncementStatuses = exports.isAnnouncementStatus = exports.isAnnouncements = exports.isAnnouncementAccounts = exports.isAnnouncementAccount = exports.isAnnouncement = void 0;
+    exports.isAnnouncement = isAnnouncement;
+    exports.isAnnouncementAccount = isAnnouncementAccount;
+    exports.isAnnouncementAccounts = isAnnouncementAccounts;
+    exports.isAnnouncements = isAnnouncements;
+    exports.isAnnouncementStatus = isAnnouncementStatus;
+    exports.isAnnouncementStatuses = isAnnouncementStatuses;
     /* *
      *
      *  Functions
@@ -303,7 +304,6 @@ define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mas
             (0, Reaction_js_1.isReactions)(json.reactions) &&
             (0, Tag_js_1.isTags)(json.tags));
     }
-    exports.isAnnouncement = isAnnouncement;
     /**
      * Tests the JSON object for a AnnouncementAccount structure.
      *
@@ -320,7 +320,6 @@ define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mas
             typeof json.url === 'string' &&
             typeof json.username === 'string');
     }
-    exports.isAnnouncementAccount = isAnnouncementAccount;
     /**
      * Tests the JSON object for a AnnouncementAccount structure.
      *
@@ -335,7 +334,6 @@ define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mas
             (!json.length ||
                 isAnnouncementAccount(json[0] || {})));
     }
-    exports.isAnnouncementAccounts = isAnnouncementAccounts;
     /**
      * Tests the JSON array for a Announcement structure.
      *
@@ -350,7 +348,6 @@ define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mas
             (!json.length ||
                 isAnnouncement(json[0] || {})));
     }
-    exports.isAnnouncements = isAnnouncements;
     /**
      * Tests the JSON object for a AnnouncementStatus structure.
      *
@@ -365,7 +362,6 @@ define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mas
             typeof json.id === 'string' &&
             typeof json.url === 'string');
     }
-    exports.isAnnouncementStatus = isAnnouncementStatus;
     /**
      * Tests the JSON object for a AnnouncementStatus structure.
      *
@@ -380,7 +376,6 @@ define("tsl-mastodon-api/lib/JSON/Announcement", ["require", "exports", "tsl-mas
             (!json.length ||
                 isAnnouncementStatus(json[0] || {})));
     }
-    exports.isAnnouncementStatuses = isAnnouncementStatuses;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -428,7 +423,8 @@ define("tsl-mastodon-api/lib/JSON/Card", ["require", "exports"], function (requi
 define("tsl-mastodon-api/lib/JSON/List", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isLists = exports.isList = void 0;
+    exports.isList = isList;
+    exports.isLists = isLists;
     /* *
      *
      *  Functions
@@ -448,7 +444,6 @@ define("tsl-mastodon-api/lib/JSON/List", ["require", "exports"], function (requi
             typeof json.id === 'string' &&
             typeof json.title === 'string');
     }
-    exports.isList = isList;
     /**
      * Tests the JSON array for a List structure.
      *
@@ -463,7 +458,6 @@ define("tsl-mastodon-api/lib/JSON/List", ["require", "exports"], function (requi
             (!json.length ||
                 isList(json[0] || {})));
     }
-    exports.isLists = isLists;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -479,7 +473,16 @@ define("tsl-mastodon-api/lib/JSON/List", ["require", "exports"], function (requi
 define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isVideoAttachmentMeta = exports.isVideoAttachment = exports.isUnknownAttachment = exports.isMediaAttachment = exports.isImageAttachmentMeta = exports.isImageAttachment = exports.isGIFVAttachmentMeta = exports.isGIFVAttachment = exports.isAudioAttachmentMeta = exports.isAudioAttachment = void 0;
+    exports.isAudioAttachment = isAudioAttachment;
+    exports.isAudioAttachmentMeta = isAudioAttachmentMeta;
+    exports.isGIFVAttachment = isGIFVAttachment;
+    exports.isGIFVAttachmentMeta = isGIFVAttachmentMeta;
+    exports.isImageAttachment = isImageAttachment;
+    exports.isImageAttachmentMeta = isImageAttachmentMeta;
+    exports.isMediaAttachment = isMediaAttachment;
+    exports.isUnknownAttachment = isUnknownAttachment;
+    exports.isVideoAttachment = isVideoAttachment;
+    exports.isVideoAttachmentMeta = isVideoAttachmentMeta;
     /// <amd-module name="tsl-mastodon-api/lib/JSON/MediaAttachment" />
     /* *
      *
@@ -504,7 +507,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             json.type === 'audio' &&
             isAudioAttachmentMeta(json.meta));
     }
-    exports.isAudioAttachment = isAudioAttachment;
     /**
      * Tests the JSON object for an AudioAttachmentMeta structure.
      *
@@ -525,7 +527,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             typeof json.original.bitrate === 'number' &&
             typeof json.original.duration === 'number');
     }
-    exports.isAudioAttachmentMeta = isAudioAttachmentMeta;
     /**
      * Tests the JSON object for a GIFVAttachment structure.
      *
@@ -545,7 +546,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             json.type === 'gifv' &&
             isGIFVAttachmentMeta(json.meta));
     }
-    exports.isGIFVAttachment = isGIFVAttachment;
     /**
      * Tests the JSON object for a GIFVAttachmentMeta structure.
      *
@@ -576,7 +576,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             typeof json.small.size === 'string' &&
             typeof json.small.width === 'number');
     }
-    exports.isGIFVAttachmentMeta = isGIFVAttachmentMeta;
     /**
      * Tests the JSON object for an ImageAttachment structure.
      *
@@ -596,7 +595,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             json.type === 'image' &&
             isImageAttachmentMeta(json.meta));
     }
-    exports.isImageAttachment = isImageAttachment;
     /**
      * Tests the JSON object for an ImageAttachmentMeta structure.
      *
@@ -619,7 +617,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             typeof json.small.size === 'string' &&
             typeof json.small.width === 'number');
     }
-    exports.isImageAttachmentMeta = isImageAttachmentMeta;
     /**
      * Tests the JSON object for a MediaAttachment structure.
      *
@@ -636,7 +633,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             isUnknownAttachment(json) ||
             isVideoAttachment(json));
     }
-    exports.isMediaAttachment = isMediaAttachment;
     /**
      * Tests the JSON object for an UnknownAttachment structure.
      *
@@ -654,7 +650,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             (typeof json.url === 'string' || json.url === null) &&
             json.type === 'unknown');
     }
-    exports.isUnknownAttachment = isUnknownAttachment;
     /**
      * Tests the JSON object for a VideoAttachment structure.
      *
@@ -674,7 +669,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             json.type === 'video' &&
             isVideoAttachmentMeta(json.meta));
     }
-    exports.isVideoAttachment = isVideoAttachment;
     /**
      * Tests the JSON object for a VideoAttachmentMeta structure.
      *
@@ -698,7 +692,6 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
             typeof json.small.size === 'string' &&
             typeof json.small.width === 'number');
     }
-    exports.isVideoAttachmentMeta = isVideoAttachmentMeta;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -714,7 +707,8 @@ define("tsl-mastodon-api/lib/JSON/MediaAttachment", ["require", "exports"], func
 define("tsl-mastodon-api/lib/JSON/Poll", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isPollOptions = exports.isPoll = void 0;
+    exports.isPoll = isPoll;
+    exports.isPollOptions = isPollOptions;
     /* *
      *
      *  Functions
@@ -741,7 +735,6 @@ define("tsl-mastodon-api/lib/JSON/Poll", ["require", "exports"], function (requi
             typeof json.votes_count === 'number' &&
             isPollOptions(json.options));
     }
-    exports.isPoll = isPoll;
     /**
      * Tests a JSON array for a PollOption structure.
      *
@@ -756,7 +749,6 @@ define("tsl-mastodon-api/lib/JSON/Poll", ["require", "exports"], function (requi
             (!json.length ||
                 typeof json[0]?.title === 'string'));
     }
-    exports.isPollOptions = isPollOptions;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -772,7 +764,11 @@ define("tsl-mastodon-api/lib/JSON/Poll", ["require", "exports"], function (requi
 define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_1, Tag_js_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isStatusSchedule = exports.isStatusMention = exports.isStatuses = exports.isStatusContext = exports.isStatus = void 0;
+    exports.isStatus = isStatus;
+    exports.isStatusContext = isStatusContext;
+    exports.isStatuses = isStatuses;
+    exports.isStatusMention = isStatusMention;
+    exports.isStatusSchedule = isStatusSchedule;
     /* *
      *
      *  Functions
@@ -804,7 +800,6 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
             (0, Account_js_1.isAccount)(json.account) &&
             (0, Tag_js_2.isTags)(json.tags));
     }
-    exports.isStatus = isStatus;
     /**
      * Tests the JSON object for a StatusContext structure.
      *
@@ -821,7 +816,6 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
             isStatuses(json.ancestors) &&
             isStatuses(json.descendants));
     }
-    exports.isStatusContext = isStatusContext;
     /**
      * Tests a JSON array for a Status structure.
      *
@@ -836,7 +830,6 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
             (!json.length ||
                 isStatus(json[0] || {})));
     }
-    exports.isStatuses = isStatuses;
     /**
      * Tests the JSON object for a StatusMention structure.
      *
@@ -853,7 +846,6 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
             typeof json.url === 'string' &&
             typeof json.username === 'string');
     }
-    exports.isStatusMention = isStatusMention;
     /**
      * Tests the JSON object for a StatusSchedule structure.
      *
@@ -870,7 +862,6 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
             typeof json.params === 'object' &&
             typeof json.scheduled_at === 'string');
     }
-    exports.isStatusSchedule = isStatusSchedule;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -886,7 +877,9 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
 define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status"], function (require, exports, Account_js_2, Status_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isNotificationType = exports.isNotifications = exports.isNotification = void 0;
+    exports.isNotification = isNotification;
+    exports.isNotifications = isNotifications;
+    exports.isNotificationType = isNotificationType;
     ;
     /* *
      *
@@ -913,7 +906,6 @@ define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mas
             isNotificationType(json.type) &&
             (0, Status_js_1.isStatus)(json.status));
     }
-    exports.isNotification = isNotification;
     /**
      * Tests the JSON array for a Notification structure.
      *
@@ -928,7 +920,6 @@ define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mas
             (!json.length ||
                 isNotification(json[0] || {})));
     }
-    exports.isNotifications = isNotifications;
     /**
      * Tests the type string for a known Notification type.
      *
@@ -950,7 +941,6 @@ define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mas
             type === 'admin.sign_up' ||
             type === 'admin.report');
     }
-    exports.isNotificationType = isNotificationType;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -966,7 +956,7 @@ define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mas
 define("tsl-mastodon-api/lib/JSON/StreamData", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isStreamData = void 0;
+    exports.isStreamData = isStreamData;
     /* *
      *
      *  Functions
@@ -989,7 +979,6 @@ define("tsl-mastodon-api/lib/JSON/StreamData", ["require", "exports"], function 
                 typeof json.payload === 'string' ||
                 typeof json.payload === 'object'));
     }
-    exports.isStreamData = isStreamData;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -1005,7 +994,8 @@ define("tsl-mastodon-api/lib/JSON/StreamData", ["require", "exports"], function 
 define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_3, Status_js_2, Tag_js_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isSearchResults = exports.isSearch = void 0;
+    exports.isSearch = isSearch;
+    exports.isSearchResults = isSearchResults;
     /* *
      *
      *  Functions
@@ -1024,7 +1014,6 @@ define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-
         return (typeof json === 'object' &&
             typeof json.q === 'string');
     }
-    exports.isSearch = isSearch;
     /**
      * Tests the JSON object for a SearchResults structure.
      *
@@ -1046,7 +1035,6 @@ define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-
             (!json.statuses.length ||
                 (0, Status_js_2.isStatus)(json.statuses[0])));
     }
-    exports.isSearchResults = isSearchResults;
 });
 /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
 
@@ -1558,7 +1546,7 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
          * Forces a certain amount of minimum delay.
          *
          * @return
-         * Promise.
+         * Promise that resolves after delay.
          */
         async delay(forcedDelay) {
             return new Promise(resolve => setTimeout(resolve, Math.max((forcedDelay || 0), this.nextDelay)));

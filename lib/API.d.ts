@@ -46,7 +46,7 @@ export declare class API {
      * Forces a certain amount of minimum delay.
      *
      * @return
-     * Promise.
+     * Promise that resolves after delay.
      */
     delay(forcedDelay?: number): Promise<void>;
     /**

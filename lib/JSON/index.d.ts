@@ -24,8 +24,8 @@ export * from './Reaction.js';
 export * from './Search.js';
 export * from './Status.js';
 export * from './Tag.js';
-export declare const parse: (text: string, reviver?: ((this: any, key: string, value: any) => any) | undefined) => any;
+export declare const parse: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;
 export declare const stringify: {
-    (value: any, replacer?: ((this: any, key: string, value: any) => any) | undefined, space?: string | number | undefined): string;
-    (value: any, replacer?: (string | number)[] | null | undefined, space?: string | number | undefined): string;
+    (value: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
+    (value: any, replacer?: (number | string)[] | null, space?: string | number): string;
 };

@@ -2232,10 +2232,10 @@ declare module "tsl-mastodon-api/lib/JSON/index" {
     export * from "tsl-mastodon-api/lib/JSON/Search";
     export * from "tsl-mastodon-api/lib/JSON/Status";
     export * from "tsl-mastodon-api/lib/JSON/Tag";
-    export const parse: (text: string, reviver?: ((this: any, key: string, value: any) => any) | undefined) => any;
+    export const parse: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;
     export const stringify: {
-        (value: any, replacer?: ((this: any, key: string, value: any) => any) | undefined, space?: string | number | undefined): string;
-        (value: any, replacer?: (string | number)[] | null | undefined, space?: string | number | undefined): string;
+        (value: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
+        (value: any, replacer?: (number | string)[] | null, space?: string | number): string;
     };
 }
 /// <amd-module name="tsl-mastodon-api/lib/Bridge" />
@@ -2245,41 +2245,41 @@ declare module "tsl-mastodon-api/lib/Bridge" {
         fetch: typeof fetch;
         fileFrom: undefined;
         Blob: {
-            new (blobParts?: BlobPart[] | undefined, options?: BlobPropertyBag | undefined): Blob;
+            new (blobParts?: BlobPart[], options?: BlobPropertyBag): Blob;
             prototype: Blob;
         };
         File: {
-            new (fileBits: BlobPart[], fileName: string, options?: FilePropertyBag | undefined): File;
+            new (fileBits: BlobPart[], fileName: string, options?: FilePropertyBag): File;
             prototype: File;
         };
         FormData: {
-            new (form?: HTMLFormElement | undefined, submitter?: HTMLElement | null | undefined): FormData;
+            new (form?: HTMLFormElement, submitter?: HTMLElement | null): FormData;
             prototype: FormData;
         };
         Headers: {
-            new (init?: HeadersInit | undefined): Headers;
+            new (init?: HeadersInit): Headers;
             prototype: Headers;
         };
         Response: {
-            new (body?: BodyInit | null | undefined, init?: ResponseInit | undefined): Response;
+            new (body?: BodyInit | null, init?: ResponseInit): Response;
             prototype: Response;
             error(): Response;
-            json(data: any, init?: ResponseInit | undefined): Response;
-            redirect(url: string | URL, status?: number | undefined): Response;
+            json(data: any, init?: ResponseInit): Response;
+            redirect(url: string | URL, status?: number): Response;
         };
         URL: {
-            new (url: string | URL, base?: string | URL | undefined): URL;
+            new (url: string | URL, base?: string | URL): URL;
             prototype: URL;
-            canParse(url: string | URL, base?: string | undefined): boolean;
+            canParse(url: string | URL, base?: string): boolean;
             createObjectURL(obj: Blob | MediaSource): string;
             revokeObjectURL(url: string): void;
         };
         URLSearchParams: {
-            new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
+            new (init?: string[][] | Record<string, string> | string | URLSearchParams): URLSearchParams;
             prototype: URLSearchParams;
         };
         WebSocket: {
-            new (url: string | URL, protocols?: string | string[] | undefined): WebSocket;
+            new (url: string | URL, protocols?: string | string[]): WebSocket;
             prototype: WebSocket;
             readonly CONNECTING: 0;
             readonly OPEN: 1;
@@ -2430,7 +2430,7 @@ declare module "tsl-mastodon-api/lib/API" {
          * Forces a certain amount of minimum delay.
          *
          * @return
-         * Promise.
+         * Promise that resolves after delay.
          */
         delay(forcedDelay?: number): Promise<void>;
         /**
@@ -2909,41 +2909,41 @@ declare module "tsl-mastodon-api/lib/Bridge" {
         fetch: typeof fetch;
         fileFrom: undefined;
         Blob: {
-            new (blobParts?: BlobPart[] | undefined, options?: BlobPropertyBag | undefined): Blob;
+            new (blobParts?: BlobPart[], options?: BlobPropertyBag): Blob;
             prototype: Blob;
         };
         File: {
-            new (fileBits: BlobPart[], fileName: string, options?: FilePropertyBag | undefined): File;
+            new (fileBits: BlobPart[], fileName: string, options?: FilePropertyBag): File;
             prototype: File;
         };
         FormData: {
-            new (form?: HTMLFormElement | undefined, submitter?: HTMLElement | null | undefined): FormData;
+            new (form?: HTMLFormElement, submitter?: HTMLElement | null): FormData;
             prototype: FormData;
         };
         Headers: {
-            new (init?: HeadersInit | undefined): Headers;
+            new (init?: HeadersInit): Headers;
             prototype: Headers;
         };
         Response: {
-            new (body?: BodyInit | null | undefined, init?: ResponseInit | undefined): Response;
+            new (body?: BodyInit | null, init?: ResponseInit): Response;
             prototype: Response;
             error(): Response;
-            json(data: any, init?: ResponseInit | undefined): Response;
-            redirect(url: string | URL, status?: number | undefined): Response;
+            json(data: any, init?: ResponseInit): Response;
+            redirect(url: string | URL, status?: number): Response;
         };
         URL: {
-            new (url: string | URL, base?: string | URL | undefined): URL;
+            new (url: string | URL, base?: string | URL): URL;
             prototype: URL;
-            canParse(url: string | URL, base?: string | undefined): boolean;
+            canParse(url: string | URL, base?: string): boolean;
             createObjectURL(obj: Blob | MediaSource): string;
             revokeObjectURL(url: string): void;
         };
         URLSearchParams: {
-            new (init?: string | URLSearchParams | Record<string, string> | string[][] | undefined): URLSearchParams;
+            new (init?: string[][] | Record<string, string> | string | URLSearchParams): URLSearchParams;
             prototype: URLSearchParams;
         };
         WebSocket: {
-            new (url: string | URL, protocols?: string | string[] | undefined): WebSocket;
+            new (url: string | URL, protocols?: string | string[]): WebSocket;
             prototype: WebSocket;
             readonly CONNECTING: 0;
             readonly OPEN: 1;
