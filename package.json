@@ -12,10 +12,10 @@
     "homepage": "https://typescriptlibs.org/tsl-mastodon-api/",
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "devDependencies": {
-        "@typescriptlibs/amd": "^1.2.2",
+        "@typescriptlibs/amd": "^1.3.1",
         "@typescriptlibs/tst": "^0.1.0",
         "tsl-mastodon-api": "file:./",
-        "typescript": "~5.4.2"
+        "typescript": "~5.5.2"
     },
     "engines": {
         "node": ">=18.16.0"
@@ -35,7 +35,7 @@
     "optionalDependencies": {
         "node-fetch": "^3.3.2",
         "oauth": "~0.10.0",
-        "ws": "^8.16.0"
+        "ws": "^8.17.1"
     },
     "scripts": {
         "build": "npm run clean && npm run build:amd && npm run build:lib",
