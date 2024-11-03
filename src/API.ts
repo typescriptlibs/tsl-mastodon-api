@@ -344,23 +344,15 @@ export class API {
 
 
     /**
-     * Gets admin reports, usually filter by arguments.
-     *
-     * @param accountID
-     * ID of the reporting account.
-     *
-     * @param targetAccountID
-     * ID of the reported account.
+     * Gets admin reports, usually filtered with query parameters.
      *
      * @param [queryParams]
-     * Query parameters to limit the amount of reeports to get.
+     * Query parameters to control the amount and kind of reports to get.
      *
      * @return
      * Promise with the array of reports, if successful.
      */
     public async getAdminReports (
-        accountID?: string,
-        targetAccountID?: string,
         queryParams?: API.AdminReportsParams
     ): Promise<API.Success<Array<JSON.AdminReport>>> {
         const result = await this.get( `admin/reports`, queryParams );
