@@ -19,6 +19,7 @@
  * */
 
 export * from './Account.js';
+export * from './AdminReport.js';
 export * from './Announcement.js';
 export * from './Application.js';
 export * from './Card.js';

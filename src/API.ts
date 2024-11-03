@@ -342,6 +342,43 @@ export class API {
     }
 
 
+
+    /**
+     * Gets admin reports, usually filter by arguments.
+     *
+     * @param accountID
+     * ID of the reporting account.
+     *
+     * @param targetAccountID
+     * ID of the reported account.
+     *
+     * @param [queryParams]
+     * Query parameters to limit the amount of reeports to get.
+     *
+     * @return
+     * Promise with the array of reports, if successful.
+     */
+    public async getAdminReports (
+        accountID?: string,
+        targetAccountID?: string,
+        queryParams?: API.AdminReportsParams
+    ): Promise<API.Success<Array<JSON.AdminReport>>> {
+        const result = await this.get( `admin/reports`, queryParams );
+
+        if (
+            result.error ||
+            result.status !== 200 ||
+            !JSON.isAdminReports( result.json )
+        ) {
+            result.error = result.error || new Error();
+
+            throw result;
+        }
+
+        return result as API.Success<Array<JSON.AdminReport>>;
+    }
+
+
     /**
      * Gets the connected account.
      *
@@ -1151,9 +1188,36 @@ export namespace API {
 
 
     /**
+     * Query parameters to retrieve admin reports.
+     */
+    export interface AdminReportsParams extends QueryParams {
+
+
+        /**
+         * Limit to reports filed by this account.
+         */
+        account_id?: string;
+
+
+        /**
+         * Limit to resolved reports.
+         */
+        resolved?: boolean;
+
+
+        /**
+         * Limit to reports targeting this account.
+         */
+        target_account_id?: string;
+
+
+    }
+
+
+    /**
      * Query parameters to retrieve announcements.
      */
-    export interface AnnouncementsParams {
+    export interface AnnouncementsParams extends QueryParams {
 
         /**
          * If true, response will include announcements dismissed by the user.
