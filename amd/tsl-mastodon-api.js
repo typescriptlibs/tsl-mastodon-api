@@ -146,6 +146,85 @@ define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (re
 define("tsl-mastodon-api/lib/JSON/AdminReport", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account"], function (require, exports, Account_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.isAdminAccount = isAdminAccount;
+    exports.isAdminAccountIP = isAdminAccountIP;
+    exports.isAdminAccountIPs = isAdminAccountIPs;
+    /* *
+     *
+     *  Functions
+     *
+     * */
+    /**
+     * Tests the JSON object for an AdminAccount structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has a AdminReport structure.
+     */
+    function isAdminAccount(json) {
+        return (typeof json === 'object' &&
+            typeof json.created_at === 'string' &&
+            typeof json.email === 'string' &&
+            typeof json.id === 'string' &&
+            typeof json.username === 'string' &&
+            (typeof json.account === 'object' &&
+                (0, Account_js_1.isAccount)(json.account)) &&
+            (typeof json.domain === 'undefined' ||
+                json.domain === null ||
+                typeof json.domain === 'string') &&
+            (typeof json.ip === 'undefined' ||
+                json.ip === null ||
+                typeof json.ip === 'string') &&
+            (typeof json.ips === 'undefined' ||
+                typeof json.ips === 'object' &&
+                    isAdminAccountIPs(json.ips)));
+    }
+    /**
+     * Tests the JSON object for an AdminAccountIP structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminAccountIP structure.
+     */
+    function isAdminAccountIP(json) {
+        return (typeof json === 'object' &&
+            typeof json.ip === 'string' &&
+            typeof json.used_at === 'string');
+    }
+    /**
+     * Tests the JSON object for an AdminAccountIP array structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminAccountIP array structure.
+     */
+    function isAdminAccountIPs(json) {
+        return (typeof json === 'object' &&
+            json instanceof Array &&
+            (!json.length ||
+                isAdminAccountIP(json[0])));
+    }
+});
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+define("tsl-mastodon-api/lib/JSON/AdminReport", ["require", "exports", "tsl-mastodon-api/lib/JSON/AdminReport"], function (require, exports, AdminAccount_js_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.AdminReportCategory = void 0;
     exports.isAdminReport = isAdminReport;
     exports.isAdminReports = isAdminReports;
@@ -181,13 +260,13 @@ define("tsl-mastodon-api/lib/JSON/AdminReport", ["require", "exports", "tsl-mast
      *
      * */
     /**
-     * Tests the JSON object for a AdminReport structure.
+     * Tests the JSON object for an AdminReport structure.
      *
      * @param json
      * JSON object to test.
      *
      * @return
-     * True, if the JSON object has a AdminReport structure.
+     * True, if the JSON object has an AdminReport structure.
      */
     function isAdminReport(json) {
         return (typeof json === 'object' &&
@@ -196,16 +275,16 @@ define("tsl-mastodon-api/lib/JSON/AdminReport", ["require", "exports", "tsl-mast
             typeof json.created_at === 'string' &&
             typeof json.id === 'string' &&
             typeof json.target_account === 'object' &&
-            (0, Account_js_1.isAccount)(json.target_account));
+            (0, AdminAccount_js_1.isAdminAccount)(json.target_account));
     }
     /**
-     * Tests a JSON array for a AdminReports structure.
+     * Tests a JSON array for an AdminReports structure.
      *
      * @param json
      * JSON array to test.
      *
      * @return
-     * True, if the JSON array contains a Status structure.
+     * True, if the JSON array contains a AdminReports structure.
      */
     function isAdminReports(json) {
         return (Array.isArray(json) &&
@@ -1128,7 +1207,7 @@ define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/AdminReport", "tsl-mastodon-api/lib/JSON/Announcement", "tsl-mastodon-api/lib/JSON/Application", "tsl-mastodon-api/lib/JSON/Card", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/List", "tsl-mastodon-api/lib/JSON/MediaAttachment", "tsl-mastodon-api/lib/JSON/StreamData", "tsl-mastodon-api/lib/JSON/Notification", "tsl-mastodon-api/lib/JSON/Poll", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Search", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_5, AdminReport_js_1, Announcement_js_1, Application_js_1, Card_js_1, Emoji_js_2, List_js_1, MediaAttachment_js_1, StreamData_js_1, Notification_js_1, Poll_js_1, Reaction_js_2, Search_js_1, Status_js_3, Tag_js_4) {
+define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/AdminReport", "tsl-mastodon-api/lib/JSON/AdminReport", "tsl-mastodon-api/lib/JSON/Announcement", "tsl-mastodon-api/lib/JSON/Application", "tsl-mastodon-api/lib/JSON/Card", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/List", "tsl-mastodon-api/lib/JSON/MediaAttachment", "tsl-mastodon-api/lib/JSON/StreamData", "tsl-mastodon-api/lib/JSON/Notification", "tsl-mastodon-api/lib/JSON/Poll", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Search", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_5, AdminAccount_js_2, AdminReport_js_1, Announcement_js_1, Application_js_1, Card_js_1, Emoji_js_2, List_js_1, MediaAttachment_js_1, StreamData_js_1, Notification_js_1, Poll_js_1, Reaction_js_2, Search_js_1, Status_js_3, Tag_js_4) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.stringify = exports.parse = void 0;
@@ -1139,6 +1218,7 @@ define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-a
      *
      * */
     __exportStar(Account_js_5, exports);
+    __exportStar(AdminAccount_js_2, exports);
     __exportStar(AdminReport_js_1, exports);
     __exportStar(Announcement_js_1, exports);
     __exportStar(Application_js_1, exports);
@@ -1782,23 +1862,27 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
             }
             return result;
         }
+        async getAdminReport(adminReportID) {
+            const result = await this.get(`admin/reports/${adminReportID}`);
+            if (result.error ||
+                result.status !== 200 ||
+                !JSON.isAdminReport(result?.json)) {
+                result.error = result.error || new Error();
+                throw result;
+            }
+            return result;
+        }
         /**
-         * Gets admin reports, usually filter by arguments.
-         *
-         * @param accountID
-         * ID of the reporting account.
-         *
-         * @param targetAccountID
-         * ID of the reported account.
+         * Gets admin reports, usually filtered with query parameters.
          *
          * @param [queryParams]
-         * Query parameters to limit the amount of reeports to get.
+         * Query parameters to control the amount and kind of reports to get.
          *
          * @return
          * Promise with the array of reports, if successful.
          */
-        async getAdminReports(accountID, targetAccountID, queryParams) {
-            const result = await this.get(`admin/reports`, queryParams);
+        async getAdminReports(queryParams) {
+            const result = await this.get('admin/reports', queryParams);
             if (result.error ||
                 result.status !== 200 ||
                 !JSON.isAdminReports(result.json)) {

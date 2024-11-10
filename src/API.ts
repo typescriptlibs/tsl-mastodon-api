@@ -342,6 +342,25 @@ export class API {
     }
 
 
+    public async getAdminReport (
+        adminReportID: string
+    ): Promise<API.Success<JSON.AdminReport>> {
+        const result = await this.get( `admin/reports/${adminReportID}` );
+
+        if (
+            result.error ||
+            result.status !== 200 ||
+            !JSON.isAdminReport( result?.json )
+        ) {
+            result.error = result.error || new Error();
+
+            throw result;
+        }
+
+        return result as API.Success<JSON.AdminReport>;
+    }
+
+
 
     /**
      * Gets admin reports, usually filtered with query parameters.
@@ -355,7 +374,7 @@ export class API {
     public async getAdminReports (
         queryParams?: API.AdminReportsParams
     ): Promise<API.Success<Array<JSON.AdminReport>>> {
-        const result = await this.get( `admin/reports`, queryParams );
+        const result = await this.get( 'admin/reports', queryParams );
 
         if (
             result.error ||

@@ -253,6 +253,127 @@ declare module "tsl-mastodon-api/lib/JSON/AdminReport" {
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     import type Account from "tsl-mastodon-api/lib/JSON/Account";
     /**
+     * Represents admin-level information about a given account.
+     *
+     * @since 2.9.1
+     */
+    export interface AdminAccount {
+        /**
+         * User-level information about the account.
+         *
+         * @since 2.9.1
+         */
+        account: Account;
+        /**
+         * When the account was first discovered.
+         *
+         * @since 2.9.1
+         */
+        created_at: string;
+        /**
+         * The domain of the account, if it is remote.
+         *
+         * @since 2.9.1
+         */
+        domain?: (string | null);
+        /**
+         * The email address associated with the account.
+         *
+         * @since 2.9.1
+         */
+        email: string;
+        /**
+         * The ID of the account in the database.
+         *
+         * @since 2.9.1
+         */
+        id: string;
+        /**
+         * The IP address last used to login to this account.
+         *
+         * @since 2.9.1
+         */
+        ip?: (string | null);
+        /**
+         * All known IP addresses associated with this account.
+         *
+         * @since 3.5.0
+         */
+        ips: Array<AdminAccountIP>;
+        /**
+         * The username of the account.
+         *
+         * @since 2.9.1
+         */
+        username: string;
+    }
+    /**
+     * Represents an IP address associated with a user.
+     *
+     * @since 3.5.0
+     */
+    export interface AdminAccountIP {
+        /**
+         * The IP address.
+         *
+         * @since 3.5.0
+         */
+        ip: string;
+        /**
+         * Time when the IP address was last used for this account.
+         * (ISO 8601 Datetime)
+         *
+         * @since 3.5.0
+         */
+        used_at: string;
+    }
+    /**
+     * Tests the JSON object for an AdminAccount structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has a AdminReport structure.
+     */
+    export function isAdminAccount(json: Partial<AdminAccount>): json is AdminAccount;
+    /**
+     * Tests the JSON object for an AdminAccountIP structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminAccountIP structure.
+     */
+    export function isAdminAccountIP(json?: Partial<AdminAccountIP>): json is AdminAccountIP;
+    /**
+     * Tests the JSON object for an AdminAccountIP array structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminAccountIP array structure.
+     */
+    export function isAdminAccountIPs(json?: Partial<Array<Partial<AdminAccountIP>>>): json is Array<AdminAccountIP>;
+    export default AdminAccount;
+}
+/// <amd-module name="tsl-mastodon-api/lib/JSON/AdminReport" />
+declare module "tsl-mastodon-api/lib/JSON/AdminReport" {
+    /*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+    
+      TypeScript Library for the Mastodon API
+    
+      Copyright (c) TypeScriptLibs and Contributors
+    
+      Licensed under the MIT License.
+      You may not use this file except in compliance with the License.
+      You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+    
+    \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+    import type AdminAccount from "tsl-mastodon-api/lib/JSON/AdminReport";
+    /**
      * Represents a report filed against a user and/or status, to be taken action on
      * by moderators.
      *
@@ -319,7 +440,7 @@ declare module "tsl-mastodon-api/lib/JSON/AdminReport" {
          *
          * @since 0.1.0
          */
-        target_account: Account;
+        target_account: AdminAccount;
     }
     /**
      * The generic reason for a report.
@@ -347,23 +468,23 @@ declare module "tsl-mastodon-api/lib/JSON/AdminReport" {
         Violation = "violation"
     }
     /**
-     * Tests the JSON object for a AdminReport structure.
+     * Tests the JSON object for an AdminReport structure.
      *
      * @param json
      * JSON object to test.
      *
      * @return
-     * True, if the JSON object has a AdminReport structure.
+     * True, if the JSON object has an AdminReport structure.
      */
     export function isAdminReport(json: Partial<AdminReport>): json is AdminReport;
     /**
-     * Tests a JSON array for a AdminReports structure.
+     * Tests a JSON array for an AdminReports structure.
      *
      * @param json
      * JSON array to test.
      *
      * @return
-     * True, if the JSON array contains a Status structure.
+     * True, if the JSON array contains a AdminReports structure.
      */
     export function isAdminReports(json: Partial<Array<Partial<AdminReport>>>): json is Array<AdminReport>;
     export default AdminReport;
@@ -2350,6 +2471,7 @@ declare module "tsl-mastodon-api/lib/JSON/index" {
     \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
     export * from "tsl-mastodon-api/lib/JSON/Account";
     export * from "tsl-mastodon-api/lib/JSON/AdminReport";
+    export * from "tsl-mastodon-api/lib/JSON/AdminReport";
     export * from "tsl-mastodon-api/lib/JSON/Announcement";
     export * from "tsl-mastodon-api/lib/JSON/Application";
     export * from "tsl-mastodon-api/lib/JSON/Card";
@@ -2648,22 +2770,17 @@ declare module "tsl-mastodon-api/lib/API" {
          * Promise with the account, if successful.
          */
         getAccount(): Promise<API.Success<JSON.Account>>;
+        getAdminReport(adminReportID: string): Promise<API.Success<JSON.AdminReport>>;
         /**
-         * Gets admin reports, usually filter by arguments.
-         *
-         * @param accountID
-         * ID of the reporting account.
-         *
-         * @param targetAccountID
-         * ID of the reported account.
+         * Gets admin reports, usually filtered with query parameters.
          *
          * @param [queryParams]
-         * Query parameters to limit the amount of reeports to get.
+         * Query parameters to control the amount and kind of reports to get.
          *
          * @return
          * Promise with the array of reports, if successful.
          */
-        getAdminReports(accountID?: string, targetAccountID?: string, queryParams?: API.AdminReportsParams): Promise<API.Success<Array<JSON.AdminReport>>>;
+        getAdminReports(queryParams?: API.AdminReportsParams): Promise<API.Success<Array<JSON.AdminReport>>>;
         /**
          * Gets the connected account.
          *
