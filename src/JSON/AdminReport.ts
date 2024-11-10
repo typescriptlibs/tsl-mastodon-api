@@ -22,9 +22,9 @@
  * */
 
 
-import type Account from './Account.js';
+import type AdminAccount from './AdminAccount.js';
 
-import { isAccount } from './Account.js';
+import { isAdminAccount } from './AdminAccount.js';
 
 
 /* *
@@ -121,7 +121,7 @@ export interface AdminReport {
      *
      * @since 0.1.0
      */
-    target_account: Account;
+    target_account: AdminAccount;
 
 
 }
@@ -170,13 +170,13 @@ export enum AdminReportCategory {
 
 
 /**
- * Tests the JSON object for a AdminReport structure.
+ * Tests the JSON object for an AdminReport structure.
  *
  * @param json
  * JSON object to test.
  *
  * @return
- * True, if the JSON object has a AdminReport structure.
+ * True, if the JSON object has an AdminReport structure.
  */
 export function isAdminReport (
     json: Partial<AdminReport>
@@ -188,19 +188,19 @@ export function isAdminReport (
         typeof json.created_at === 'string' &&
         typeof json.id === 'string' &&
         typeof json.target_account === 'object' &&
-        isAccount( json.target_account )
+        isAdminAccount( json.target_account )
     );
 }
 
 
 /**
- * Tests a JSON array for a AdminReports structure.
+ * Tests a JSON array for an AdminReports structure.
  *
  * @param json
  * JSON array to test.
  *
  * @return
- * True, if the JSON array contains a Status structure.
+ * True, if the JSON array contains a AdminReports structure.
  */
 export function isAdminReports (
     json: Partial<Array<Partial<AdminReport>>>

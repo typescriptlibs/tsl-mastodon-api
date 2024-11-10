@@ -10,7 +10,7 @@
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 /// <amd-module name="tsl-mastodon-api/lib/JSON/AdminReport" />
-import type Account from './Account.js';
+import type AdminAccount from './AdminAccount.js';
 /**
  * Represents a report filed against a user and/or status, to be taken action on
  * by moderators.
@@ -78,7 +78,7 @@ export interface AdminReport {
      *
      * @since 0.1.0
      */
-    target_account: Account;
+    target_account: AdminAccount;
 }
 /**
  * The generic reason for a report.
@@ -106,23 +106,23 @@ export declare enum AdminReportCategory {
     Violation = "violation"
 }
 /**
- * Tests the JSON object for a AdminReport structure.
+ * Tests the JSON object for an AdminReport structure.
  *
  * @param json
  * JSON object to test.
  *
  * @return
- * True, if the JSON object has a AdminReport structure.
+ * True, if the JSON object has an AdminReport structure.
  */
 export declare function isAdminReport(json: Partial<AdminReport>): json is AdminReport;
 /**
- * Tests a JSON array for a AdminReports structure.
+ * Tests a JSON array for an AdminReports structure.
  *
  * @param json
  * JSON array to test.
  *
  * @return
- * True, if the JSON array contains a Status structure.
+ * True, if the JSON array contains a AdminReports structure.
  */
 export declare function isAdminReports(json: Partial<Array<Partial<AdminReport>>>): json is Array<AdminReport>;
 export default AdminReport;
