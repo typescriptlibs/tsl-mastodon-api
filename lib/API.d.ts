@@ -133,6 +133,17 @@ export declare class API {
      * Promise with the account, if successful.
      */
     getAccount(): Promise<API.Success<JSON.Account>>;
+    getAdminReport(adminReportID: string): Promise<API.Success<JSON.AdminReport>>;
+    /**
+     * Gets admin reports, usually filtered with query parameters.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount and kind of reports to get.
+     *
+     * @return
+     * Promise with the array of reports, if successful.
+     */
+    getAdminReports(queryParams?: API.AdminReportsParams): Promise<API.Success<Array<JSON.AdminReport>>>;
     /**
      * Gets the connected account.
      *
@@ -430,9 +441,26 @@ export declare class API {
  */
 export declare namespace API {
     /**
+     * Query parameters to retrieve admin reports.
+     */
+    interface AdminReportsParams extends QueryParams {
+        /**
+         * Limit to reports filed by this account.
+         */
+        account_id?: string;
+        /**
+         * Limit to resolved reports.
+         */
+        resolved?: boolean;
+        /**
+         * Limit to reports targeting this account.
+         */
+        target_account_id?: string;
+    }
+    /**
      * Query parameters to retrieve announcements.
      */
-    interface AnnouncementsParams {
+    interface AnnouncementsParams extends QueryParams {
         /**
          * If true, response will include announcements dismissed by the user.
          */
