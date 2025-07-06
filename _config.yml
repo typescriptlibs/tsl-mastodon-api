@@ -27,13 +27,13 @@ plugins:
   - jekyll-seo-tag
   - jekyll-titles-from-headings
 
-remote_theme: jekyll/minima
+remote_theme: jekyll/minima@c6e74bb
 
 minima:
   date_format: "%Y-%m-%d"
   skin: auto
   social_links:
-    - { platform: github,   user_url: "https://github.com/typescriptlibs/amd/" }
+    - { platform: github,   user_url: "https://github.com/typescriptlibs/tsl-mastodon-api/" }
     - { platform: mastodon, user_url: "https://mastodon.social/@typescriptlibs" }
     - { platform: rss,      user_url: "feed.xml" }
 
