@@ -2,8 +2,8 @@ All Libraries
 =============
 
 To see all TypeScript libraries, go to
-[typescriptlibs.org](https://typescriptlibs.org/).
+[typescriptlibs.eu](https://typescriptlibs.eu/).
 
 
 
-<script type="text/javascript">location.href="https://typescriptlibs.org/";</script>
+<script type="text/javascript">location.href="https://typescriptlibs.eu/";</script>
