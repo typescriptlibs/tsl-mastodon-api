@@ -2,6 +2,6 @@ Downloads
 =========
 
 To download the package, go to
-[typescriptlibs.org/package/tsl-mastodon-api.html](https://typescriptlibs.org/package/tsl-mastodon-api.html).
+[typescriptlibs.eu/package/tsl-mastodon-api.html](https://typescriptlibs.eu/package/tsl-mastodon-api.html).
 
-<script type="text/javascript">location.href="https://typescriptlibs.org/package/tsl-mastodon-api.html";</script>
+<script type="text/javascript">location.href="https://typescriptlibs.eu/package/tsl-mastodon-api.html";</script>
