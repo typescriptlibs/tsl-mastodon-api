@@ -9,7 +9,7 @@
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "bugs": "https://github.com/typescriptlibs/tsl-mastodon-api/issues",
-    "homepage": "https://typescriptlibs.org/tsl-mastodon-api/",
+    "homepage": "https://typescriptlibs.eu/tsl-mastodon-api/",
     "repository": "https://github.com/typescriptlibs/tsl-mastodon-api.git",
     "devDependencies": {
         "@typescriptlibs/amd": "^1.3.1",
