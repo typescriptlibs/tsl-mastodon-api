@@ -157,4 +157,4 @@ Links
 
 * [npmjs.com/package/tsl-mastodon-api](https://www.npmjs.com/package/tsl-mastodon-api)
 
-* [typescriptlibs.org](https://typescriptlibs.org/)
+* [typescriptlibs.eu](https://typescriptlibs.eu/)
