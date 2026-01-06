@@ -4,11 +4,10 @@ TypeScript Library for the Mastodon API
 TypeScript library to access a Mastodon server from front-end or back-end environments.
 
 
-
-[![CodeQL](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml)
+[![NPM](https://img.shields.io/npm/v/tsl-mastodon-api.svg)](https://www.npmjs.com/package/tsl-mastodon-api)
 [![Node.js](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/Node.js/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/node.js.yml)
-[![npm](https://img.shields.io/npm/v/tsl-mastodon-api.svg)](https://www.npmjs.com/package/tsl-mastodon-api)
-[![license](https://img.shields.io/npm/l/tsl-mastodon-api.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/blob/main/LICENSE.md)
+[![License](https://img.shields.io/npm/l/tsl-mastodon-api.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/blob/main/LICENSE.md)
+[![CodeQL Advanced](https://github.com/typescriptlibs/tsl-mastodon-api/workflows/CodeQL%20Advanced/badge.svg)](https://github.com/typescriptlibs/tsl-mastodon-api/actions/workflows/codeql.yml)
 
 
 
