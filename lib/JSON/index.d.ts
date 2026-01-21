@@ -11,6 +11,8 @@
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 /// <amd-module name="tsl-mastodon-api/lib/JSON/index" />
 export * from './Account.js';
+export * from './AdminAccount.js';
+export * from './AdminReport.js';
 export * from './Announcement.js';
 export * from './Application.js';
 export * from './Card.js';

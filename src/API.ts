@@ -342,6 +342,54 @@ export class API {
     }
 
 
+    public async getAdminReport (
+        adminReportID: string
+    ): Promise<API.Success<JSON.AdminReport>> {
+        const result = await this.get( `admin/reports/${adminReportID}` );
+
+        if (
+            result.error ||
+            result.status !== 200 ||
+            !JSON.isAdminReport( result?.json )
+        ) {
+            result.error = result.error || new Error();
+
+            throw result;
+        }
+
+        return result as API.Success<JSON.AdminReport>;
+    }
+
+
+
+    /**
+     * Gets admin reports, usually filtered with query parameters.
+     *
+     * @param [queryParams]
+     * Query parameters to control the amount and kind of reports to get.
+     *
+     * @return
+     * Promise with the array of reports, if successful.
+     */
+    public async getAdminReports (
+        queryParams?: API.AdminReportsParams
+    ): Promise<API.Success<Array<JSON.AdminReport>>> {
+        const result = await this.get( 'admin/reports', queryParams );
+
+        if (
+            result.error ||
+            result.status !== 200 ||
+            !JSON.isAdminReports( result.json )
+        ) {
+            result.error = result.error || new Error();
+
+            throw result;
+        }
+
+        return result as API.Success<Array<JSON.AdminReport>>;
+    }
+
+
     /**
      * Gets the connected account.
      *
@@ -1151,9 +1199,36 @@ export namespace API {
 
 
     /**
+     * Query parameters to retrieve admin reports.
+     */
+    export interface AdminReportsParams extends QueryParams {
+
+
+        /**
+         * Limit to reports filed by this account.
+         */
+        account_id?: string;
+
+
+        /**
+         * Limit to resolved reports.
+         */
+        resolved?: boolean;
+
+
+        /**
+         * Limit to reports targeting this account.
+         */
+        target_account_id?: string;
+
+
+    }
+
+
+    /**
      * Query parameters to retrieve announcements.
      */
-    export interface AnnouncementsParams {
+    export interface AnnouncementsParams extends QueryParams {
 
         /**
          * If true, response will include announcements dismissed by the user.

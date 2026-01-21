@@ -143,6 +143,166 @@ define("tsl-mastodon-api/lib/JSON/Account", ["require", "exports"], function (re
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+define("tsl-mastodon-api/lib/JSON/AdminReport", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account"], function (require, exports, Account_js_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.isAdminAccount = isAdminAccount;
+    exports.isAdminAccountIP = isAdminAccountIP;
+    exports.isAdminAccountIPs = isAdminAccountIPs;
+    /* *
+     *
+     *  Functions
+     *
+     * */
+    /**
+     * Tests the JSON object for an AdminAccount structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has a AdminReport structure.
+     */
+    function isAdminAccount(json) {
+        return (typeof json === 'object' &&
+            typeof json.created_at === 'string' &&
+            typeof json.email === 'string' &&
+            typeof json.id === 'string' &&
+            typeof json.username === 'string' &&
+            (typeof json.account === 'object' &&
+                (0, Account_js_1.isAccount)(json.account)) &&
+            (typeof json.domain === 'undefined' ||
+                json.domain === null ||
+                typeof json.domain === 'string') &&
+            (typeof json.ip === 'undefined' ||
+                json.ip === null ||
+                typeof json.ip === 'string') &&
+            (typeof json.ips === 'undefined' ||
+                typeof json.ips === 'object' &&
+                    isAdminAccountIPs(json.ips)));
+    }
+    /**
+     * Tests the JSON object for an AdminAccountIP structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminAccountIP structure.
+     */
+    function isAdminAccountIP(json) {
+        return (typeof json === 'object' &&
+            typeof json.ip === 'string' &&
+            typeof json.used_at === 'string');
+    }
+    /**
+     * Tests the JSON object for an AdminAccountIP array structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminAccountIP array structure.
+     */
+    function isAdminAccountIPs(json) {
+        return (typeof json === 'object' &&
+            json instanceof Array &&
+            (!json.length ||
+                isAdminAccountIP(json[0])));
+    }
+});
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+define("tsl-mastodon-api/lib/JSON/AdminReport", ["require", "exports", "tsl-mastodon-api/lib/JSON/AdminReport"], function (require, exports, AdminAccount_js_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.AdminReportCategory = void 0;
+    exports.isAdminReport = isAdminReport;
+    exports.isAdminReports = isAdminReports;
+    /**
+     * The generic reason for a report.
+     *
+     * @since 4.0.0
+     */
+    var AdminReportCategory;
+    (function (AdminReportCategory) {
+        /**
+         * Some other reason.
+         *
+         * @since 4.0.0
+         */
+        AdminReportCategory["Other"] = "other";
+        /**
+         * Unwanted or repetitive content.
+         *
+         * @since 4.0.0
+         */
+        AdminReportCategory["Spam"] = "spam";
+        /**
+         * A specific rule was violated.
+         *
+         * @since 4.0.0
+         */
+        AdminReportCategory["Violation"] = "violation";
+    })(AdminReportCategory || (exports.AdminReportCategory = AdminReportCategory = {}));
+    /* *
+     *
+     *  Functions
+     *
+     * */
+    /**
+     * Tests the JSON object for an AdminReport structure.
+     *
+     * @param json
+     * JSON object to test.
+     *
+     * @return
+     * True, if the JSON object has an AdminReport structure.
+     */
+    function isAdminReport(json) {
+        return (typeof json === 'object' &&
+            typeof json.category === 'string' &&
+            typeof json.comment === 'string' &&
+            typeof json.created_at === 'string' &&
+            typeof json.id === 'string' &&
+            typeof json.target_account === 'object' &&
+            (0, AdminAccount_js_1.isAdminAccount)(json.target_account));
+    }
+    /**
+     * Tests a JSON array for an AdminReports structure.
+     *
+     * @param json
+     * JSON array to test.
+     *
+     * @return
+     * True, if the JSON array contains a AdminReports structure.
+     */
+    function isAdminReports(json) {
+        return (Array.isArray(json) &&
+            (!json.length ||
+                isAdminReport(json[0] || {})));
+    }
+});
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TypeScript Library for the Mastodon API
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License.
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
 define("tsl-mastodon-api/lib/JSON/Reaction", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -761,7 +921,7 @@ define("tsl-mastodon-api/lib/JSON/Poll", ["require", "exports"], function (requi
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_1, Tag_js_2) {
+define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_2, Tag_js_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isStatus = isStatus;
@@ -797,7 +957,7 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
             typeof json.tags === 'object' &&
             typeof json.uri === 'string' &&
             typeof json.visibility === 'string' &&
-            (0, Account_js_1.isAccount)(json.account) &&
+            (0, Account_js_2.isAccount)(json.account) &&
             (0, Tag_js_2.isTags)(json.tags));
     }
     /**
@@ -874,7 +1034,7 @@ define("tsl-mastodon-api/lib/JSON/Status", ["require", "exports", "tsl-mastodon-
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status"], function (require, exports, Account_js_2, Status_js_1) {
+define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status"], function (require, exports, Account_js_3, Status_js_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isNotification = isNotification;
@@ -902,7 +1062,7 @@ define("tsl-mastodon-api/lib/JSON/Notification", ["require", "exports", "tsl-mas
             typeof json.id === 'string' &&
             typeof json.status === 'object' &&
             typeof json.type === 'string' &&
-            (0, Account_js_2.isAccount)(json.account) &&
+            (0, Account_js_3.isAccount)(json.account) &&
             isNotificationType(json.type) &&
             (0, Status_js_1.isStatus)(json.status));
     }
@@ -991,7 +1151,7 @@ define("tsl-mastodon-api/lib/JSON/StreamData", ["require", "exports"], function 
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_3, Status_js_2, Tag_js_3) {
+define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_4, Status_js_2, Tag_js_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isSearch = isSearch;
@@ -1029,7 +1189,7 @@ define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-
             Array.isArray(json.hashtags) &&
             Array.isArray(json.statuses) &&
             (!json.accounts.length ||
-                (0, Account_js_3.isAccount)(json.accounts[0])) &&
+                (0, Account_js_4.isAccount)(json.accounts[0])) &&
             (!json.hashtags.length ||
                 (0, Tag_js_3.isTag)(json.hashtags[0])) &&
             (!json.statuses.length ||
@@ -1047,7 +1207,7 @@ define("tsl-mastodon-api/lib/JSON/Search", ["require", "exports", "tsl-mastodon-
   You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
 
 \*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
-define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/Announcement", "tsl-mastodon-api/lib/JSON/Application", "tsl-mastodon-api/lib/JSON/Card", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/List", "tsl-mastodon-api/lib/JSON/MediaAttachment", "tsl-mastodon-api/lib/JSON/StreamData", "tsl-mastodon-api/lib/JSON/Notification", "tsl-mastodon-api/lib/JSON/Poll", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Search", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_4, Announcement_js_1, Application_js_1, Card_js_1, Emoji_js_2, List_js_1, MediaAttachment_js_1, StreamData_js_1, Notification_js_1, Poll_js_1, Reaction_js_2, Search_js_1, Status_js_3, Tag_js_4) {
+define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-api/lib/JSON/Account", "tsl-mastodon-api/lib/JSON/AdminReport", "tsl-mastodon-api/lib/JSON/AdminReport", "tsl-mastodon-api/lib/JSON/Announcement", "tsl-mastodon-api/lib/JSON/Application", "tsl-mastodon-api/lib/JSON/Card", "tsl-mastodon-api/lib/JSON/Emoji", "tsl-mastodon-api/lib/JSON/List", "tsl-mastodon-api/lib/JSON/MediaAttachment", "tsl-mastodon-api/lib/JSON/StreamData", "tsl-mastodon-api/lib/JSON/Notification", "tsl-mastodon-api/lib/JSON/Poll", "tsl-mastodon-api/lib/JSON/Reaction", "tsl-mastodon-api/lib/JSON/Search", "tsl-mastodon-api/lib/JSON/Status", "tsl-mastodon-api/lib/JSON/Tag"], function (require, exports, Account_js_5, AdminAccount_js_2, AdminReport_js_1, Announcement_js_1, Application_js_1, Card_js_1, Emoji_js_2, List_js_1, MediaAttachment_js_1, StreamData_js_1, Notification_js_1, Poll_js_1, Reaction_js_2, Search_js_1, Status_js_3, Tag_js_4) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.stringify = exports.parse = void 0;
@@ -1057,7 +1217,9 @@ define("tsl-mastodon-api/lib/JSON/index", ["require", "exports", "tsl-mastodon-a
      *  Exports
      *
      * */
-    __exportStar(Account_js_4, exports);
+    __exportStar(Account_js_5, exports);
+    __exportStar(AdminAccount_js_2, exports);
+    __exportStar(AdminReport_js_1, exports);
     __exportStar(Announcement_js_1, exports);
     __exportStar(Application_js_1, exports);
     __exportStar(Card_js_1, exports);
@@ -1695,6 +1857,35 @@ define("tsl-mastodon-api/lib/API", ["require", "exports", "tsl-mastodon-api/lib/
             if (result.error ||
                 result.status !== 200 ||
                 !JSON.isAccount(result.json)) {
+                result.error = result.error || new Error();
+                throw result;
+            }
+            return result;
+        }
+        async getAdminReport(adminReportID) {
+            const result = await this.get(`admin/reports/${adminReportID}`);
+            if (result.error ||
+                result.status !== 200 ||
+                !JSON.isAdminReport(result?.json)) {
+                result.error = result.error || new Error();
+                throw result;
+            }
+            return result;
+        }
+        /**
+         * Gets admin reports, usually filtered with query parameters.
+         *
+         * @param [queryParams]
+         * Query parameters to control the amount and kind of reports to get.
+         *
+         * @return
+         * Promise with the array of reports, if successful.
+         */
+        async getAdminReports(queryParams) {
+            const result = await this.get('admin/reports', queryParams);
+            if (result.error ||
+                result.status !== 200 ||
+                !JSON.isAdminReports(result.json)) {
                 result.error = result.error || new Error();
                 throw result;
             }
