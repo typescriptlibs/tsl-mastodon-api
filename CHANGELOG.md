@@ -3,6 +3,20 @@ Changelog
 
 
 
+v0.5.2
+------
+
+* Fixed Node.js compatibility in Bridge system. by @sophiebremer in https://github.com/typescriptlibs/tsl-mastodon-api/pull/44
+  - Fixed buffer type mismatch in Node.js Bridge system.
+* Updated dependencies. by @sophiebremer in https://github.com/typescriptlibs/tsl-mastodon-api/pull/43
+  - Fixed security issue in optional dependency `ws` with latest version.
+  - Updated optional dependency `oauth` to latest version.
+  - Updated TypeScript v5 dependency to latest minor version.
+
+**Full Changelog**: https://github.com/typescriptlibs/tsl-mastodon-api/compare/v0.5.1...v0.5.2
+
+
+
 v0.5.1
 ------
 

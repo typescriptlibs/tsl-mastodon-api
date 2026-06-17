@@ -39,8 +39,9 @@ export declare const Bridge: {
     URL: {
         new (url: string | URL, base?: string | URL): URL;
         prototype: URL;
-        canParse(url: string | URL, base?: string): boolean;
+        canParse(url: string | URL, base?: string | URL): boolean;
         createObjectURL(obj: Blob | MediaSource): string;
+        parse(url: string | URL, base?: string | URL): URL | null;
         revokeObjectURL(url: string): void;
     };
     URLSearchParams: {
