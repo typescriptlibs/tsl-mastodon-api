@@ -75,7 +75,7 @@ export async function fileFrom (
     mimeType?: string
 ): Promise<File> {
     return new Bridge.File(
-        [FS.readFileSync( filePath )],
+        [FS.readFileSync( filePath, { encoding: 'binary' } )],
         Path.basename( filePath ),
         { type: mimeType }
     );
